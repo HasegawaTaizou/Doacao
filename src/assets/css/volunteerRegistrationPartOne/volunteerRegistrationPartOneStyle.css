@@ -1,9 +1,8 @@
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   margin: 54px 98px 32px 98px;
-  gap: 32px;
 }
 
 .volunteer-registration-part-one__title::before {

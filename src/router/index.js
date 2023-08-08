@@ -1,23 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "@/pages/Home.vue";
-import Volunteers from "@/pages/Volunteers.vue";
-import EveryDropCounts from "@/pages/EveryDropCounts.vue";
-import SeedOfLove from "@/pages/SeedOfLove.vue";
-import FoodBasketDistribution from "@/pages/FoodBasketDistribution.vue";
-import FeedbackBeneficiaries from "@/pages/FeedbackBeneficiaries.vue";
-import OurPartners from "@/pages/OurPartners.vue";
 import Login from "@/pages/Login.vue";
 import VolunteerRegistrationPartOne from "@/pages/VolunteerRegistrationPartOne.vue";
 import VolunteerRegistrationPartTwo from "@/pages/VolunteerRegistrationPartTwo.vue";
 import VolunteerRegistrationPartThree from "@/pages/VolunteerRegistrationPartThree.vue";
-import BeneficiaryRegistrationPartOne from "@/pages/BeneficiaryRegistrationPartOne.vue";
-import BeneficiaryRegistrationPartTwo from "@/pages/BeneficiaryRegistrationPartTwo.vue";
-import BeneficiaryRegistrationPartThree from "@/pages/BeneficiaryRegistrationPartThree.vue";
 import CheckYourEmail from "@/pages/CheckYourEmail.vue";
 import RedefinePassword from "@/pages/RedefinePassword.vue";
 import RedefinePasswordConfirmation from "@/pages/RedefinePasswordConfirmation.vue";
-import PrivacyPolicy from "@/pages/PrivacyPolicy.vue";
 import Faq from "@/pages/Faq.vue";
 //DASHBOARD
 import Dashboard from "@/pages/dashboard/Dashboard.vue";
@@ -55,36 +45,6 @@ const routes = [
     component: Home,
   },
   {
-    path: "/volunteers",
-    name: "Volunteers",
-    component: Volunteers,
-  },
-  {
-    path: "/every-drop-counts",
-    name: "EveryDropCounts",
-    component: EveryDropCounts,
-  },
-  {
-    path: "/seed-of-love",
-    name: "SeedOfLove",
-    component: SeedOfLove,
-  },
-  {
-    path: "/food-basket-distribution",
-    name: "FoodBasketDistribution",
-    component: FoodBasketDistribution,
-  },
-  {
-    path: "/feedback-beneficiaries",
-    name: "FeedbackBeneficiaries",
-    component: FeedbackBeneficiaries,
-  },
-  {
-    path: "/our-partners",
-    name: "OurPartners",
-    component: OurPartners,
-  },
-  {
     path: "/login",
     name: "Login",
     component: Login,
@@ -105,21 +65,6 @@ const routes = [
     component: VolunteerRegistrationPartThree,
   },
   {
-    path: "/beneficiary-registration-part-one",
-    name: "BeneficiaryRegistrationPartOne",
-    component: BeneficiaryRegistrationPartOne,
-  },
-  {
-    path: "/beneficiary-registration-part-two",
-    name: "BeneficiaryRegistrationPartTwo",
-    component: BeneficiaryRegistrationPartTwo,
-  },
-  {
-    path: "/beneficiary-registration-part-three",
-    name: "BeneficiaryRegistrationPartThree",
-    component: BeneficiaryRegistrationPartThree,
-  },
-  {
     path: "/check-your-email",
     name: "CheckYourEmail",
     component: CheckYourEmail,
@@ -138,12 +83,7 @@ const routes = [
     path: "/faq",
     name: "Faq",
     component: Faq,
-  },
-  {
-    path: "/privacy-policy",
-    name: "PrivacyPolicy",
-    component: PrivacyPolicy,
-  },
+  }, 
 
   //DASHBOARD
   {

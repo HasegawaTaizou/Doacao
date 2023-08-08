@@ -515,7 +515,6 @@ export default {
       buttonBeneficiarie.style.display = "block"
       buttonVolunteer.style.display = "block"
       container.classList.add('margin-top')
-      console.log('oi');
     }
   },
 };

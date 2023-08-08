@@ -1,8 +1,9 @@
 <template>
   <div class="content">
+    <img src="../assets/img/logo.png" alt="Website logo" id="logo">
     <header>
       <h1 class="volunteer-registration-part-one__title">
-        CADASTRO VOLUNTÁRIO
+        CADASTRO HOSPITAL
       </h1>
       <router-link class="return__link" to="/">
         <img
@@ -14,7 +15,7 @@
     </header>
     <main>
       <img
-        src="../assets/img/volunteer-registration-image.png"
+        src="../assets/img/hospital-registration-image.png"
         alt="Volunteer Registration Image"
         class="volunteer-registration__image"
       />
