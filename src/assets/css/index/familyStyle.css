@@ -1,0 +1,32 @@
+#family{
+    background-color: #EAEAEA;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    padding: 100px 85px 100px 85px;
+}
+
+.familys-imagens{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.familys-imagens img{
+    width: 400px;
+    height: 400px;
+    border-radius: 400px;
+    transition: 0.4s ease-out;
+    box-shadow: 1px 1px 15px #717171;
+
+}
+
+.familys-imagens img:hover{
+    transform: scale(1.1);
+}
+
+.family-know-more__link{
+    place-self: center;
+}

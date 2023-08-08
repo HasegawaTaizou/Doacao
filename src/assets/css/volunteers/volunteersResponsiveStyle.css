@@ -1,0 +1,156 @@
+@media (max-width: 1260px) {
+  header {
+    height: 400px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+
+@media (max-width: 1140px) {
+  .why-contribute {
+    margin: 100px 64px 164px 64px;
+  }
+
+  .why-contribute__title {
+    font-size: 1.875rem;
+  }
+
+  .why-contribute__text {
+    font-size: 1.5rem;
+  }
+
+  .why-contribute__image {
+    max-width: 30vw;
+    max-height: 62vh;
+    min-width: 16vh;
+    min-height: 16vh;
+  }
+
+  .how-contribute {
+    margin: 100px 64px 164px 64px;
+  }
+
+  .how-contribute__title {
+    font-size: 1.875rem;
+  }
+
+  .how-contribute__text {
+    font-size: 1.5rem;
+  }
+
+  .how-contribute__image {
+    max-width: 30vw;
+    max-height: 62vh;
+    min-width: 16vh;
+    min-height: 12vh;
+  }
+}
+
+@media (max-width: 790px) {
+
+  .why-contribute__image,
+  .how-contribute__image {
+    max-width: 45vw;
+    max-height: 75vh;
+    min-width: 18vh;
+    min-height: 18vh;
+  }
+
+  header {
+    padding: 48px 20px;
+    margin: 0px;
+    gap: 12px;
+  }
+
+  .volunteers__title {
+    font-size: 1.5rem;
+  }
+
+  .return__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .why-contribute {
+    grid-template-areas:
+      "title"
+      "image"
+      "text";
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    justify-items: center;
+    margin: 70px 32px;
+    gap: 50px;
+  }
+
+  .why-contribute__title,
+  .how-contribute__title {
+    font-size: 2rem;
+    place-self: start;
+  }
+
+  .why-contribute__text,
+  .how-contribute__text {
+    font-size: 1.2rem;
+    margin: 0;
+    max-width: 85%;
+  }
+
+  .how-contribute {
+    grid-template-areas:
+      "title"
+      "image"
+      "text"
+      "link";
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto;
+    justify-items: center;
+    margin: 0 32px 70px 32px;
+    gap: 50px;
+  }
+
+
+  .how-contribute__image {
+    margin: 0;
+  }
+
+  .how-contribute__button {
+    width: 160px;
+    height: 42px;
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 592px) {
+
+  header {
+    padding: 48px 20px;
+    margin: 0px;
+    gap: 12px;
+    height: 280px;
+  }
+
+  .why-contribute__text,
+  .how-contribute__text {
+    font-size: 1.1rem;
+    margin: 0;
+    max-width: 100%;
+
+  }
+
+  .why-contribute__title,
+  .how-contribute__title {
+    font-size: 1.6rem;
+    place-self: start;
+  }
+
+}
+
+@media (max-width: 340px) {
+  .volunteers__title {
+    font-size: 1.25rem;
+  }
+}

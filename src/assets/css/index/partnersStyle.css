@@ -1,0 +1,44 @@
+#our-partners{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 70px;
+    padding: 100px 85px 100px 85px;
+}
+
+.partners-content{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 70px
+}
+
+.partner-text{
+    color: black;
+    font-size: 1.6rem;
+}
+
+.partner img{
+    height: 135px;
+    width: 165px;
+    transition: all .5s;
+}
+
+
+.partner img:hover{
+    transform: scale(1.1);
+  }
+  
+
+
+@media (max-width: 500px){
+    #our-partners{
+        padding: 70px 40px; 
+    }
+
+    .partner-text{
+        color: black;
+        font-size: 1.4rem;
+    }
+}

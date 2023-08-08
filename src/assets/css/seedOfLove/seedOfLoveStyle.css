@@ -1,0 +1,203 @@
+header {
+  display: flex;
+  align-items: flex-start;
+  padding: 54px 96px 32px 96px;
+  gap: 32px;
+  width: 100%;
+  background-image: url("../../img/seed-of-love-banner-image.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 600px;
+  position: relative;
+}
+
+.seed-of-love-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+.seed-of-love__title {
+  color: #fff;
+}
+
+.seed-of-logo__logo {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.return__icon {
+  filter: brightness(0) invert(1);
+}
+
+.project-goal {
+  padding: 92px 86px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.project-goal__title {
+  font-size: 2.5rem;
+}
+
+.project-goal__text {
+  font-size: 1.875rem;
+}
+
+.how-is-possible {
+  padding: 0px 86px 92px 82px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.how-is-possible__title {
+  font-size: 2.5rem;
+}
+
+.how-is-possible__item {
+  font-size: 1.875rem;
+  color: var(--text-color);
+}
+
+.speeches {
+  padding: 0px 86px 92px 82px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+.speeches__title {
+  width: 100%;
+}
+
+.speeches__image {
+  padding-top: 64px;
+  width: fit-content;
+  height: fit-content;
+}
+
+.types-of-planting-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.types-of-planting__title {
+  padding-bottom: 98px;
+}
+
+.types-of-planting {
+  width: 100%;
+  background-image: linear-gradient(#fff 45%,
+      var(--section-background-color) 20%);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 70px;
+  justify-content: space-around;
+  padding: 0 70px 70px 70px;
+
+}
+
+.floor {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 100%;
+  border-radius: 0 0 20px 20px;
+  background-image: url("../../img/seed-of-love-floor-image.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 386px;
+  height: 638px;
+}
+
+.floor:hover::before {
+  content: "As hortas no solo são uma forma tradicional e eficaz de cultivar alimentos, proporcionando uma conexão direta com a terra e uma maneira sustentável de obter alimentos frescos e saudáveis. Nesse método de cultivo, as plantas são cultivadas diretamente no solo, utilizando-se técnicas de manejo e cuidado para garantir um ambiente favorável ao crescimento das plantas.";
+  transform: translateY(40%);
+  font-size: 1.3rem;
+  transition: transform 0.5s;
+}
+
+.type-of-planting__title {
+  color: #fff;
+  font-size: 1.875rem;
+  text-align: center;
+  padding-top: 86px;
+}
+
+.box {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 100%;
+  border-radius: 0 0 20px 20px;
+  background-image: url("../../img/seed-of-love-box-image.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 386px;
+  height: 638px;
+  transition: transform 0.5s;
+
+}
+
+.box::before,
+.floor::before,
+.pet-bottle::before {
+  background: rgba(64, 141, 123, 0.8);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  text-align: center;
+  padding-top: 50px;
+  transform: translateY(100%);
+  transition: transform 0.5s;
+  color: #fff;
+  font-size: 1.75rem;
+  border-radius: 0 0 20px 20px;
+
+}
+
+.box:hover::before {
+  content: "As hortas em caixa são uma maneira conveniente e versátil de cultivar alimentos em espaços reduzidos ou em áreas onde o solo não é adequado para o plantio direto. Essa abordagem de jardinagem permite que você crie uma horta em recipientes retangulares, como caixas de madeira, vasos de plantas ou recipientes de plástico, adaptando-se facilmente a varandas, pátios, terraços e até mesmo áreas internas.";
+  transform: translateY(40%);
+  font-size: 1.3rem;
+  transition: transform 0.5s;
+}
+
+
+.pet-bottle {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 100%;
+  border-radius: 0 0 20px 20px;
+  background-image: url("../../img/seed-of-love-pet-bottle-image.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 386px;
+  height: 638px;
+}
+
+
+.pet-bottle:hover::before {
+  content: "As hortas suspensas são uma opção prática e criativa para quem deseja cultivar alimentos em espaços limitados ou sem acesso a um jardim tradicional. Essa forma de cultivo vertical permite aproveitar o espaço vertical disponível, como varandas, terraços, paredes e até mesmo áreas internas, para produzir alimentos frescos e saudáveis.";
+  transform: translateY(40%);
+  font-size: 1.3rem;
+  transition: transform 0.5s;
+}

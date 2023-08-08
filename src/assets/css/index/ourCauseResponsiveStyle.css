@@ -1,0 +1,174 @@
+@media(max-width: 1800px) {
+    .our-cause__text {
+        font-size: 1.5rem;
+    }
+}
+
+
+@media (max-width: 1600px) {
+    #our-cause {
+        flex-direction: column-reverse;
+        align-items: center;
+        
+        gap: 60px;
+    }
+    
+    .our-cause__image {
+        width: 70vw;
+        height: 100vh;
+        border-radius: 10px;
+    }
+    
+    .our-cause-content {
+        width: 100%;
+    }
+    
+    .our-cause-images{
+        height: 100vh;
+        width: 70vw;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 1546px) {
+    .our-cause__text {
+        font-size: 1.5rem;
+    }
+
+}
+
+
+@media (max-width: 1185px) {
+    .our-cause-images{
+        height: 80vh;
+        width: 70vw;
+        border-radius: 10px;
+    }
+
+
+    .our-cause__image {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 930px) {
+    .our-cause-images{
+        height: 80vh;
+        width: 90vw;
+        border-radius: 10px;
+    }
+
+
+    .our-cause__image {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 790px) {
+
+    .our-cause-images{
+        height: 600px;
+        width: 600px;
+        border-radius: 10px;
+    }
+
+    .our-cause__image {
+        height: 600px;
+        width: 600px;
+        border-radius: 10px;
+    }
+
+    .our-cause__title {
+        font-size: 2.7rem;
+    }
+}
+
+@media (max-width: 601px) {
+
+    .our-cause-images{
+        height: 500px;
+        width: 500px;
+        border-radius: 10px;
+    }
+
+    .our-cause__image {
+        height: 500px;
+        width: 500px;
+        border-radius: 10px;
+    }
+
+    .our-cause__title {
+        font-size: 2.7rem;
+    }
+}
+
+@media (max-width: 500px) {
+    #our-cause{
+        padding-top: 70px;
+    }
+}
+
+@media (max-width: 545px) {
+
+    .our-cause-images{
+        height: 400px;
+        width: 400px;
+        border-radius: 10px;
+    }
+
+    .our-cause__image {
+        height: 400px;
+        width: 400px;
+        border-radius: 10px;
+    }
+
+    .our-cause__text {
+        font-size: 1.1rem;
+    }
+
+
+    .our-cause__title {
+        font-size: 2.4rem;
+    }
+
+    .our-cause-content {
+        padding: 0 50px;
+
+    }
+}
+
+
+@media (max-width: 445px) {
+    #who-we-are {
+        gap: 40px;
+    }
+
+    .our-cause-images{
+        height: 330px;
+        width: 330px;
+        border-radius: 10px;
+    }
+
+    .our-cause__image {
+        height: 330px;
+        width: 330px;
+        border-radius: 10px;
+    }
+
+    .our-cause__title {
+        font-size: 2.1rem;
+    }
+
+   
+    .our-cause-content {
+        padding: 0 35px;
+
+    }
+
+   
+
+}

@@ -1,0 +1,194 @@
+
+
+@media (max-width: 1546px) {
+
+  .how-is-possible__item,
+  .project-goal__text,
+  .speeches__text {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 1437px) {
+  .types-of-planting {
+    background-image: linear-gradient(#fff 13%, var(--section-background-color) 13%);
+  }
+  
+}
+
+@media (max-width: 1260px) {
+  header {
+    height: 400px;
+  }
+
+  .project-images-container {
+    background-image: linear-gradient(#fff 15%,
+        var(--section-background-color) 15%);
+  }
+
+  .project-images {
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .speeches__image{
+    height: 600px;
+    width: 600px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .floor, .box, .pet-bottle{
+    height: 450px;
+  }
+
+  .floor:hover::before,
+  .box:hover::before, 
+  .pet-bottle:hover::before{
+    font-size: 1rem;
+  }
+
+  
+  
+
+}
+
+@media (max-width: 760px) { 
+  .project-image {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* .project-goal__title,
+  .how-is-possible__item{
+    font-size: 2.7rem;
+  } */
+
+  .speeches__image{
+    height: 400px;
+    width: 400px;
+  }
+  
+}
+
+
+
+@media (max-width: 592px) {
+  main {
+    gap: 0;
+  }
+
+  .speeches__image{
+    height: auto;
+    width: 80vw;
+  }
+
+  .seed-of-love__title {
+    font-size: 1.5rem;
+  }
+
+  .floor, .box, .pet-bottle{
+    height: 380px;
+    width: 360px;    
+   
+  }
+
+  .types-of-planting{
+    padding: 0 0 70px 0;
+  }
+
+  .types-of-planting__title{
+    padding-bottom: 40px;
+  }
+
+  .floor:hover::before,
+  .box:hover::before, 
+  .pet-bottle:hover::before{
+    padding-top: 25px;
+  }
+
+  header {
+    padding: 48px 20px;
+    margin: 0px;
+    gap: 12px;
+    height: 280px;
+  }
+
+  .project-goal__title,
+  .speeches__title,
+  .how-is-possible__title,
+  .types-of-planting__title{
+    font-size: 2.4rem;
+  }
+
+
+  .return__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .project-goal {
+    padding: 70px 32px;
+  }
+
+  .how-is-possible__item,
+  .project-goal__text,
+  .speeches__text{
+    font-size: 1.1rem;
+  }
+
+  .how-is-possible {
+    padding: 0px 32px 70px 32px;
+  }
+
+  .speeches{
+    padding: 0px 32px 70px 32px;
+  }
+}
+
+@media (max-width: 445px){
+  .project-goal__title,
+  .how-is-possible__title,
+  .speeches__,
+  .types-of-planting__title{
+    font-size: 2rem;
+  }
+
+
+}
+
+@media (max-width: 405px) {
+  .floor, .box, .pet-bottle{
+    height: 380px;
+    width: 340px;    
+   
+  }
+
+
+  .speeches__title{
+    font-size: 1.6rem;
+  }
+
+  .project-goal__title, 
+  .types-of-planting__title {
+    font-size: 1.6rem;
+  }
+
+
+  .how-is-possible__title {
+    font-size: 1.6rem;
+  }
+
+
+  .project-images-container {
+    padding-bottom: 48px;
+  }
+
+  .seed-of-love__title {
+    font-size: 1.25rem;
+  }
+
+  .types-of-planting {
+    padding-bottom: 48px;
+  }
+}
