@@ -6,32 +6,22 @@ import Vuex from "vuex";
 export default new Vuex.Store({
   state: {
     formData: {
-      // GENERIC DATA
+      // HOSPITAL DATA
       isSelectedImage: false,
-      foto: "",
-      nome_completo: "",
-      data_nascimento: "11/11/1111",
-      rg: "",
-      cpf: "",
-      telefone: "",
+      photo: "",
+      name: "",
+      cnpj: "",
       email: "",
+      phone: "",
+      password: "",
+      url: "",
+
+      // ADDRESS DATA
       cep: "",
       logradouro: "",
       bairro: "",
       estado: "",
       cidade: "",
-
-      //VOLUNTEER DATA
-      limitacao_fisica: "",
-      motivo: "",
-      experiencia: "",
-
-      // BENEFICIARY DATA
-      quantidade_moradores: "",
-      renda: "",
-      // typeResidence: "",
-      metros_quadrados: "",
-      observacao: "",
     },
 
     //SEED DATA

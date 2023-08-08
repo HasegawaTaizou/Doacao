@@ -1,9 +1,9 @@
 :root {
-  --title-color: #408d7b;
-  --subtitle-color: #408d7b;
+  --title-color: #4e7bf2;
+  --subtitle-color: #4e7bf2;
   --text-color: #6d6868;
   --section-background-color: #b25f30;
   --feedback-color: #eaeaea;
-  --input-background-color: #e7e7e7;
-  --error-color: #ED4E3B;
+  --input-border: 1px solid #7395f7;
+  --error-color: #ed4e3b;
 }

@@ -1,0 +1,53 @@
+@media (max-width: 790px) {
+  .form__photo-container label {
+    margin: 0px;
+  }
+}
+
+@media (max-width: 762px) {
+  header {
+    padding: 48px 20px;
+    margin: 0px;
+    gap: 12px;
+  }
+
+  .hospital-registration-part-one__title {
+    font-size: 1.45rem;
+  }
+
+  .return__icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .hospital-registration-part-one-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hospital-registration__button {
+    margin-bottom: 64px;
+  }
+}
+
+@media (max-width: 420px) {
+  .form__photo-container label {
+    width: 75vw;
+    height: 180px;
+  }
+
+  .hospital-registration__image {
+    max-width: 65vw;
+    max-height: 62vh;
+    min-width: 16vh;
+    min-height: 16vh;
+  }
+
+  input {
+    width: 75vw;
+  }
+
+  .hospital-registration__button {
+    width: 75vw;
+  }
+}

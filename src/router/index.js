@@ -2,9 +2,9 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "@/pages/Home.vue";
 import Login from "@/pages/Login.vue";
-import VolunteerRegistrationPartOne from "@/pages/VolunteerRegistrationPartOne.vue";
-import VolunteerRegistrationPartTwo from "@/pages/VolunteerRegistrationPartTwo.vue";
-import VolunteerRegistrationPartThree from "@/pages/VolunteerRegistrationPartThree.vue";
+import HospitalRegistrationPartOne from "@/pages/HospitalRegistrationPartOne.vue";
+import HospitalRegistrationPartTwo from "@/pages/HospitalRegistrationPartTwo.vue";
+import HospitalRegistrationPartThree from "@/pages/HospitalRegistrationPartThree.vue";
 import CheckYourEmail from "@/pages/CheckYourEmail.vue";
 import RedefinePassword from "@/pages/RedefinePassword.vue";
 import RedefinePasswordConfirmation from "@/pages/RedefinePasswordConfirmation.vue";
@@ -50,19 +50,19 @@ const routes = [
     component: Login,
   },
   {
-    path: "/volunteer-registration-part-one",
-    name: "VolunteerRegistrationPartOne",
-    component: VolunteerRegistrationPartOne,
+    path: "/hospital-registration-part-one",
+    name: "HospitalRegistrationPartOne",
+    component: HospitalRegistrationPartOne,
   },
   {
-    path: "/volunteer-registration-part-two",
-    name: "VolunteerRegistrationPartTwo",
-    component: VolunteerRegistrationPartTwo,
+    path: "/hospital-registration-part-two",
+    name: "HospitalRegistrationPartTwo",
+    component: HospitalRegistrationPartTwo,
   },
   {
-    path: "/volunteer-registration-part-three",
-    name: "VolunteerRegistrationPartThree",
-    component: VolunteerRegistrationPartThree,
+    path: "/hospital-registration-part-three",
+    name: "HospitalRegistrationPartThree",
+    component: HospitalRegistrationPartThree,
   },
   {
     path: "/check-your-email",
