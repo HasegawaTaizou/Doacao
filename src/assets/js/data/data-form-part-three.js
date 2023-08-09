@@ -1,5 +1,3 @@
-import cleanInput from "../input/clean-input.js";
-
 export default function dataPartThree(formData) {
   return {
     inputDonationLocal: formData.donationLocal,

@@ -1,9 +1,8 @@
 <template>
   <div class="content">
+    <img src="../assets/img/logo.png" alt="Website logo" id="logo" />
     <header>
-      <h1 class="hospital-registration-part-three__title">
-        CADASTRO HOSPITAL
-      </h1>
+      <h1 class="hospital-registration-part-three__title">CADASTRO HOSPITAL</h1>
       <router-link class="return__link" to="/hospital-registration-part-two">
         <img
           src="../assets/img/return-icon.png"
@@ -19,24 +18,39 @@
         class="hospital-registration__image"
       />
       <form class="hospital-registration-part-three-form">
-        <div class="form__reason-container">
-          <label for="reason" class="reason__label">Motivo:</label>
+        <div class="form__donation-local-container">
+          <label for="donation-local" class="donation-local__label"
+            >Local de doação:</label
+          >
           <textarea
-            name="reason"
+            name="donation-local"
             id=""
             cols="30"
             rows="10"
-            class="reason__textarea"
-            v-model="inputReason"
-            :class="{ error: v$.inputReason.$error }"
-            @blur="v$.inputReason.$touch();"
-            ref="inputReason"
+            class="donation-local__textarea"
+            v-model="inputDonationLocal"
+            :class="{ error: v$.inputDonationLocal.$error }"
+            @blur="v$.inputDonationLocal.$touch()"
+            ref="inputDonationLocal"
           ></textarea>
-          <div v-if="v$.inputReason.$error">
-            <p v-if="v$.inputReason.required" class="error-text">
-              Preencha o motivo!
+          <div v-if="v$.inputDonationLocal.$error">
+            <p v-if="v$.inputDonationLocal.required" class="error-text">
+              Preencha o local de doação!
             </p>
           </div>
+        </div>
+        <div class="form__other-donation-local-container">
+          <label for="other-donation-local" class="other-donation-local__label"
+            >Outro local de doação:</label
+          >
+          <textarea
+            name="other-donation-local"
+            id=""
+            cols="30"
+            rows="10"
+            class="other-donation-local__textarea"
+            v-model="inputOtherDonationLocal"
+          ></textarea>
         </div>
         <router-link to="/hospital-registration-part-two">
           <button type="button" class="hospital-registration__button-return">
@@ -59,7 +73,7 @@
     </main>
     <footer>
       <p class="footer__text">
-        Copyright © 2023 | Todos os direitos reservados Green World
+        Copyright © 2023 | Todos os direitos reservados EMPRESA
       </p>
     </footer>
   </div>
