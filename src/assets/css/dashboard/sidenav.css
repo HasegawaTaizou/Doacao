@@ -2,10 +2,9 @@
   padding: 30px 0 30px 0;
   display: none;
   justify-items: center;
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
-    "close"
-    "administrator"
+    "company"
     "nav"
     "logout";
   gap: 40px;
@@ -13,40 +12,18 @@
   box-shadow: 3px 4px 15px #d6d6d6;
   width: 400px;
   max-height: 100vh;
-  
+  position: relative;
 }
 
 .close__button {
-  grid-area: close;
-  place-self: start start;
-  padding-left: 36px;
-}
-
-.profile-administrator-content {
-  grid-area: administrator;
-}
-
-.profile-administrator-content a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-}
-
-.profile_administrator__name {
-  font-weight: 600;
-  font-size: 1.25rem;
-}
-
-.profile_administrator__image {
-  width: 80px;
-  height: 80px;
+  position: absolute;
+  top: 32px;
+  right: -12px;
 }
 
 .navigation {
   grid-area: nav;
   width: 100%;
-  padding: 70px 30px 0 30px;
 }
 
 .navigation-fields-content {
@@ -56,16 +33,18 @@
   width: 100%;
 }
 
-.navigation-field__name {
-  font-weight: 500;
-  font-size: 1.25rem;
-}
-
 .navigation-field {
   gap: 22px;
   align-items: center;
   min-height: 58px;
   display: flex;
+}
+
+.navigation-field:hover {
+  background-color: #dae3ff;
+  transition: all 100ms ease-in-out;
+  border-right: 3px solid #2c62f1;
+  color: #2c62f1;
 }
 
 .navigation-field a {
@@ -74,58 +53,12 @@
   gap: 22px;
   height: 58px;
   border-radius: 10px;
-  transition: all 400ms ease-in-out;
+  margin-left: 32px;
 }
 
-.navigation-field a:hover {
-  background-color: rgba(64, 141, 123, 0.4);
-  padding-left: 20px;
-}
-
-.navigation-field-list {
-  align-items: center;
-  min-height: 58px;
-  display: grid;
-  grid-template-areas: 
-  "icon title arrow"
-  ". list list";
-  cursor: pointer;
-}
-
-.navigation-field-list img {
-  grid-area: icon;
-}
-
-.submenu {
-  grid-area: list;
-}
-
-.navigation-field-list .navigation-field__name {
-  grid-area: title;
-}
-
-.navigation-field-list i {
-  grid-area: arrow;
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  height: 58px;
-  border-radius: 10px;
-  transition: all 400ms ease-in-out;
-}
-
-.navigation-field-list a {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  height: 58px;
-  border-radius: 10px;
-  transition: all 400ms ease-in-out;
-}
-
-.navigation-field-list a:hover {
-  background-color: rgba(64, 141, 123, 0.4);
-  padding-left: 20px;
+.navigation-field__name {
+  font-weight: 500;
+  font-size: 1.25rem;
 }
 
 .log-out-content {
