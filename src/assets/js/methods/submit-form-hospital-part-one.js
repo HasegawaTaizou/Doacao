@@ -1,4 +1,3 @@
-import cleanInput from "../input/clean-input.js";
 import fieldsHospitalPartOne from '../validations/fields/fields-hospital-part-one.js'
 
 export default async function submitFormHospitalPartOne() {
@@ -10,9 +9,6 @@ export default async function submitFormHospitalPartOne() {
   this.formData.password = this.inputPassword;
   this.formData.url = this.inputURL;
  
-  // this.formData.cpf = this.inputCpf;
-  // this.formData.cpf = cleanInput(this.formData.cpf)
-
   console.log(this.formData);
 
   this.v$.$touch();

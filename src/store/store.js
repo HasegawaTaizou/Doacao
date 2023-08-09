@@ -22,6 +22,10 @@ export default new Vuex.Store({
       neighborhood: "",
       state: "",
       city: "",
+
+      // DONATION LOCAL DATA
+      donationLocal: "",
+      otherDonationLocal: "",
     },
 
     //SEED DATA
@@ -35,10 +39,9 @@ export default new Vuex.Store({
 
     //NOTIFICATION STATUS
     showNotification: false,
-    
+
     //POPUP STATUS
     showPopUp: false,
-
   },
   mutations: {
     updateFormData(state, payload) {

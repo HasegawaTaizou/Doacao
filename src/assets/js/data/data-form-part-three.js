@@ -1,22 +1,30 @@
 import cleanInput from "../input/clean-input.js";
-import cleanBirthDate from "../input/clean-birth-date.js";
 
 export default function dataPartThree(formData) {
   return {
-    selectHaveExperience: formData.experiencia,
-    inputReason: formData.motivo,
+    inputDonationLocal: formData.donationLocal,
+    inputOtherDonationLocal: formData.otherDonationLocal,
     formData: {
-      nome_completo: formData.nome_completo,
-      foto: formData.foto,
-      data_nascimento: cleanBirthDate(formData.data_nascimento),
-      limitacao_fisica: formData.limitacao_fisica,
-      rg: cleanInput(formData.rg),
-      cpf: cleanInput(formData.cpf),
-      telefone: cleanInput(formData.telefone),
+      // Hospital General Data
+      photo: formData.photo,
+      name: formData.name,
+      cnpj: formData.cnpj,
       email: formData.email,
-      cep: cleanInput(formData.cep),
-      motivo: "",
-      experiencia: "",
+      phone: formData.phone,
+      password: formData.password,
+      url: formData.url,
+
+      // Address Data
+      cep: formData.cep,
+      road: formData.road,
+      neighborhood: formData.neighborhood,
+      complement: formData.complement,
+      state: formData.state,
+      city: formData.city,
+
+      // Donation Local Data
+      donationLocal: formData.donationLocal,
+      otherDonationLocal: formData.otherDonationLocal,
     },
   };
 }

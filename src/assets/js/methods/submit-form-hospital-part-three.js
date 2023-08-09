@@ -2,7 +2,9 @@ import postDataPartThree from "./post-data-part-three.js";
 import fieldsHospitalPartThree from '../validations/fields/fields-hospital-part-three.js'
 
 export default async function submitFormHospitalPartThree() {
-  // this.formData.experiencia = this.selectHaveExperience;
+  this.formData.donationLocal = this.inputDonationLocal;
+  this.formData.otherDonationLocal = this.inputOtherDonationLocal;
+
   this.$store.commit("updateFormData", this.formData);
   console.log("form 3: ", this.formData);
 
@@ -15,7 +17,8 @@ export default async function submitFormHospitalPartThree() {
     this.$store.state.showNotification = true
 
     this.$store.commit("updateFormData", this.formData);
-    postDataPartThree(this.formData);
+    
+    //postDataPartThree(this.formData);
   } else {
     for (const field of fieldsHospitalPartThree) {
       if (this.v$[field.key].$error) {

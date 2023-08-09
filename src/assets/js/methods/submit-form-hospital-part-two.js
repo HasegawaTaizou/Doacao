@@ -14,7 +14,6 @@ export default async function submitFormHospitalPartTwo() {
     console.log("formData 2: ", this.formData);
     this.$store.commit("updateFormData", this.formData);
     this.$router.push("/hospital-registration-part-three");
-    postDataPartTwo(this.formData);
   } else {
     for (const field of fieldsHospitalPartTwo) {
       if (this.v$[field.key].$error) {
