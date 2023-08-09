@@ -133,28 +133,15 @@
               Preencha a senha!
             </p>
           </div>
-        </div>
-        <!-- <div class="form__password-confirmation-container">
+        </div>  
+        <div class="form__password-confirmation-container">
           <label for="password-confirmation" class="password-confirmation__label">Confirmar senha:</label>
           <input
             type="text"
             class="password-confirmation__input"
-            v-mask="'(##) #####-####'"
-            v-model="inputPasswordConfirmation"
-            :class="{ error: v$.inputPasswordConfirmation.$error }"
-            ref="inputPasswordConfirmation"
-            @blur="v$.inputPasswordConfirmation.$touch()"
           />
-          <div v-if="v$.inputPasswordConfirmation.$error">
-            <p
-              v-if="v$.inputPasswordConfirmation.required && v$.inputPasswordConfirmation.minLength"
-              class="error-text"
-            >
-              Preencha a senha!
-            </p>
-          </div>
-        </div> -->
-        <!-- <div class="form__URL-container">
+        </div>
+        <div class="form__URL-container">
           <label for="URL" class="URL__label">URL do site:</label>
           <input
             type="text"
@@ -173,7 +160,7 @@
               Preencha a URL do site!
             </p>
           </div>
-        </div> -->
+        </div>
         <button
           type="button"
           @click="submitFormHospitalPartOne()"

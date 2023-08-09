@@ -165,6 +165,7 @@ label {
 
 .URL__input {
   border: var(--input-border);
+  width: 660px;
 }
 
 .hospital-registration__button {

@@ -7,7 +7,7 @@ export default function validationsHospitalPartOne() {
     inputEmail: { required, email },
     inputPhone: { required, minLength: minLength(15) },
     inputPassword: { required, minLength: minLength(15) },
-    inputPasswordConfirmation: { required, minLength: minLength(15) },
+    // inputPasswordConfirmation: { required, minLength: minLength(15) },
     inputURL: { required, minLength: minLength(15) },
   };
 }
