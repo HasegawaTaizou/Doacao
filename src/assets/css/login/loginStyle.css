@@ -1,9 +1,8 @@
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   margin: 54px 98px 32px 98px;
-  gap: 32px;
 }
 
 main {
@@ -40,7 +39,7 @@ label {
 }
 
 .email__input {
-  background-color: var(--input-background-color);
+  border: var(--input-border);
 }
 
 .form__password-container {
@@ -50,13 +49,13 @@ label {
 }
 
 .password__input {
-  background-color: var(--input-background-color);
+  border: var(--input-border);
 }
 
 .login__button {
   width: 314px;
   height: 46px;
-  background: #408d7b;
+  background: #7395f7;
   border-radius: 5px;
   color: #fff;
   font-family: "Abel";
@@ -70,15 +69,3 @@ label {
   padding-bottom: 2px;
   margin: 0px 80px;
 }
-
-/* .login__register {
-  width: 314px;
-  height: 46px;
-  background: transparent;
-  border: 1px solid #000;
-  border-radius: 5px;
-  color: #000;
-  font-family: "Abel";
-  font-size: 1.125rem;
-  cursor: pointer;
-} */

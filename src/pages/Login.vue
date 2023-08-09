@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <img src="../assets/img/logo.png" alt="Website logo" id="logo" />
     <header>
       <h1 class="login__title">LOG IN</h1>
       <router-link class="return__link" to="/">
@@ -12,7 +13,7 @@
     </header>
     <main>
       <img
-        src="../assets/img/login-image.png"
+        src="../assets/img/hospital-login-image.png"
         alt="Login Image"
         class="login__image"
       />
@@ -33,7 +34,7 @@
     </main>
     <footer>
       <p class="footer__text">
-        Copyright © 2023 | Todos os direitos reservados Green World
+        Copyright © 2023 | Todos os direitos reservados EMPRESA
       </p>
     </footer>
   </div>
@@ -41,7 +42,7 @@
 
 <script>
 export default {
-  name: "OurPartners",
+  name: "Login",
 };
 </script>
 
