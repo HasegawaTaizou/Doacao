@@ -18,10 +18,10 @@ export default new Vuex.Store({
 
       // ADDRESS DATA
       cep: "",
-      logradouro: "",
-      bairro: "",
-      estado: "",
-      cidade: "",
+      road: "",
+      neighborhood: "",
+      state: "",
+      city: "",
     },
 
     //SEED DATA

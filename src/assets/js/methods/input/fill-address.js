@@ -8,11 +8,11 @@ export default function fillAdrress() {
   axios
     .get(`https://viacep.com.br/ws/${this.formData.cep}/json/`)
     .then((response) => {
-      this.formData.logradouro = response.data.logradouro;
-      this.formData.bairro = response.data.bairro;
-      this.formData.complemento = response.data.complemento;
-      this.formData.estado = response.data.uf;
-      this.formData.cidade = response.data.localidade;
+      this.formData.road = response.data.logradouro;
+      this.formData.neighborhood = response.data.bairro;
+      this.formData.complement = response.data.complemento;
+      this.formData.state = response.data.uf;
+      this.formData.city = response.data.localidade;
     })
     .catch((error) => {
       console.error(error);

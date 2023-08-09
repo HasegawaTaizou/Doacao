@@ -1,10 +1,11 @@
 <template>
   <div class="content">
+    <img src="../assets/img/logo.png" alt="Website logo" id="logo" />
     <header>
-      <h1 class="volunteer-registration-part-two__title">
-        CADASTRO VOLUNTÁRIO
+      <h1 class="hospital-registration-part-two__title">
+        CADASTRO HOSPITAL
       </h1>
-      <router-link class="return__link" to="/volunteer-registration-part-one">
+      <router-link class="return__link" to="/hospital-registration-part-one">
         <img
           src="../assets/img/return-icon.png"
           alt="Return Icon"
@@ -14,11 +15,11 @@
     </header>
     <main>
       <img
-        src="../assets/img/volunteer-registration-image.png"
-        alt="Volunteer Registration Image"
-        class="volunteer-registration__image"
+        src="../assets/img/hospital-registration-image.png"
+        alt="Hospital Registration Image"
+        class="hospital-registration__image"
       />
-      <form class="volunteer-registration-part-two-form">
+      <form class="hospital-registration-part-two-form">
         <div class="form__cep-container">
           <label for="cep" class="cep__label">CEP:</label>
           <input
@@ -48,7 +49,7 @@
             type="text"
             class="road__input"
             disabled
-            v-model="formData.logradouro"
+            v-model="formData.road"
           />
         </div>
         <div class="form__neighborhood-container">
@@ -57,7 +58,7 @@
             type="text"
             class="neighborhood__input"
             disabled
-            v-model="formData.bairro"
+            v-model="formData.neighborhood"
           />
         </div>
         <div class="form__complement-container">
@@ -66,7 +67,7 @@
             type="text"
             class="complement__input"
             disabled
-            v-model="formData.complemento"
+            v-model="formData.complement"
           />
         </div>
         <div class="form__state-container">
@@ -75,7 +76,7 @@
             type="text"
             class="state__input"
             disabled
-            v-model="formData.estado"
+            v-model="formData.state"
           />
         </div>
         <div class="form__city-container">
@@ -84,18 +85,18 @@
             type="text"
             class="city__input"
             disabled
-            v-model="formData.cidade"
+            v-model="formData.city"
           />
         </div>
-        <router-link to="/volunteer-registration-part-one">
-          <button type="button" class="volunteer-registration__button-return">
+        <router-link to="/hospital-registration-part-one">
+          <button type="button" class="hospital-registration__button-return">
             Voltar
           </button>
         </router-link>
         <button
           type="button"
-          @click="submitFormVolunteerPartTwo"
-          class="volunteer-registration__button"
+          @click="submitFormHospitalPartTwo"
+          class="hospital-registration__button"
         >
           Continuar
         </button>
@@ -103,7 +104,7 @@
     </main>
     <footer>
       <p class="footer__text">
-        Copyright © 2023 | Todos os direitos reservados Green World
+        Copyright © 2023 | Todos os direitos reservados EMPRESA
       </p>
     </footer>
   </div>
@@ -111,13 +112,13 @@
 
 <script>
 import fillAdrress from "../assets/js/methods/input/fill-address.js";
-import submitFormVolunteerPartTwo from "../assets/js/methods/submit-form-volunteer-part-two.js";
+import submitFormHospitalPartTwo from "../assets/js/methods/submit-form-hospital-part-two.js";
 import dataFormPartTwo from "../assets/js/data/data-form-part-two.js";
 import { useVuelidate } from "@vuelidate/core";
-import validationsVolunteerPartTwo from "../assets/js/validations/validations-volunteer-part-two.js";
+import validationsHospitalPartTwo from "../assets/js/validations/validations-hospital-part-two.js";
 
 export default {
-  name: "VolunteerRegistrationPartTwo",
+  name: "HospitalRegistrationPartTwo",
   setup() {
     return { v$: useVuelidate() };
   },
@@ -129,23 +130,23 @@ export default {
     };
   },
   validations() {
-    const validations = validationsVolunteerPartTwo();
+    const validations = validationsHospitalPartTwo();
     return {
       ...validations,
     };
   },
   methods: {
     fillAdrress,
-    submitFormVolunteerPartTwo,
+    submitFormHospitalPartTwo,
   },
 };
 </script>
 
 <style scoped>
-@import url("../assets/css/volunteerRegistrationPartTwo/generalStyle.css");
-@import url("../assets/css/volunteerRegistrationPartTwo/limitsSizeStyle.css");
-@import url("../assets/css/volunteerRegistrationPartTwo/volunteerRegistrationPartTwoStyle.css");
-@import url("../assets/css/volunteerRegistrationPartTwo/volunteerRegistrationPartTwoResponsiveStyle.css");
-@import url("../assets/css/volunteerRegistrationPartTwo/copyrightStyle.css");
-@import url("../assets/css/volunteerRegistrationPartTwo/copyrightResponsiveStyle.css");
+@import url("../assets/css/hospitalRegistrationPartTwo/generalStyle.css");
+@import url("../assets/css/hospitalRegistrationPartTwo/limitsSizeStyle.css");
+@import url("../assets/css/hospitalRegistrationPartTwo/hospitalRegistrationPartTwoStyle.css");
+@import url("../assets/css/hospitalRegistrationPartTwo/hospitalRegistrationPartTwoResponsiveStyle.css");
+@import url("../assets/css/hospitalRegistrationPartTwo/copyrightStyle.css");
+@import url("../assets/css/hospitalRegistrationPartTwo/copyrightResponsiveStyle.css");
 </style>

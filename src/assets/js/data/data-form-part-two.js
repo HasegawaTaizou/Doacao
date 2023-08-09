@@ -3,11 +3,11 @@ export default function dataFormPartTwo(formData) {
     inputCep: formData.cep,
     formData: {
       cep: formData.cep,
-      logradouro: formData.logradouro,
-      bairro: formData.bairro,
-      complemento: formData.complemento,
-      estado: formData.estado,
-      cidade: formData.cidade,
+      road: formData.road,
+      neighborhood: formData.neighborhood,
+      complement: formData.complement,
+      state: formData.state,
+      city: formData.city,
     },
   };
 }
