@@ -1,0 +1,39 @@
+#book-schedules-dashboard {
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
+.book-schedules__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 48px;
+}
+
+.book-schedules__title {
+  font-size: 2.5rem;
+  color: #000;
+  font-family: "Abel";
+  font-weight: normal;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.profile__name {
+  font-size: 1.25rem;
+  max-width: 155px;
+  text-align: center;
+}
+
+.book-schedules__content {
+  display: flex;
+  flex-direction: column;
+  background-color: #afafaf;
+  border-radius: 12px;
+  height: 88vh;
+  margin: 0px 32px;
+}

@@ -13,6 +13,7 @@ import Faq from "@/pages/Faq.vue";
 import Dashboard from "@/pages/dashboard/Dashboard.vue";
 import Schedules from "@/pages/dashboard/Schedules.vue";
 import Scheduling from "@/pages/dashboard/Scheduling.vue";
+import BookSchedules from "@/pages/dashboard/BookSchedules.vue";
 import Seeds from '@/pages/dashboard/Seeds.vue';
 import Seed from "@/pages/dashboard/Seed.vue";
 import AllHelp from "@/pages/dashboard/AllHelp.vue";
@@ -105,6 +106,11 @@ const routes = [
         path: "/dashboard/schedules/scheduling",
         name: "Scheduling",
         component: Scheduling,
+      },
+      {
+        path: "/dashboard/book-schedules",
+        name: "BookSchedules",
+        component: BookSchedules,
       },
       {
         path: "/dashboard/all-help",
