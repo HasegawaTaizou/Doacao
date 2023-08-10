@@ -23,3 +23,15 @@
     max-width: 155px;
     text-align: center;
 }
+
+.scheduling__content {
+    display: flex;
+    background-color: #FFFFFF;
+    justify-content: center;
+    
+    border-radius: 12px;
+    height: 90vh;
+    margin: 0px 32px;
+    
+    /* width: 98%;  */
+}
