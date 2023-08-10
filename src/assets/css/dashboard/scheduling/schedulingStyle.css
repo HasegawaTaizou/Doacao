@@ -1,37 +1,121 @@
+#scheduling-dashboard {
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
 .scheduling__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 16px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 48px;
 }
 
 .scheduling__title {
-    font-size: 2.5rem;
-    color: #000;
-    font-family: "Abel";
-    font-weight: normal;
+  font-size: 2.5rem;
+  color: #000;
+  font-family: "Abel";
+  font-weight: normal;
 }
 
 .profile-container {
-    display: flex;
-    align-items: center;
-    gap: 28px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
 }
 
 .profile__name {
-    font-size: 1.25rem;
-    max-width: 155px;
-    text-align: center;
+  font-size: 1.25rem;
+  max-width: 155px;
+  text-align: center;
 }
 
 .scheduling__content {
-    display: flex;
-    background-color: #FFFFFF;
-    justify-content: center;
-    
-    border-radius: 12px;
-    height: 90vh;
-    margin: 0px 32px;
-    
-    /* width: 98%;  */
+  display: flex;
+  flex-direction: column;
+  background-color: #afafaf;
+  border-radius: 12px;
+  height: 88vh;
+  margin: 0px 32px;
+}
+
+.donator-container {
+  display: grid;
+  grid-template-areas:
+    "image name name"
+    "image email age"
+    "image phone gender"
+    "image blood-type weight";
+  grid-template-columns: auto 350px 1fr;
+  grid-template-rows: auto auto auto auto;
+  align-items: center;
+  margin: 58px 58px 0px 82px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid #dde5e9;
+}
+
+.donator__image {
+  grid-area: image;
+  width: 224px;
+  height: 224px;
+  border-radius: 100%;
+  margin-right: 72px;
+}
+
+.donator-container span {
+  font-size: 1.25rem;
+}
+
+.donator__name {
+  grid-area: name;
+  font-size: 2.5rem;
+  font-family: "Abel";
+  font-weight: normal;
+  color: #000;
+}
+
+.donator__email {
+  grid-area: email;
+  display: flex;
+  gap: 12px;
+}
+
+.donator__phone {
+  grid-area: phone;
+  display: flex;
+  gap: 12px;
+}
+
+.donator__blood-type {
+  grid-area: blood-type;
+  display: flex;
+  gap: 12px;
+}
+
+.donator__age {
+  grid-area: age;
+  display: flex;
+  gap: 12px;
+}
+
+.donator__gender {
+  grid-area: gender;
+  display: flex;
+  gap: 12px;
+}
+
+.donator__weight {
+  grid-area: weight;
+  display: flex;
+  gap: 12px;
+}
+
+.schedules {
+  margin: 24px 58px 0px 82px;
+}
+
+.schedules__title {
+  font-size: 2.5rem;
+  font-family: "Abel";
+  font-weight: normal;
+  color: #000;
 }
