@@ -11,7 +11,7 @@ import RedefinePasswordConfirmation from "@/pages/RedefinePasswordConfirmation.v
 import Faq from "@/pages/Faq.vue";
 //DASHBOARD
 import Dashboard from "@/pages/dashboard/Dashboard.vue";
-import HomeDashboard from "@/pages/dashboard/HomeDashboard.vue";
+import SchedulingDashboard from "@/pages/dashboard/SchedulingDashboard.vue";
 import Seeds from '@/pages/dashboard/Seeds.vue';
 import Seed from "@/pages/dashboard/Seed.vue";
 import AllHelp from "@/pages/dashboard/AllHelp.vue";
@@ -93,12 +93,12 @@ const routes = [
     children: [
       {
         path: "",
-        redirect: "/dashboard/home",
+        redirect: "/dashboard/scheduling",
       },
       {
-        path: "/dashboard/home",
-        name: "HomeDashboard",
-        component: HomeDashboard,
+        path: "/dashboard/scheduling",
+        name: "SchedulingDashboard",
+        component: SchedulingDashboard,
       },
       {
         path: "/dashboard/all-help",

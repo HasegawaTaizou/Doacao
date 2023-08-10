@@ -1,0 +1,25 @@
+.scheduling__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 48px;
+}
+
+.scheduling__title {
+    font-size: 2.5rem;
+    color: #000;
+    font-family: "Abel";
+    font-weight: normal;
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.profile__name {
+    font-size: 1.25rem;
+    max-width: 155px;
+    text-align: center;
+}

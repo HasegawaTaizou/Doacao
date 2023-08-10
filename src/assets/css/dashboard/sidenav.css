@@ -9,15 +9,29 @@
     "logout";
   gap: 40px;
   height: 100%;
-  box-shadow: 3px 4px 15px #d6d6d6;
+  border-right: 1px solid #DDE5E9;
   width: 400px;
   max-height: 100vh;
   position: relative;
 }
 
+.company {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  margin-left: 36px;
+  margin-bottom: 24px;
+}
+
+.company__image {
+  width: 54px;
+  height: 54px;
+}
+
 .close__button {
   position: absolute;
-  top: 32px;
+  top: 42px;
   right: -12px;
 }
 
@@ -61,13 +75,6 @@
   font-size: 1.25rem;
 }
 
-.log-out-content {
-  grid-area: logout;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
 .log-out__button {
   background-color: transparent;
   color: #000;
@@ -80,7 +87,8 @@
   transition: all 400ms ease-in-out;
   display: flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 8px;
   font-family: "Montserrat", sans-serif;
 }
 

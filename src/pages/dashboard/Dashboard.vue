@@ -29,6 +29,10 @@
           @click="this.showSidenav = false"
         />
       </a>
+      <div class="company">
+        <img src="../../assets/img/logo.png" alt="Company Image" class="company__image">
+        <span class="company__name">NOME EMPRESA</span>
+      </div>
       <nav class="navigation">
         <ul class="navigation-fields-content">
           <template v-for="item in menuItems" :key="item.id">
@@ -41,14 +45,12 @@
           </template>
         </ul>
       </nav>
-      <div class="log-out-content">
         <a href="#" class="log-out-content">
           <button class="log-out__button">
             <img src="../../assets/img/logout-icon.png" alt="Log Out Icon" />
             <span class="log-out__text">Sair</span>
           </button>
         </a>
-      </div>
     </div>
     <div id="dashboard" class="dashboard-content">
       <router-view></router-view>
@@ -92,6 +94,6 @@ export default {
 @import url("../../assets/css/variables.css");
 @import url("../../assets/css/dashboard/reset.css");
 @import url("../../assets/css/generalStyle.css");
-@import url("../../assets/css/dashboard/home/homeStyle.css");
+@import url("../../assets/css/dashboard/dashboardStyle.css");
 @import url("../../assets/css/dashboard/sidenav.css");
 </style>
