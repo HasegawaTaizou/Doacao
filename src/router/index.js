@@ -18,10 +18,10 @@ import BookSchedules from "@/pages/dashboard/BookSchedules.vue";
 import Settings from "@/pages/dashboard/Settings.vue";
 import RedefinePassword from "@/pages/dashboard/RedefinePassword.vue";
 import EditHospital from "@/pages/dashboard/EditHospital.vue";
+import Help from "@/pages/dashboard/Help.vue";
 // -----------------------
-import Seeds from '@/pages/dashboard/Seeds.vue';
+import Seeds from "@/pages/dashboard/Seeds.vue";
 import Seed from "@/pages/dashboard/Seed.vue";
-import AllHelp from "@/pages/dashboard/AllHelp.vue";
 import AllVolunteers from "@/pages/dashboard/AllVolunteers.vue";
 import Volunteer from "@/pages/dashboard/Volunteer.vue";
 import VolunteerRequests from "@/pages/dashboard/VolunteerRequests.vue";
@@ -34,9 +34,6 @@ import Administrator from "@/pages/dashboard/Administrator.vue";
 import UpdateAdministrator from "@/pages/dashboard/UpdateAdministrator.vue";
 import UpdateBeneficiarie from "@/pages/dashboard/UpdateBeneficiarie.vue";
 import UpdateVolunteer from "@/pages/dashboard/UpdateVolunteer.vue";
-import UpdateHelp from "@/pages/dashboard/UpdateHelp.vue";
-import Help from "@/pages/dashboard/Help.vue";
-import CreateHelp from "@/pages/dashboard/CreateHelp.vue";
 
 // TELAS DE TESTE
 import Requisicoes from "@/pages/Requisicoes.vue";
@@ -91,7 +88,7 @@ const routes = [
     path: "/faq",
     name: "Faq",
     component: Faq,
-  }, 
+  },
 
   //DASHBOARD
   {
@@ -134,9 +131,9 @@ const routes = [
         component: EditHospital,
       },
       {
-        path: "/dashboard/all-help",
-        name: "AllHelp",
-        component: AllHelp,
+        path: "/dashboard/help",
+        name: "Help",
+        component: Help,
       },
       {
         path: "/dashboard/seeds",
@@ -207,21 +204,6 @@ const routes = [
         path: "/dashboard/all-volunteers/volunteer/update-volunteer",
         name: "UpdateVolunteer",
         component: UpdateVolunteer,
-      },
-      {
-        path: "/dashboard/update-help",
-        name: "UpdateHelp",
-        component: UpdateHelp,
-      },
-      {
-        path: "/dashboard/help",
-        name: "Help",
-        component: Help,
-      },
-      {
-        path: "/dashboard/create-help",
-        name: "CreateHelp",
-        component: CreateHelp,
       },
     ],
   },
