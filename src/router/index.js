@@ -15,7 +15,10 @@ import Dashboard from "@/pages/dashboard/Dashboard.vue";
 import Schedules from "@/pages/dashboard/Schedules.vue";
 import Scheduling from "@/pages/dashboard/Scheduling.vue";
 import BookSchedules from "@/pages/dashboard/BookSchedules.vue";
+import Settings from "@/pages/dashboard/Settings.vue";
 import RedefinePassword from "@/pages/dashboard/RedefinePassword.vue";
+import EditHospital from "@/pages/dashboard/EditHospital.vue";
+// -----------------------
 import Seeds from '@/pages/dashboard/Seeds.vue';
 import Seed from "@/pages/dashboard/Seed.vue";
 import AllHelp from "@/pages/dashboard/AllHelp.vue";
@@ -115,15 +118,20 @@ const routes = [
         name: "BookSchedules",
         component: BookSchedules,
       },
-      // {
-      //   path: "/dashboard/settings",
-      //   name: "Settings",
-      //   component: Settings,
-      // },
+      {
+        path: "/dashboard/settings",
+        name: "Settings",
+        component: Settings,
+      },
       {
         path: "/dashboard/settings/redefine-password",
         name: "RedefinePassword",
         component: RedefinePassword,
+      },
+      {
+        path: "/dashboard/settings/edit-hospital",
+        name: "EditHospital",
+        component: EditHospital,
       },
       {
         path: "/dashboard/all-help",
