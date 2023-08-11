@@ -6,14 +6,16 @@ import HospitalRegistrationPartOne from "@/pages/HospitalRegistrationPartOne.vue
 import HospitalRegistrationPartTwo from "@/pages/HospitalRegistrationPartTwo.vue";
 import HospitalRegistrationPartThree from "@/pages/HospitalRegistrationPartThree.vue";
 import CheckYourEmail from "@/pages/CheckYourEmail.vue";
-import RedefinePassword from "@/pages/RedefinePassword.vue";
+// import RedefinePassword from "@/pages/RedefinePassword.vue";
 import RedefinePasswordConfirmation from "@/pages/RedefinePasswordConfirmation.vue";
 import Faq from "@/pages/Faq.vue";
+
 //DASHBOARD
 import Dashboard from "@/pages/dashboard/Dashboard.vue";
 import Schedules from "@/pages/dashboard/Schedules.vue";
 import Scheduling from "@/pages/dashboard/Scheduling.vue";
 import BookSchedules from "@/pages/dashboard/BookSchedules.vue";
+import RedefinePassword from "@/pages/dashboard/RedefinePassword.vue";
 import Seeds from '@/pages/dashboard/Seeds.vue';
 import Seed from "@/pages/dashboard/Seed.vue";
 import AllHelp from "@/pages/dashboard/AllHelp.vue";
@@ -32,6 +34,7 @@ import UpdateVolunteer from "@/pages/dashboard/UpdateVolunteer.vue";
 import UpdateHelp from "@/pages/dashboard/UpdateHelp.vue";
 import Help from "@/pages/dashboard/Help.vue";
 import CreateHelp from "@/pages/dashboard/CreateHelp.vue";
+
 // TELAS DE TESTE
 import Requisicoes from "@/pages/Requisicoes.vue";
 import Firebase from "@/pages/Firebase.vue";
@@ -71,11 +74,11 @@ const routes = [
     name: "CheckYourEmail",
     component: CheckYourEmail,
   },
-  {
-    path: "/redefine-password",
-    name: "RedefinePassword",
-    component: RedefinePassword,
-  },
+  // {
+  //   path: "/redefine-password",
+  //   name: "RedefinePassword",
+  //   component: RedefinePassword,
+  // },
   {
     path: "/redefine-password-confirmation",
     name: "RedefinePasswordConfirmation",
@@ -111,6 +114,16 @@ const routes = [
         path: "/dashboard/book-schedules",
         name: "BookSchedules",
         component: BookSchedules,
+      },
+      // {
+      //   path: "/dashboard/settings",
+      //   name: "Settings",
+      //   component: Settings,
+      // },
+      {
+        path: "/dashboard/settings/redefine-password",
+        name: "RedefinePassword",
+        component: RedefinePassword,
       },
       {
         path: "/dashboard/all-help",
