@@ -1,8 +1,3 @@
-#book-schedules-dashboard {
-  max-height: 100vh;
-  overflow-y: scroll;
-}
-
 .book-schedules__header {
   display: flex;
   justify-content: space-between;

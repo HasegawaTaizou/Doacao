@@ -1,8 +1,3 @@
-#scheduling-dashboard {
-  max-height: 100vh;
-  overflow-y: scroll;
-}
-
 .scheduling__header {
   display: flex;
   justify-content: space-between;
@@ -98,6 +93,7 @@ tr:not(:last-child)::after {
   width: 98%;
   border-bottom: 1px solid #dde5e9;
 }
+
 
 .content__donator {
   display: flex;
