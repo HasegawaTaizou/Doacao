@@ -70,18 +70,18 @@
             </td>
           </tr>
           <tr class="table__content">
-            <td class="content__id">1</td>
+            <td class="content__id">2</td>
             <td class="content__donator">
               <img
                 src="../../assets/img/donator-image.png"
                 alt="Donator Image"
                 class="donator__image"
               />
-              <span class="donator__name">João Pedro Bueno</span>
+              <span class="donator__name">Beatriz Fideliz Landi Coelho</span>
             </td>
             <td class="content__date">29/07/2023</td>
             <td class="content__hour">11:10</td>
-            <td class="content__site">Descrição do local 1</td>
+            <td class="content__site">Descrição do local 2</td>
             <td class="content__status concluded">Concluído</td>
             <td class="content__actions">
               <span class="action__none">NÃO DISPONÍVEL</span>
@@ -89,90 +89,6 @@
           </tr>
         </table>
       </div>
-      <!-- <div class="scheduling__schedules">
-         <div class="schedule__title-container">
-          <span class="id__title">ID</span>
-          <span class="donator__title">Nome do doador</span>
-          <span class="date__title">Data</span>
-          <span class="hour__title">Horário</span>
-          <span class="site__title">Local de doação</span>
-          <span class="status__title">Status</span>
-          <span class="action__title">Ação</span>
-        </div> 
-
-        <div class="schedule__text-container">
-          <span class="id__text">1</span>
-          <div class="donator-container">
-            <div class="donator-content">
-              <img
-                src="../../assets/img/donator-image.png"
-                alt="Donator Image"
-                class="donator__image"
-              />
-              <span class="donator__text">João Pedro Bueno</span>
-            </div>
-          </div>
-          <span class="date__text">29/07/2023</span>
-          <span class="hour__text">11:10</span>
-          <span class="site__text">Descrição do local 1</span>
-          <span class="status__text">Agendado</span>
-          <div class="actions-container">
-            <div class="action-content">
-              <img
-                src="../../assets/img/scheduling-cancel-icon.png"
-                alt="Cancel Icon"
-                class="action__icon"
-              />
-              <img
-                src="../../assets/img/scheduling-conclude-icon.png"
-                alt=" Conclude Icon"
-                class="action__icon"
-              />
-              <img
-                src="../../assets/img/scheduling-reschedule-icon.png"
-                alt="Reschedule Icon"
-                class="action__icon"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="schedule__text-container">
-          <span class="id__text">1</span>
-          <div class="donator-container">
-            <div class="donator-content">
-              <img
-                src="../../assets/img/donator-image.png"
-                alt="Donator Image"
-                class="donator__image"
-              />
-              <span class="donator__text">João Pedro Bueno</span>
-            </div>
-          </div>
-          <span class="date__text">29/07/2023</span>
-          <span class="hour__text">11:10</span>
-          <span class="site__text">Descrição do local 1</span>
-          <span class="status__text">Agendado</span>
-          <div class="actions-container">
-            <div class="action-content">
-              <img
-                src="../../assets/img/scheduling-cancel-icon.png"
-                alt="Cancel Icon"
-                class="action__icon"
-              />
-              <img
-                src="../../assets/img/scheduling-conclude-icon.png"
-                alt=" Conclude Icon"
-                class="action__icon"
-              />
-              <img
-                src="../../assets/img/scheduling-reschedule-icon.png"
-                alt="Reschedule Icon"
-                class="action__icon"
-              />
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
   </section>
 </template>

@@ -38,9 +38,107 @@
             class="book-scheduling__icon"
           />
         </button>
+        <div class="book-scheduling__schedules">
+          <table class="schedules__table">
+            <tr class="table__title">
+              <th class="title__date">Data</th>
+              <th class="title__hour">Horário</th>
+              <th class="title__site">Local</th>
+              <th class="title__action">Ação</th>
+            </tr>
+            <tr class="table__content">
+              <td class="content__date">29/07/2023</td>
+              <td class="content__hour">11:10</td>
+              <td class="content__site">Descrição do local 1</td>
+              <td class="content__actions">
+                <img
+                  src="../../assets/img/scheduling-cancel-icon.png"
+                  alt="Cancel Icon"
+                  class="action__icon"
+                />
+                <img
+                  src="../../assets/img/scheduling-reschedule-icon.png"
+                  alt="Reschedule Icon"
+                  class="action__icon"
+                />
+              </td>
+            </tr>
+            <tr class="table__content">
+              <td class="content__date">29/07/2023</td>
+              <td class="content__hour">11:10</td>
+              <td class="content__site">Descrição do local 2</td>
+              <td class="content__actions">
+                <img
+                  src="../../assets/img/scheduling-cancel-icon.png"
+                  alt="Cancel Icon"
+                  class="action__icon"
+                />
+                <img
+                  src="../../assets/img/scheduling-reschedule-icon.png"
+                  alt="Reschedule Icon"
+                  class="action__icon"
+                />
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="book-scheduling__actions-buttons">
+          <button class="action-button__cancel">
+            <span class="cancel__text">Cancelar</span>
+            <i class="fa-regular fa-circle-xmark"></i>
+          </button>
+          <button class="action-button__save">
+            <span class="save__text">Salvar</span>
+            <i class="fa-regular fa-circle-check"></i>
+          </button>
+        </div>
       </div>
       <div class="schedules-available">
-        <span class="schedules-available__title">Agendamentos disponíveis:</span>
+        <span class="schedules-available__title"
+          >Agendamentos disponíveis:</span
+        >
+        <table class="schedules__table">
+          <tr class="table__title">
+            <th class="title__date">Data</th>
+            <th class="title__hour">Horário</th>
+            <th class="title__site">Local</th>
+            <th class="title__action">Ação</th>
+          </tr>
+          <tr class="table__content">
+            <td class="content__date">29/07/2023</td>
+            <td class="content__hour">11:10</td>
+            <td class="content__site">Descrição do local 1</td>
+            <td class="content__actions">
+              <img
+                src="../../assets/img/scheduling-cancel-icon.png"
+                alt="Cancel Icon"
+                class="action__icon"
+              />
+              <img
+                src="../../assets/img/scheduling-reschedule-icon.png"
+                alt="Reschedule Icon"
+                class="action__icon"
+              />
+            </td>
+          </tr>
+          <tr class="table__content">
+            <td class="content__date">29/07/2023</td>
+            <td class="content__hour">11:10</td>
+            <td class="content__site">Descrição do local 2</td>
+            <td class="content__actions">
+              <img
+                src="../../assets/img/scheduling-cancel-icon.png"
+                alt="Cancel Icon"
+                class="action__icon"
+              />
+              <img
+                src="../../assets/img/scheduling-reschedule-icon.png"
+                alt="Reschedule Icon"
+                class="action__icon"
+              />
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </section>

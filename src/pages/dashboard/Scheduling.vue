@@ -46,6 +46,47 @@
       </div>
       <div class="schedules">
         <h2 class="schedules__title">Agendamentos</h2>
+        <table class="schedules__table">
+          <tr class="table__title">
+            <th class="title__date">Data</th>
+            <th class="title__hour">Horário</th>
+            <th class="title__site">Local</th>
+            <th class="title__status">Status</th>
+            <th class="title__action">Ação</th>
+          </tr>
+          <tr class="table__content">
+            <td class="content__date">29/07/2023</td>
+            <td class="content__hour">11:10</td>
+            <td class="content__site">Descrição do local 1</td>
+            <td class="content__status scheduled">Agendado</td>
+            <td class="content__actions">
+              <img
+                src="../../assets/img/scheduling-cancel-icon.png"
+                alt="Cancel Icon"
+                class="action__icon"
+              />
+              <img
+                src="../../assets/img/scheduling-conclude-icon.png"
+                alt=" Conclude Icon"
+                class="action__icon"
+              />
+              <img
+                src="../../assets/img/scheduling-reschedule-icon.png"
+                alt="Reschedule Icon"
+                class="action__icon"
+              />
+            </td>
+          </tr>
+          <tr class="table__content">
+            <td class="content__date">29/07/2023</td>
+            <td class="content__hour">11:10</td>
+            <td class="content__site">Descrição do local 2</td>
+            <td class="content__status concluded">Concluído</td>
+            <td class="content__actions">
+              <span class="action__none">NÃO DISPONÍVEL</span>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </section>

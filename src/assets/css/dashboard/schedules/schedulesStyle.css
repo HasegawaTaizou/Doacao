@@ -62,9 +62,10 @@
 
 .schedules__table {
   display: flex;
-  border-spacing: 20px;
+  border-spacing: 28px;
   border-collapse: separate;
   width: 100%;
+  justify-content: center;
 }
 
 tr,
