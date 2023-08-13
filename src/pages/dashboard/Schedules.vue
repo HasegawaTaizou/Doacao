@@ -27,24 +27,31 @@
         </div>
       </div>
       <div class="scheduling__schedules">
-        <table class="schedules__table" border="1">
-          <tr>
-            <th>ID</th>
-            <th>Nome do doador</th>
-            <th>Data</th>
-            <th>Horário</th>
-            <th>Local</th>
-            <th>Status</th>
-            <th>Ação</th>
+        <table class="schedules__table">
+          <tr class="table__title">
+            <th class="title__id">ID</th>
+            <th class="title__donator">Nome do doador</th>
+            <th class="title__date">Data</th>
+            <th class="title__hour">Horário</th>
+            <th class="title__site">Local</th>
+            <th class="title__status">Status</th>
+            <th class="title__action">Ação</th>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>João Pedro Bueno</td>
-            <td>29/07/2023</td>
-            <td>11:10</td>
-            <td>Descrição do local 1</td>
-            <td>Agendado</td>
-            <td>
+          <tr class="table__content">
+            <td class="content__id">1</td>
+            <td class="content__donator">
+              <img
+                src="../../assets/img/donator-image.png"
+                alt="Donator Image"
+                class="donator__image"
+              />
+              <span class="donator__name">João Pedro Bueno</span>
+            </td>
+            <td class="content__date">29/07/2023</td>
+            <td class="content__hour">11:10</td>
+            <td class="content__site">Descrição do local 1</td>
+            <td class="content__status scheduled">Agendado</td>
+            <td class="content__actions">
               <img
                 src="../../assets/img/scheduling-cancel-icon.png"
                 alt="Cancel Icon"
@@ -62,29 +69,22 @@
               />
             </td>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>João Pedro Bueno</td>
-            <td>29/07/2023</td>
-            <td>11:10</td>
-            <td>Descrição do local 1</td>
-            <td>Agendado</td>
-            <td>
+          <tr class="table__content">
+            <td class="content__id">1</td>
+            <td class="content__donator">
               <img
-                src="../../assets/img/scheduling-cancel-icon.png"
-                alt="Cancel Icon"
-                class="action__icon"
+                src="../../assets/img/donator-image.png"
+                alt="Donator Image"
+                class="donator__image"
               />
-              <img
-                src="../../assets/img/scheduling-conclude-icon.png"
-                alt=" Conclude Icon"
-                class="action__icon"
-              />
-              <img
-                src="../../assets/img/scheduling-reschedule-icon.png"
-                alt="Reschedule Icon"
-                class="action__icon"
-              />
+              <span class="donator__name">João Pedro Bueno</span>
+            </td>
+            <td class="content__date">29/07/2023</td>
+            <td class="content__hour">11:10</td>
+            <td class="content__site">Descrição do local 1</td>
+            <td class="content__status concluded">Concluído</td>
+            <td class="content__actions">
+              <span class="action__none">NÃO DISPONÍVEL</span>
             </td>
           </tr>
         </table>

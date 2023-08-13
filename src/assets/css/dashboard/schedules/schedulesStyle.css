@@ -63,6 +63,15 @@
 .schedules__table {
   display: flex;
   border-spacing: 20px;
+  border-collapse: separate;
+  width: 100%;
+}
+
+tr,
+td,
+th {
+  margin: auto;
+  padding: 10px;
 }
 
 th {
@@ -72,13 +81,11 @@ th {
   font-weight: normal;
 }
 
-table {
-  border-collapse: separate;
-  border-spacing: 10px; /* Define o espaçamento entre as células */
-  width: 100%;
+tr {
+  text-align: center;
 }
 
-tr {
+tr:not(:first-child) {
   position: relative;
 }
 
@@ -86,7 +93,61 @@ tr:not(:last-child)::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -5px; /* Ajuste para posicionar a linha onde desejar */
-  width: 100%;
-  border-bottom: 1px solid black; /* Cria a linha de separação */
+  bottom: -12px;
+  width: 98%;
+  border-bottom: 1px solid #dde5e9;
+}
+
+.content__donator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.donator__image {
+  width: 24px;
+  height: 24px;
+}
+
+.content__actions {
+  display: flex;
+  gap: 18px;
+}
+
+.content__actions img {
+  width: 20px;
+  height: 20px;
+}
+
+.action__none {
+  color: #fff;
+  background-color: #7395f7;
+  border-radius: 5px;
+  margin: auto;
+}
+
+.content__status {
+  padding: 12px;
+  border-radius: 5px;
+}
+
+/* STATUS STYLE */
+.scheduled {
+  color: #2c62f1;
+  background-color: #dae3ff;
+}
+
+.concluded {
+  color: #6ab39d;
+  background-color: #f0f9f3;
+}
+
+.pending {
+  color: #f43434;
+  background-color: #fdc4c4;
+}
+
+.rescheduled {
+  color: #e5c05e;
+  background-color: #fbf4e4;
 }
