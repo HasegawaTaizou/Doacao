@@ -142,11 +142,18 @@
       </div>
     </div>
   </section>
+  <PopUp
+    :message="'Os dados do beneficiado serão excluídos'"
+    :acceptFunction="deleteVolunteer"
+  />
 </template>
 
 <script>
+import PopUp from "../../assets/components/PopUp.vue";
+
 export default {
   name: "BookSchedules",
+  components: { PopUp },
 };
 </script>
 

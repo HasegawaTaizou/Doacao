@@ -55,80 +55,33 @@
   font-size: 0.75rem;
 }
 
-.schedules__table {
-  display: flex;
-  border-spacing: 28px;
-  border-collapse: separate;
-  width: 100%;
-  justify-content: center;
+.title__status {
+  width: 100px;
 }
 
-tr,
-td,
-th {
-  margin: auto;
-  padding: 10px;
-}
-
-th {
-  text-align: start;
-  font-family: "Abel";
-  font-size: 1.125rem;
-  font-weight: normal;
-}
-
-tr {
-  text-align: center;
-}
-
-tr:not(:first-child) {
-  position: relative;
-}
-
-tr:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -12px;
-  width: 98%;
-  border-bottom: 1px solid #dde5e9;
-}
-
-
-.content__donator {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.donator__image {
-  width: 24px;
-  height: 24px;
-}
-
-.content__actions {
-  display: flex;
-  gap: 18px;
-}
-
-.content__actions img {
-  width: 20px;
-  height: 20px;
-}
+/* ACTION STATUS */
 
 .action__none {
-  color: #fff;
   background-color: #7395f7;
   border-radius: 5px;
-  margin: auto;
-}
-
-.content__status {
   padding: 12px;
-  border-radius: 5px;
+  margin: auto;
+  width: 60px;
 }
 
 /* STATUS STYLE */
+
+.content__status {
+  position: relative;
+  width: 100px;
+  text-align: center;
+}
+
+.status__text {
+  border-radius: 5px;
+  padding: 8px;
+}
+
 .scheduled {
   color: #2c62f1;
   background-color: #dae3ff;
@@ -147,4 +100,129 @@ tr:not(:last-child)::after {
 .rescheduled {
   color: #e5c05e;
   background-color: #fbf4e4;
+}
+
+.donator__image {
+  width: 32px;
+  height: 32px;
+}
+
+/* TABELA ESTILO */
+
+.schedules__table {
+  width: 95%;
+  border-collapse: collapse;
+  border-spacing: 0; /* Remove qualquer espaçamento padrão entre as células */
+}
+
+thead,
+tbody {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+}
+
+tr {
+  display: table-row;
+}
+
+td,
+th {
+  display: table-cell;
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle; /* Centraliza verticalmente */
+}
+
+.title__action,
+.content__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.action__none {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7395f7;
+  border-radius: 5px;
+  padding: 8px; /* Adjust padding as needed */
+  width: 60px;
+  height: 100%;
+}
+
+.content__donator a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.title__action,
+.content__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.content__actions img {
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.content__actions {
+  gap: 16px;
+}
+
+.action__none {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7395f7;
+  border-radius: 5px;
+  padding: 8px; /* Adjust padding as needed */
+  width: 60px;
+  height: 100%;
+  color: #fff;
+}
+
+tr {
+  position: relative;
+}
+
+tr:not(:first-child) {
+  position: relative;
+}
+
+tr:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 96%;
+  border-bottom: 1px solid #dde5e9;
+  margin: 0 auto;
+  transform: translateX(2%);
+}
+
+.title__id {
+  width: 100px;
+}
+
+.content__id {
+  width: 100px;
+}
+
+th {
+  font-family: "Abel";
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+
+.scheduling__schedules {
+  display: flex;
+  justify-content: center;
 }

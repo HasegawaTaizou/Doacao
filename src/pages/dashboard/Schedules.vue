@@ -28,74 +28,101 @@
       </div>
       <div class="scheduling__schedules">
         <table class="schedules__table">
-          <tr class="table__title">
-            <th class="title__id">ID</th>
-            <th class="title__donator">Nome do doador</th>
-            <th class="title__date">Data</th>
-            <th class="title__hour">Horário</th>
-            <th class="title__site">Local</th>
-            <th class="title__status">Status</th>
-            <th class="title__action">Ação</th>
-          </tr>
-          <tr class="table__content">
-            <td class="content__id">1</td>
-            <td class="content__donator">
-              <img
-                src="../../assets/img/donator-image.png"
-                alt="Donator Image"
-                class="donator__image"
-              />
-              <span class="donator__name">João Pedro Bueno</span>
-            </td>
-            <td class="content__date">29/07/2023</td>
-            <td class="content__hour">11:10</td>
-            <td class="content__site">Descrição do local 1</td>
-            <td class="content__status scheduled">Agendado</td>
-            <td class="content__actions">
-              <img
-                src="../../assets/img/scheduling-cancel-icon.png"
-                alt="Cancel Icon"
-                class="action__icon"
-              />
-              <img
-                src="../../assets/img/scheduling-conclude-icon.png"
-                alt=" Conclude Icon"
-                class="action__icon"
-              />
-              <img
-                src="../../assets/img/scheduling-reschedule-icon.png"
-                alt="Reschedule Icon"
-                class="action__icon"
-              />
-            </td>
-          </tr>
-          <tr class="table__content">
-            <td class="content__id">2</td>
-            <td class="content__donator">
-              <img
-                src="../../assets/img/donator-image.png"
-                alt="Donator Image"
-                class="donator__image"
-              />
-              <span class="donator__name">Beatriz Fideliz Landi Coelho</span>
-            </td>
-            <td class="content__date">29/07/2023</td>
-            <td class="content__hour">11:10</td>
-            <td class="content__site">Descrição do local 2</td>
-            <td class="content__status concluded">Concluído</td>
-            <td class="content__actions">
-              <span class="action__none">NÃO DISPONÍVEL</span>
-            </td>
-          </tr>
+          <thead>
+            <tr class="table__title">
+              <th class="title__id">ID</th>
+              <th class="title__donator">Nome do doador</th>
+              <th class="title__date">Data</th>
+              <th class="title__hour">Horário</th>
+              <th class="title__site">Local</th>
+              <th class="title__status">Status</th>
+              <th class="title__action">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table__content">
+              <td class="content__id">1</td>
+              <td class="content__donator">
+                <router-link
+                  :to="'/dashboard/schedules/scheduling'"
+                  class="action__redefine-password-container"
+                >
+                  <img
+                    src="../../assets/img/donator-image.png"
+                    alt="Donator Image"
+                    class="donator__image"
+                  />
+                  <span class="donator__name">João Pedro Bueno</span>
+                </router-link>
+              </td>
+              <td class="content__date">29/07/2023</td>
+              <td class="content__hour">11:10</td>
+              <td class="content__site">Descrição do local 1</td>
+              <td class="content__status">
+                <span class="status__text scheduled">Agendado</span>
+              </td>
+              <td class="content__actions">
+                <img
+                  src="../../assets/img/scheduling-cancel-icon.png"
+                  alt="Cancel Icon"
+                  class="action__icon"
+                />
+                <img
+                  src="../../assets/img/scheduling-conclude-icon.png"
+                  alt=" Conclude Icon"
+                  class="action__icon"
+                />
+                <img
+                  src="../../assets/img/scheduling-reschedule-icon.png"
+                  alt="Reschedule Icon"
+                  class="action__icon"
+                />
+              </td>
+            </tr>
+            <tr class="table__content">
+              <td class="content__id">2</td>
+              <td class="content__donator">
+                <router-link
+                  :to="'/dashboard/schedules/scheduling'"
+                  class="action__redefine-password-container"
+                >
+                  <img
+                    src="../../assets/img/donator-image.png"
+                    alt="Donator Image"
+                    class="donator__image"
+                  />
+                  <span class="donator__name"
+                    >Beatriz Fideliz Landi Coelho</span
+                  >
+                </router-link>
+              </td>
+              <td class="content__date">29/07/2023</td>
+              <td class="content__hour">11:10</td>
+              <td class="content__site">Descrição do local 2</td>
+              <td class="content__status">
+                <span class="status__text concluded">Concluído</span>
+              </td>
+              <td class="content__actions">
+                <span class="action__none">N/A</span>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
   </section>
+  <PopUp
+    :message="'Os dados do beneficiado serão excluídos'"
+    :acceptFunction="deleteVolunteer"
+  />
 </template>
 
 <script>
+import PopUp from "../../assets/components/PopUp.vue";
+
 export default {
   name: "Schedules",
+  components: { PopUp },
 };
 </script>
 
