@@ -30,7 +30,11 @@
         />
       </a>
       <div class="company">
-        <img src="../../assets/img/logo.png" alt="Company Image" class="company__image">
+        <img
+          src="../../assets/img/logo.png"
+          alt="Company Image"
+          class="company__image"
+        />
         <span class="company__name">NOME EMPRESA</span>
       </div>
       <nav class="navigation">
@@ -45,12 +49,10 @@
           </template>
         </ul>
       </nav>
-        <a href="#" class="log-out-content">
-          <button class="log-out__button">
-            <img src="../../assets/img/logout-icon.png" alt="Log Out Icon" />
-            <span class="log-out__text">Sair</span>
-          </button>
-        </a>
+      <router-link :to="'/'" class="log-out-content">
+        <img src="../../assets/img/logout-icon.png" alt="Log Out Icon" />
+        <span class="log-out__text">Sair</span>
+      </router-link>
     </div>
     <div id="dashboard" class="dashboard-content">
       <router-view></router-view>
@@ -69,15 +71,25 @@ export default {
   data() {
     return {
       menuItems: [
-        { id: 1, title: "Agendamentos", image: schedulingIcon, route: "" },
+        {
+          id: 1,
+          title: "Agendamentos",
+          image: schedulingIcon,
+          route: "schedules",
+        },
         {
           id: 2,
           title: "Reservar agendamentos",
           image: bookSchedulingIcon,
-          route: "",
+          route: "book-schedules",
         },
-        { id: 3, title: "Configurações", image: settingsIcon, route: "" },
-        { id: 4, title: "Ajuda", image: helpIcon, route: "" },
+        {
+          id: 3,
+          title: "Configurações",
+          image: settingsIcon,
+          route: "settings",
+        },
+        { id: 4, title: "Ajuda", image: helpIcon, route: "help" },
       ],
       showSidenav: false,
     };

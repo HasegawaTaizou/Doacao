@@ -68,6 +68,7 @@
   height: 58px;
   border-radius: 10px;
   margin-left: 32px;
+  width: 100%;
 }
 
 .navigation-field__name {
@@ -75,7 +76,7 @@
   font-size: 1.25rem;
 }
 
-.log-out__button {
+.log-out-content {
   background-color: transparent;
   color: #000;
   width: 140px;
