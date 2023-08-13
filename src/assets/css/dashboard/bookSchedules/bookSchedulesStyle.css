@@ -107,6 +107,7 @@
   color: #fff;
   font-family: "Abel";
   font-size: 0.875rem;
+  cursor: pointer;
 }
 
 .schedules-available {

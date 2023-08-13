@@ -91,7 +91,7 @@ export default {
         },
         { id: 4, title: "Ajuda", image: helpIcon, route: "help" },
       ],
-      showSidenav: false,
+      showSidenav: true,
     };
   },
   methods: {

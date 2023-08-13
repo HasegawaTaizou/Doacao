@@ -57,12 +57,16 @@
             <input type="text" class="new-password__input" />
           </div>
           <div class="input__new-password-confirmation">
-            <label for="" class="new-password-confirmation__label">Confirmar nova senha:</label>
+            <label for="" class="new-password-confirmation__label"
+              >Confirmar nova senha:</label
+            >
             <input type="text" class="new-password-confirmation__input" />
           </div>
         </div>
         <div class="redefine-password__buttons">
-          <button class="button__cancel">Cancelar</button>
+          <router-link :to="'/dashboard/settings/'">
+            <button class="button__cancel">Cancelar</button>
+          </router-link>
           <button class="button__redefine-password">Redefinir senha</button>
         </div>
       </div>

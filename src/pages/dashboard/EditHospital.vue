@@ -88,7 +88,9 @@
         </div>
       </div>
       <div class="hospital-actions">
-        <button class="action__cancel">Cancelar</button>
+        <router-link :to="'/dashboard/settings/'">
+          <button class="action__cancel">Cancelar</button>
+        </router-link>
         <button class="action__change-data">Alterar dados</button>
       </div>
     </div>
