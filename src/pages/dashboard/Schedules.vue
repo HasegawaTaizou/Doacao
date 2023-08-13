@@ -27,7 +27,70 @@
         </div>
       </div>
       <div class="scheduling__schedules">
-        <!-- <div class="schedule__title-container">
+        <table class="schedules__table" border="1">
+          <tr>
+            <th>ID</th>
+            <th>Nome do doador</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Local</th>
+            <th>Status</th>
+            <th>Ação</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>João Pedro Bueno</td>
+            <td>29/07/2023</td>
+            <td>11:10</td>
+            <td>Descrição do local 1</td>
+            <td>Agendado</td>
+            <td>
+              <img
+                src="../../assets/img/scheduling-cancel-icon.png"
+                alt="Cancel Icon"
+                class="action__icon"
+              />
+              <img
+                src="../../assets/img/scheduling-conclude-icon.png"
+                alt=" Conclude Icon"
+                class="action__icon"
+              />
+              <img
+                src="../../assets/img/scheduling-reschedule-icon.png"
+                alt="Reschedule Icon"
+                class="action__icon"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>João Pedro Bueno</td>
+            <td>29/07/2023</td>
+            <td>11:10</td>
+            <td>Descrição do local 1</td>
+            <td>Agendado</td>
+            <td>
+              <img
+                src="../../assets/img/scheduling-cancel-icon.png"
+                alt="Cancel Icon"
+                class="action__icon"
+              />
+              <img
+                src="../../assets/img/scheduling-conclude-icon.png"
+                alt=" Conclude Icon"
+                class="action__icon"
+              />
+              <img
+                src="../../assets/img/scheduling-reschedule-icon.png"
+                alt="Reschedule Icon"
+                class="action__icon"
+              />
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- <div class="scheduling__schedules">
+         <div class="schedule__title-container">
           <span class="id__title">ID</span>
           <span class="donator__title">Nome do doador</span>
           <span class="date__title">Data</span>
@@ -35,7 +98,7 @@
           <span class="site__title">Local de doação</span>
           <span class="status__title">Status</span>
           <span class="action__title">Ação</span>
-        </div> -->
+        </div> 
 
         <div class="schedule__text-container">
           <span class="id__text">1</span>
@@ -109,7 +172,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>

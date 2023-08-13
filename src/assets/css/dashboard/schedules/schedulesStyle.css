@@ -60,75 +60,33 @@
   font-size: 0.75rem;
 }
 
-.scheduling__schedules {
+.schedules__table {
   display: flex;
-  flex-direction: column;
-  padding: 32px 36px;
+  border-spacing: 20px;
 }
 
-.schedule__text-container:first-child > .id__text::before {
-  content: "ID";
-  display: block;
+th {
+  text-align: start;
+  font-family: "Abel";
   font-size: 1.125rem;
-  margin-bottom: 36px;
+  font-weight: normal;
 }
 
-.schedule__text-container:first-child .donator-container::before {
-  content: "Nome do doador";
-  display: block;
-  font-size: 1.125rem;
-  margin-bottom: 36px;
+table {
+  border-collapse: separate;
+  border-spacing: 10px; /* Define o espaçamento entre as células */
+  width: 100%;
 }
 
-.schedule__text-container:first-child > .date__text::before {
-  content: "Data";
-  display: block;
-  font-size: 1.125rem;
-  margin-bottom: 36px;
+tr {
+  position: relative;
 }
 
-.schedule__text-container:first-child > .hour__text::before {
-  content: "Hora";
-  display: block;
-  font-size: 1.125rem;
-  margin-bottom: 36px;
-}
-
-.schedule__text-container:first-child > .site__text::before {
-  content: "Local";
-  display: block;
-  font-size: 1.125rem;
-  margin-bottom: 36px;
-}
-
-.schedule__text-container:first-child > .status__text::before {
-  content: "Status";
-  display: block;
-  font-size: 1.125rem;
-  margin-bottom: 36px;
-}
-
-.schedule__text-container:first-child > .actions-container::before {
-  content: "Ações";
-  display: block;
-  font-size: 1.125rem;
-  margin-bottom: 36px;
-}
-
-.schedule__text-container {
-  display: flex;
-  gap: 42px;
-  padding: 16px 0px;
-  border-bottom: 1px solid #dde5e9;
-}
-
-.donator-content {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.action-content {
-  display: flex;
-  gap: 12px;
+tr:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px; /* Ajuste para posicionar a linha onde desejar */
+  width: 100%;
+  border-bottom: 1px solid black; /* Cria a linha de separação */
 }
