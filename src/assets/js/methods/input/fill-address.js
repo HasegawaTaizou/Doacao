@@ -11,7 +11,7 @@ export default function fillAdrress() {
       this.formData.road = response.data.logradouro;
       this.formData.neighborhood = response.data.bairro;
       this.formData.complement = response.data.complemento;
-      this.formData.state = response.data.uf;
+      this.formData.uf = response.data.uf;
       this.formData.city = response.data.localidade;
     })
     .catch((error) => {
