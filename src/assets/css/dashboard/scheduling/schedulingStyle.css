@@ -113,31 +113,32 @@
   font-family: "Abel";
   font-weight: normal;
   color: #000;
+  margin-bottom: 36px;
 }
+
+/* TABLE STYLE */
 
 .schedules__table {
+  width: 95%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.scheduling__schedules {
   display: flex;
-  border-spacing: 28px;
-  border-collapse: separate;
+  justify-content: center;
+}
+
+thead,
+tbody {
   width: 100%;
-}
-
-tr,
-td,
-th {
-  margin: auto;
-  padding: 10px;
-}
-
-th {
-  text-align: start;
-  font-family: "Abel";
-  font-size: 1.125rem;
-  font-weight: normal;
+  display: table;
+  table-layout: fixed;
 }
 
 tr {
-  text-align: center;
+  display: table-row;
+  position: relative;
 }
 
 tr:not(:first-child) {
@@ -148,34 +149,52 @@ tr:not(:last-child)::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -12px;
-  width: 98%;
+  bottom: 0;
+  width: 96%;
   border-bottom: 1px solid #dde5e9;
+  margin: 0 auto;
+  transform: translateX(2%);
 }
 
-.content__actions {
-  display: flex;
-  gap: 18px;
+td,
+th {
+  display: table-cell;
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
 }
 
-.content__actions img {
-  width: 20px;
-  height: 20px;
+th {
+  font-family: "Abel";
+  font-size: 1.25rem;
+  font-weight: normal;
 }
 
-.action__none {
-  color: #fff;
-  background-color: #7395f7;
-  border-radius: 5px;
-  margin: auto;
+.title__id {
+  width: 100px;
 }
 
-.content__status {
-  padding: 12px;
-  border-radius: 5px;
+.content__id {
+  width: 100px;
 }
 
 /* STATUS STYLE */
+
+.title__status {
+  width: 100px;
+}
+
+.content__status {
+  position: relative;
+  width: 100px;
+  text-align: center;
+}
+
+.status__text {
+  border-radius: 5px;
+  padding: 8px;
+}
+
 .scheduled {
   color: #2c62f1;
   background-color: #dae3ff;
@@ -194,4 +213,33 @@ tr:not(:last-child)::after {
 .rescheduled {
   color: #e5c05e;
   background-color: #fbf4e4;
+}
+
+.title__action,
+.content__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.content__actions img {
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.content__actions {
+  gap: 16px;
+}
+
+.action__none {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7395f7;
+  border-radius: 5px;
+  padding: 8px;
+  width: 60px;
+  height: 100%;
+  color: #fff;
 }
