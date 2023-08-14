@@ -34,7 +34,7 @@
   grid-template-columns: auto auto;
   grid-template-rows: auto auto auto auto;
   gap: 64px;
-  background-color: #afafaf;
+  background-color: #ffffff;
   border-radius: 12px;
   height: 88vh;
   margin: 0px 32px;
@@ -72,7 +72,8 @@
 }
 
 input:disabled, textarea:disabled {
-  background-color: #E6E6E6;
+  background-color: #F5F5F5;
+  
 }
 
 .hospital-general-data__cnpj-container {
