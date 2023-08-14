@@ -61,14 +61,24 @@
   color: #2c62f1;
 }
 
+.router-link-active {
+  background-color: #dae3ff;
+  transition: all 100ms ease-in-out;
+  border-right: 3px solid #2c62f1;
+  color: #2c62f1;
+}
+
 .navigation-field a {
   display: flex;
   align-items: center;
   gap: 22px;
   height: 58px;
-  border-radius: 10px;
-  margin-left: 32px;
+  padding-left: 32px;
   width: 100%;
+}
+
+.navigation-field i {
+  font-size: 1.75rem;
 }
 
 .navigation-field__name {

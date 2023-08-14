@@ -42,7 +42,7 @@
           <template v-for="item in menuItems" :key="item.id">
             <li class="navigation-field">
               <router-link :to="`/dashboard/${item.route}`">
-                <img :src="item.image" alt="Item icon" />
+                <i :class="item.image" alt="Item icon"></i>
                 <span class="navigation-field__name">{{ item.title }}</span>
               </router-link>
             </li>
@@ -61,10 +61,6 @@
 </template>
 
 <script>
-import schedulingIcon from "@/assets/img/scheduling-icon.png";
-import bookSchedulingIcon from "@/assets/img/book-scheduling-icon.png";
-import settingsIcon from "@/assets/img/settings-icon.png";
-import helpIcon from "@/assets/img/help-icon.png";
 
 export default {
   name: "Dashboard",
@@ -74,22 +70,22 @@ export default {
         {
           id: 1,
           title: "Agendamentos",
-          image: schedulingIcon,
+          image: "far fa-calendar-alt",
           route: "schedules",
         },
         {
           id: 2,
           title: "Reservar agendamentos",
-          image: bookSchedulingIcon,
+          image: "fas fa-calendar-day",
           route: "book-schedules",
         },
         {
           id: 3,
           title: "Configurações",
-          image: settingsIcon,
+          image: "fas fa-cog",
           route: "settings",
         },
-        { id: 4, title: "Ajuda", image: helpIcon, route: "help" },
+        { id: 4, title: "Ajuda", image: "fas fa-question-circle", route: "help" },
       ],
       showSidenav: true,
     };
