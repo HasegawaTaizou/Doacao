@@ -20,7 +20,7 @@ export default new Vuex.Store({
       cep: "",
       road: "",
       neighborhood: "",
-      state: "",
+      uf: "",
       city: "",
       complement: "",
 

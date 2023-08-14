@@ -69,6 +69,15 @@ label {
   align-items: center;
   justify-content: center;
   border: var(--input-border);
+  position: relative;
+}
+
+.form__photo-container label::before {
+  content: "Foto:";
+  position: absolute;
+  color: #000;
+  top: -36px;
+  left: 0;
 }
 
 .form__photo-container label::after {
@@ -139,10 +148,20 @@ label {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  position: relative;
 }
 
 .password__input {
   border: var(--input-border);
+  position: relative;
+}
+
+.form__password-container i {
+  position: absolute;
+  right: 16px;
+  top: 45px;
+  color: #7395F7;
+  font-size: 1.5rem;
 }
 
 .form__password-confirmation-container {
@@ -150,10 +169,19 @@ label {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  position: relative;
 }
 
 .password-confirmation__input {
   border: var(--input-border);
+}
+
+.form__password-confirmation-container i {
+  position: absolute;
+  right: 16px;
+  top: 45px;
+  color: #7395F7;
+  font-size: 1.5rem;
 }
 
 .form__URL-container {

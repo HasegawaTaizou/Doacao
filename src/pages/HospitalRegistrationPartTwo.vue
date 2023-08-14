@@ -70,13 +70,13 @@
             v-model="formData.complement"
           />
         </div>
-        <div class="form__state-container">
-          <label for="state" class="state__label">Estado:</label>
+        <div class="form__uf-container">
+          <label for="uf" class="uf__label">UF:</label>
           <input
             type="text"
-            class="state__input"
+            class="uf__input"
             disabled
-            v-model="formData.state"
+            v-model="formData.uf"
           />
         </div>
         <div class="form__city-container">

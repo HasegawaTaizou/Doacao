@@ -99,7 +99,7 @@
           <input
             type="text"
             class="CNPJ__input"
-            v-mask="'(##) #####-####'"
+            v-mask="'##.###.###/000#-##'"
             v-model="inputCNPJ"
             :class="{ error: v$.inputCNPJ.$error }"
             ref="inputCNPJ"
@@ -117,14 +117,22 @@
         <div class="form__password-container">
           <label for="password" class="password__label">Senha:</label>
           <input
-            type="text"
+            :type="isShowPassword ? 'text' : 'password'"
             class="password__input"
-            v-mask="'(##) #####-####'"
             v-model="inputPassword"
             :class="{ error: v$.inputPassword.$error }"
             ref="inputPassword"
             @blur="v$.inputPassword.$touch()"
           />
+          <i
+            @mousedown="showPassword"
+            @mouseup="showPassword"
+            :class="{
+              'far fa-eye-slash': isShowPassword,
+              'far fa-eye': !isShowPassword,
+              'error-icon': v$.inputPassword.$error,
+            }"
+          ></i>
           <div v-if="v$.inputPassword.$error">
             <p
               v-if="v$.inputPassword.required && v$.inputPassword.minLength"
@@ -133,20 +141,29 @@
               Preencha a senha!
             </p>
           </div>
-        </div>  
+        </div>
         <div class="form__password-confirmation-container">
-          <label for="password-confirmation" class="password-confirmation__label">Confirmar senha:</label>
-          <input
-            type="text"
-            class="password-confirmation__input"
-          />
+          <label
+            for="password-confirmation"
+            class="password-confirmation__label"
+            >Confirmar senha:</label
+          >
+          <input :type="isShowPasswordConfirmation ? 'text' : 'password'" class="password-confirmation__input" />
+          <i
+            @mousedown="showPasswordConfirmation"
+            @mouseup="showPasswordConfirmation"
+            :class="{
+              'far fa-eye-slash': isShowPasswordConfirmation,
+              'far fa-eye': !isShowPasswordConfirmation,
+              'error-icon': v$.inputPassword.$error,
+            }"
+          ></i>
         </div>
         <div class="form__URL-container">
           <label for="URL" class="URL__label">URL do site:</label>
           <input
             type="text"
             class="URL__input"
-            v-mask="'(##) #####-####'"
             v-model="inputURL"
             :class="{ error: v$.inputURL.$error }"
             ref="inputURL"
@@ -200,6 +217,10 @@ export default {
     return {
       validDate: true,
       ...data,
+
+      //Show Password
+      isShowPassword: false,
+      isShowPasswordConfirmation: false,
     };
   },
   validations() {
@@ -213,6 +234,12 @@ export default {
     uploadImage,
     submitFormHospitalPartOne,
     onlyLetters,
+    showPassword() {
+      this.isShowPassword = !this.isShowPassword;
+    },
+    showPasswordConfirmation() {
+      this.isShowPasswordConfirmation = !this.isShowPasswordConfirmation;
+    },
   },
 };
 </script>

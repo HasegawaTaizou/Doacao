@@ -41,9 +41,9 @@ label {
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
   grid-template-areas:
-    "cep road"
-    "neighborhood complement"
-    "state city"
+    "cep uf"
+    "city neighborhood"
+    "road complement"
     "button-return button-continue";
   justify-items: center;
   gap: 32px;
@@ -104,14 +104,14 @@ label {
   border: var(--input-border);
 }
 
-.form__state-container {
-  grid-area: state;
+.form__uf-container {
+  grid-area: uf;
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-.state__input {
+.uf__input {
   border: var(--input-border);
 }
 

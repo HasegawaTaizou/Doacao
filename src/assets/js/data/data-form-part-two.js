@@ -6,7 +6,7 @@ export default function dataFormPartTwo(formData) {
       road: formData.road,
       neighborhood: formData.neighborhood,
       complement: formData.complement,
-      state: formData.state,
+      uf: formData.uf,
       city: formData.city,
     },
   };
