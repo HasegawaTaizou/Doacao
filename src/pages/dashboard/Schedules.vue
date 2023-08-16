@@ -63,16 +63,19 @@
               </td>
               <td class="content__actions">
                 <img
+                  @click="this.$store.state.showPopUp = true"
                   src="../../assets/img/scheduling-cancel-icon.png"
                   alt="Cancel Icon"
                   class="action__icon"
                 />
                 <img
+                  @click="this.$store.state.showPopUp = true"
                   src="../../assets/img/scheduling-conclude-icon.png"
                   alt=" Conclude Icon"
                   class="action__icon"
                 />
                 <img
+                  @click="this.$store.state.showPopUp = true"
                   src="../../assets/img/scheduling-reschedule-icon.png"
                   alt="Reschedule Icon"
                   class="action__icon"
@@ -111,10 +114,48 @@
       </div>
     </div>
   </section>
-  <PopUp
-    :message="'Os dados do beneficiado serão excluídos'"
+  <!-- <PopUp
+    :title="'Concluir?'"
+    :message="'Os dados serão alterados e não terá como desfazer esta ação.'"
     :acceptFunction="deleteVolunteer"
-  />
+  >
+  </PopUp> -->
+  <!-- <PopUp
+    :title="'Cancelar?'"
+    :message="'Digite o motivo do cancelamento (Opcional)'"
+    :acceptFunction="deleteVolunteer"
+  >
+    <textarea
+      name=""
+      id=""
+      cols="30"
+      rows="10"
+      class="cancel-reason"
+      placeholder="Motivo:"
+    ></textarea>
+  </PopUp> -->
+  <PopUp
+    :title="'Remarcar'"
+    :message="'Escolha a data e o horário para remarcar'"
+    :acceptFunction="deleteVolunteer"
+  >
+    <div class="book-scheduling">
+      <div class="scheduling-date">
+        <input
+          type="datetime-local"
+          name=""
+          id=""
+          class="date__datetime-local"
+        />
+      </div>
+      <div class="scheduling-site">
+        <select name="" id="" class="site__select">
+          <option value="" disabled>Escolha o local</option>
+          <option value="1">Descrição Local 1</option>
+        </select>
+      </div>
+    </div>
+  </PopUp>
 </template>
 
 <script>
@@ -128,4 +169,6 @@ export default {
 
 <style scoped>
 @import url("../../assets/css/dashboard/schedules/schedulesStyle.css");
+@import url("../../assets/css/components/cancelIconStyle.css");
+@import url("../../assets/css/components/rescheduleIconStyle.css");
 </style>

@@ -6,10 +6,11 @@
       hidden: !this.$store.state.showPopUp,
     }"
   >
-    <h2 class="popup__title">Tem certeza?</h2>
+    <h2 class="popup__title">{{ title }}</h2>
     <p class="popup__text">
       {{ message }}
     </p>
+    <slot></slot>
     <div class="popup__buttons">
       <button class="button__deny" @click="closePopup">
         <span class="deny__text">Não</span>
@@ -27,6 +28,10 @@
 export default {
   name: "PopUp",
   props: {
+    title: {
+      type: String,
+      required: true,
+    },
     message: {
       type: String,
       required: true,
@@ -36,11 +41,6 @@ export default {
       required: true,
     },
   },
-  // data() {
-  //   return {
-  //     popUpStatus: this.$store.state.showPopUp,
-  //   };
-  // },
   methods: {
     closePopup() {
       this.$store.state.showPopUp = false;
@@ -49,8 +49,8 @@ export default {
     },
     executeAcceptAction() {
       console.log("Ação executada");
-      this.acceptFunction(); // Chama a função especificada
-      this.closePopup(); // Fecha o popup após um pequeno atraso
+      this.acceptFunction();
+      this.closePopup();
     },
   },
 };
@@ -61,7 +61,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid #408d7b;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
   min-width: 416px;
   max-width: 416px;
   width: 100%;
@@ -69,10 +69,10 @@ export default {
   top: 30%;
   left: 45%;
   text-align: center;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-  height: 212px;
-  background-color: #e4e4e4;
+  min-height: 212px;
+  height: fit-content;
+  background-color: #fff;
 }
 
 .popup__title {
@@ -80,15 +80,15 @@ export default {
   font-family: "Abel";
   font-weight: normal;
   margin-top: 12px;
+  color: #000;
 }
 
 .popup__text {
   font-size: 1rem;
-  max-width: 226px;
-  widows: 100%;
+  max-width: 252px;
+  width: 100%;
   margin-top: 12px;
-  margin-bottom: 36px;
-  color: black;
+  color: #6d6868;
 }
 
 .popup__buttons {
@@ -96,6 +96,7 @@ export default {
   gap: 32px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 32px;
 }
 
 .button__deny {

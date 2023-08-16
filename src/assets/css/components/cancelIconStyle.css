@@ -1,0 +1,13 @@
+.cancel-reason {
+    border-radius: 5px;
+    resize: none;
+    width: 362px;
+    height: 146px;
+    padding: 12px 12px;
+    font-family: "Abel";
+    font-size: 1.25rem;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+    color: #6D6868;
+    margin: 32px 0px;
+  }
