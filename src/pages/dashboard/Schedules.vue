@@ -63,19 +63,19 @@
               </td>
               <td class="content__actions">
                 <img
-                  @click="this.$store.state.showPopUp = true"
+                  @click="openPopUp('cancel')"
                   src="../../assets/img/scheduling-cancel-icon.png"
                   alt="Cancel Icon"
                   class="action__icon"
                 />
                 <img
-                  @click="this.$store.state.showPopUp = true"
+                  @click="openPopUp('conclude')"
                   src="../../assets/img/scheduling-conclude-icon.png"
                   alt=" Conclude Icon"
                   class="action__icon"
                 />
                 <img
-                  @click="this.$store.state.showPopUp = true"
+                  @click="openPopUp('reschedule')"
                   src="../../assets/img/scheduling-reschedule-icon.png"
                   alt="Reschedule Icon"
                   class="action__icon"
@@ -114,13 +114,8 @@
       </div>
     </div>
   </section>
-  <!-- <PopUp
-    :title="'Concluir?'"
-    :message="'Os dados serão alterados e não terá como desfazer esta ação.'"
-    :acceptFunction="deleteVolunteer"
-  >
-  </PopUp> -->
-  <!-- <PopUp
+  <PopUp
+    v-if="selectedComponent === 'cancel'"
     :title="'Cancelar?'"
     :message="'Digite o motivo do cancelamento (Opcional)'"
     :acceptFunction="deleteVolunteer"
@@ -133,8 +128,16 @@
       class="cancel-reason"
       placeholder="Motivo:"
     ></textarea>
-  </PopUp> -->
+  </PopUp>
   <PopUp
+    v-if="selectedComponent === 'conclude'"
+    :title="'Concluir?'"
+    :message="'Os dados serão alterados e não terá como desfazer esta ação.'"
+    :acceptFunction="deleteVolunteer"
+  >
+  </PopUp>
+  <PopUp
+    v-if="selectedComponent === 'reschedule'"
     :title="'Remarcar'"
     :message="'Escolha a data e o horário para remarcar'"
     :acceptFunction="deleteVolunteer"
@@ -164,6 +167,17 @@ import PopUp from "../../assets/components/PopUp.vue";
 export default {
   name: "Schedules",
   components: { PopUp },
+  data() {
+    return { selectedComponent: "" };
+  },
+  methods: {
+    openPopUp(componentName) {
+      this.selectedComponent = componentName;
+      
+      this.$store.state.showPopUp = true;
+      this.$store.commit("setShowPopUp", true);
+    },
+  },
 };
 </script>
 

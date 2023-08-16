@@ -44,7 +44,6 @@ export default {
   methods: {
     closePopup() {
       this.$store.state.showPopUp = false;
-
       this.$store.commit("setShowPopUp", false);
     },
     executeAcceptAction() {
@@ -73,6 +72,7 @@ export default {
   min-height: 212px;
   height: fit-content;
   background-color: #fff;
+  gap: 32px;
 }
 
 .popup__title {
@@ -87,7 +87,6 @@ export default {
   font-size: 1rem;
   max-width: 252px;
   width: 100%;
-  margin-top: 12px;
   color: #6d6868;
 }
 

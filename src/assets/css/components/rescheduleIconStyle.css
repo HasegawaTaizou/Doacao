@@ -2,7 +2,6 @@
   grid-area: input;
   display: flex;
   gap: 24px;
-  margin: 32px 0px;
 }
 
 .date__datetime-local {
