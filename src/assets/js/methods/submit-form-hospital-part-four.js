@@ -18,7 +18,7 @@ export default async function submitFormHospitalPartFour() {
 
     this.$store.commit("updateFormData", this.formData);
     
-    //postDataPartThree(this.formData);
+    postDataPartFour(this.formData);
   } else {
     for (const field of fieldsHospitalPartFour) {
       if (this.v$[field.key].$error) {

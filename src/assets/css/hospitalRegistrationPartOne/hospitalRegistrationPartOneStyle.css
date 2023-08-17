@@ -6,7 +6,7 @@ header {
 }
 
 .hospital-registration-part-one__title::before {
-  content: "Passo 1 de 3";
+  content: "Passo 1 de 4";
   display: block;
   font-size: 0.875rem;
   color: #5c5c5c;
@@ -198,7 +198,7 @@ label {
   grid-area: button;
   width: 160px;
   height: 46px;
-  background: #7395f7;
+  background: #4E7BF2;
   border-radius: 5px;
   color: #fff;
   font-family: "Abel";

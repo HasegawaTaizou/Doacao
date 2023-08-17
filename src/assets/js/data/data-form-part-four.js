@@ -1,8 +1,13 @@
 export default function dataPartFour(formData) {
+  
   return {
     isSelectedImage: formData.isSelectedImage,
     downloadURL: formData.photo,
     inputPassword: formData.password,
+    //Show Password
+    isShowPassword: false,
+    isShowPasswordConfirmation: false,
+    
     formData: {
       // Hospital General Data
       photo: formData.photo,

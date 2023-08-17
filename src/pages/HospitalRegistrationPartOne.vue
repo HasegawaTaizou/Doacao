@@ -18,24 +18,6 @@
         class="hospital-registration__image"
       />
       <form class="hospital-registration-part-one-form">
-        <div v-if="!isSelectedImage" class="form__photo-container">
-          <input
-            type="file"
-            class="photo__label"
-            id="photo"
-            @change="uploadImage"
-          />
-          <label for="photo">
-            <img
-              src="../assets/img/photo-icon.png"
-              alt="Photo Icon"
-              class="photo__icon"
-            />
-          </label>
-        </div>
-        <div v-else class="form__photo-selected-container">
-          <img :src="downloadURL" alt="Hospital Photo" class="photo__photo" />
-        </div>
         <div class="form__name-container">
           <label for="name" class="name__label">Nome:</label>
           <input
@@ -114,51 +96,6 @@
             </p>
           </div>
         </div>
-        <div class="form__password-container">
-          <label for="password" class="password__label">Senha:</label>
-          <input
-            :type="isShowPassword ? 'text' : 'password'"
-            class="password__input"
-            v-model="inputPassword"
-            :class="{ error: v$.inputPassword.$error }"
-            ref="inputPassword"
-            @blur="v$.inputPassword.$touch()"
-          />
-          <i
-            @mousedown="showPassword"
-            @mouseup="showPassword"
-            :class="{
-              'far fa-eye-slash': isShowPassword,
-              'far fa-eye': !isShowPassword,
-              'error-icon': v$.inputPassword.$error,
-            }"
-          ></i>
-          <div v-if="v$.inputPassword.$error">
-            <p
-              v-if="v$.inputPassword.required && v$.inputPassword.minLength"
-              class="error-text"
-            >
-              Preencha a senha!
-            </p>
-          </div>
-        </div>
-        <div class="form__password-confirmation-container">
-          <label
-            for="password-confirmation"
-            class="password-confirmation__label"
-            >Confirmar senha:</label
-          >
-          <input :type="isShowPasswordConfirmation ? 'text' : 'password'" class="password-confirmation__input" />
-          <i
-            @mousedown="showPasswordConfirmation"
-            @mouseup="showPasswordConfirmation"
-            :class="{
-              'far fa-eye-slash': isShowPasswordConfirmation,
-              'far fa-eye': !isShowPasswordConfirmation,
-              'error-icon': v$.inputPassword.$error,
-            }"
-          ></i>
-        </div>
         <div class="form__URL-container">
           <label for="URL" class="URL__label">URL do site:</label>
           <input
@@ -197,7 +134,6 @@
 
 <script>
 import submitFormHospitalPartOne from "../assets/js/methods/submit-form-hospital-part-one.js";
-import uploadImage from "../assets/js/methods/input/upload-image.js";
 import onlyLetters from "../assets/js/methods/input/only-letters.js";
 import dataPartOne from "../assets/js/data/data-form-part-one.js";
 import validationsHospitalPartOne from "../assets/js/validations/validations-hospital-part-one.js";
@@ -217,10 +153,6 @@ export default {
     return {
       validDate: true,
       ...data,
-
-      //Show Password
-      isShowPassword: false,
-      isShowPasswordConfirmation: false,
     };
   },
   validations() {
@@ -231,15 +163,8 @@ export default {
   },
   methods: {
     ...mapMutations(["updateNotificationStatus"]),
-    uploadImage,
     submitFormHospitalPartOne,
     onlyLetters,
-    showPassword() {
-      this.isShowPassword = !this.isShowPassword;
-    },
-    showPasswordConfirmation() {
-      this.isShowPasswordConfirmation = !this.isShowPasswordConfirmation;
-    },
   },
 };
 </script>

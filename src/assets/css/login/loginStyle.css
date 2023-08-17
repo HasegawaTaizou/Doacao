@@ -43,19 +43,33 @@ label {
 }
 
 .form__password-container {
+  grid-area: password;
   display: flex;
   flex-direction: column;
   gap: 14px;
+  position: relative;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .password__input {
   border: var(--input-border);
+  position: relative;
+}
+
+.form__password-container i {
+  position: absolute;
+  right: 16px;
+  top: 45px;
+  color: #7395f7;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .login__button {
   width: 314px;
   height: 46px;
-  background: #7395f7;
+  background: #4e7bf2;
   border-radius: 5px;
   color: #fff;
   font-family: "Abel";

@@ -24,7 +24,19 @@
         </div>
         <div class="form__password-container">
           <label for="password" class="password__label">Senha:</label>
-          <input type="text" class="password__input" />
+          <input
+            :type="isShowPassword ? 'text' : 'password'"
+            class="password__input"
+            autocomplete="new-password"
+          />
+          <i
+            @mousedown="showPassword"
+            @mouseup="showPassword"
+            :class="{
+              'far fa-eye-slash': isShowPassword,
+              'far fa-eye': !isShowPassword
+            }"
+          ></i>
         </div>
         <button class="login__button">Entrar</button>
         <router-link class="login__forgot-password" to="/redefine-password">
@@ -41,8 +53,19 @@
 </template>
 
 <script>
+import showPassword from "../assets/js/methods/input/show-password.js";
+
 export default {
   name: "Login",
+  data() {
+    return {
+      //Show Password
+      isShowPassword: false,
+    };
+  },
+  methods: {
+    showPassword,
+  },
 };
 </script>
 

@@ -13,12 +13,9 @@ export default async function submitFormHospitalPartThree() {
   const isFormCorrect = await this.v$.$validate();
 
   if (isFormCorrect) {
-    //To show notification
-    this.$store.state.showNotification = true
-
     this.$store.commit("updateFormData", this.formData);
-    
-    //postDataPartThree(this.formData);
+    this.$router.push("/hospital-registration-part-four");
+    // postDataPartThree(this.formData);
   } else {
     for (const field of fieldsHospitalPartThree) {
       if (this.v$[field.key].$error) {

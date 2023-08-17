@@ -24,7 +24,7 @@ main {
 
 input {
   border-radius: 5px;
-  width: 314px;
+  width: 362px;
   height: 46px;
   padding-left: 12px;
   font-family: "Abel";
@@ -44,12 +44,13 @@ label {
     "photo photo"
     "password password"
     "password-confirmation password-confirmation"
-    "button-return button-send";
+    "button button";
   gap: 32px;
 }
 
 .form__photo-container {
   grid-area: photo;
+  border-bottom: 1px solid #d9d9d9;
 }
 
 .form__photo-container input[type="file"] {
@@ -102,6 +103,8 @@ label {
   flex-direction: column;
   gap: 14px;
   position: relative;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .password__input {
@@ -113,8 +116,9 @@ label {
   position: absolute;
   right: 16px;
   top: 45px;
-  color: #7395F7;
+  color: #7395f7;
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .form__password-confirmation-container {
@@ -123,6 +127,7 @@ label {
   flex-direction: column;
   gap: 14px;
   position: relative;
+  margin: 0 auto;
 }
 
 .password-confirmation__input {
@@ -133,12 +138,19 @@ label {
   position: absolute;
   right: 16px;
   top: 45px;
-  color: #7395F7;
+  color: #7395f7;
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
-.hospital-registration__button-return {
-  grid-area: button-return;
+.hospital-registration__buttons {
+  grid-area: button;
+  display: flex;
+  gap: 46px;
+  justify-content: center;
+}
+
+.button__return {
   width: 160px;
   height: 46px;
   background: transparent;
@@ -152,11 +164,10 @@ label {
   margin-bottom: 128px;
 }
 
-.hospital-registration__button {
-  grid-area: button-send;
+.button__send {
   width: 160px;
   height: 46px;
-  background: #7395f7;
+  background: #4E7BF2;
   border-radius: 5px;
   color: #fff;
   font-family: "Abel";

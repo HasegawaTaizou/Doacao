@@ -52,24 +52,19 @@
             v-model="inputOtherDonationLocal"
           ></textarea>
         </div>
-        <router-link to="/hospital-registration-part-two">
-          <button type="button" class="hospital-registration__button-return">
-            Voltar
+        <div class="hospital-registration__buttons">
+          <router-link to="/hospital-registration-part-two">
+            <button type="button" class="button__return">Voltar</button>
+          </router-link>
+          <button
+            type="button"
+            @click="submitFormHospitalPartThree"
+            class="button__continue"
+          >
+            Continuar
           </button>
-        </router-link>
-        <button
-          type="button"
-          @click="submitFormHospitalPartThree"
-          class="hospital-registration__button"
-        >
-          Continuar
-        </button>
+        </div>
       </form>
-      <NotificationBar
-        v-if="$store.state.showNotification"
-        :route="'/'"
-        :message="'Cadastro realizado com sucesso! Verifique seu e-mail'"
-      />
     </main>
     <footer>
       <p class="footer__text">
@@ -82,7 +77,6 @@
 <script>
 import submitFormHospitalPartThree from "../assets/js/methods/submit-form-hospital-part-three.js";
 import dataFormPartThree from "../assets/js/data/data-form-part-three.js";
-import NotificationBar from "../assets/components/NotificationBar.vue";
 import { useVuelidate } from "@vuelidate/core";
 import validationsHospitalPartThree from "../assets/js/validations/validations-hospital-part-three.js";
 
@@ -90,9 +84,6 @@ export default {
   name: "HospitalRegistrationPartThree",
   setup() {
     return { v$: useVuelidate() };
-  },
-  components: {
-    NotificationBar,
   },
   data() {
     const formData = this.$store.state.formData;

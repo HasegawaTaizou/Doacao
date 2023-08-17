@@ -6,7 +6,7 @@ header {
 }
 
 .hospital-registration-part-two__title::before {
-  content: "Passo 2 de 3";
+  content: "Passo 2 de 4";
   display: block;
   font-size: 0.875rem;
   color: #5c5c5c;
@@ -44,7 +44,7 @@ label {
     "cep uf"
     "city neighborhood"
     "road complement"
-    "button-return button-continue";
+    "button button";
   justify-items: center;
   gap: 32px;
 }
@@ -115,8 +115,14 @@ label {
   border: var(--input-border);
 }
 
-.hospital-registration__button-return {
-  grid-area: button-return;
+.hospital-registration__buttons {
+  grid-area: button;
+  display: flex;
+  gap: 46px;
+  justify-content: center;
+}
+
+.button__return {
   width: 160px;
   height: 46px;
   background: transparent;
@@ -130,11 +136,10 @@ label {
   margin-bottom: 128px;
 }
 
-.hospital-registration__button {
-  grid-area: button-continue;
+.button__continue {
   width: 160px;
   height: 46px;
-  background: #7395f7;
+  background: #4E7BF2;
   border-radius: 5px;
   color: #fff;
   font-family: "Abel";

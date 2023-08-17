@@ -12,11 +12,6 @@
       </router-link>
     </header>
     <main>
-      <img
-        src="../assets/img/hospital-registration-image.png"
-        alt="Hospital Registration Image"
-        class="hospital-registration__image"
-      />
       <form class="hospital-registration-part-four-form">
         <div v-if="!isSelectedImage" class="form__photo-container">
           <input
@@ -45,6 +40,7 @@
             :class="{ error: v$.inputPassword.$error }"
             ref="inputPassword"
             @blur="v$.inputPassword.$touch()"
+            autocomplete="new-password"
           />
           <i
             @mousedown="showPassword"
@@ -70,7 +66,11 @@
             class="password-confirmation__label"
             >Confirmar senha:</label
           >
-          <input :type="isShowPasswordConfirmation ? 'text' : 'password'" class="password-confirmation__input" />
+          <input
+            :type="isShowPasswordConfirmation ? 'text' : 'password'"
+            class="password-confirmation__input"
+            autocomplete="new-password"
+          />
           <i
             @mousedown="showPasswordConfirmation"
             @mouseup="showPasswordConfirmation"
@@ -81,18 +81,18 @@
             }"
           ></i>
         </div>
-        <router-link to="/hospital-registration-part-three">
-          <button type="button" class="hospital-registration__button-return">
-            Voltar
+        <div class="hospital-registration__buttons">
+          <router-link to="/hospital-registration-part-three">
+            <button type="button" class="button__return">Voltar</button>
+          </router-link>
+          <button
+            type="button"
+            @click="submitFormHospitalPartFour"
+            class="button__send"
+          >
+            Enviar
           </button>
-        </router-link>
-        <button
-          type="button"
-          @click="submitFormHospitalPartFour"
-          class="hospital-registration__button"
-        >
-          Enviar
-        </button>
+        </div>
       </form>
       <NotificationBar
         v-if="$store.state.showNotification"
@@ -114,6 +114,9 @@ import dataFormPartFour from "../assets/js/data/data-form-part-four.js";
 import NotificationBar from "../assets/components/NotificationBar.vue";
 import { useVuelidate } from "@vuelidate/core";
 import validationsHospitalPartFour from "../assets/js/validations/validations-hospital-part-four.js";
+import uploadImage from "../assets/js/methods/input/upload-image.js";
+import showPassword from "../assets/js/methods/input/show-password.js";
+import showPasswordConfirmation from "../assets/js/methods/input/show-password-confirmation.js";
 
 export default {
   name: "HospitalRegistrationPartFour",
@@ -140,6 +143,9 @@ export default {
   },
   methods: {
     submitFormHospitalPartFour,
+    uploadImage,
+    showPassword,
+    showPasswordConfirmation,
   },
 };
 </script>

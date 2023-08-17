@@ -88,18 +88,18 @@
             v-model="formData.city"
           />
         </div>
-        <router-link to="/hospital-registration-part-one">
-          <button type="button" class="hospital-registration__button-return">
-            Voltar
+        <div class="hospital-registration__buttons">
+          <router-link to="/hospital-registration-part-one">
+            <button type="button" class="button__return">Voltar</button>
+          </router-link>
+          <button
+            type="button"
+            @click="submitFormHospitalPartTwo"
+            class="button__continue"
+          >
+            Continuar
           </button>
-        </router-link>
-        <button
-          type="button"
-          @click="submitFormHospitalPartTwo"
-          class="hospital-registration__button"
-        >
-          Continuar
-        </button>
+        </div>
       </form>
     </main>
     <footer>
