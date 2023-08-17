@@ -1,7 +1,7 @@
 import postDataPartFour from "./post-data-part-four.js";
 import fieldsHospitalPartFour from '../validations/fields/fields-hospital-part-four.js'
 
-export default async function submitFormHospitalPartThree() {
+export default async function submitFormHospitalPartFour() {
   this.formData.donationLocal = this.inputDonationLocal;
   this.formData.otherDonationLocal = this.inputOtherDonationLocal;
 
