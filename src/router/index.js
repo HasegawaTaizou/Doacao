@@ -5,6 +5,7 @@ import Login from "@/pages/Login.vue";
 import HospitalRegistrationPartOne from "@/pages/HospitalRegistrationPartOne.vue";
 import HospitalRegistrationPartTwo from "@/pages/HospitalRegistrationPartTwo.vue";
 import HospitalRegistrationPartThree from "@/pages/HospitalRegistrationPartThree.vue";
+import HospitalRegistrationPartFour from "@/pages/HospitalRegistrationPartFour.vue";
 import CheckYourEmail from "@/pages/CheckYourEmail.vue";
 // import RedefinePassword from "@/pages/RedefinePassword.vue";
 import RedefinePasswordConfirmation from "@/pages/RedefinePasswordConfirmation.vue";
@@ -68,6 +69,11 @@ const routes = [
     path: "/hospital-registration-part-three",
     name: "HospitalRegistrationPartThree",
     component: HospitalRegistrationPartThree,
+  },
+  {
+    path: "/hospital-registration-part-four",
+    name: "HospitalRegistrationPartFour",
+    component: HospitalRegistrationPartFour,
   },
   {
     path: "/check-your-email",
