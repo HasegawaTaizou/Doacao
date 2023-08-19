@@ -44,6 +44,7 @@ import Criptografia from "@/pages/Criptografia.vue";
 import Menu from "@/pages/Menu.vue";
 import Notificacao from "@/pages/Notificacao.vue";
 import PopUp from "@/pages/PopUp.vue";
+import Pizza from "@/pages/Pizza.vue";
 
 const routes = [
   {
@@ -251,6 +252,11 @@ const routes = [
     path: "/popup",
     name: "PopUp",
     component: PopUp,
+  },
+  {
+    path: "/pizza",
+    name: "Pizza",
+    component: Pizza,
   },
 ];
 
