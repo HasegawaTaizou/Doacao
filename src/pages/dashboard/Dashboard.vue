@@ -61,7 +61,6 @@
 </template>
 
 <script>
-
 export default {
   name: "Dashboard",
   data() {
@@ -85,7 +84,18 @@ export default {
           image: "fas fa-cog",
           route: "settings",
         },
-        { id: 4, title: "Ajuda", image: "fas fa-question-circle", route: "help" },
+        {
+          id: 3,
+          title: "Configurações",
+          image: "fas fa-cog",
+          route: "settings",
+        },
+        {
+          id: 4,
+          title: "Ajuda",
+          image: "fas fa-question-circle",
+          route: "help",
+        },
       ],
       showSidenav: true,
     };
