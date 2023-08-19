@@ -85,13 +85,13 @@ export default {
           route: "settings",
         },
         {
-          id: 3,
-          title: "Configurações",
-          image: "fas fa-cog",
-          route: "settings",
+          id: 4,
+          title: "Estatísticas",
+          image: "fa-solid fa-star",
+          route: "statistics",
         },
         {
-          id: 4,
+          id: 5,
           title: "Ajuda",
           image: "fas fa-question-circle",
           route: "help",

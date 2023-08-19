@@ -20,6 +20,7 @@ import Settings from "@/pages/dashboard/Settings.vue";
 import RedefinePassword from "@/pages/dashboard/RedefinePassword.vue";
 import EditHospital from "@/pages/dashboard/EditHospital.vue";
 import Help from "@/pages/dashboard/Help.vue";
+import Statistics from "@/pages/dashboard/Statistics.vue";
 // -----------------------
 import Seeds from "@/pages/dashboard/Seeds.vue";
 import Seed from "@/pages/dashboard/Seed.vue";
@@ -141,6 +142,12 @@ const routes = [
         name: "Help",
         component: Help,
       },
+      {
+        path: "/dashboard/statistics",
+        name: "Statistics",
+        component: Statistics,
+      },
+      // -----------------------------------------------------
       {
         path: "/dashboard/seeds",
         name: "Seeds",
