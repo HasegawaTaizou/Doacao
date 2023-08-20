@@ -3,8 +3,11 @@
 </template> -->
 
 <template>
-  <div id="teste" style="width: 25  0px; height: 250px">
+  <div id="teste" style="width: 25 0px; height: 250px">
     <canvas id="myChart"></canvas>
+    <div>
+      <p>{{ this.$data }}</p>
+    </div>
   </div>
 </template>
 
@@ -21,7 +24,12 @@ export default {
       datasets: [
         {
           label: "My First Dataset",
-          data: [300, 50, 100, 70],
+          data: [
+            (this.scheduled = 300),
+            (this.concluded = 50),
+            (this.rescheduled = 100),
+            (this.pending = 70),
+          ],
           backgroundColor: [
             "rgb(255, 99, 132)",
             "rgb(54, 162, 235)",
@@ -41,11 +49,19 @@ export default {
         responsive: true,
         plugins: {
           legend: {
-            display: false
+            display: false,
           },
         },
       },
     });
+  },
+  data() {
+    return {
+      scheduled: 0,
+      concluded: 0,
+      rescheduled: 0,
+      pending: 0,
+    };
   },
 };
 </script>

@@ -32,3 +32,98 @@
   height: 88vh;
   margin: 0px 32px;
 }
+
+.statistics__schedules {
+  display: flex;
+  gap: 64px;
+  width: 676px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 32px;
+  margin-left: 92px;
+}
+
+.schedules__schedules-introduction {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.schedules-introduction__title {
+  font-size: 2.5rem;
+  font-family: "Abel";
+  font-weight: normal;
+  color: #000;
+}
+
+.schedules-introduction__image {
+  width: 234px;
+  height: 186px;
+}
+
+.schedules__schedules-graph {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+.schedules-graph__graph {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.graph__total-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.total__text {
+  color: #6d6868;
+}
+
+.total__number {
+  font-size: 1.125rem;
+}
+
+.schedules-graph__labels {
+  display: flex;
+  gap: 22px;
+}
+
+.graph-label-container {
+  display: grid;
+  grid-template-areas:
+    "title title"
+    "label-color label-text";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 6px;
+  row-gap: 4px;
+  align-items: center;
+}
+
+.graph-label__title {
+  grid-area: title;
+  font-size: 1rem;
+  color: #6d6868;
+}
+
+.graph-label__text__before {
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+}
+
+.graph-label__text {
+  grid-area: label-text;
+  font-size: 1.125rem;
+}
