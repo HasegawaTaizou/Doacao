@@ -25,7 +25,7 @@
           <div class="schedules-graph__graph">
             <div class="graph__total-container">
               <span class="total__text">Total</span>
-            <span class="total__number">18</span>
+              <span class="total__number">{{ this.scheduledTotal }}</span>
             </div>
             <canvas id="doughnut-graph"></canvas>
           </div>
@@ -123,6 +123,7 @@ export default {
       concluded: 5,
       rescheduled: 8,
       pending: 2,
+      scheduledTotal: 18,
 
       //BackgroundColor data
       scheduledColor: "rgb(44, 98, 241)",
