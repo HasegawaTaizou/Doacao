@@ -147,6 +147,53 @@
   font-family: "Abel";
   font-weight: normal;
   color: #000;
+  margin-bottom: 38px;
+}
+
+.reviews__graph-review-container {
+  padding-right: 32px;
+}
+
+.graph-review__graph-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.graph__bar-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bar__line-container {
+  height: 100%;
+  background-color: #d9d9d9;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.line__progress {
+  height: 100%;
+  background-color: #7395f7;
+  width: 30%;
+  border-radius: 12px;
+}
+
+.bar__label-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.label__number {
+  font-size: 1.25rem;
+  color: #6D6868;
+}
+
+.label__star {
+  font-size: 1rem;
+  color: #6D6868;
 }
 
 .graph-review__summary-container {
@@ -183,6 +230,12 @@
   grid-area: total;
   font-size: 1.5rem;
   color: #6d6868;
+}
+
+.bar__line-container {
+  height: 12px;
+  background-color: #d9d9d9;
+  border-radius: 12px;
 }
 
 .reviews__comments-container {

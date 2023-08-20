@@ -82,7 +82,53 @@
             </div>
             <span class="summary__total">12 Avaliações</span>
           </div>
-          <div class="graph-review__graph-container"></div>
+          <div class="graph-review__graph-container">
+            <div class="graph__bar-container">
+              <div class="bar__line-container">
+                <div class="line__progress"></div>
+              </div>
+              <div class="bar__label-container">
+                <span class="label__number">5</span>
+                <i class="far fa-star label__star"></i>
+              </div>
+            </div>
+            <div class="graph__bar-container">
+              <div class="bar__line-container">
+                <div class="line__progress"></div>
+              </div>
+              <div class="bar__label-container">
+                <span class="label__number">4</span>
+                <i class="far fa-star label__star"></i>
+              </div>
+            </div>
+            <div class="graph__bar-container">
+              <div class="bar__line-container">
+                <div class="line__progress"></div>
+              </div>
+              <div class="bar__label-container">
+                <span class="label__number">3</span>
+                <i class="far fa-star label__star"></i>
+              </div>
+            </div>
+            <div class="graph__bar-container">
+              <div class="bar__line-container">
+                <div class="line__progress"></div>
+              </div>
+              <div class="bar__label-container">
+                <span class="label__number">2</span>
+                <i class="far fa-star label__star"></i>
+              </div>
+            </div>
+            <div class="graph__bar-container">
+              <div class="bar__line-container">
+                <div class="line__progress"></div>
+              </div>
+              <div class="bar__label-container">
+                <span class="label__number">1</span>
+                <i class="far fa-star label__star"></i>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="reviews__comments-container">
           <div class="comment-container">
