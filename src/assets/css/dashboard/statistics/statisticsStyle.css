@@ -42,6 +42,7 @@
   border-radius: 12px;
   padding: 32px;
   margin-left: 92px;
+  margin-top: 42px;
 }
 
 .schedules__schedules-introduction {
@@ -126,4 +127,123 @@
 .graph-label__text {
   grid-area: label-text;
   font-size: 1.125rem;
+}
+
+.statistics__reviews {
+  display: grid;
+  grid-template-areas:
+    "title title"
+    "summary comments";
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  margin: 68px 92px 92px 92px;
+  padding-top: 52px;
+  border-top: 1px solid #d9d9d9;
+}
+
+.reviews__title {
+  grid-area: title;
+  font-size: 2.5rem;
+  font-family: "Abel";
+  font-weight: normal;
+  color: #000;
+}
+
+.graph-review__summary-container {
+  grid-area: summary;
+  display: grid;
+  grid-template-areas:
+    "average stars"
+    "average total";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 22px;
+  row-gap: 12px;
+}
+
+.summary__average {
+  grid-area: average;
+  font-size: 5.75rem;
+  color: #7395f7;
+}
+
+.summary__stars-container {
+  grid-area: stars;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.summary__stars-container i {
+  font-size: 1.5rem;
+  color: #7395f7;
+}
+
+.summary__total {
+  grid-area: total;
+  font-size: 1.5rem;
+  color: #6d6868;
+}
+
+.reviews__comments-container {
+  grid-area: comments;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-left: 1px solid #d9d9d9;
+  padding: 32px 0px 32px 32px;
+}
+
+.comment-container {
+  display: grid;
+  grid-template-areas:
+    "image donator date"
+    "image stars ."
+    "text text text";
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto auto auto;
+  width: 412px;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  column-gap: 10px;
+  padding: 12px;
+}
+
+.comment__image {
+  grid-area: image;
+  width: 42px;
+  height: 42px;
+}
+
+.comment__donator {
+  grid-area: donator;
+  color: #000;
+  font-size: 0.75rem;
+  margin-top: 6px;
+}
+
+.comment__stars-container {
+  grid-area: stars;
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.comment__stars-container i {
+  font-size: 0.75rem;
+  color: #7395f7;
+}
+
+.comment__date {
+  grid-area: date;
+  color: #959595;
+  font-size: 0.625rem;
+}
+
+.comment__text {
+  grid-area: text;
+  color: #000;
+  font-size: 0.75rem;
+  max-width: 372px;
+  margin-top: 12px;
 }

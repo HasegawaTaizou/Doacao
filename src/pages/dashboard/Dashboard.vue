@@ -50,7 +50,7 @@
         </ul>
       </nav>
       <router-link :to="'/'" class="log-out-content">
-        <img src="../../assets/img/logout-icon.png" alt="Log Out Icon" />
+        <i class="fa-solid fa-right-from-bracket"></i>
         <span class="log-out__text">Sair</span>
       </router-link>
     </div>

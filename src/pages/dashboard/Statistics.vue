@@ -68,6 +68,88 @@
           </div>
         </div>
       </div>
+      <div class="statistics__reviews">
+        <h2 class="reviews__title">AVALIAÇÕES</h2>
+        <div class="reviews__graph-review-container">
+          <div class="graph-review__summary-container">
+            <span class="summary__average">3.8</span>
+            <div class="summary__stars-container">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <span class="summary__total">12 Avaliações</span>
+          </div>
+          <div class="graph-review__graph-container"></div>
+        </div>
+        <div class="reviews__comments-container">
+          <div class="comment-container">
+            <img
+              src="../../assets/img/donator-image.png"
+              alt="Comment Image"
+              class="comment__image"
+            />
+            <span class="comment__donator">Camila Alves Pinheiro</span>
+            <div class="comment__stars-container">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <span class="comment__date">14/08/2023</span>
+            <p class="comment__text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+              tempus a urna a scelerisque. Morbi accumsan odio sit amet nulla
+              eleifend molestie. Nullam pretium tortor est.
+            </p>
+          </div>
+          <div class="comment-container">
+            <img
+              src="../../assets/img/donator-image.png"
+              alt="Comment Image"
+              class="comment__image"
+            />
+            <span class="comment__donator">Camila Alves Pinheiro</span>
+            <div class="comment__stars-container">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <span class="comment__date">14/08/2023</span>
+            <p class="comment__text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+              tempus a urna a scelerisque. Morbi accumsan odio sit amet nulla
+              eleifend molestie. Nullam pretium tortor est.
+            </p>
+          </div>
+          <div class="comment-container">
+            <img
+              src="../../assets/img/donator-image.png"
+              alt="Comment Image"
+              class="comment__image"
+            />
+            <span class="comment__donator">Camila Alves Pinheiro</span>
+            <div class="comment__stars-container">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <span class="comment__date">14/08/2023</span>
+            <p class="comment__text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+              tempus a urna a scelerisque. Morbi accumsan odio sit amet nulla
+              eleifend molestie. Nullam pretium tortor est.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
