@@ -91,15 +91,32 @@
         <router-link :to="'/dashboard/settings/'">
           <button class="action__cancel">Cancelar</button>
         </router-link>
-        <button class="action__change-data">Alterar dados</button>
+        <button @click="openPopUp('change')" class="action__change-data">Alterar dados</button>
       </div>
     </div>
   </section>
+  <PopUp
+    v-if="selectedComponent === 'change'"
+    :title="'Alterar dados?'"
+    :message="'Os dados serão alterados e não terá como desfazer esta ação.'"
+    :acceptFunction="deleteVolunteer"
+  >
+  </PopUp>
 </template>
 
 <script>
+import PopUp from "../../assets/components/PopUp.vue";
+import openPopUp from "../../assets/js/methods/open-pop-up.js";
+
 export default {
   name: "EditHospital",
+  components: { PopUp },
+  data() {
+    return { selectedComponent: "" };
+  },
+  methods: {
+    openPopUp,
+  },
 };
 </script>
 

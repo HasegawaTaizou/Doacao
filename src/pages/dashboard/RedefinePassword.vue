@@ -95,28 +95,42 @@
           <router-link :to="'/dashboard/settings/'">
             <button class="button__cancel">Cancelar</button>
           </router-link>
-          <button class="button__redefine-password">Redefinir senha</button>
+          <button @click="openPopUp('change')" class="button__redefine-password">Redefinir senha</button>
         </div>
       </div>
     </div>
   </section>
+  <PopUp
+    v-if="selectedComponent === 'change'"
+    :title="'Alterar senha?'"
+    :message="'A senha será alterada e não terá como desfazer esta ação.'"
+    :acceptFunction="deleteVolunteer"
+  >
+  </PopUp>
 </template>
 
 <script>
 import showPassword from "../../assets/js/methods/input/show-password.js";
 import showPasswordConfirmation from "../../assets/js/methods/input/show-password-confirmation.js";
+import PopUp from "../../assets/components/PopUp.vue";
+import openPopUp from "../../assets/js/methods/open-pop-up.js";
 
 export default {
   name: "RedefinePassword",
+  components: { PopUp },
   data() {
     return {
+      selectedComponent: "",
+      //Show Password
       isShowPassword: false,
       isShowPasswordConfirmation: false,
+
     };
   },
   methods: {
     showPassword,
     showPasswordConfirmation,
+    openPopUp,
   },
 };
 </script>
