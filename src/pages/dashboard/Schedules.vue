@@ -43,10 +43,7 @@
             <tr class="table__content">
               <td class="content__id">1</td>
               <td class="content__donator">
-                <router-link
-                  :to="'/dashboard/donator'"
-                  class="donator__link"
-                >
+                <router-link :to="'/dashboard/donator'" class="donator__link">
                   <img
                     src="../../assets/img/donator-image.png"
                     alt="Donator Image"
@@ -85,10 +82,7 @@
             <tr class="table__content">
               <td class="content__id">2</td>
               <td class="content__donator">
-                <router-link
-                  :to="'/dashboard/donator'"
-                  class="donator__link"
-                >
+                <router-link :to="'/dashboard/donator'" class="donator__link">
                   <img
                     src="../../assets/img/donator-image.png"
                     alt="Donator Image"
@@ -163,6 +157,7 @@
 
 <script>
 import PopUp from "../../assets/components/PopUp.vue";
+import openPopUp from "../../assets/js/methods/open-pop-up.js";
 
 export default {
   name: "Schedules",
@@ -171,12 +166,7 @@ export default {
     return { selectedComponent: "" };
   },
   methods: {
-    openPopUp(componentName) {
-      this.selectedComponent = componentName;
-      
-      this.$store.state.showPopUp = true;
-      this.$store.commit("setShowPopUp", true);
-    },
+    openPopUp,
   },
 };
 </script>
