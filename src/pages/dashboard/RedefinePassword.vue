@@ -52,15 +52,43 @@
       </div>
       <div class="redefine-password-action">
         <div class="redefine-password__inputs">
-          <div class="input__new-password">
-            <label for="" class="new-password__label">Nova senha:</label>
-            <input type="text" class="new-password__input" />
+          <div class="form__password-container">
+            <label for="password" class="password__label">Senha:</label>
+            <input
+              :type="isShowPassword ? 'text' : 'password'"
+              class="password__input"
+              v-model="inputPassword"
+              ref="inputPassword"
+              autocomplete="new-password"
+            />
+            <i
+              @mousedown="showPassword"
+              @mouseup="showPassword"
+              :class="{
+                'far fa-eye-slash': isShowPassword,
+                'far fa-eye': !isShowPassword,
+              }"
+            ></i>
           </div>
-          <div class="input__new-password-confirmation">
-            <label for="" class="new-password-confirmation__label"
-              >Confirmar nova senha:</label
+          <div class="form__password-confirmation-container">
+            <label
+              for="password-confirmation"
+              class="password-confirmation__label"
+              >Confirmar senha:</label
             >
-            <input type="text" class="new-password-confirmation__input" />
+            <input
+              :type="isShowPasswordConfirmation ? 'text' : 'password'"
+              class="password-confirmation__input"
+              autocomplete="new-password"
+            />
+            <i
+              @mousedown="showPasswordConfirmation"
+              @mouseup="showPasswordConfirmation"
+              :class="{
+                'far fa-eye-slash': isShowPasswordConfirmation,
+                'far fa-eye': !isShowPasswordConfirmation,
+              }"
+            ></i>
           </div>
         </div>
         <div class="redefine-password__buttons">
@@ -75,8 +103,21 @@
 </template>
 
 <script>
+import showPassword from "../../assets/js/methods/input/show-password.js";
+import showPasswordConfirmation from "../../assets/js/methods/input/show-password-confirmation.js";
+
 export default {
   name: "RedefinePassword",
+  data() {
+    return {
+      isShowPassword: false,
+      isShowPasswordConfirmation: false,
+    };
+  },
+  methods: {
+    showPassword,
+    showPasswordConfirmation,
+  },
 };
 </script>
 
