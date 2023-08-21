@@ -137,7 +137,9 @@
               alt="Comment Image"
               class="comment__image"
             />
-            <span class="comment__donator">Camila Alves Pinheiro</span>
+            <router-link :to="'/dashboard/donator'" class="comment__donator">
+              Camila Alves Pinheiro
+            </router-link>
             <div class="comment__stars-container">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
@@ -158,7 +160,9 @@
               alt="Comment Image"
               class="comment__image"
             />
-            <span class="comment__donator">Camila Alves Pinheiro</span>
+            <router-link :to="'/dashboard/donator'" class="comment__donator">
+              João Pedro Bueno
+            </router-link>
             <div class="comment__stars-container">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
@@ -179,7 +183,9 @@
               alt="Comment Image"
               class="comment__image"
             />
-            <span class="comment__donator">Camila Alves Pinheiro</span>
+            <router-link :to="'/dashboard/donator'" class="comment__donator">
+              Beatriz Fideliz Landi Coelho
+            </router-link>
             <div class="comment__stars-container">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>

@@ -1,7 +1,7 @@
 <template>
-  <section id="scheduling-dashboard">
-    <div class="scheduling__header">
-      <h1 class="scheduling__title">AGENDAMENTO</h1>
+  <section id="donator-dashboard">
+    <div class="donator__header">
+      <h1 class="donator__title">AGENDAMENTO</h1>
       <div class="profile-container">
         <img
           src="../../assets/img/hospital-profile-image.png"
@@ -11,7 +11,7 @@
         <span class="profile__name">Hospital Notredame Intermédica</span>
       </div>
     </div>
-    <div class="scheduling__content">
+    <div class="donator__content">
       <div class="donator-container">
         <img
           src="../../assets/img/donator-image.png"
@@ -107,10 +107,10 @@
 
 <script>
 export default {
-  name: "Scheduling",
+  name: "Donator",
 };
 </script>
 
 <style scoped>
-@import url("../../assets/css/dashboard/scheduling/schedulingStyle.css");
+@import url("../../assets/css/dashboard/donator/donatorStyle.css");
 </style>

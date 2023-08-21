@@ -1,11 +1,11 @@
-.scheduling__header {
+.donator__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 16px 48px;
 }
 
-.scheduling__title {
+.donator__title {
   font-size: 2.5rem;
   color: #000;
   font-family: "Abel";
@@ -24,7 +24,7 @@
   text-align: center;
 }
 
-.scheduling__content {
+.donator__content {
   display: flex;
   flex-direction: column;
   background-color: #ffffff;

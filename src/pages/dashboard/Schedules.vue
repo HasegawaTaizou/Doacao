@@ -44,8 +44,8 @@
               <td class="content__id">1</td>
               <td class="content__donator">
                 <router-link
-                  :to="'/dashboard/schedules/scheduling'"
-                  class="action__redefine-password-container"
+                  :to="'/dashboard/donator'"
+                  class="donator__link"
                 >
                   <img
                     src="../../assets/img/donator-image.png"
@@ -86,8 +86,8 @@
               <td class="content__id">2</td>
               <td class="content__donator">
                 <router-link
-                  :to="'/dashboard/schedules/scheduling'"
-                  class="action__redefine-password-container"
+                  :to="'/dashboard/donator'"
+                  class="donator__link"
                 >
                   <img
                     src="../../assets/img/donator-image.png"

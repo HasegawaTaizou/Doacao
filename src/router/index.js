@@ -14,7 +14,7 @@ import Faq from "@/pages/Faq.vue";
 //DASHBOARD
 import Dashboard from "@/pages/dashboard/Dashboard.vue";
 import Schedules from "@/pages/dashboard/Schedules.vue";
-import Scheduling from "@/pages/dashboard/Scheduling.vue";
+import Donator from "@/pages/dashboard/Donator.vue";
 import BookSchedules from "@/pages/dashboard/BookSchedules.vue";
 import Settings from "@/pages/dashboard/Settings.vue";
 import RedefinePassword from "@/pages/dashboard/RedefinePassword.vue";
@@ -114,9 +114,9 @@ const routes = [
         component: Schedules,
       },
       {
-        path: "/dashboard/schedules/scheduling",
-        name: "Scheduling",
-        component: Scheduling,
+        path: "/dashboard/donator",
+        name: "Donator",
+        component: Donator,
       },
       {
         path: "/dashboard/book-schedules",
