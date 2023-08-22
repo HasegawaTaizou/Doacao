@@ -69,6 +69,7 @@
                     class="action__icon"
                   />
                   <img
+                    @click="openPopUp('reschedule')"
                     src="../../assets/img/scheduling-reschedule-icon.png"
                     alt="Reschedule Icon"
                     class="action__icon"
@@ -82,11 +83,11 @@
           v-if="this.tableBookSchedules.length > 0"
           class="book-scheduling__actions-buttons"
         >
-          <button @click="clearSchedules" class="action-button__cancel">
+          <button @click="openPopUp('cancel')" class="action-button__cancel">
             <span class="cancel__text">Cancelar</span>
             <i class="fa-regular fa-circle-xmark"></i>
           </button>
-          <button class="action-button__save">
+          <button @click="openPopUp('save')" class="action-button__save">
             <span class="save__text">Salvar</span>
             <i class="fa-regular fa-circle-check"></i>
           </button>
@@ -142,13 +143,47 @@
     </div>
   </section>
   <PopUp
-    :message="'Os dados do beneficiado serão excluídos'"
+    v-if="selectedComponent === 'cancel'"
+    :title="'Cancelar?'"
+    :message="'Os agendamentos criados serão cancelados.'"
+    :acceptFunction="clearSchedules"
+  ></PopUp>
+  <PopUp
+    v-if="selectedComponent === 'save'"
+    :title="'Salvar?'"
+    :message="'Os agendamentos criados serão colocados como agendamentos disponíveis.'"
     :acceptFunction="deleteVolunteer"
-  />
+  ></PopUp>
+  <PopUp
+    v-if="selectedComponent === 'reschedule'"
+    :title="'Remarcar'"
+    :message="'Escolha a data e o horário para remarcar'"
+    :acceptFunction="deleteVolunteer"
+  >
+    <div class="book-scheduling">
+      <div class="scheduling-date">
+        <input
+          v-model="scheduleDatetime"
+          type="datetime-local"
+          name=""
+          id=""
+          class="date__datetime-local"
+        />
+      </div>
+      <div class="scheduling-site">
+        <select v-model="scheduleSite" name="" id="" class="site__select">
+          <option disabled value="">Escolha o local</option>
+          <option value="Descrição Local 1">Descrição Local 1</option>
+          <option value="Descrição Local 2">Descrição Local 2</option>
+        </select>
+      </div>
+    </div>
+  </PopUp>
 </template>
 
 <script>
 import PopUp from "../../assets/components/PopUp.vue";
+import openPopUp from "../../assets/js/methods/open-pop-up.js";
 import { format } from "date-fns";
 
 export default {
@@ -163,8 +198,9 @@ export default {
 
       //Book Schedules Content
       tableBookSchedules: [],
-      contentDate: "29/07/2023",
-      contentHour: "11:10",
+
+      //Component
+      selectedComponent: "",
     };
   },
   methods: {
@@ -191,10 +227,12 @@ export default {
         "dd/MM/yyyy HH:mm"
       );
     },
+    openPopUp,
   },
 };
 </script>
 
 <style scoped>
 @import url("../../assets/css/dashboard/bookSchedules/bookSchedulesStyle.css");
+@import url("../../assets/css/components/rescheduleIconStyle.css");
 </style>
