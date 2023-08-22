@@ -21,16 +21,19 @@
               name=""
               id=""
               class="date__datetime-local"
+              v-model="scheduleDatetime"
             />
           </div>
           <div class="scheduling-site">
             <span class="site__title">Escolha o local:</span>
-            <select name="" id="" class="site__select">
-              <option value="1">Descrição Local 1</option>
+            <select v-model="scheduleSite" name="" id="" class="site__select">
+              <option disabled value="">Escolha o local</option>
+              <option value="Descrição Local 1">Descrição Local 1</option>
+              <option value="Descrição Local 2">Descrição Local 2</option>
             </select>
           </div>
         </div>
-        <button class="book-scheduling__button">
+        <button @click="addSchedule" class="book-scheduling__button">
           <span class="book-scheduling__text">Reservar agendamento</span>
           <img
             src="../../assets/img/plus-icon.png"
@@ -38,52 +41,48 @@
             class="book-scheduling__icon"
           />
         </button>
-        <div class="book-scheduling__schedules">
+        <div
+          v-if="this.tableBookSchedules.length > 0"
+          class="book-scheduling__schedules"
+        >
           <table class="schedules__table">
-            <tr class="table__title">
-              <th class="title__date">Data</th>
-              <th class="title__hour">Horário</th>
-              <th class="title__site">Local</th>
-              <th class="title__action">Ação</th>
-            </tr>
-            <tr class="table__content">
-              <td class="content__date">29/07/2023</td>
-              <td class="content__hour">11:10</td>
-              <td class="content__site">Descrição do local 1</td>
-              <td class="content__actions">
-                <img
-                  src="../../assets/img/scheduling-cancel-icon.png"
-                  alt="Cancel Icon"
-                  class="action__icon"
-                />
-                <img
-                  src="../../assets/img/scheduling-reschedule-icon.png"
-                  alt="Reschedule Icon"
-                  class="action__icon"
-                />
-              </td>
-            </tr>
-            <tr class="table__content">
-              <td class="content__date">29/07/2023</td>
-              <td class="content__hour">11:10</td>
-              <td class="content__site">Descrição do local 2</td>
-              <td class="content__actions">
-                <img
-                  src="../../assets/img/scheduling-cancel-icon.png"
-                  alt="Cancel Icon"
-                  class="action__icon"
-                />
-                <img
-                  src="../../assets/img/scheduling-reschedule-icon.png"
-                  alt="Reschedule Icon"
-                  class="action__icon"
-                />
-              </td>
-            </tr>
+            <tbody>
+              <tr class="table__title">
+                <th class="title__date">Data</th>
+                <th class="title__hour">Horário</th>
+                <th class="title__site">Local</th>
+                <th class="title__action">Ação</th>
+              </tr>
+              <tr
+                class="table__content"
+                v-for="(item, index) in tableBookSchedules"
+                :key="index"
+              >
+                <td class="content__date">{{ item.contentDate }}</td>
+                <td class="content__hour">{{ item.contentHour }}</td>
+                <td class="content__site">{{ item.contentSite }}</td>
+                <td class="content__actions">
+                  <img
+                    @click="removeSchedule(index)"
+                    src="../../assets/img/scheduling-cancel-icon.png"
+                    alt="Cancel Icon"
+                    class="action__icon"
+                  />
+                  <img
+                    src="../../assets/img/scheduling-reschedule-icon.png"
+                    alt="Reschedule Icon"
+                    class="action__icon"
+                  />
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
-        <div class="book-scheduling__actions-buttons">
-          <button class="action-button__cancel">
+        <div
+          v-if="this.tableBookSchedules.length > 0"
+          class="book-scheduling__actions-buttons"
+        >
+          <button @click="clearSchedules" class="action-button__cancel">
             <span class="cancel__text">Cancelar</span>
             <i class="fa-regular fa-circle-xmark"></i>
           </button>
@@ -150,10 +149,49 @@
 
 <script>
 import PopUp from "../../assets/components/PopUp.vue";
+import { format } from "date-fns";
 
 export default {
   name: "BookSchedules",
   components: { PopUp },
+  data() {
+    return {
+      //Book Schedule site and datetime
+      scheduleDatetime: "",
+      scheduleDatetimeFormatted: "",
+      scheduleSite: "",
+
+      //Book Schedules Content
+      tableBookSchedules: [],
+      contentDate: "29/07/2023",
+      contentHour: "11:10",
+    };
+  },
+  methods: {
+    addSchedule() {
+      if (this.scheduleDatetime != "" && this.scheduleSite != "") {
+        console.log(this.scheduleDatetime);
+        this.formatDateTime();
+        this.tableBookSchedules.push({
+          contentDate: this.scheduleDatetimeFormatted.split(" ")[0],
+          contentHour: this.scheduleDatetimeFormatted.split(" ")[1],
+          contentSite: this.scheduleSite,
+        });
+      }
+    },
+    removeSchedule(index) {
+      this.tableBookSchedules.splice(index, 1);
+    },
+    clearSchedules() {
+      this.tableBookSchedules = [];
+    },
+    formatDateTime() {
+      this.scheduleDatetimeFormatted = format(
+        new Date(this.scheduleDatetime),
+        "dd/MM/yyyy HH:mm"
+      );
+    },
+  },
 };
 </script>
 

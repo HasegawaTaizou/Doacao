@@ -165,6 +165,7 @@ tr:not(:last-child)::after {
 .content__actions img {
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 
 .action__none {
