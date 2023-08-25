@@ -43,15 +43,15 @@
           <span @click="showOptions()" class="register-text">Cadastre-se</span>
           <router-link
             class="volunteer-button"
-            to="/volunteer-registration-part-one"
+            to="/hospital-registration-part-one"
           >
-            <button class="register__button">Voluntário</button>
+            <button class="register__button">Hospital</button>
           </router-link>
           <router-link
             class="beneficiarie-button"
-            to="/beneficiary-registration-part-one"
+            to="/hospital-registration-part-one"
           >
-            <button class="register__button">Beneficiado</button>
+            <button class="register__button">AAAA</button>
           </router-link>
         </div>
       </div>

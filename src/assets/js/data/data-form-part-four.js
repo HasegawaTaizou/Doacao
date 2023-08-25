@@ -23,6 +23,7 @@ export default function dataPartFour(formData) {
       road: formData.road,
       neighborhood: formData.neighborhood,
       complement: formData.complement,
+      number: formData.number,
       uf: formData.uf,
       city: formData.city,
 

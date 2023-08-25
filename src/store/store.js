@@ -23,6 +23,7 @@ export default new Vuex.Store({
       uf: "",
       city: "",
       complement: "",
+      number: "",
 
       // DONATION LOCAL DATA
       donationLocal: "",

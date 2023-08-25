@@ -2,9 +2,7 @@
   <div class="content">
     <img src="../assets/img/logo.png" alt="Website logo" id="logo" />
     <header>
-      <h1 class="hospital-registration-part-two__title">
-        CADASTRO HOSPITAL
-      </h1>
+      <h1 class="hospital-registration-part-two__title">CADASTRO HOSPITAL</h1>
       <router-link class="return__link" to="/hospital-registration-part-one">
         <img
           src="../assets/img/return-icon.png"
@@ -28,7 +26,12 @@
             id="cep"
             v-mask="'#####-###'"
             v-model="formData.cep"
-            @blur="() => { fillAdrress(); v$.inputCep.$touch(); }"
+            @blur="
+              () => {
+                fillAdrress();
+                v$.inputCep.$touch();
+              }
+            "
             @keydown.enter="fillAdrress"
             v-model.trim="inputCep"
             :class="{ error: v$.inputCep.$error }"
@@ -62,22 +65,42 @@
           />
         </div>
         <div class="form__complement-container">
-          <label for="complement" class="complement__label">Complemento:</label>
-          <input
-            type="text"
-            class="complement__input"
-            disabled
-            v-model="formData.complement"
-          />
+          <div class="complement__complement-container">
+            <label for="complement" class="complement__label"
+              >Complemento:</label
+            >
+            <input
+              type="text"
+              class="complement__input"
+              disabled
+              v-model="formData.complement"
+            />
+          </div>
+          <div class="complement__number-container">
+            <label for="number" class="number__label"
+              >Número:</label
+            >
+            <input
+              type="number"
+              class="number__input"
+              v-model="inputNumber"
+              :class="{ error: v$.inputNumber.$error }"
+            ref="inputNumber"
+            @blur="v$.inputNumber.$touch()"
+            />
+            <div v-if="v$.inputNumber.$error">
+            <p
+              v-if="v$.inputNumber.required"
+              class="error-text"
+            >
+              Preencha o número!
+            </p>
+          </div>
+          </div>
         </div>
         <div class="form__uf-container">
           <label for="uf" class="uf__label">UF:</label>
-          <input
-            type="text"
-            class="uf__input"
-            disabled
-            v-model="formData.uf"
-          />
+          <input type="text" class="uf__input" disabled v-model="formData.uf" />
         </div>
         <div class="form__city-container">
           <label for="city" class="city__label">Cidade:</label>

@@ -5,6 +5,7 @@ import fieldsHospitalPartTwo from '../validations/fields/fields-hospital-part-tw
 export default async function submitFormHospitalPartTwo() {
   this.formData.cep = this.inputCep;
   this.formData.cep = cleanInput(this.formData.cep);
+  this.formData.number = this.inputNumber.toString();
 
   this.v$.$touch();
 

@@ -158,7 +158,7 @@
     v-if="selectedComponent === 'reschedule'"
     :title="'Remarcar'"
     :message="'Escolha a data e o horário para remarcar'"
-    :acceptFunction="deleteVolunteer"
+    :acceptFunction="updateSchedule"
   >
     <div class="book-scheduling">
       <div class="scheduling-date">
@@ -226,6 +226,17 @@ export default {
         new Date(this.scheduleDatetime),
         "dd/MM/yyyy HH:mm"
       );
+    },
+    updateSchedule() {
+      this.formatDateTime();
+      const dateParts = this.scheduleDatetimeFormatted.split(" ");
+      const updatedDate = dateParts[0];
+      const updatedTime = dateParts[1];
+
+      this.tableBookSchedules[this.currentIndex].contentDate = updatedDate;
+      this.tableBookSchedules[this.currentIndex].contentHour = updatedTime;
+      this.tableBookSchedules[this.currentIndex].contentSite =
+        this.scheduleSite;
     },
     openPopUp,
   },
