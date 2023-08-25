@@ -80,12 +80,15 @@
               <i class="fas fa-star-half-alt"></i>
               <i class="far fa-star"></i>
             </div>
-            <span class="summary__total">12 Avaliações</span>
+            <span class="summary__total">{{ totalReviews }} Avaliações</span>
           </div>
           <div class="graph-review__graph-container">
             <div class="graph__bar-container">
               <div class="bar__line-container">
-                <div class="line__progress"></div>
+                <div
+                  class="line__progress"
+                  :style="`width: ${this.fiveStarPercentage}%`"
+                ></div>
               </div>
               <div class="bar__label-container">
                 <span class="label__number">5</span>
@@ -94,7 +97,10 @@
             </div>
             <div class="graph__bar-container">
               <div class="bar__line-container">
-                <div class="line__progress"></div>
+                <div
+                  class="line__progress"
+                  :style="{ width: `${fourStarPercentage}%` }"
+                ></div>
               </div>
               <div class="bar__label-container">
                 <span class="label__number">4</span>
@@ -103,7 +109,10 @@
             </div>
             <div class="graph__bar-container">
               <div class="bar__line-container">
-                <div class="line__progress"></div>
+                <div
+                  class="line__progress"
+                  :style="{ width: `${threeStarPercentage}%` }"
+                ></div>
               </div>
               <div class="bar__label-container">
                 <span class="label__number">3</span>
@@ -112,7 +121,10 @@
             </div>
             <div class="graph__bar-container">
               <div class="bar__line-container">
-                <div class="line__progress"></div>
+                <div
+                  class="line__progress"
+                  :style="{ width: `${twoStarPercentage}%` }"
+                ></div>
               </div>
               <div class="bar__label-container">
                 <span class="label__number">2</span>
@@ -121,7 +133,10 @@
             </div>
             <div class="graph__bar-container">
               <div class="bar__line-container">
-                <div class="line__progress"></div>
+                <div
+                  class="line__progress"
+                  :style="{ width: `${fiveStarPercentage}%` }"
+                ></div>
               </div>
               <div class="bar__label-container">
                 <span class="label__number">1</span>
@@ -259,12 +274,41 @@ export default {
       pending: 2,
       scheduledTotal: 18,
 
+      //Stars Review Data
+      totalReviews: 78,
+      fiveStarsReview: 5,
+      fourStarsReview: 28,
+      threeStarsReview: 12,
+      twoStarsReview: 32,
+      oneStarsReview: 1,
+
       //BackgroundColor data
       scheduledColor: "rgb(44, 98, 241)",
       concludedColor: "rgb(106, 179, 157)",
       rescheduledColor: "rgb(229, 192, 94)",
       pendingColor: "rgb(244, 52, 52)",
     };
+  },
+  computed: {
+    //Percentage Line Data
+    fiveStarPercentage() {
+      return (100 * this.fiveStarsReview) / 100;
+    },
+    fourStarPercentage() {
+      return (100 * this.fourStarsReview) / 100;
+    },
+    threeStarPercentage() {
+      return (100 * this.threeStarsReview) / 100;
+    },
+    twoStarPercentage() {
+      return (100 * this.twoStarsReview) / 100;
+    },
+    oneStarPercentage() {
+      return (100 * this.oneStarsReview) / 100;
+    },
+  },
+  created() {
+    console.log((100 * this.fiveStarsReview) / 100);
   },
 };
 </script>
