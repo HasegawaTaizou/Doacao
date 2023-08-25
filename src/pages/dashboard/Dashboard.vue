@@ -35,7 +35,7 @@
           alt="Company Image"
           class="company__image"
         />
-        <span class="company__name">NOME EMPRESA</span>
+        <span class="company__name">Doe Vida</span>
       </div>
       <nav class="navigation">
         <ul class="navigation-fields-content">

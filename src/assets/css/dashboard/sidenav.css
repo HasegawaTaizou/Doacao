@@ -29,6 +29,10 @@
   height: 54px;
 }
 
+.company__name {
+  font-size: 1.5rem;
+}
+
 .close__button {
   position: absolute;
   top: 42px;

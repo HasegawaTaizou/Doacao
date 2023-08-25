@@ -126,6 +126,14 @@
   padding-left: 12px;
 }
 
+.email__input {
+  margin-left: 14px;
+}
+
+.website__input {
+  margin-left: 30px;
+}
+
 .hospital-address-data {
   grid-area: address;
   display: flex;
@@ -158,6 +166,26 @@
   font-size: 0.875rem;
   font-family: "Abel";
   padding-left: 12px;
+}
+
+.cep__input {
+  margin-left: 20px;
+}
+
+.city__input {
+  margin-left: 3px;
+}
+
+.neighborhood__input {
+  margin-left: 10px;
+}
+
+.complement__input {
+  width: 184px !important;
+}
+
+.number__input {
+  width: 68px !important;
 }
 
 .hospital-donation-site-data {
