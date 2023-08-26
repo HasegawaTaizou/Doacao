@@ -292,23 +292,20 @@ export default {
   computed: {
     //Percentage Line Data
     fiveStarPercentage() {
-      return (100 * this.fiveStarsReview) / 100;
+      return (this.fiveStarsReview / this.totalReviews) * 100;
     },
     fourStarPercentage() {
-      return (100 * this.fourStarsReview) / 100;
+      return (this.fourStarsReview / this.totalReviews) * 100;
     },
     threeStarPercentage() {
-      return (100 * this.threeStarsReview) / 100;
+      return (this.threeStarsReview / this.totalReviews) * 100;
     },
     twoStarPercentage() {
-      return (100 * this.twoStarsReview) / 100;
+      return (this.twoStarsReview / this.totalReviews) * 100;
     },
     oneStarPercentage() {
-      return (100 * this.oneStarsReview) / 100;
+      return (this.oneStarsReview / this.totalReviews) * 100;
     },
-  },
-  created() {
-    console.log((100 * this.fiveStarsReview) / 100);
   },
 };
 </script>
