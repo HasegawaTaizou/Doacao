@@ -80,6 +80,7 @@
               :type="isShowPasswordConfirmation ? 'text' : 'password'"
               class="password-confirmation__input"
               autocomplete="new-password"
+              v-model="inputPasswordConfirmation"
             />
             <i
               @mousedown="showPasswordConfirmation"
@@ -89,13 +90,21 @@
                 'far fa-eye': !isShowPasswordConfirmation,
               }"
             ></i>
+            <div v-if="!isPasswordTheSame">
+              <p class="error-text">A senha deve ser a mesma!</p>
+            </div>
           </div>
         </div>
         <div class="redefine-password__buttons">
           <router-link :to="'/dashboard/settings/'">
             <button class="button__cancel">Cancelar</button>
           </router-link>
-          <button @click="openPopUp('change')" class="button__redefine-password">Redefinir senha</button>
+          <button
+            @click="openPopUp('change')"
+            class="button__redefine-password"
+          >
+            Redefinir senha
+          </button>
         </div>
       </div>
     </div>
@@ -104,7 +113,7 @@
     v-if="selectedComponent === 'change'"
     :title="'Alterar senha?'"
     :message="'A senha será alterada e não terá como desfazer esta ação.'"
-    :acceptFunction="deleteVolunteer"
+    :acceptFunction="changePassword"
   >
   </PopUp>
 </template>
@@ -114,6 +123,10 @@ import showPassword from "../../assets/js/methods/input/show-password.js";
 import showPasswordConfirmation from "../../assets/js/methods/input/show-password-confirmation.js";
 import PopUp from "../../assets/components/PopUp.vue";
 import openPopUp from "../../assets/js/methods/open-pop-up.js";
+import isPasswordSame from "../../assets/js/methods/input/is-password-same";
+
+import { BASE_URL } from "../../assets/js/config";
+import axios from "axios";
 
 export default {
   name: "RedefinePassword",
@@ -125,12 +138,32 @@ export default {
       isShowPassword: false,
       isShowPasswordConfirmation: false,
 
+      isPasswordTheSame: true,
+
+      inputPassword: "",
+      inputPasswordConfirmation: "",
     };
   },
   methods: {
     showPassword,
     showPasswordConfirmation,
     openPopUp,
+    isPasswordSame,
+    changePassword() {
+      if (
+        this.isPasswordSame(this.inputPassword, this.inputPasswordConfirmation)
+      ) {
+        const updatePasswordData = {
+          password: this.inputPassword,
+        };
+        axios.put(
+          `${BASE_URL}/hospital/redefine-password/1`,
+          updatePasswordData
+        );
+      } else {
+        this.isPasswordTheSame = false;
+      }
+    },
   },
 };
 </script>
