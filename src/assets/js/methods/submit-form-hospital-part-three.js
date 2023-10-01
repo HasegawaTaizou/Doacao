@@ -20,6 +20,7 @@ export default async function submitFormHospitalPartThree() {
     for (const field of fieldsHospitalPartThree) {
       if (this.v$[field.key].$error) {
         this.$nextTick(() => {
+          console.log(field);
           this.$refs[field.ref].focus();
         });
         break;

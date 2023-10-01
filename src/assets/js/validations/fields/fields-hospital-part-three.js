@@ -1,5 +1,5 @@
 const fieldsHospitalPartThree = [
- // { key: "inputReason", ref: "inputReason" },
+ { key: "inputDonationLocal", ref: "inputDonationLocal" },
 ];
 
 export default fieldsHospitalPartThree;

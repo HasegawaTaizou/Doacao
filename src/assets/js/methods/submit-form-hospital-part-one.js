@@ -15,6 +15,7 @@ export default async function submitFormHospitalPartOne() {
 
   const isFormCorrect = await this.v$.$validate();
 
+  console.log(isFormCorrect);
   if (isFormCorrect) {
     this.$store.commit("updateFormData", this.formData);
     this.$router.push("/hospital-registration-part-two");
