@@ -1,8 +1,5 @@
 import Vuex from "vuex";
 
-// para acessar uma propriedade em outra tela é o comando abaixo
-// console.log(this.$store.state.formData.cep);
-
 export default new Vuex.Store({
   state: {
     formData: {
@@ -14,6 +11,7 @@ export default new Vuex.Store({
       email: "",
       phone: "",
       password: "",
+      isPasswordSame: true,
       url: "",
 
       // ADDRESS DATA
@@ -63,6 +61,9 @@ export default new Vuex.Store({
     },
     setShowPopUp(state, value) {
       state.showPopUp = value;
+    },
+    SET_IS_PASSWORD_SAME(state, value) {
+      state.formData.isPasswordSame = value;
     },
   },
 });

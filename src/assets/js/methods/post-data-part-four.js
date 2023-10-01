@@ -1,18 +1,39 @@
 import axios from "axios";
-import sendEmail from './send-email.js'
+import sendEmail from "./send-email.js";
+import { BASE_URL } from "../config.js";
 
 export default function postData(formData) {
-  // Enviar dados para o servidor
-  axios
-    .post("http://127.0.0.1:8080/v4/green-world/inserir_voluntario", formData)
-    .then((response) => {
-      // Manipular a resposta do servidor
-      console.log(response.data);
+  const insertHospitalData = {
+    hospital: {
+      name: formData.name,
+      cnpj: formData.cnpj,
+      email: formData.email,
+      phone: formData.phone,
+      website: formData.url,
+      donationSite: formData.donationLocal,
+      otherDonationSite: formData.otherDonationLocal,
+      photo: formData.photo,
+      password: formData.password,
+    },
+    address: {
+      cep: formData.cep,
+      uf: formData.uf,
+      city: formData.city,
+      neighborhood: formData.neighborhood,
+      street: formData.road,
+      number: formData.number,
+      complement: formData.complement,
+    },
+  };
 
-      sendEmail(formData)
+  console.log(insertHospitalData);
+  axios
+    .post(`${BASE_URL}/hospital-registration`, insertHospitalData)
+    .then((response) => {
+      console.log(response.data);
+      // sendEmail(formData)
     })
     .catch((error) => {
-      // Tratar erros na requisição
       console.error(error);
     });
 }

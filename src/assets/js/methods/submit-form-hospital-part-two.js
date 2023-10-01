@@ -1,5 +1,4 @@
 import cleanInput from "../input/clean-input.js";
-import postDataPartTwo from "./post-data-part-two.js";
 import fieldsHospitalPartTwo from '../validations/fields/fields-hospital-part-two.js'
 
 export default async function submitFormHospitalPartTwo() {

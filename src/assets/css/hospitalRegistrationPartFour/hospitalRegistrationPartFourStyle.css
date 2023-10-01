@@ -46,6 +46,7 @@ label {
     "password-confirmation password-confirmation"
     "button button";
   gap: 32px;
+  justify-items: center;
 }
 
 .form__photo-container {
@@ -93,8 +94,10 @@ label {
 .photo__photo {
   width: 100%;
   height: 100%;
-  border-radius: 100%;
   overflow: hidden;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .form__password-container {

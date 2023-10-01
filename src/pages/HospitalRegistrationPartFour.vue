@@ -70,6 +70,10 @@
             :type="isShowPasswordConfirmation ? 'text' : 'password'"
             class="password-confirmation__input"
             autocomplete="new-password"
+            v-model="inputPasswordConfirmation"
+            :class="{ error: v$.inputPasswordConfirmation.$error }"
+            ref="inputPasswordConfirmation"
+            @blur="v$.inputPasswordConfirmation.$touch()"
           />
           <i
             @mousedown="showPasswordConfirmation"
@@ -77,9 +81,23 @@
             :class="{
               'far fa-eye-slash': isShowPasswordConfirmation,
               'far fa-eye': !isShowPasswordConfirmation,
-              'error-icon': v$.inputPassword.$error,
+              'error-icon': v$.inputPasswordConfirmation.$error,
             }"
           ></i>
+          <div v-if="v$.inputPasswordConfirmation.$error">
+            <p
+              v-if="
+                v$.inputPasswordConfirmation.required &&
+                v$.inputPasswordConfirmation.minLength
+              "
+              class="error-text"
+            >
+              Preencha a senha!
+            </p>
+          </div>
+          <div v-else-if="!this.$store.state.formData.isPasswordSame">
+            <p class="error-text">A senha deve ser a mesma!</p>
+          </div>
         </div>
         <div class="hospital-registration__buttons">
           <router-link to="/hospital-registration-part-three">
@@ -117,6 +135,7 @@ import validationsHospitalPartFour from "../assets/js/validations/validations-ho
 import uploadImage from "../assets/js/methods/input/upload-image.js";
 import showPassword from "../assets/js/methods/input/show-password.js";
 import showPasswordConfirmation from "../assets/js/methods/input/show-password-confirmation.js";
+import isPasswordSame from "../assets/js/methods/input/is-password-same.js";
 
 export default {
   name: "HospitalRegistrationPartFour",
@@ -146,6 +165,7 @@ export default {
     uploadImage,
     showPassword,
     showPasswordConfirmation,
+    isPasswordSame,
   },
 };
 </script>

@@ -4,6 +4,7 @@ export default function dataPartFour(formData) {
     isSelectedImage: formData.isSelectedImage,
     downloadURL: formData.photo,
     inputPassword: formData.password,
+    inputPasswordConfirmation: "",
     //Show Password
     isShowPassword: false,
     isShowPasswordConfirmation: false,
