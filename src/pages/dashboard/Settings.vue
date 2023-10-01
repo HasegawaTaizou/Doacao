@@ -49,7 +49,7 @@
         </div>
         <div class="hospital-address-data__state-container">
           <label for="" class="state__label">Estado:</label>
-          <input type="text" class="state__input" :value="addressData.state" disabled />
+          <input type="text" class="state__input" :value="addressData.uf" disabled />
         </div>
         <div class="hospital-address-data__city-container">
           <label for="" class="city__label">Cidade:</label>
