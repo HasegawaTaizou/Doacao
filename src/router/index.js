@@ -21,21 +21,6 @@ import RedefinePassword from "@/pages/dashboard/RedefinePassword.vue";
 import EditHospital from "@/pages/dashboard/EditHospital.vue";
 import Help from "@/pages/dashboard/Help.vue";
 import Statistics from "@/pages/dashboard/Statistics.vue";
-// -----------------------
-import Seeds from "@/pages/dashboard/Seeds.vue";
-import Seed from "@/pages/dashboard/Seed.vue";
-import AllVolunteers from "@/pages/dashboard/AllVolunteers.vue";
-import Volunteer from "@/pages/dashboard/Volunteer.vue";
-import VolunteerRequests from "@/pages/dashboard/VolunteerRequests.vue";
-import DataVolunteerRequest from "@/pages/dashboard/DataVolunteerRequest.vue";
-import AllBeneficiaries from "@/pages/dashboard/AllBeneficiaries.vue";
-import BeneficiarieRequests from "@/pages/dashboard/BeneficiarieRequests.vue";
-import DataBeneficiarieRequest from "@/pages/dashboard/DataBeneficiarieRequest.vue";
-import Beneficiarie from "@/pages/dashboard/Beneficiarie.vue";
-import Administrator from "@/pages/dashboard/Administrator.vue";
-import UpdateAdministrator from "@/pages/dashboard/UpdateAdministrator.vue";
-import UpdateBeneficiarie from "@/pages/dashboard/UpdateBeneficiarie.vue";
-import UpdateVolunteer from "@/pages/dashboard/UpdateVolunteer.vue";
 
 // TELAS DE TESTE
 import Requisicoes from "@/pages/Requisicoes.vue";
@@ -148,77 +133,6 @@ const routes = [
         path: "/dashboard/statistics",
         name: "Statistics",
         component: Statistics,
-      },
-      // -----------------------------------------------------
-      {
-        path: "/dashboard/seeds",
-        name: "Seeds",
-        component: Seeds,
-      },
-      {
-        path: "/dashboard/seeds/seed",
-        name: "Seed",
-        component: Seed,
-      },
-      {
-        path: "/dashboard/all-volunteers",
-        name: "AllVolunteers",
-        component: AllVolunteers,
-      },
-      {
-        path: "/dashboard/volunteer-requests",
-        name: "VolunteerRequests",
-        component: VolunteerRequests,
-      },
-      {
-        path: "/dashboard/volunteer-requests/volunteer-request",
-        name: "DataVolunteerRequest",
-        component: DataVolunteerRequest,
-      },
-      {
-        path: "/dashboard/all-volunteers/volunteer",
-        name: "Volunteer",
-        component: Volunteer,
-      },
-      {
-        path: "/dashboard/all-beneficiaries",
-        name: "AllBeneficiaries",
-        component: AllBeneficiaries,
-      },
-      {
-        path: "/dashboard/beneficiarie-requests",
-        name: "BeneficiarieRequests",
-        component: BeneficiarieRequests,
-      },
-      {
-        path: "/dashboard/beneficiarie-requests/data-beneficiarie-request",
-        name: "DataBeneficiarieRequest",
-        component: DataBeneficiarieRequest,
-      },
-      {
-        path: "/dashboard/all-beneficiaries/beneficiary",
-        name: "Beneficiarie",
-        component: Beneficiarie,
-      },
-      {
-        path: "/dashboard/administrator",
-        name: "Administrator",
-        component: Administrator,
-      },
-      {
-        path: "/dashboard/update-administrator",
-        name: "UpdateAdministrator",
-        component: UpdateAdministrator,
-      },
-      {
-        path: "/dashboard/update-beneficiarie",
-        name: "UpdateBeneficiarie",
-        component: UpdateBeneficiarie,
-      },
-      {
-        path: "/dashboard/all-volunteers/volunteer/update-volunteer",
-        name: "UpdateVolunteer",
-        component: UpdateVolunteer,
       },
     ],
   },
