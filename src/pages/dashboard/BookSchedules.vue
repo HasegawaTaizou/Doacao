@@ -28,8 +28,13 @@
             <span class="site__title">Escolha o local:</span>
             <select v-model="scheduleSite" name="" id="" class="site__select">
               <option disabled value="">Escolha o local</option>
-              <option value="Descrição Local 1">Descrição Local 1</option>
-              <option value="Descrição Local 2">Descrição Local 2</option>
+              <option
+                v-for="site in sites"
+                :key="site.idSite"
+                :value="site.idSite"
+              >
+                {{ site.site }}
+              </option>
             </select>
           </div>
         </div>
@@ -55,12 +60,12 @@
               </tr>
               <tr
                 class="table__content"
-                v-for="(item, index) in tableBookSchedules"
+                v-for="(schedule, index) in tableBookSchedules"
                 :key="index"
               >
-                <td class="content__date">{{ item.contentDate }}</td>
-                <td class="content__hour">{{ item.contentHour }}</td>
-                <td class="content__site">{{ item.contentSite }}</td>
+                <td class="content__date">{{ schedule.date }}</td>
+                <td class="content__hour">{{ schedule.hour }}</td>
+                <td class="content__site">{{ schedule.contentSite }}</td>
                 <td class="content__actions">
                   <img
                     @click="removeSchedule(index)"
@@ -98,46 +103,36 @@
           >Agendamentos disponíveis:</span
         >
         <table class="schedules__table">
-          <tr class="table__title">
-            <th class="title__date">Data</th>
-            <th class="title__hour">Horário</th>
-            <th class="title__site">Local</th>
-            <th class="title__action">Ação</th>
-          </tr>
-          <tr class="table__content">
-            <td class="content__date">29/07/2023</td>
-            <td class="content__hour">11:10</td>
-            <td class="content__site">Descrição do local 1</td>
-            <td class="content__actions">
-              <img
-                src="../../assets/img/scheduling-cancel-icon.png"
-                alt="Cancel Icon"
-                class="action__icon"
-              />
-              <img
-                src="../../assets/img/scheduling-reschedule-icon.png"
-                alt="Reschedule Icon"
-                class="action__icon"
-              />
-            </td>
-          </tr>
-          <tr class="table__content">
-            <td class="content__date">29/07/2023</td>
-            <td class="content__hour">11:10</td>
-            <td class="content__site">Descrição do local 2</td>
-            <td class="content__actions">
-              <img
-                src="../../assets/img/scheduling-cancel-icon.png"
-                alt="Cancel Icon"
-                class="action__icon"
-              />
-              <img
-                src="../../assets/img/scheduling-reschedule-icon.png"
-                alt="Reschedule Icon"
-                class="action__icon"
-              />
-            </td>
-          </tr>
+          <tbody>
+            <tr class="table__title">
+              <th class="title__date">Data</th>
+              <th class="title__hour">Horário</th>
+              <th class="title__site">Local</th>
+              <th class="title__action">Ação</th>
+            </tr>
+            <tr
+              v-for="schedule in bookSchedules"
+              :key="schedule.id"
+              class="table__content"
+            >
+              <td class="content__date">{{ schedule.date }}</td>
+              <td class="content__hour">{{ schedule.hour }}</td>
+              <td class="content__site">{{ schedule.site }}</td>
+              <td class="content__actions">
+                <img
+                  src="../../assets/img/scheduling-cancel-icon.png"
+                  alt="Cancel Icon"
+                  class="action__icon"
+                  @click="openPopUp('cancel-book-schedule'); bookScheduleId = schedule.id"
+                />
+                <img
+                  src="../../assets/img/scheduling-reschedule-icon.png"
+                  alt="Reschedule Icon"
+                  class="action__icon"
+                />
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -149,10 +144,16 @@
     :acceptFunction="clearSchedules"
   ></PopUp>
   <PopUp
+    v-if="selectedComponent === 'cancel-book-schedule'"
+    :title="'Excluir agendamento?'"
+    :message="`O agendamento será excluído.`"
+    :acceptFunction="deleteBookSchedule"
+  ></PopUp>
+  <PopUp
     v-if="selectedComponent === 'save'"
     :title="'Salvar?'"
     :message="'Os agendamentos criados serão colocados como agendamentos disponíveis.'"
-    :acceptFunction="deleteVolunteer"
+    :acceptFunction="addSchedules"
   ></PopUp>
   <PopUp
     v-if="selectedComponent === 'reschedule'"
@@ -186,11 +187,17 @@ import PopUp from "../../assets/components/PopUp.vue";
 import openPopUp from "../../assets/js/methods/open-pop-up.js";
 import { format } from "date-fns";
 
+import { BASE_URL } from "../../assets/js/config";
+import axios from "axios";
+
 export default {
   name: "BookSchedules",
   components: { PopUp },
   data() {
     return {
+      //Sites data
+      sites: [],
+
       //Book Schedule site and datetime
       scheduleDatetime: "",
       scheduleDatetimeFormatted: "",
@@ -199,21 +206,37 @@ export default {
       //Book Schedules Content
       tableBookSchedules: [],
 
+      //Book Schedules Data
+      bookSchedules: [],
+      bookScheduleId: 0,
+
       //Component
       selectedComponent: "",
     };
   },
   methods: {
+    getHospitalSites() {
+      axios.get(`${BASE_URL}/hospital/1/sites`).then((response) => {
+        this.sites = response.data.sites;
+      });
+    },
     addSchedule() {
       if (this.scheduleDatetime != "" && this.scheduleSite != "") {
-        console.log(this.scheduleDatetime);
         this.formatDateTime();
         this.tableBookSchedules.push({
-          contentDate: this.scheduleDatetimeFormatted.split(" ")[0],
-          contentHour: this.scheduleDatetimeFormatted.split(" ")[1],
+          date: this.scheduleDatetimeFormatted.split(" ")[0],
+          hour: this.scheduleDatetimeFormatted.split(" ")[1],
+          hospitalSiteId: this.scheduleSite,
           contentSite: this.scheduleSite,
         });
       }
+    },
+    addSchedules() {
+      axios
+        .post(`${BASE_URL}/book-schedules`, this.tableBookSchedules)
+        .then(() => {
+          this.clearSchedules();
+        });
     },
     removeSchedule(index) {
       this.tableBookSchedules.splice(index, 1);
@@ -238,7 +261,19 @@ export default {
       this.tableBookSchedules[this.currentIndex].contentSite =
         this.scheduleSite;
     },
+    getBookSchedules() {
+      axios.get(`${BASE_URL}/hospital/1/book-schedules`).then((response) => {
+        this.bookSchedules = response.data.bookSchedules;
+      });
+    },
+    deleteBookSchedule() {
+      axios.delete(`${BASE_URL}/delete-book-schedule/${this.bookScheduleId}`)
+    },
     openPopUp,
+  },
+  mounted() {
+    this.getHospitalSites();
+    this.getBookSchedules();
   },
 };
 </script>
