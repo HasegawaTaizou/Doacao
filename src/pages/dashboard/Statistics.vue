@@ -72,7 +72,7 @@
         <h2 class="reviews__title">AVALIAÇÕES</h2>
         <div class="reviews__graph-review-container">
           <div class="graph-review__summary-container">
-            <span class="summary__average">3.8</span>
+            <span class="summary__average">{{ averageReview }}</span>
             <div class="summary__stars-container">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
@@ -224,6 +224,9 @@
 <script>
 import Chart from "chart.js/auto";
 
+import { BASE_URL } from "../../assets/js/config";
+import axios from "axios";
+
 export default {
   name: "Statistics",
   mounted() {
@@ -268,19 +271,20 @@ export default {
   data() {
     return {
       //Label Data
-      scheduled: 3,
-      concluded: 5,
-      rescheduled: 8,
-      pending: 2,
-      scheduledTotal: 18,
+      scheduled: 0,
+      concluded: 0,
+      rescheduled: 0,
+      pending: 0,
+      scheduledTotal: 0,
 
       //Stars Review Data
-      totalReviews: 78,
-      fiveStarsReview: 5,
-      fourStarsReview: 28,
-      threeStarsReview: 12,
-      twoStarsReview: 32,
-      oneStarsReview: 1,
+      totalReviews: 0,
+      fiveStarsReview: 0,
+      fourStarsReview: 0,
+      threeStarsReview: 0,
+      twoStarsReview: 0,
+      oneStarsReview: 0,
+      averageReview: 0,
 
       //BackgroundColor data
       scheduledColor: "rgb(44, 98, 241)",
@@ -307,6 +311,34 @@ export default {
       return (this.oneStarsReview / this.totalReviews) * 100;
     },
   },
+  methods: {
+    getSchedulesStatistics() {
+      axios.get(`${BASE_URL}/hospital/1/statistics/schedules`).then((response) => {
+        const schedulesStatisticsData = response.data.schedulesStatistics
+
+        this.scheduled = schedulesStatisticsData.scheduledAmount
+        this.concluded = schedulesStatisticsData.concludedAmount
+        this.rescheduled = schedulesStatisticsData.rescheduledAmount
+        this.pending = schedulesStatisticsData.pendingAmount
+        this.scheduledTotal = schedulesStatisticsData.totalSchedules
+      })
+    },
+    getRatingsStatistics() {
+      axios.get(`${BASE_URL}/hospital/1/statistics/ratings`).then((response) => {
+        const hospitalRatingsData = response.data.ratingsStatistics
+
+        this.oneStarsReview = hospitalRatingsData.oneStarsRating
+        this.twoStarsReview = hospitalRatingsData.twoStarsRating
+        this.threeStarsReview = hospitalRatingsData.threeStarsRating
+        this.fourStarsReview = hospitalRatingsData.fourStarsRating
+        this.fiveStarsReview = hospitalRatingsData.fiveStarsRating
+        this.averageReview = hospitalRatingsData.average
+      })
+    }
+  },
+  mounted() {
+    this.getSchedulesStatistics()
+  }
 };
 </script>
 
