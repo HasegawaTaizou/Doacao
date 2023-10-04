@@ -146,14 +146,14 @@
           </div>
         </div>
         <div class="reviews__comments-container">
-          <div class="comment-container">
+          <div v-for="(review, index) in hospitalReviews" :key="index" class="comment-container">
             <img
-              src="../../assets/img/donator-image.png"
+              :src="review.photo"
               alt="Comment Image"
               class="comment__image"
             />
             <router-link :to="'/dashboard/donator'" class="comment__donator">
-              Camila Alves Pinheiro
+              {{ review.name }}
             </router-link>
             <div class="comment__stars-container">
               <i class="fas fa-star"></i>
@@ -162,57 +162,9 @@
               <i class="fas fa-star-half-alt"></i>
               <i class="far fa-star"></i>
             </div>
-            <span class="comment__date">14/08/2023</span>
+            <span class="comment__date">{{ review.date }}</span>
             <p class="comment__text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-              tempus a urna a scelerisque. Morbi accumsan odio sit amet nulla
-              eleifend molestie. Nullam pretium tortor est.
-            </p>
-          </div>
-          <div class="comment-container">
-            <img
-              src="../../assets/img/donator-image.png"
-              alt="Comment Image"
-              class="comment__image"
-            />
-            <router-link :to="'/dashboard/donator'" class="comment__donator">
-              João Pedro Bueno
-            </router-link>
-            <div class="comment__stars-container">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-              <i class="far fa-star"></i>
-            </div>
-            <span class="comment__date">14/08/2023</span>
-            <p class="comment__text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-              tempus a urna a scelerisque. Morbi accumsan odio sit amet nulla
-              eleifend molestie. Nullam pretium tortor est.
-            </p>
-          </div>
-          <div class="comment-container">
-            <img
-              src="../../assets/img/donator-image.png"
-              alt="Comment Image"
-              class="comment__image"
-            />
-            <router-link :to="'/dashboard/donator'" class="comment__donator">
-              Beatriz Fideliz Landi Coelho
-            </router-link>
-            <div class="comment__stars-container">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-              <i class="far fa-star"></i>
-            </div>
-            <span class="comment__date">14/08/2023</span>
-            <p class="comment__text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-              tempus a urna a scelerisque. Morbi accumsan odio sit amet nulla
-              eleifend molestie. Nullam pretium tortor est.
+              {{ review.opinion }}
             </p>
           </div>
         </div>
@@ -286,6 +238,9 @@ export default {
       oneStarsReview: 0,
       averageReview: 0,
 
+      //Hospital Reviews
+      hospitalReviews: [],
+
       //BackgroundColor data
       scheduledColor: "rgb(44, 98, 241)",
       concludedColor: "rgb(106, 179, 157)",
@@ -334,10 +289,17 @@ export default {
         this.fiveStarsReview = hospitalRatingsData.fiveStarsRating
         this.averageReview = hospitalRatingsData.average
       })
-    }
+    },
+    getReviews() {
+      axios.get(`${BASE_URL}/hospital/1/statistics/reviews`).then((response) => {
+        this.hospitalReviews = response.data.reviewsStatistics
+      })
+    },
   },
   mounted() {
     this.getSchedulesStatistics()
+    this.getRatingsStatistics()
+    this.getReviews()
   }
 };
 </script>
