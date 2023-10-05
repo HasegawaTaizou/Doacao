@@ -13,35 +13,31 @@
     </div>
     <div class="donator__content">
       <div class="donator-container">
-        <img
-          src="../../assets/img/donator-image.png"
-          alt="Donator Image"
-          class="donator__image"
-        />
-        <h2 class="donator__name">João Pedro Bueno</h2>
+        <img :src="photo" alt="Donator Image" class="donator__image" />
+        <h2 class="donator__name">{{ name }}</h2>
         <div class="donator__email">
           <span class="email__title">E-mail:</span>
-          <span class="email__text">joaopedrobueno@gmail.com</span>
+          <span class="email__text">{{ email }}</span>
         </div>
         <div class="donator__phone">
           <span class="phone__title">Telefone:</span>
-          <span class="phone__text">(11) 32358-9255</span>
+          <span class="phone__text">{{ phone }}</span>
         </div>
         <div class="donator__blood-type">
           <span class="blood-type__title">Tipo sanguíneo:</span>
-          <span class="blood-type__text">O-</span>
+          <span class="blood-type__text">{{ bloodType }}</span>
         </div>
         <div class="donator__age">
           <span class="age__title">Idade:</span>
-          <span class="age__text">30 anos</span>
+          <span class="age__text">{{ age }} anos</span>
         </div>
         <div class="donator__gender">
           <span class="gender__title">Sexo:</span>
-          <span class="gender__text">Masculino</span>
+          <span class="gender__text">{{ sex }}</span>
         </div>
         <div class="donator__weight">
           <span class="weight__title">Peso:</span>
-          <span class="weight__text">80 Kg</span>
+          <span class="weight__text">{{ weight }} Kg</span>
         </div>
       </div>
       <div class="schedules">
@@ -59,15 +55,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="table__content">
-                <td class="content__id">1</td>
-                <td class="content__date">29/07/2023</td>
-                <td class="content__hour">11:10</td>
-                <td class="content__site">Descrição do local 1</td>
+              <tr v-for="schedule in schedules" :key="schedule.id" class="table__content">
+                <td class="content__id">{{ schedule.scheduleId }}</td>
+                <td class="content__date">{{ schedule.date }}</td>
+                <td class="content__hour">{{ schedule.hour }}</td>
+                <td class="content__site">{{ schedule.site }}</td>
                 <td class="content__status">
-                  <span class="status__text scheduled">Agendado</span>
+                  <span class="status__text" :class="schedule.status.toLowerCase()">{{ getUserSchedule(schedule.status) }}</span>
                 </td>
-                <td class="content__actions">
+                <td v-if="schedule.status != 'CONCLUDED'" class="content__actions">
                   <img
                     @click="openPopUp('cancel')"
                     src="../../assets/img/scheduling-cancel-icon.png"
@@ -87,16 +83,7 @@
                     class="action__icon"
                   />
                 </td>
-              </tr>
-              <tr class="table__content">
-                <td class="content__id">2</td>
-                <td class="content__date">29/07/2023</td>
-                <td class="content__hour">11:10</td>
-                <td class="content__site">Descrição do local 2</td>
-                <td class="content__status">
-                  <span class="status__text concluded">Concluído</span>
-                </td>
-                <td class="content__actions">
+                <td v-else class="content__actions">
                   <span class="action__none">N/A</span>
                 </td>
               </tr>
@@ -157,14 +144,86 @@
 import PopUp from "../../assets/components/PopUp.vue";
 import openPopUp from "../../assets/js/methods/open-pop-up.js";
 
+import axios from "axios";
+import { BASE_URL } from "../../assets/js/config";
+
 export default {
   name: "Donator",
   components: { PopUp },
   data() {
-    return { selectedComponent: "" };
+    return {
+      selectedComponent: "",
+      id: 0,
+      name: "",
+      photo: "",
+      email: "",
+      phone: "",
+      weight: 0.0,
+      age: 0,
+      bloodType: "",
+      sex: "",
+      schedules: [],
+    };
   },
   methods: {
     openPopUp,
+    getUserData() {
+      axios
+        .get(`${BASE_URL}/users/1`)
+        .then((response) => {
+          console.log(response.data.user);
+          const userData = response.data.user;
+
+          this.id = userData.id;
+          this.sex = userData.sex;
+          this.name = userData.name;
+          this.photo = userData.photo;
+          this.email = userData.email;
+          this.phone = userData.phone;
+          this.weight = userData.weight;
+          this.age = userData.age;
+          this.bloodType = userData.bloodType;
+          this.sex = userData.sex;
+        })
+        .then(() => {
+          this.getUserSex();
+          this.getUserSchedules();
+        });
+    },
+    getUserSex() {
+      const mappedSexs = [{ MASCULINE: "Masculino" }, { FEMININE: "Feminino" }];
+
+      mappedSexs.forEach((sex) => {
+        if (Object.keys(sex) == this.sex) {
+          this.sex = Object.values(sex)[0];
+        }
+      });
+    },
+    getUserSchedules() {
+      axios.get(`${BASE_URL}/users/${this.id}/schedules`).then((response) => {
+        this.schedules = response.data.schedules;
+        console.log(this.schedules);
+      });
+    },
+    getUserSchedule(status) {
+      const mappedSchedules = [
+        { SCHEDULED: "Agendado" },
+        { RESCHEDULED: "Remarcado" },
+        { PENDING: "Pendente" },
+        { CONCLUDED: "Concluído" },
+      ];
+
+      mappedSchedules.forEach(schedule => {
+        if(status == Object.keys(schedule)) {
+          status = Object.values(schedule)[0]
+        }
+      })
+
+      return status
+    },
+  },
+  mounted() {
+    this.getUserData();
   },
 };
 </script>
