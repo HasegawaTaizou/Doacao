@@ -34,6 +34,10 @@ import Adicionar from "@/pages/Adicionar.vue";
 
 const routes = [
   {
+    path: "/:catchAll(.*)",
+    redirect: "/",
+  },
+  {
     path: "/",
     name: "Home",
     component: Home,
