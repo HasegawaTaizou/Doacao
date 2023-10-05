@@ -55,29 +55,47 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="schedule in schedules" :key="schedule.id" class="table__content">
+              <tr
+                v-for="schedule in schedules"
+                :key="schedule.id"
+                class="table__content"
+              >
                 <td class="content__id">{{ schedule.scheduleId }}</td>
                 <td class="content__date">{{ schedule.date }}</td>
                 <td class="content__hour">{{ schedule.hour }}</td>
                 <td class="content__site">{{ schedule.site }}</td>
                 <td class="content__status">
-                  <span class="status__text" :class="schedule.status.toLowerCase()">{{ getUserSchedule(schedule.status) }}</span>
+                  <span
+                    class="status__text"
+                    :class="schedule.status.toLowerCase()"
+                    >{{ getUserSchedule(schedule.status) }}</span
+                  >
                 </td>
-                <td v-if="schedule.status != 'CONCLUDED'" class="content__actions">
+                <td
+                  v-if="schedule.status != 'CONCLUDED'"
+                  class="content__actions"
+                >
                   <img
-                    @click="openPopUp('cancel')"
+                    @click="
+                      openPopUp('cancel'), (scheduleId = schedule.scheduleId)
+                    "
                     src="../../assets/img/scheduling-cancel-icon.png"
                     alt="Cancel Icon"
                     class="action__icon"
                   />
                   <img
-                    @click="openPopUp('conclude')"
+                    @click="
+                      openPopUp('conclude'), (scheduleId = schedule.scheduleId)
+                    "
                     src="../../assets/img/scheduling-conclude-icon.png"
                     alt=" Conclude Icon"
                     class="action__icon"
                   />
                   <img
-                    @click="openPopUp('reschedule')"
+                    @click="
+                      openPopUp('reschedule'),
+                        (scheduleId = schedule.scheduleId)
+                    "
                     src="../../assets/img/scheduling-reschedule-icon.png"
                     alt="Reschedule Icon"
                     class="action__icon"
@@ -97,7 +115,7 @@
     v-if="selectedComponent === 'cancel'"
     :title="'Cancelar?'"
     :message="'Digite o motivo do cancelamento (Opcional)'"
-    :acceptFunction="deleteVolunteer"
+    :acceptFunction="updateScheduleToCancel"
   >
     <textarea
       name=""
@@ -106,20 +124,21 @@
       rows="10"
       class="cancel-reason"
       placeholder="Motivo:"
+      v-model="observation"
     ></textarea>
   </PopUp>
   <PopUp
     v-if="selectedComponent === 'conclude'"
     :title="'Concluir?'"
     :message="'Os dados serão alterados e não terá como desfazer esta ação.'"
-    :acceptFunction="deleteVolunteer"
+    :acceptFunction="updateScheduleToConclude"
   >
   </PopUp>
   <PopUp
     v-if="selectedComponent === 'reschedule'"
     :title="'Remarcar'"
     :message="'Escolha a data e o horário para remarcar'"
-    :acceptFunction="deleteVolunteer"
+    :acceptFunction="updateScheduleToReschedule"
   >
     <div class="book-scheduling">
       <div class="scheduling-date">
@@ -128,12 +147,15 @@
           name=""
           id=""
           class="date__datetime-local"
+          v-model="scheduleDatetime"
         />
       </div>
       <div class="scheduling-site">
-        <select name="" id="" class="site__select">
-          <option value="" disabled>Escolha o local</option>
-          <option value="1">Descrição Local 1</option>
+        <select v-model="scheduleSite" name="" id="" class="site__select">
+          <option disabled value="">Escolha o local</option>
+          <option v-for="site in sites" :key="site.idSite" :value="site.idSite">
+            {{ site.site }}
+          </option>
         </select>
       </div>
     </div>
@@ -144,6 +166,7 @@
 import PopUp from "../../assets/components/PopUp.vue";
 import openPopUp from "../../assets/js/methods/open-pop-up.js";
 
+import { format } from "date-fns";
 import axios from "axios";
 import { BASE_URL } from "../../assets/js/config";
 
@@ -162,7 +185,19 @@ export default {
       age: 0,
       bloodType: "",
       sex: "",
+
+      //Schedule
       schedules: [],
+      scheduleId: 0,
+      observation: "",
+      scheduleDatetime: "",
+      scheduleDatetimeFormatted: "",
+      scheduleSite: "",
+      scheduleDate: "",
+      scheduleTime: "",
+
+      //Sites data
+      sites: [],
     };
   },
   methods: {
@@ -171,7 +206,6 @@ export default {
       axios
         .get(`${BASE_URL}/users/1`)
         .then((response) => {
-          console.log(response.data.user);
           const userData = response.data.user;
 
           this.id = userData.id;
@@ -199,10 +233,14 @@ export default {
         }
       });
     },
+    getHospitalSites() {
+      axios.get(`${BASE_URL}/hospital/1/sites`).then((response) => {
+        this.sites = response.data.sites;
+      });
+    },
     getUserSchedules() {
       axios.get(`${BASE_URL}/users/${this.id}/schedules`).then((response) => {
         this.schedules = response.data.schedules;
-        console.log(this.schedules);
       });
     },
     getUserSchedule(status) {
@@ -213,17 +251,53 @@ export default {
         { CONCLUDED: "Concluído" },
       ];
 
-      mappedSchedules.forEach(schedule => {
-        if(status == Object.keys(schedule)) {
-          status = Object.values(schedule)[0]
+      mappedSchedules.forEach((schedule) => {
+        if (status == Object.keys(schedule)) {
+          status = Object.values(schedule)[0];
         }
-      })
+      });
 
-      return status
+      return status;
+    },
+    updateScheduleToCancel() {
+      const updateScheduleData = {
+        id: this.scheduleId,
+        observation: this.observation,
+      };
+      axios.put(`${BASE_URL}/schedule-cancel`, updateScheduleData);
+    },
+    updateScheduleToConclude() {
+      const updateScheduleData = {
+        id: this.scheduleId,
+      };
+      axios.put(`${BASE_URL}/schedule-conclude`, updateScheduleData);
+    },
+    updateScheduleToReschedule() {
+      this.updateScheduleDateTime();
+      const updateScheduleData = {
+        id: this.scheduleId,
+        date: this.scheduleDate,
+        hour: this.scheduleTime,
+        siteId: this.scheduleSite,
+      };
+      axios.put(`${BASE_URL}/schedule-reschedule`, updateScheduleData);
+    },
+    formatDateTime() {
+      this.scheduleDatetimeFormatted = format(
+        new Date(this.scheduleDatetime),
+        "dd/MM/yyyy HH:mm"
+      );
+    },
+    updateScheduleDateTime() {
+      this.formatDateTime();
+      const dateParts = this.scheduleDatetimeFormatted.split(" ");
+      this.scheduleDate = dateParts[0];
+      this.scheduleTime = dateParts[1];
     },
   },
   mounted() {
     this.getUserData();
+    this.getHospitalSites();
   },
 };
 </script>

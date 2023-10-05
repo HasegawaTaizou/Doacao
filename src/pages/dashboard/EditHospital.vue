@@ -194,7 +194,7 @@ export default {
         },
       };
       console.log(updateHospitalData);
-      axios.put(`${BASE_URL}/hospital/1`, updateHospitalData);
+      axios.put(`${BASE_URL}/hospital-update/1`, updateHospitalData);
     },
   },
   mounted() {
