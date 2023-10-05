@@ -28,33 +28,21 @@ export default new Vuex.Store({
       otherDonationLocal: "",
     },
 
-    //SEED DATA
-    id_semente: "",
-
-    //VOLUNTEER CPF
-    selectedVolunteerCpf: "",
-
-    //BENEFICIARY ID
-    selectedBeneficiaryId: "",
-
     //NOTIFICATION STATUS
     showNotification: false,
 
     //POPUP STATUS
     showPopUp: false,
+
+    //HOSPITAL LOGIN
+    hospitalId: 0,
+    hospitalName: "",
+    hospitalPhoto: "",
+    token: ""
   },
   mutations: {
     updateFormData(state, payload) {
       state.formData = { ...state.formData, ...payload };
-    },
-    updateSeed(state, payload) {
-      state.id_semente = payload;
-    },
-    updateVolunteerCpf(state, cpf) {
-      state.selectedVolunteerCpf = cpf;
-    },
-    updateBeneficiaryId(state, id) {
-      state.selectedBeneficiaryId = id;
     },
     setShowNotification(state, value) {
       state.showNotification = value;
@@ -64,6 +52,15 @@ export default new Vuex.Store({
     },
     SET_IS_PASSWORD_SAME(state, value) {
       state.formData.isPasswordSame = value;
+    },
+    SET_HOSPITAL_ID(state, value) {
+      state.hospitalId = value
+    },
+    SET_HOSPITAL_NAME(state, value) {
+      state.hospitalName = value
+    },
+    SET_HOSPITAL_PHOTO(state, value) {
+      state.hospitalPhoto = value
     },
   },
 });

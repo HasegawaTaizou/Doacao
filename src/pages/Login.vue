@@ -17,10 +17,10 @@
         alt="Login Image"
         class="login__image"
       />
-      <form action="" class="login-form">
+      <form @submit.prevent="login" method="POST" class="login-form">
         <div class="form__email-container">
           <label for="email" class="email__label">E-mail:</label>
-          <input type="text" class="email__input" />
+          <input type="text" class="email__input" v-model="email" />
         </div>
         <div class="form__password-container">
           <label for="password" class="password__label">Senha:</label>
@@ -28,6 +28,7 @@
             :type="isShowPassword ? 'text' : 'password'"
             class="password__input"
             autocomplete="new-password"
+            v-model="password"
           />
           <i
             @mousedown="showPassword"
@@ -38,7 +39,7 @@
             }"
           ></i>
         </div>
-        <button class="login__button">Entrar</button>
+        <button type="submit" class="login__button">Entrar</button>
         <router-link class="login__forgot-password" to="/redefine-password">
           Esqueceu a senha?
         </router-link>
@@ -55,16 +56,37 @@
 <script>
 import showPassword from "../assets/js/methods/input/show-password.js";
 
+import axios from 'axios'
+import { BASE_URL } from "../assets/js/config";
+
 export default {
   name: "Login",
   data() {
     return {
       //Show Password
       isShowPassword: false,
+      password: "",
+      email: "",
     };
   },
   methods: {
     showPassword,
+    login() {
+      const loginData = {
+        email: this.email,
+        password: this.password
+      }
+      axios.post(`${BASE_URL}/hospital-login`, loginData).then((response) => {
+        const hospitalData = response.data.hospitalData
+        console.log(response.data.hospitalData);
+        this.$store.commit('SET_HOSPITAL_ID', hospitalData.id)
+        this.$store.commit('SET_HOSPITAL_NAME', hospitalData.name)
+        this.$store.commit('SET_HOSPITAL_PHOTO', hospitalData.photo)
+
+        localStorage.setItem("token", hospitalData.token)
+        this.$router.push('/dashboard')
+      })
+    },
   },
 };
 </script>
