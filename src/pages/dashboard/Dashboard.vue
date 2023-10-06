@@ -1,5 +1,5 @@
 <template>
-  <header :class="{ none: this.showSidenav }">
+  <!-- <header :class="{ none: this.showSidenav }">
     <nav>
       <img
         @click="this.showSidenav = true"
@@ -19,7 +19,7 @@
         </button>
       </a>
     </div>
-  </header>
+  </header> -->
   <main>
     <div class="side-nav" :class="{ grid: this.showSidenav }">
       <a href="#" class="close__button">
