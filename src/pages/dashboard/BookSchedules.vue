@@ -123,12 +123,19 @@
                   src="../../assets/img/scheduling-cancel-icon.png"
                   alt="Cancel Icon"
                   class="action__icon"
-                  @click="openPopUp('cancel-book-schedule'); bookScheduleId = schedule.id"
+                  @click="
+                    openPopUp('cancel-book-schedule');
+                    bookScheduleId = schedule.id;
+                  "
                 />
                 <img
                   src="../../assets/img/scheduling-reschedule-icon.png"
                   alt="Reschedule Icon"
                   class="action__icon"
+                  @click="
+                    openPopUp('reschedule-book-schedule');
+                    bookScheduleId = schedule.id;
+                  "
                 />
               </td>
             </tr>
@@ -180,6 +187,32 @@
       </div>
     </div>
   </PopUp>
+  <PopUp
+    v-if="selectedComponent === 'reschedule-book-schedule'"
+    :title="'Remarcar'"
+    :message="'Escolha a data e o horário para remarcar'"
+    :acceptFunction="updateBookSchedule"
+  >
+    <div class="book-scheduling">
+      <div class="scheduling-date">
+        <input
+          v-model="bookScheduleDatetime"
+          type="datetime-local"
+          name=""
+          id=""
+          class="date__datetime-local"
+        />
+      </div>
+      <div class="scheduling-site">
+        <select v-model="bookScheduleSite" name="" id="" class="site__select">
+          <option disabled value="">Escolha o local</option>
+          <option v-for="site in sites" :key="site.idSite" :value="site.idSite">
+            {{ site.site }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </PopUp>
 </template>
 
 <script>
@@ -209,6 +242,11 @@ export default {
       //Book Schedules Data
       bookSchedules: [],
       bookScheduleId: 0,
+      bookScheduleDatetimeFormatted: "",
+      bookScheduleDatetime: "",
+      bookScheduleDate: "",
+      bookScheduleTime: "",
+      bookScheduleSite: "",
 
       //Component
       selectedComponent: "",
@@ -223,6 +261,7 @@ export default {
     addSchedule() {
       if (this.scheduleDatetime != "" && this.scheduleSite != "") {
         this.formatDateTime();
+
         this.tableBookSchedules.push({
           date: this.scheduleDatetimeFormatted.split(" ")[0],
           hour: this.scheduleDatetimeFormatted.split(" ")[1],
@@ -250,6 +289,12 @@ export default {
         "dd/MM/yyyy HH:mm"
       );
     },
+    formatDateTimeBookSchedule() {
+      this.bookScheduleDatetimeFormatted = format(
+        new Date(this.bookScheduleDatetime),
+        "dd/MM/yyyy HH:mm"
+      );
+    },
     updateSchedule() {
       this.formatDateTime();
       const dateParts = this.scheduleDatetimeFormatted.split(" ");
@@ -261,13 +306,28 @@ export default {
       this.tableBookSchedules[this.currentIndex].contentSite =
         this.scheduleSite;
     },
+    updateBookSchedule() {
+      this.formatDateTimeBookSchedule();
+      const dateParts = this.bookScheduleDatetimeFormatted.split(" ");
+      this.bookScheduleDate = dateParts[0];
+      this.bookScheduleTime = dateParts[1];
+
+      const updateBookScheduleData = {
+        id: this.bookScheduleId,
+        date: this.bookScheduleDate,
+        hour: this.bookScheduleTime,
+        siteId: this.bookScheduleSite,
+      };
+
+      axios.put(`${BASE_URL}/schedule-reschedule`, updateBookScheduleData);
+    },
     getBookSchedules() {
       axios.get(`${BASE_URL}/hospital/1/book-schedules`).then((response) => {
         this.bookSchedules = response.data.bookSchedules;
       });
     },
     deleteBookSchedule() {
-      axios.delete(`${BASE_URL}/delete-book-schedule/${this.bookScheduleId}`)
+      axios.delete(`${BASE_URL}/delete-book-schedule/${this.bookScheduleId}`);
     },
     openPopUp,
   },

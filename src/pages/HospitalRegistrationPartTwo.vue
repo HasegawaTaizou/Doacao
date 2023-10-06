@@ -1,19 +1,32 @@
 <template>
   <div class="content">
-    <img src="../assets/img/logo.png" alt="Website logo" id="logo" />
+    <div id="logo-container">
+      <img src="../assets/img/logo.png" alt="Website logo" id="logo__logo" />
+      <span id="logo__name">Doe Vida</span>
+    </div>
     <header>
-      <h1 class="hospital-registration-part-two__title">CADASTRO HOSPITAL</h1>
-      <router-link class="return__link" to="/hospital-registration-part-one">
-        <img
-          src="../assets/img/return-icon.png"
-          alt="Return Icon"
-          class="return__icon"
-        />
-      </router-link>
+      <div class="hospital-registration-parts">
+        <div class="registration-part">
+          <div class="registration-part__radio"></div>
+          <span class="registration-part__text">Dados pessoais</span>
+        </div>
+        <div class="registration-part">
+          <div class="registration-part__radio radio-active"></div>
+          <span class="registration-part__text">Endereço</span>
+        </div>
+        <div class="registration-part">
+          <div class="registration-part__radio"></div>
+          <span class="registration-part__text">Local</span>
+        </div>
+        <div class="registration-part">
+          <div class="registration-part__radio"></div>
+          <span class="registration-part__text">Foto e Senha</span>
+        </div>
+      </div>
     </header>
     <main>
       <img
-        src="../assets/img/hospital-registration-image.png"
+        src="../assets/img/hospital-registration-part-two-image.png"
         alt="Hospital Registration Image"
         class="hospital-registration__image"
       />
@@ -77,25 +90,20 @@
             />
           </div>
           <div class="complement__number-container">
-            <label for="number" class="number__label"
-              >Número:</label
-            >
+            <label for="number" class="number__label">Número:</label>
             <input
               type="number"
               class="number__input"
               v-model="inputNumber"
               :class="{ error: v$.inputNumber.$error }"
-            ref="inputNumber"
-            @blur="v$.inputNumber.$touch()"
+              ref="inputNumber"
+              @blur="v$.inputNumber.$touch()"
             />
             <div v-if="v$.inputNumber.$error">
-            <p
-              v-if="v$.inputNumber.required"
-              class="error-text"
-            >
-              Preencha o número!
-            </p>
-          </div>
+              <p v-if="v$.inputNumber.required" class="error-text">
+                Preencha o número!
+              </p>
+            </div>
           </div>
         </div>
         <div class="form__uf-container">
@@ -127,7 +135,7 @@
     </main>
     <footer>
       <p class="footer__text">
-        Copyright © 2023 | Todos os direitos reservados EMPRESA
+        Copyright © 2023 | Todos os direitos reservados Doe Vida
       </p>
     </footer>
   </div>
