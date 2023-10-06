@@ -1,62 +1,92 @@
 <template>
-  <div class="content">
-    <img src="../assets/img/logo.png" alt="Website logo" id="logo" />
-    <header>
-      <h1 class="login__title">LOG IN</h1>
-      <router-link class="return__link" to="/">
-        <img
-          src="../assets/img/return-icon.png"
-          alt="Return Icon"
-          class="return__icon"
-        />
-      </router-link>
-    </header>
+  <div id="login">
+    <img
+      src="../assets/img/login-ornament-6.png"
+      alt="Login Ornament Image 6"
+      class="login-ornament-image-6"
+    />
+    <img
+      src="../assets/img/login-ornament-7.png"
+      alt="Login Ornament Image 7"
+      class="login-ornament-image-7"
+    />
     <main>
-      <img
-        src="../assets/img/hospital-login-image.png"
-        alt="Login Image"
-        class="login__image"
-      />
-      <form @submit.prevent="login" method="POST" class="login-form">
-        <div class="form__email-container">
-          <label for="email" class="email__label">E-mail:</label>
-          <input type="text" class="email__input" v-model="email" />
-        </div>
-        <div class="form__password-container">
-          <label for="password" class="password__label">Senha:</label>
-          <input
-            :type="isShowPassword ? 'text' : 'password'"
-            class="password__input"
-            autocomplete="new-password"
-            v-model="password"
+      <div class="login-introduction">
+        <h1 class="login-introduction__text">Olá! Bem-vindo ao Doe Vida</h1>
+      </div>
+      <div class="login-form">
+        <div class="form__introduction">
+          <img
+            class="introduction__image"
+            src="../assets/img/login-image.png"
+            alt=""
           />
-          <i
-            @mousedown="showPassword"
-            @mouseup="showPassword"
-            :class="{
-              'far fa-eye-slash': isShowPassword,
-              'far fa-eye': !isShowPassword
-            }"
-          ></i>
+          <h2 class="introduction__title">LOGIN</h2>
         </div>
-        <button type="submit" class="login__button">Entrar</button>
-        <router-link class="login__forgot-password" to="/redefine-password">
-          Esqueceu a senha?
-        </router-link>
-      </form>
+        <form @submit.prevent="login" method="POST" class="form__form">
+          <div class="form__email-container">
+            <label for="email" class="email__label">E-mail:</label>
+            <input type="text" class="email__input" v-model="email" />
+            <i class="fa-solid fa-envelope email__icon"></i>
+          </div>
+          <div class="form__password-container">
+            <label for="password" class="password__label">Senha:</label>
+            <input
+              :type="isShowPassword ? 'text' : 'password'"
+              class="password__input"
+              autocomplete="new-password"
+              v-model="password"
+            />
+            <i
+              @mousedown="showPassword"
+              @mouseup="showPassword"
+              class="password-eye__icon"
+              :class="{
+                'far fa-eye-slash': isShowPassword,
+                'far fa-eye': !isShowPassword,
+              }"
+            ></i>
+            <i class="fas fa-lock password-padlock__icon"></i>
+          </div>
+          <button type="submit" class="login__button">Entrar</button>
+          <router-link class="login__forgot-password" to="/redefine-password">
+            Esqueceu a senha?
+          </router-link>
+        </form>
+      </div>
+      <img
+        src="../assets/img/login-ornament-1.png"
+        alt="Login Ornament Image 1"
+        class="login-ornament-image-1"
+      />
+      <img
+        src="../assets/img/login-ornament-2.png"
+        alt="Login Ornament Image 2"
+        class="login-ornament-image-2"
+      />
+      <img
+        src="../assets/img/login-ornament-3.png"
+        alt="Login Ornament Image 3"
+        class="login-ornament-image-3"
+      />
+      <img
+        src="../assets/img/login-ornament-4.png"
+        alt="Login Ornament Image 4"
+        class="login-ornament-image-4"
+      />
+      <img
+        src="../assets/img/login-ornament-5.png"
+        alt="Login Ornament Image 5"
+        class="login-ornament-image-5"
+      />
     </main>
-    <footer>
-      <p class="footer__text">
-        Copyright © 2023 | Todos os direitos reservados EMPRESA
-      </p>
-    </footer>
   </div>
 </template>
 
 <script>
 import showPassword from "../assets/js/methods/input/show-password.js";
 
-import axios from 'axios'
+import axios from "axios";
 import { BASE_URL } from "../assets/js/config";
 
 export default {
@@ -74,18 +104,18 @@ export default {
     login() {
       const loginData = {
         email: this.email,
-        password: this.password
-      }
+        password: this.password,
+      };
       axios.post(`${BASE_URL}/hospital-login`, loginData).then((response) => {
-        const hospitalData = response.data.hospitalData
+        const hospitalData = response.data.hospitalData;
         console.log(response.data.hospitalData);
-        this.$store.commit('SET_HOSPITAL_ID', hospitalData.id)
-        this.$store.commit('SET_HOSPITAL_NAME', hospitalData.name)
-        this.$store.commit('SET_HOSPITAL_PHOTO', hospitalData.photo)
+        this.$store.commit("SET_HOSPITAL_ID", hospitalData.id);
+        this.$store.commit("SET_HOSPITAL_NAME", hospitalData.name);
+        this.$store.commit("SET_HOSPITAL_PHOTO", hospitalData.photo);
 
-        localStorage.setItem("token", hospitalData.token)
-        this.$router.push('/dashboard')
-      })
+        localStorage.setItem("token", hospitalData.token);
+        this.$router.push("/dashboard");
+      });
     },
   },
 };
@@ -93,9 +123,5 @@ export default {
 
 <style scoped>
 @import url("../assets/css/login/generalStyle.css");
-@import url("../assets/css/login/limitsSizeStyle.css");
 @import url("../assets/css/login/loginStyle.css");
-@import url("../assets/css/login/loginResponsiveStyle.css");
-@import url("../assets/css/login/copyrightStyle.css");
-@import url("../assets/css/login/copyrightResponsiveStyle.css");
 </style>
