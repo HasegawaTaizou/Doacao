@@ -53,15 +53,16 @@
 .action-introduction {
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
 .action-introduction__image {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
 }
 
 .action-introduction__title {
-  font-size: 0.75rem;
+  font-size: 1.5rem;
 }
 
 /* TABLE STYLE */
@@ -92,7 +93,7 @@ tbody {
 tr {
   display: table-row;
   position: relative;
-  background: rgba(209, 209, 209, 0.23)
+  background: rgba(209, 209, 209, 0.23);
 }
 
 tr:not(:first-child) {
@@ -120,28 +121,50 @@ th {
 
 th {
   font-family: "Abel";
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   font-weight: normal;
+}
+
+td {
+  font-size: 1.5rem;
 }
 
 .title__id {
   width: 100px;
 }
 
+.title__hour {
+  width: 100px;
+}
+
+.title__donator {
+  width: 280px;
+}
+
 .content__id {
+  width: 100px;
+}
+
+.content__donator {
+  width: 280px;
+}
+
+.content__hour {
   width: 100px;
 }
 
 .content__donator a {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 8px;
 }
 
 .donator__image {
-  width: 32px;
-  height: 32px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
 }
 
 /* STATUS STYLE */
@@ -190,7 +213,8 @@ th {
 }
 
 .content__actions img {
-  margin-top: 5px;
+  width: 28px;
+  margin-top: 10px;
   cursor: pointer;
 }
 

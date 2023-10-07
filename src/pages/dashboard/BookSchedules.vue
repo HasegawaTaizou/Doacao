@@ -11,97 +11,97 @@
         <span class="profile__name">Hospital Notredame Intermédica</span>
       </div>
     </div>
-    <div class="book-schedules__content">
-      <div class="book-scheduling-container">
-        <div class="book-scheduling">
-          <div class="scheduling-date">
-            <span class="date__title">Escolha a data e hora:</span>
-            <input
-              type="datetime-local"
-              name=""
-              id=""
-              class="date__datetime-local"
-              v-model="scheduleDatetime"
+    <div class="book-schedules-wrapper">
+      <div class="book-schedules__content">
+        <div class="book-scheduling-container">
+          <div class="book-scheduling">
+            <div class="scheduling-date">
+              <span class="date__title">Escolha a data e hora:</span>
+              <input
+                type="datetime-local"
+                name=""
+                id=""
+                class="date__datetime-local"
+                v-model="scheduleDatetime"
+              />
+            </div>
+            <div class="scheduling-site">
+              <span class="site__title">Escolha o local:</span>
+              <select v-model="scheduleSite" name="" id="" class="site__select">
+                <option disabled value="">Escolha o local</option>
+                <option
+                  v-for="site in sites"
+                  :key="site.idSite"
+                  :value="site.idSite"
+                >
+                  {{ site.site }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <button @click="addSchedule" class="book-scheduling__button">
+            <span class="book-scheduling__text">Reservar agendamento</span>
+            <img
+              src="../../assets/img/plus-icon.png"
+              alt="Book Scheduling Icon"
+              class="book-scheduling__icon"
             />
-          </div>
-          <div class="scheduling-site">
-            <span class="site__title">Escolha o local:</span>
-            <select v-model="scheduleSite" name="" id="" class="site__select">
-              <option disabled value="">Escolha o local</option>
-              <option
-                v-for="site in sites"
-                :key="site.idSite"
-                :value="site.idSite"
-              >
-                {{ site.site }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <button @click="addSchedule" class="book-scheduling__button">
-          <span class="book-scheduling__text">Reservar agendamento</span>
-          <img
-            src="../../assets/img/plus-icon.png"
-            alt="Book Scheduling Icon"
-            class="book-scheduling__icon"
-          />
-        </button>
-        <div
-          v-if="this.tableBookSchedules.length > 0"
-          class="book-scheduling__schedules"
-        >
-          <table class="schedules__table">
-            <tbody>
-              <tr class="table__title">
-                <th class="title__date">Data</th>
-                <th class="title__hour">Horário</th>
-                <th class="title__site">Local</th>
-                <th class="title__action">Ação</th>
-              </tr>
-              <tr
-                class="table__content"
-                v-for="(schedule, index) in tableBookSchedules"
-                :key="index"
-              >
-                <td class="content__date">{{ schedule.date }}</td>
-                <td class="content__hour">{{ schedule.hour }}</td>
-                <td class="content__site">{{ schedule.contentSite }}</td>
-                <td class="content__actions">
-                  <img
-                    @click="removeSchedule(index)"
-                    src="../../assets/img/scheduling-cancel-icon.png"
-                    alt="Cancel Icon"
-                    class="action__icon"
-                  />
-                  <img
-                    @click="openPopUp('reschedule')"
-                    src="../../assets/img/scheduling-reschedule-icon.png"
-                    alt="Reschedule Icon"
-                    class="action__icon"
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div
-          v-if="this.tableBookSchedules.length > 0"
-          class="book-scheduling__actions-buttons"
-        >
-          <button @click="openPopUp('cancel')" class="action-button__cancel">
-            <span class="cancel__text">Cancelar</span>
-            <i class="fa-regular fa-circle-xmark"></i>
           </button>
-          <button @click="openPopUp('save')" class="action-button__save">
-            <span class="save__text">Salvar</span>
-            <i class="fa-regular fa-circle-check"></i>
-          </button>
+          <div
+            v-if="this.tableBookSchedules.length > 0"
+            class="book-scheduling__schedules"
+          >
+            <table class="schedules__table">
+              <tbody>
+                <tr class="table__title">
+                  <th class="title__date">Data</th>
+                  <th class="title__hour">Horário</th>
+                  <th class="title__site">Local</th>
+                  <th class="title__action">Ação</th>
+                </tr>
+                <tr
+                  class="table__content"
+                  v-for="(schedule, index) in tableBookSchedules"
+                  :key="index"
+                >
+                  <td class="content__date">{{ schedule.date }}</td>
+                  <td class="content__hour">{{ schedule.hour }}</td>
+                  <td class="content__site">{{ schedule.contentSite }}</td>
+                  <td class="content__actions">
+                    <img
+                      @click="removeSchedule(index)"
+                      src="../../assets/img/scheduling-cancel-icon.png"
+                      alt="Cancel Icon"
+                      class="action__icon"
+                    />
+                    <img
+                      @click="openPopUp('reschedule')"
+                      src="../../assets/img/scheduling-reschedule-icon.png"
+                      alt="Reschedule Icon"
+                      class="action__icon"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div
+            v-if="this.tableBookSchedules.length > 0"
+            class="book-scheduling__actions-buttons"
+          >
+            <button @click="openPopUp('cancel')" class="action-button__cancel">
+              <span class="cancel__text">Cancelar</span>
+              <i class="fa-regular fa-circle-xmark"></i>
+            </button>
+            <button @click="openPopUp('save')" class="action-button__save">
+              <span class="save__text">Salvar</span>
+              <i class="fa-regular fa-circle-check"></i>
+            </button>
+          </div>
         </div>
       </div>
+      <h2 class="schedules-available__title">Agendamentos disponíveis:</h2>
       <div class="schedules-available">
-        <span class="schedules-available__title"
-          >Agendamentos disponíveis:</span
-        >
         <table class="schedules__table">
           <tbody>
             <tr class="table__title">

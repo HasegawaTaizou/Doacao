@@ -1,25 +1,23 @@
 .book-scheduling {
   grid-area: input;
   display: flex;
-  gap: 24px;
+  gap: 42px;
 }
 
 .date__datetime-local {
-  width: 164px;
   border: 1px solid #7395f7;
   padding: 6px;
   border-radius: 5px;
   font-family: "Abel";
-  font-size: 1rem;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 
 .site__select {
-  width: 164px;
   border: 1px solid #7395f7;
   padding: 6px;
   border-radius: 5px;
   font-family: "Abel";
-  font-size: 1rem;
+  font-size: 1.5rem;
   cursor: pointer;
 }
