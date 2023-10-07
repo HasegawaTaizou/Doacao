@@ -18,6 +18,12 @@
   gap: 28px;
 }
 
+.profile__image {
+  width: 72px;
+  height: 72px;
+  border-radius: 100%;
+}
+
 .profile__name {
   font-size: 1.25rem;
   max-width: 155px;
@@ -25,160 +31,165 @@
 }
 
 .settings__content {
-  display: grid;
-  grid-template-areas:
-    "general general"
-    "contact address"
-    "site site"
-    "button button";
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto auto auto;
+  display: flex;
+  flex-direction: column;
   gap: 64px;
   background-color: #ffffff;
   border-radius: 12px;
   height: 88vh;
   margin: 0px 32px;
   overflow-y: scroll;
-  justify-content: center;
   justify-items: center;
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
+  align-items: center;
 }
 
 .hospital-general-data {
-  grid-area: general;
-  display: grid;
-  grid-template-areas:
-    "image name"
-    "image cnpj";
-  grid-template-columns: auto auto;
-  grid-template-rows: auto 1fr;
-  column-gap: 46px;
-  margin-top: 32px;
+  width: 100%;
+}
+
+.hospital-general-data__image-container {
+  background-color: #dedee5;
+  display: flex;
+  justify-content: center;
 }
 
 .hospital-general-data__image {
-  grid-area: image;
-  border-radius: 100%;
-  width: 224px;
-  height: 224px;
+  width: 608px;
+  height: 408px;
 }
 
 .hospital-general-data__title {
-  grid-area: name;
-  font-size: 2rem;
+  font-size: 2.75rem;
   font-family: "Abel";
   color: #000;
   font-weight: normal;
-  margin-top: 32px;
+  margin: 12px 0px;
+  text-align: center;
+}
+
+input:disabled,
+textarea:disabled {
+  background-color: #f5f5f5;
 }
 
 .hospital-general-data__cnpj-container {
-  grid-area: cnpj;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
 }
 
 .cnpj__label {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
 }
 
 .cnpj__input {
   border: var(--input-border);
   border-radius: 5px;
-  width: 228px;
-  height: 32px;
-  font-size: 0.875rem;
+  width: 272px;
+  height: 42px;
+  font-size: 1.5rem;
   font-family: "Abel";
   padding-left: 12px;
 }
 
 .hospital-contact-data {
-  grid-area: contact;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  justify-content: center;
+  gap: 16px;
+  max-width: 1200px;
+  width: 100%;
 }
 
 .hospital-contact-data__title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-family: "Abel";
   color: #000;
   font-weight: normal;
 }
 
-.hospital-contact-data div {
+.hospital-contact-data-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+}
+
+.hospital-contact-data-container div {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .hospital-contact-data label {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
 }
 
-.hospital-contact-data input {
+.hospital-contact-data-container input {
   border: var(--input-border);
   border-radius: 5px;
-  width: 228px;
-  height: 32px;
-  font-size: 0.875rem;
+  width: 272px;
+  height: 42px;
+  font-size: 1.5rem;
   font-family: "Abel";
   padding-left: 12px;
 }
 
 .email__input {
-  margin-left: 14px;
+  width: 308px !important;
+}
+
+.phone__input {
+  width: 192px !important;
 }
 
 .website__input {
-  margin-left: 30px;
+  width: 324px !important;
 }
 
 .hospital-address-data {
-  grid-area: address;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  justify-content: center;
+  gap: 16px;
+  max-width: 1080px;
+  width: 100%;
 }
 
 .hospital-address-data__title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-family: "Abel";
   color: #000;
   font-weight: normal;
 }
 
-.hospital-address-data div {
+.hospital-address-data-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+}
+
+.hospital-address-data-container div {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .hospital-address-data label {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
 }
 
 .hospital-address-data input {
   border: var(--input-border);
   border-radius: 5px;
-  width: 228px;
-  height: 32px;
-  font-size: 0.875rem;
+  width: 272px;
+  height: 42px;
+  font-size: 1.5rem;
   font-family: "Abel";
   padding-left: 12px;
 }
 
-.cep__input {
-  margin-left: 20px;
-}
-
-.city__input {
-  margin-left: 3px;
-}
-
-.neighborhood__input {
-  margin-left: 10px;
+.state__input {
+  width: 68px !important;
 }
 
 .complement__input {
@@ -190,7 +201,6 @@
 }
 
 .hospital-donation-site-data {
-  grid-area: site;
   display: grid;
   grid-template-areas:
     "title title"
@@ -203,7 +213,7 @@
 
 .hospital-donation-site-data__title {
   grid-area: title;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-family: "Abel";
   color: #000;
   font-weight: normal;
@@ -217,18 +227,18 @@
 }
 
 .site__label {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
 }
 
 .site__textarea {
   border-radius: 5px;
   border: var(--input-border);
   resize: none;
-  width: 336px;
-  height: 146px;
+  width: 516px;
+  height: 192px;
   padding: 12px 12px;
   font-family: "Abel";
-  font-size: 0.875rem;
+  font-size: 1.5rem;
 }
 
 .hospital-donation-site-data__other-site-container {
@@ -239,45 +249,45 @@
 }
 
 .other-site__label {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
 }
 
 .other-site__textarea {
   border-radius: 5px;
   border: var(--input-border);
   resize: none;
-  width: 336px;
-  height: 146px;
+  width: 516px;
+  height: 192px;
   padding: 12px 12px;
   font-family: "Abel";
-  font-size: 0.875rem;
+  font-size: 1.5rem;
 }
 
 .hospital-actions {
   grid-area: button;
   display: flex;
   gap: 42px;
-  margin-bottom: 32px;
+  margin-bottom: 62px;
 }
 
 .action__cancel {
   background-color: #ee5353;
   border-radius: 5px;
-  width: 128px;
-  height: 42px;
+  width: 208px;
+  height: 56px;
   color: #fff;
   font-family: "Abel";
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 
 .action__change-data {
   background-color: #2c62f1;
   border-radius: 5px;
-  width: 128px;
-  height: 42px;
+  width: 208px;
+  height: 56px;
   color: #fff;
   font-family: "Abel";
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   cursor: pointer;
 }

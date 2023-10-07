@@ -13,60 +13,120 @@
     </div>
     <div class="settings__content">
       <div class="hospital-general-data">
-        <img
-          src="../../assets/img/hospital-profile-image.png"
-          alt="Hospital Image"
-          class="hospital-general-data__image"
-        />
+        <div class="hospital-general-data__image-container">
+          <img
+            src="../../assets/img/hospital-profile-image.png"
+            alt="Hospital Image"
+            class="hospital-general-data__image"
+          />
+        </div>
         <h2 class="hospital-general-data__title">
           {{ hospitalData.name }}
         </h2>
         <div class="hospital-general-data__cnpj-container">
           <label for="" class="cnpj__label">CNPJ:</label>
-          <input type="text" class="cnpj__input" :value="hospitalData.cnpj" disabled />
+          <input
+            type="text"
+            class="cnpj__input"
+            :value="hospitalData.cnpj"
+            v-mask="'##.###.###/000#-##'"
+            disabled
+          />
         </div>
       </div>
       <div class="hospital-contact-data">
         <h2 class="hospital-contact-data__title">Contato:</h2>
-        <div class="hospital-contact-data__email-container">
-          <label for="" class="email__label">E-mail:</label>
-          <input type="text" class="email__input" :value="hospitalData.email" disabled />
-        </div>
-        <div class="hospital-contact-data__phone-container">
-          <label for="" class="phone__label">Telefone:</label>
-          <input type="text" class="phone__input" :value="hospitalData.phone" disabled />
-        </div>
-        <div class="hospital-contact-data__website-container">
-          <label for="" class="website__label">Site:</label>
-          <input type="text" class="website__input" :value="hospitalData.website" disabled />
+        <div class="hospital-contact-data-container">
+          <div class="hospital-contact-data__email-container">
+            <label for="" class="email__label">E-mail:</label>
+            <input
+              type="text"
+              class="email__input"
+              :value="hospitalData.email"
+              disabled
+            />
+          </div>
+          <div class="hospital-contact-data__phone-container">
+            <label for="" class="phone__label">Telefone:</label>
+            <input
+              type="text"
+              class="phone__input"
+              :value="hospitalData.phone"
+              v-mask="'(##) #####-####'"
+              disabled
+            />
+          </div>
+          <div class="hospital-contact-data__website-container">
+            <label for="" class="website__label">Site:</label>
+            <input
+              type="text"
+              class="website__input"
+              :value="hospitalData.website"
+              disabled
+            />
+          </div>
         </div>
       </div>
       <div class="hospital-address-data">
         <h2 class="hospital-address-data__title">Endereço:</h2>
-        <div class="hospital-address-data__cep-container">
-          <label for="" class="cep__label">CEP:</label>
-          <input type="text" class="cep__input" :value="addressData.cep" disabled />
+        <div class="hospital-address-data-container">
+          <div class="hospital-address-data__cep-container">
+            <label for="" class="cep__label">CEP:</label>
+            <input
+              type="text"
+              class="cep__input"
+              :value="addressData.cep"
+              v-mask="'#####-###'"
+              disabled
+            />
+          </div>
+          <div class="hospital-address-data__state-container">
+            <label for="" class="state__label">Estado:</label>
+            <input
+              type="text"
+              class="state__input"
+              :value="addressData.uf"
+              disabled
+            />
+          </div>
+          <div class="hospital-address-data__city-container">
+            <label for="" class="city__label">Cidade:</label>
+            <input
+              type="text"
+              class="city__input"
+              :value="addressData.city"
+              disabled
+            />
+          </div>
+          <div class="hospital-address-data__neighborhood-container">
+            <label for="" class="neighborhood__label">Bairro:</label>
+            <input
+              type="text"
+              class="neighborhood__input"
+              :value="addressData.neighborhood"
+              disabled
+            />
+          </div>
+          <div class="hospital-address-data__complement-container">
+            <label for="" class="complement__label">Complemento:</label>
+            <input
+              type="text"
+              class="complement__input"
+              :value="addressData.complement"
+              disabled
+            />
+          </div>
+          <div class="hospital-address-data__number-container">
+            <label for="" class="number__label">Numero:</label>
+            <input
+              type="text"
+              class="number__input"
+              :value="addressData.number"
+              v-mask="'###'"
+              disabled
+            />
+          </div>
         </div>
-        <div class="hospital-address-data__state-container">
-          <label for="" class="state__label">Estado:</label>
-          <input type="text" class="state__input" :value="addressData.uf" disabled />
-        </div>
-        <div class="hospital-address-data__city-container">
-          <label for="" class="city__label">Cidade:</label>
-          <input type="text" class="city__input" :value="addressData.city" disabled />
-        </div>
-        <div class="hospital-address-data__neighborhood-container">
-          <label for="" class="neighborhood__label">Bairro:</label>
-          <input type="text" class="neighborhood__input" :value="addressData.neighborhood" disabled />
-        </div>
-        <div class="hospital-address-data__complement-container">
-          <label for="" class="complement__label">Complemento:</label>
-          <input type="text" class="complement__input" :value="addressData.complement" disabled />
-        </div>  
-        <div class="hospital-address-data__number-container">
-          <label for="" class="number__label">Numero:</label>
-          <input type="text" class="number__input" :value="addressData.number" disabled />
-        </div>   
       </div>
       <div class="hospital-donation-site-data">
         <h2 class="hospital-donation-site-data__title">Local de doação:</h2>
@@ -124,29 +184,29 @@
 </template>
 
 <script>
-import { BASE_URL } from '../../assets/js/config';
-import axios from 'axios'
+import { BASE_URL } from "../../assets/js/config";
+import axios from "axios";
 
 export default {
   name: "Settings",
   data() {
     return {
       hospitalData: [],
-      addressData: []
-    }
+      addressData: [],
+    };
   },
   methods: {
     getHospitalData() {
-      axios.get(`${BASE_URL}/hospital-data/1`).then(response => {
-        this.hospitalData = response.data.hospital
-        this.addressData = response.data.address
+      axios.get(`${BASE_URL}/hospital-data/1`).then((response) => {
+        this.hospitalData = response.data.hospital;
+        this.addressData = response.data.address;
         console.log(this.addressData);
-      })
-    }
+      });
+    },
   },
   mounted() {
-    this.getHospitalData()
-  }
+    this.getHospitalData();
+  },
 };
 </script>
 

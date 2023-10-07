@@ -13,96 +13,113 @@
     </div>
     <div class="settings__content">
       <div class="hospital-general-data">
-        <img
-          src="../../assets/img/hospital-profile-image.png"
-          alt="Hospital Image"
-          class="hospital-general-data__image"
-        />
-        <input
-          class="hospital-general-data__title"
-          v-model="hospitalData.name"
-        />
+        <div class="hospital-general-data__image-container">
+          <img
+            src="../../assets/img/hospital-profile-image.png"
+            alt="Hospital Image"
+            class="hospital-general-data__image"
+          />
+        </div>
+        <h2 class="hospital-general-data__title">
+          {{ hospitalData.name }}
+        </h2>
         <div class="hospital-general-data__cnpj-container">
           <label for="" class="cnpj__label">CNPJ:</label>
-          <input type="text" class="cnpj__input" v-model="hospitalData.cnpj" />
+          <input
+            type="text"
+            class="cnpj__input"
+            v-model="hospitalData.cnpj"
+            v-mask="'##.###.###/000#-##'"
+          />
         </div>
       </div>
       <div class="hospital-contact-data">
         <h2 class="hospital-contact-data__title">Contato:</h2>
-        <div class="hospital-contact-data__email-container">
-          <label for="" class="email__label">E-mail:</label>
-          <input
-            type="text"
-            class="email__input"
-            v-model="hospitalData.email"
-          />
-        </div>
-        <div class="hospital-contact-data__phone-container">
-          <label for="" class="phone__label">Telefone:</label>
-          <input
-            type="text"
-            class="phone__input"
-            v-model="hospitalData.phone"
-          />
-        </div>
-        <div class="hospital-contact-data__website-container">
-          <label for="" class="website__label">Site:</label>
-          <input
-            type="text"
-            class="website__input"
-            v-model="hospitalData.website"
-          />
+        <div class="hospital-contact-data-container">
+          <div class="hospital-contact-data__email-container">
+            <label for="" class="email__label">E-mail:</label>
+            <input
+              type="text"
+              class="email__input"
+              v-model="hospitalData.email"
+            />
+          </div>
+          <div class="hospital-contact-data__phone-container">
+            <label for="" class="phone__label">Telefone:</label>
+            <input
+              type="text"
+              class="phone__input"
+              v-model="hospitalData.phone"
+              v-mask="'(##) #####-####'"
+            />
+          </div>
+          <div class="hospital-contact-data__website-container">
+            <label for="" class="website__label">Site:</label>
+            <input
+              type="text"
+              class="website__input"
+              v-model="hospitalData.website"
+            />
+          </div>
         </div>
       </div>
       <div class="hospital-address-data">
         <h2 class="hospital-address-data__title">Endereço:</h2>
-        <div class="hospital-address-data__cep-container">
-          <label for="" class="cep__label">CEP:</label>
-          <input type="text" class="cep__input" v-model="addressData.cep" />
-        </div>
-        <div class="hospital-address-data__state-container">
-          <label for="" class="state__label">Estado:</label>
-          <input
-            type="text"
-            class="state__input"
-            v-model="addressData.uf"
-            disabled
-          />
-        </div>
-        <div class="hospital-address-data__city-container">
-          <label for="" class="city__label">Cidade:</label>
-          <input
-            type="text"
-            class="city__input"
-            v-model="addressData.city"
-            disabled
-          />
-        </div>
-        <div class="hospital-address-data__neighborhood-container">
-          <label for="" class="neighborhood__label">Bairro:</label>
-          <input
-            type="text"
-            class="neighborhood__input"
-            v-model="addressData.neighborhood"
-            disabled
-          />
-        </div>
-        <div class="hospital-address-data__complement-container">
-          <label for="" class="complement__label">Complemento:</label>
-          <input
-            type="text"
-            class="complement__input"
-            v-model="addressData.complement"
-            disabled
-          />
-        </div>
-        <div class="hospital-address-data__number-container">
-          <label for="" class="number__label">Numero:</label>
-          <input
-            type="text"
-            class="number__input"
-            v-model="addressData.number"
-          />
+        <div class="hospital-address-data-container">
+          <div class="hospital-address-data__cep-container">
+            <label for="" class="cep__label">CEP:</label>
+            <input
+              type="text"
+              class="cep__input"
+              v-model="addressData.cep"
+              v-mask="'#####-###'"
+            />
+          </div>
+          <div class="hospital-address-data__state-container">
+            <label for="" class="state__label">Estado:</label>
+            <input
+              type="text"
+              class="state__input"
+              v-model="addressData.uf"
+              disabled
+            />
+          </div>
+          <div class="hospital-address-data__city-container">
+            <label for="" class="city__label">Cidade:</label>
+            <input
+              type="text"
+              class="city__input"
+              v-model="addressData.city"
+              disabled
+            />
+          </div>
+          <div class="hospital-address-data__neighborhood-container">
+            <label for="" class="neighborhood__label">Bairro:</label>
+            <input
+              type="text"
+              class="neighborhood__input"
+              v-model="addressData.neighborhood"
+              disabled
+            />
+          </div>
+          <div class="hospital-address-data__complement-container">
+            <label for="" class="complement__label">Complemento:</label>
+            <input
+              type="text"
+              class="complement__input"
+              v-model="addressData.complement"
+              disabled
+            />
+          </div>
+          <div class="hospital-address-data__number-container">
+            <label for="" class="number__label">Numero:</label>
+            <input
+              type="text"
+              class="number__input"
+              v-model="addressData.number"
+              v-mask="'###'"
+            />
+          </div>
         </div>
       </div>
       <div class="hospital-donation-site-data">
@@ -110,23 +127,23 @@
         <div class="hospital-donation-site-data__site-container">
           <label for="" class="site__label">Local 1:</label>
           <textarea
-            v-model="hospitalData.donationSite"
             name=""
             id=""
             cols="30"
             rows="10"
             class="site__textarea"
+            v-model="hospitalData.donationSite"
           ></textarea>
         </div>
         <div class="hospital-donation-site-data__other-site-container">
           <label for="" class="other-site__label">Local 2:</label>
           <textarea
-            v-model="hospitalData.otherDonationSite"
             name=""
             id=""
             cols="30"
             rows="10"
             class="other-site__textarea"
+            v-model="hospitalData.otherDonationSite"
           ></textarea>
         </div>
       </div>
