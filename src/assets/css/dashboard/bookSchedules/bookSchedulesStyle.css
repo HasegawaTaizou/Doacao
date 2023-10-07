@@ -45,6 +45,7 @@
   background-color: #ffffff;
   border-radius: 12px;
   margin: 0px 32px;
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
 }
 
 .book-scheduling-container {
@@ -138,8 +139,17 @@
 }
 
 .schedules__table {
+  margin: 36px 0px;
+}
+
+.schedules-available {
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+}
+
+.schedules-available > .schedules__table {
+  padding: 42px 0px;
   margin: 36px 36px;
-  grid-area: schedules;
   display: flex;
   border-spacing: 0px;
   border-collapse: separate;
@@ -163,7 +173,7 @@ tr {
   text-align: center;
   font-size: 1.5rem;
   display: flex;
-  gap: 32px;
+  gap: 38px;
   background: rgba(209, 209, 209, 0.23);
 }
 
@@ -181,7 +191,7 @@ tr:not(:last-child)::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -12px;
+  bottom: 0px;
   width: 98%;
   border-bottom: 1px solid #dde5e9;
 }
