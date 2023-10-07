@@ -13,12 +13,12 @@
     </div>
     <div class="redefine-password__content">
       <div class="redefine-password-introduction">
+        <h2 class="redefine-password__title">Redefinir a senha</h2>
         <img
           src="../../assets/img/redefine-password-image.png"
           alt="Redefine Password Image"
           class="redefine-password__image"
         />
-        <h2 class="redefine-password__title">Redefinir a senha</h2>
         <div class="redefine-password__text-container">
           <p class="redefine-password__text">
             Basta digitá-la duas vezes e tentar não esquecê-la.
@@ -49,62 +49,62 @@
             <span class="recomendation__description">Símbolos</span>
           </div>
         </div>
-      </div>
-      <div class="redefine-password-action">
-        <div class="redefine-password__inputs">
-          <div class="form__password-container">
-            <label for="password" class="password__label">Senha:</label>
-            <input
-              :type="isShowPassword ? 'text' : 'password'"
-              class="password__input"
-              v-model="inputPassword"
-              ref="inputPassword"
-              autocomplete="new-password"
-            />
-            <i
-              @mousedown="showPassword"
-              @mouseup="showPassword"
-              :class="{
-                'far fa-eye-slash': isShowPassword,
-                'far fa-eye': !isShowPassword,
-              }"
-            ></i>
-          </div>
-          <div class="form__password-confirmation-container">
-            <label
-              for="password-confirmation"
-              class="password-confirmation__label"
-              >Confirmar senha:</label
-            >
-            <input
-              :type="isShowPasswordConfirmation ? 'text' : 'password'"
-              class="password-confirmation__input"
-              autocomplete="new-password"
-              v-model="inputPasswordConfirmation"
-            />
-            <i
-              @mousedown="showPasswordConfirmation"
-              @mouseup="showPasswordConfirmation"
-              :class="{
-                'far fa-eye-slash': isShowPasswordConfirmation,
-                'far fa-eye': !isShowPasswordConfirmation,
-              }"
-            ></i>
-            <div v-if="!isPasswordTheSame">
-              <p class="error-text">A senha deve ser a mesma!</p>
+        <div class="redefine-password-action">
+          <div class="redefine-password__inputs">
+            <div class="form__password-container">
+              <label for="password" class="password__label">Senha:</label>
+              <input
+                :type="isShowPassword ? 'text' : 'password'"
+                class="password__input"
+                v-model="inputPassword"
+                ref="inputPassword"
+                autocomplete="new-password"
+              />
+              <i
+                @mousedown="showPassword"
+                @mouseup="showPassword"
+                :class="{
+                  'far fa-eye-slash': isShowPassword,
+                  'far fa-eye': !isShowPassword,
+                }"
+              ></i>
+            </div>
+            <div class="form__password-confirmation-container">
+              <label
+                for="password-confirmation"
+                class="password-confirmation__label"
+                >Confirmar senha:</label
+              >
+              <input
+                :type="isShowPasswordConfirmation ? 'text' : 'password'"
+                class="password-confirmation__input"
+                autocomplete="new-password"
+                v-model="inputPasswordConfirmation"
+              />
+              <i
+                @mousedown="showPasswordConfirmation"
+                @mouseup="showPasswordConfirmation"
+                :class="{
+                  'far fa-eye-slash': isShowPasswordConfirmation,
+                  'far fa-eye': !isShowPasswordConfirmation,
+                }"
+              ></i>
+              <div v-if="!isPasswordTheSame">
+                <p class="error-text">A senha deve ser a mesma!</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="redefine-password__buttons">
-          <router-link :to="'/dashboard/settings/'">
-            <button class="button__cancel">Cancelar</button>
-          </router-link>
-          <button
-            @click="openPopUp('change')"
-            class="button__redefine-password"
-          >
-            Redefinir senha
-          </button>
+          <div class="redefine-password__buttons">
+            <router-link :to="'/dashboard/settings/'">
+              <button class="button__cancel">Cancelar</button>
+            </router-link>
+            <button
+              @click="openPopUp('change')"
+              class="button__redefine-password"
+            >
+              Redefinir senha
+            </button>
+          </div>
         </div>
       </div>
     </div>
