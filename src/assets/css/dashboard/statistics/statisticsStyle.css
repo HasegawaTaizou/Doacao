@@ -33,47 +33,44 @@
   text-align: center;
 }
 
-.statistics__content {
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  border-radius: 12px;
-  height: 88vh;
-  margin: 0px 32px;
-  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
+.statistics-wrapper {
+  height: 80vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .statistics__schedules {
-  display: flex;
-  gap: 64px;
-  width: 676px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  display: grid;
+  grid-template-areas:
+    "title title"
+    "image graph";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
   background-color: #fff;
   border-radius: 12px;
-  padding: 32px;
-  margin-left: 92px;
-  margin-top: 42px;
-}
-
-.schedules__schedules-introduction {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  margin: 32px;
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
 }
 
 .schedules-introduction__title {
+  grid-area: title;
   font-size: 2.5rem;
   font-family: "Abel";
   font-weight: normal;
-  color: #000;
+  color: #fff;
+  background-color: #638bff;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin: 32px;
 }
 
 .schedules-introduction__image {
-  width: 234px;
-  height: 186px;
+  grid-area: image;
+  transform: translateY(-50px);
 }
 
 .schedules__schedules-graph {
+  grid-area: graph;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -82,8 +79,8 @@
 
 .schedules-graph__graph {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
 }
 
 .graph__total-container {
@@ -99,10 +96,11 @@
 
 .total__text {
   color: #6d6868;
+  font-size: 1.5rem;
 }
 
 .total__number {
-  font-size: 1.125rem;
+  font-size: 2rem;
 }
 
 .schedules-graph__labels {
@@ -124,19 +122,19 @@
 
 .graph-label__title {
   grid-area: title;
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: #6d6868;
 }
 
 .graph-label__text__before {
-  width: 12px;
-  height: 12px;
+  width: 20px;
+  height: 20px;
   border-radius: 100%;
 }
 
 .graph-label__text {
   grid-area: label-text;
-  font-size: 1.125rem;
+  font-size: 1.75rem;
 }
 
 .statistics__reviews {
@@ -144,11 +142,12 @@
   grid-template-areas:
     "title title"
     "summary comments";
-  grid-template-columns: auto auto;
+  grid-template-columns: 0.75fr 1fr;
   grid-template-rows: auto auto;
-  margin: 68px 92px 92px 92px;
-  padding-top: 52px;
-  border-top: 1px solid #d9d9d9;
+  background-color: #fff;
+  border-radius: 12px;
+  margin: 32px;
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
 }
 
 .reviews__title {
@@ -156,12 +155,15 @@
   font-size: 2.5rem;
   font-family: "Abel";
   font-weight: normal;
-  color: #000;
-  margin-bottom: 38px;
+  color: #fff;
+  background-color: #638bff;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin: 32px;
 }
 
 .reviews__graph-review-container {
-  padding-right: 32px;
+  margin: 32px;
 }
 
 .graph-review__graph-container {
@@ -196,17 +198,16 @@
 }
 
 .label__number {
-  font-size: 1.25rem;
-  color: #6D6868;
+  font-size: 1.75rem;
+  color: #6d6868;
 }
 
 .label__star {
-  font-size: 1rem;
-  color: #6D6868;
+  font-size: 1.25rem;
+  color: #6d6868;
 }
 
 .graph-review__summary-container {
-  grid-area: summary;
   display: grid;
   grid-template-areas:
     "average stars"
@@ -237,12 +238,12 @@
 
 .summary__total {
   grid-area: total;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   color: #6d6868;
 }
 
 .bar__line-container {
-  height: 12px;
+  height: 16px;
   background-color: #d9d9d9;
   border-radius: 12px;
 }
@@ -264,23 +265,26 @@
     "text text text";
   grid-template-columns: auto 1fr auto;
   grid-template-rows: auto auto auto;
-  width: 412px;
   border: 1px solid #f0f0f0;
   border-radius: 12px;
   column-gap: 10px;
+  margin-right: 32px;
   padding: 12px;
 }
 
 .comment__image {
   grid-area: image;
-  width: 42px;
-  height: 42px;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .comment__donator {
   grid-area: donator;
   color: #000;
-  font-size: 0.75rem;
+  font-size: 1.75rem;
   margin-top: 6px;
 }
 
@@ -292,20 +296,20 @@
 }
 
 .comment__stars-container i {
-  font-size: 0.75rem;
+  font-size: 1.25rem;
   color: #7395f7;
 }
 
 .comment__date {
   grid-area: date;
   color: #959595;
-  font-size: 0.625rem;
+  font-size: 1.35rem;
 }
 
 .comment__text {
   grid-area: text;
   color: #000;
-  font-size: 0.75rem;
+  font-size: 1.75rem;
   max-width: 372px;
   margin-top: 12px;
 }

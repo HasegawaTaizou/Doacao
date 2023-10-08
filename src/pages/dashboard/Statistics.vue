@@ -11,16 +11,14 @@
         <span class="profile__name">Hospital Notredame Intermédica</span>
       </div>
     </div>
-    <div class="statistics__content">
+    <div class="statistics-wrapper">
       <div class="statistics__schedules">
-        <div class="schedules__schedules-introduction">
-          <h2 class="schedules-introduction__title">AGENDAMENTOS</h2>
-          <img
-            src="../../assets/img/statistics-schedules-image.png"
-            alt="Schedules Image"
-            class="schedules-introduction__image"
-          />
-        </div>
+        <h2 class="schedules-introduction__title">AGENDAMENTOS</h2>
+        <img
+          src="../../assets/img/statistics-schedules-image.png"
+          alt="Schedules Image"
+          class="schedules-introduction__image"
+        />
         <div class="schedules__schedules-graph">
           <div class="schedules-graph__graph">
             <div class="graph__total-container">
@@ -36,7 +34,6 @@
                 :style="`background-color: ${this.scheduledColor}`"
                 class="graph-label__text__before"
               ></span>
-
               <span class="graph-label__text">{{ this.scheduled }}</span>
             </div>
             <div class="graph-label-container">
@@ -146,9 +143,18 @@
           </div>
         </div>
         <div class="reviews__comments-container">
-          <div v-for="(review, index) in hospitalReviews" :key="index" class="comment-container">
-            <img
+          <div
+            v-for="(review, index) in hospitalReviews"
+            :key="index"
+            class="comment-container"
+          >
+            <!-- <img
               :src="review.photo"
+              alt="Comment Image"
+              class="comment__image"
+            /> -->
+            <img
+              src="../../assets/img/donator-image.png"
               alt="Comment Image"
               class="comment__image"
             />
@@ -181,7 +187,93 @@ import axios from "axios";
 
 export default {
   name: "Statistics",
+  data() {
+    return {
+      //Label Data
+      scheduled: 2,
+      concluded: 2,
+      rescheduled: 2,
+      pending: 2,
+      scheduledTotal: 2,
+
+      //Stars Review Data
+      totalReviews: 10,
+      fiveStarsReview: 2,
+      fourStarsReview: 1,
+      threeStarsReview: 1,
+      twoStarsReview: 1,
+      oneStarsReview: 2,
+      averageReview: 2,
+
+      //Hospital Reviews
+      hospitalReviews: [],
+
+      //BackgroundColor data
+      scheduledColor: "rgb(44, 98, 241)",
+      concludedColor: "rgb(106, 179, 157)",
+      rescheduledColor: "rgb(229, 192, 94)",
+      pendingColor: "rgb(244, 52, 52)",
+    };
+  },
+  computed: {
+    //Percentage Line Data
+    fiveStarPercentage() {
+      return (this.fiveStarsReview / this.totalReviews) * 100;
+    },
+    fourStarPercentage() {
+      return (this.fourStarsReview / this.totalReviews) * 100;
+    },
+    threeStarPercentage() {
+      return (this.threeStarsReview / this.totalReviews) * 100;
+    },
+    twoStarPercentage() {
+      return (this.twoStarsReview / this.totalReviews) * 100;
+    },
+    oneStarPercentage() {
+      return (this.oneStarsReview / this.totalReviews) * 100;
+    },
+  },
+  methods: {
+    getSchedulesStatistics() {
+      axios
+        .get(`${BASE_URL}/hospital/1/statistics/schedules`)
+        .then((response) => {
+          const schedulesStatisticsData = response.data.schedulesStatistics;
+
+          this.scheduled = schedulesStatisticsData.scheduledAmount;
+          this.concluded = schedulesStatisticsData.concludedAmount;
+          this.rescheduled = schedulesStatisticsData.rescheduledAmount;
+          this.pending = schedulesStatisticsData.pendingAmount;
+          this.scheduledTotal = schedulesStatisticsData.totalSchedules;
+        });
+    },
+    getRatingsStatistics() {
+      axios
+        .get(`${BASE_URL}/hospital/1/statistics/ratings`)
+        .then((response) => {
+          const hospitalRatingsData = response.data.ratingsStatistics;
+
+          this.oneStarsReview = hospitalRatingsData.oneStarsRating;
+          this.twoStarsReview = hospitalRatingsData.twoStarsRating;
+          this.threeStarsReview = hospitalRatingsData.threeStarsRating;
+          this.fourStarsReview = hospitalRatingsData.fourStarsRating;
+          this.fiveStarsReview = hospitalRatingsData.fiveStarsRating;
+          this.averageReview = hospitalRatingsData.average;
+        });
+    },
+    getReviews() {
+      axios
+        .get(`${BASE_URL}/hospital/1/statistics/reviews`)
+        .then((response) => {
+          this.hospitalReviews = response.data.reviewsStatistics;
+        });
+    },
+  },
   mounted() {
+    this.getSchedulesStatistics();
+    this.getRatingsStatistics();
+    this.getReviews();
+
     const ctx = document.getElementById("doughnut-graph");
 
     const data = {
@@ -220,87 +312,6 @@ export default {
       },
     });
   },
-  data() {
-    return {
-      //Label Data
-      scheduled: 0,
-      concluded: 0,
-      rescheduled: 0,
-      pending: 0,
-      scheduledTotal: 0,
-
-      //Stars Review Data
-      totalReviews: 0,
-      fiveStarsReview: 0,
-      fourStarsReview: 0,
-      threeStarsReview: 0,
-      twoStarsReview: 0,
-      oneStarsReview: 0,
-      averageReview: 0,
-
-      //Hospital Reviews
-      hospitalReviews: [],
-
-      //BackgroundColor data
-      scheduledColor: "rgb(44, 98, 241)",
-      concludedColor: "rgb(106, 179, 157)",
-      rescheduledColor: "rgb(229, 192, 94)",
-      pendingColor: "rgb(244, 52, 52)",
-    };
-  },
-  computed: {
-    //Percentage Line Data
-    fiveStarPercentage() {
-      return (this.fiveStarsReview / this.totalReviews) * 100;
-    },
-    fourStarPercentage() {
-      return (this.fourStarsReview / this.totalReviews) * 100;
-    },
-    threeStarPercentage() {
-      return (this.threeStarsReview / this.totalReviews) * 100;
-    },
-    twoStarPercentage() {
-      return (this.twoStarsReview / this.totalReviews) * 100;
-    },
-    oneStarPercentage() {
-      return (this.oneStarsReview / this.totalReviews) * 100;
-    },
-  },
-  methods: {
-    getSchedulesStatistics() {
-      axios.get(`${BASE_URL}/hospital/1/statistics/schedules`).then((response) => {
-        const schedulesStatisticsData = response.data.schedulesStatistics
-
-        this.scheduled = schedulesStatisticsData.scheduledAmount
-        this.concluded = schedulesStatisticsData.concludedAmount
-        this.rescheduled = schedulesStatisticsData.rescheduledAmount
-        this.pending = schedulesStatisticsData.pendingAmount
-        this.scheduledTotal = schedulesStatisticsData.totalSchedules
-      })
-    },
-    getRatingsStatistics() {
-      axios.get(`${BASE_URL}/hospital/1/statistics/ratings`).then((response) => {
-        const hospitalRatingsData = response.data.ratingsStatistics
-
-        this.oneStarsReview = hospitalRatingsData.oneStarsRating
-        this.twoStarsReview = hospitalRatingsData.twoStarsRating
-        this.threeStarsReview = hospitalRatingsData.threeStarsRating
-        this.fourStarsReview = hospitalRatingsData.fourStarsRating
-        this.fiveStarsReview = hospitalRatingsData.fiveStarsRating
-        this.averageReview = hospitalRatingsData.average
-      })
-    },
-    getReviews() {
-      axios.get(`${BASE_URL}/hospital/1/statistics/reviews`).then((response) => {
-        this.hospitalReviews = response.data.reviewsStatistics
-      })
-    },
-  },
-  mounted() {
-    this.getSchedulesStatistics()
-    this.getRatingsStatistics()
-    this.getReviews()
-  }
 };
 </script>
 
