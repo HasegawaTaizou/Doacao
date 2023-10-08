@@ -33,13 +33,19 @@
   text-align: center;
 }
 
+.donator-wrapper {
+  height: 80vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 .donator__content {
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
   border-radius: 12px;
-  height: 88vh;
   margin: 0px 32px;
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
 }
 
 .donator-container {
@@ -55,23 +61,29 @@
   margin: 58px 58px 0px 82px;
   padding-bottom: 64px;
   border-bottom: 1px solid #dde5e9;
+  column-gap: 24px;
 }
 
 .donator__image {
   grid-area: image;
-  width: 224px;
-  height: 224px;
-  border-radius: 100%;
   margin-right: 72px;
+  width: 302px;
+  height: 302px;
+  overflow: hidden;
+  border-radius: 20px;
+  object-fit: cover;
+  object-position: center center;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 3px solid #eee;
 }
 
 .donator-container span {
-  font-size: 1.25rem;
+  font-size: 1.75rem;
 }
 
 .donator__name {
   grid-area: name;
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   font-family: "Abel";
   font-weight: normal;
   color: #000;
@@ -81,40 +93,85 @@
   grid-area: email;
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
 .donator__phone {
   grid-area: phone;
   display: flex;
+  align-items: center;
   gap: 12px;
+}
+
+.phone__text {
+  border: 1px solid #cecece;
+  border-radius: 5px;
+  padding: 4px 8px;
+}
+
+.email__text {
+  border: 1px solid #cecece;
+  border-radius: 5px;
+  padding: 4px 8px;
 }
 
 .donator__blood-type {
   grid-area: blood-type;
   display: flex;
   gap: 12px;
+  align-items: center;
+}
+
+.blood-type__text {
+  border: 1px solid #cecece;
+  border-radius: 5px;
+  padding: 4px 8px;
 }
 
 .donator__age {
   grid-area: age;
   display: flex;
   gap: 12px;
+  align-items: center;
+}
+
+.age__text {
+  border: 1px solid #cecece;
+  border-radius: 5px;
+  padding: 4px 8px;
 }
 
 .donator__gender {
   grid-area: gender;
   display: flex;
   gap: 12px;
+  align-items: center;
+}
+
+.gender__text {
+  border: 1px solid #cecece;
+  border-radius: 5px;
+  padding: 4px 8px;
 }
 
 .donator__weight {
   grid-area: weight;
   display: flex;
   gap: 12px;
+  align-items: center;
+}
+
+.weight__text {
+  border: 1px solid #cecece;
+  border-radius: 5px;
+  padding: 4px 8px;
 }
 
 .schedules {
-  margin: 24px 58px 0px 82px;
+  background-color: #fff;
+  margin: 0px 32px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
 }
 
 .schedules__title {
@@ -122,12 +179,13 @@
   font-family: "Abel";
   font-weight: normal;
   color: #000;
-  margin-bottom: 36px;
+  margin: 36px 48px;
 }
 
 /* TABLE STYLE */
 
 .schedules__table {
+  margin: 32px 0px;
   width: 95%;
   border-collapse: collapse;
   border-spacing: 0;
@@ -168,15 +226,24 @@ tr:not(:last-child)::after {
 td,
 th {
   display: table-cell;
-  padding: 10px;
+  padding: 16px;
   text-align: center;
   vertical-align: middle;
 }
 
 th {
   font-family: "Abel";
-  font-size: 1.25rem;
   font-weight: normal;
+  font-size: 1.75rem;
+}
+
+.table__title {
+  background-color: #638bff;
+  color: #fff;
+}
+
+.table__content {
+  font-size: 1.5rem;
 }
 
 .title__id {
@@ -187,15 +254,28 @@ th {
   width: 100px;
 }
 
+.title__hour {
+  width: 100px;
+}
+
+.content__hour {
+  width: 100px;
+}
+
+.content__actions img {
+  width: 28px;
+  height: 28px;
+}
+
 /* STATUS STYLE */
 
 .title__status {
-  width: 100px;
+  width: 140px;
 }
 
 .content__status {
   position: relative;
-  width: 100px;
+  width: 140px;
   text-align: center;
 }
 
@@ -251,4 +331,5 @@ th {
   width: 60px;
   height: 100%;
   color: #fff;
+  font-size: 1.25rem;
 }

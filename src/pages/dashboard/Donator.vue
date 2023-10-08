@@ -1,7 +1,7 @@
 <template>
   <section id="donator-dashboard">
     <div class="donator__header">
-      <h1 class="donator__title">AGENDAMENTO</h1>
+      <h1 class="donator__title">DOADOR</h1>
       <div class="profile-container">
         <img
           src="../../assets/img/hospital-profile-image.png"
@@ -11,37 +11,44 @@
         <span class="profile__name">Hospital Notredame Intermédica</span>
       </div>
     </div>
-    <div class="donator__content">
-      <div class="donator-container">
-        <img :src="photo" alt="Donator Image" class="donator__image" />
-        <h2 class="donator__name">{{ name }}</h2>
-        <div class="donator__email">
-          <span class="email__title">E-mail:</span>
-          <span class="email__text">{{ email }}</span>
-        </div>
-        <div class="donator__phone">
-          <span class="phone__title">Telefone:</span>
-          <span class="phone__text">{{ phone }}</span>
-        </div>
-        <div class="donator__blood-type">
-          <span class="blood-type__title">Tipo sanguíneo:</span>
-          <span class="blood-type__text">{{ bloodType }}</span>
-        </div>
-        <div class="donator__age">
-          <span class="age__title">Idade:</span>
-          <span class="age__text">{{ age }} anos</span>
-        </div>
-        <div class="donator__gender">
-          <span class="gender__title">Sexo:</span>
-          <span class="gender__text">{{ sex }}</span>
-        </div>
-        <div class="donator__weight">
-          <span class="weight__title">Peso:</span>
-          <span class="weight__text">{{ weight }} Kg</span>
+    <div class="donator-wrapper">
+      <div class="donator__content">
+        <div class="donator-container">
+          <!-- <img :src="photo" alt="Donator Image" class="donator__image" /> -->
+          <img
+            src="../../assets/img/donator-image.png"
+            alt="Donator Image"
+            class="donator__image"
+          />
+          <h2 class="donator__name">{{ name }}</h2>
+          <div class="donator__email">
+            <span class="email__title">E-mail:</span>
+            <span class="email__text">{{ email }}</span>
+          </div>
+          <div class="donator__phone">
+            <span class="phone__title">Telefone:</span>
+            <span class="phone__text">{{ phone }}</span>
+          </div>
+          <div class="donator__blood-type">
+            <span class="blood-type__title">Tipo sanguíneo:</span>
+            <span class="blood-type__text">{{ bloodType }}</span>
+          </div>
+          <div class="donator__age">
+            <span class="age__title">Idade:</span>
+            <span class="age__text">{{ age }} anos</span>
+          </div>
+          <div class="donator__gender">
+            <span class="gender__title">Sexo:</span>
+            <span class="gender__text">{{ sex }}</span>
+          </div>
+          <div class="donator__weight">
+            <span class="weight__title">Peso:</span>
+            <span class="weight__text">{{ weight }} Kg</span>
+          </div>
         </div>
       </div>
+      <h2 class="schedules__title">AGENDAMENTOS</h2>
       <div class="schedules">
-        <h2 class="schedules__title">Agendamentos</h2>
         <div class="scheduling__schedules">
           <table class="schedules__table">
             <thead>
