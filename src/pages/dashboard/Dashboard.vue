@@ -55,7 +55,11 @@
       </router-link>
     </div>
     <div id="dashboard" class="dashboard-content">
-      <router-view></router-view>
+      <router-view v-slot="{ Component }">
+        <transition name="fade">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </div>
   </main>
 </template>

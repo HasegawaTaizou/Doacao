@@ -1,4 +1,5 @@
 <template>
+  <transition name="fade">
   <section id="settings-dashboard">
     <div class="settings__header">
       <h1 class="settings__title">CONFIGURAÇÕES</h1>
@@ -181,6 +182,7 @@
       </div>
     </div>
   </section>
+</transition>
 </template>
 
 <script>
@@ -191,6 +193,9 @@ export default {
   name: "Settings",
   data() {
     return {
+      //Transition
+      showTransition: false,
+
       hospitalData: [],
       addressData: [],
     };
@@ -206,6 +211,9 @@ export default {
   },
   mounted() {
     this.getHospitalData();
+    console.log('antes: ', this.showTransition);
+    this.showTransition = true;
+    console.log('depois: ', this.showTransition);
   },
 };
 </script>

@@ -108,7 +108,7 @@
       </div>
     </div>
   </section>
-  <PopUp
+  <!-- <PopUp
     v-if="selectedComponent === 'cancel'"
     :title="'Cancelar?'"
     :message="'Digite o motivo do cancelamento (Opcional)'"
@@ -152,7 +152,7 @@
         </select>
       </div>
     </div>
-  </PopUp>
+  </PopUp> -->
 </template>
 
 <script>
@@ -163,10 +163,19 @@ export default {
   name: "Schedules",
   components: { PopUp },
   data() {
-    return { selectedComponent: "" };
+    return {
+      //Transition
+      showTransition: false,
+      selectedComponent: "",
+    };
   },
   methods: {
     openPopUp,
+  },
+  mounted() {
+    console.log("antes: ", this.showTransition);
+    this.showTransition = true;
+    console.log("depois: ", this.showTransition);
   },
 };
 </script>

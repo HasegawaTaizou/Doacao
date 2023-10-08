@@ -1,4 +1,5 @@
 <template>
+  <transition name="fade">
   <section id="statistics-dashboard">
     <div class="statistics__header">
       <h1 class="statistics__title">Estatísticas</h1>
@@ -177,6 +178,7 @@
       </div>
     </div>
   </section>
+</transition>
 </template>
 
 <script>
@@ -189,6 +191,9 @@ export default {
   name: "Statistics",
   data() {
     return {
+      //Transition
+      showTransition: false,
+
       //Label Data
       scheduled: 2,
       concluded: 2,
@@ -275,6 +280,7 @@ export default {
     this.getReviews();
 
     const ctx = document.getElementById("doughnut-graph");
+    console.log(ctx);
 
     const data = {
       labels: ["Agendado", "Concluído", "Remarcado", "Pendente"],
@@ -311,6 +317,8 @@ export default {
         },
       },
     });
+
+    this.showTransition = true;
   },
 };
 </script>

@@ -1,4 +1,5 @@
 <template>
+  <transition name="fade">
   <section id="redefine-password-dashboard">
     <div class="redefine-password__header">
       <h1 class="redefine-password__title">REDEFINIR SENHA</h1>
@@ -109,6 +110,7 @@
       </div>
     </div>
   </section>
+  </transition>
   <PopUp
     v-if="selectedComponent === 'change'"
     :title="'Alterar senha?'"
@@ -133,6 +135,8 @@ export default {
   components: { PopUp },
   data() {
     return {
+      showTransition: false,
+
       selectedComponent: "",
       //Show Password
       isShowPassword: false,
@@ -165,6 +169,9 @@ export default {
       }
     },
   },
+  mounted() {
+    this.showTransition = true;
+  }
 };
 </script>
 

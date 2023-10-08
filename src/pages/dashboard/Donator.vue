@@ -1,123 +1,126 @@
 <template>
-  <section id="donator-dashboard">
-    <div class="donator__header">
-      <h1 class="donator__title">DOADOR</h1>
-      <div class="profile-container">
-        <img
-          src="../../assets/img/hospital-profile-image.png"
-          alt="Profile Image"
-          class="profile__image"
-        />
-        <span class="profile__name">Hospital Notredame Intermédica</span>
-      </div>
-    </div>
-    <div class="donator-wrapper">
-      <div class="donator__content">
-        <div class="donator-container">
-          <!-- <img :src="photo" alt="Donator Image" class="donator__image" /> -->
+  <transition name="fade">
+    <section id="donator-dashboard">
+      <div class="donator__header">
+        <h1 class="donator__title">DOADOR</h1>
+        <div class="profile-container">
           <img
-            src="../../assets/img/donator-image.png"
-            alt="Donator Image"
-            class="donator__image"
+            src="../../assets/img/hospital-profile-image.png"
+            alt="Profile Image"
+            class="profile__image"
           />
-          <h2 class="donator__name">{{ name }}</h2>
-          <div class="donator__email">
-            <span class="email__title">E-mail:</span>
-            <span class="email__text">{{ email }}</span>
-          </div>
-          <div class="donator__phone">
-            <span class="phone__title">Telefone:</span>
-            <span class="phone__text">{{ phone }}</span>
-          </div>
-          <div class="donator__blood-type">
-            <span class="blood-type__title">Tipo sanguíneo:</span>
-            <span class="blood-type__text">{{ bloodType }}</span>
-          </div>
-          <div class="donator__age">
-            <span class="age__title">Idade:</span>
-            <span class="age__text">{{ age }} anos</span>
-          </div>
-          <div class="donator__gender">
-            <span class="gender__title">Sexo:</span>
-            <span class="gender__text">{{ sex }}</span>
-          </div>
-          <div class="donator__weight">
-            <span class="weight__title">Peso:</span>
-            <span class="weight__text">{{ weight }} Kg</span>
-          </div>
+          <span class="profile__name">Hospital Notredame Intermédica</span>
         </div>
       </div>
-      <h2 class="schedules__title">AGENDAMENTOS</h2>
-      <div class="schedules">
-        <div class="scheduling__schedules">
-          <table class="schedules__table">
-            <thead>
-              <tr class="table__title">
-                <th class="title__id">ID</th>
-                <th class="title__date">Data</th>
-                <th class="title__hour">Horário</th>
-                <th class="title__site">Local</th>
-                <th class="title__status">Status</th>
-                <th class="title__action">Ação</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="schedule in schedules"
-                :key="schedule.id"
-                class="table__content"
-              >
-                <td class="content__id">{{ schedule.scheduleId }}</td>
-                <td class="content__date">{{ schedule.date }}</td>
-                <td class="content__hour">{{ schedule.hour }}</td>
-                <td class="content__site">{{ schedule.site }}</td>
-                <td class="content__status">
-                  <span
-                    class="status__text"
-                    :class="schedule.status.toLowerCase()"
-                    >{{ getUserSchedule(schedule.status) }}</span
-                  >
-                </td>
-                <td
-                  v-if="schedule.status != 'CONCLUDED'"
-                  class="content__actions"
+      <div class="donator-wrapper">
+        <div class="donator__content">
+          <div class="donator-container">
+            <!-- <img :src="photo" alt="Donator Image" class="donator__image" /> -->
+            <img
+              src="../../assets/img/donator-image.png"
+              alt="Donator Image"
+              class="donator__image"
+            />
+            <h2 class="donator__name">{{ name }}</h2>
+            <div class="donator__email">
+              <span class="email__title">E-mail:</span>
+              <span class="email__text">{{ email }}</span>
+            </div>
+            <div class="donator__phone">
+              <span class="phone__title">Telefone:</span>
+              <span class="phone__text">{{ phone }}</span>
+            </div>
+            <div class="donator__blood-type">
+              <span class="blood-type__title">Tipo sanguíneo:</span>
+              <span class="blood-type__text">{{ bloodType }}</span>
+            </div>
+            <div class="donator__age">
+              <span class="age__title">Idade:</span>
+              <span class="age__text">{{ age }} anos</span>
+            </div>
+            <div class="donator__gender">
+              <span class="gender__title">Sexo:</span>
+              <span class="gender__text">{{ sex }}</span>
+            </div>
+            <div class="donator__weight">
+              <span class="weight__title">Peso:</span>
+              <span class="weight__text">{{ weight }} Kg</span>
+            </div>
+          </div>
+        </div>
+        <h2 class="schedules__title">AGENDAMENTOS</h2>
+        <div class="schedules">
+          <div class="scheduling__schedules">
+            <table class="schedules__table">
+              <thead>
+                <tr class="table__title">
+                  <th class="title__id">ID</th>
+                  <th class="title__date">Data</th>
+                  <th class="title__hour">Horário</th>
+                  <th class="title__site">Local</th>
+                  <th class="title__status">Status</th>
+                  <th class="title__action">Ação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="schedule in schedules"
+                  :key="schedule.id"
+                  class="table__content"
                 >
-                  <img
-                    @click="
-                      openPopUp('cancel'), (scheduleId = schedule.scheduleId)
-                    "
-                    src="../../assets/img/scheduling-cancel-icon.png"
-                    alt="Cancel Icon"
-                    class="action__icon"
-                  />
-                  <img
-                    @click="
-                      openPopUp('conclude'), (scheduleId = schedule.scheduleId)
-                    "
-                    src="../../assets/img/scheduling-conclude-icon.png"
-                    alt=" Conclude Icon"
-                    class="action__icon"
-                  />
-                  <img
-                    @click="
-                      openPopUp('reschedule'),
-                        (scheduleId = schedule.scheduleId)
-                    "
-                    src="../../assets/img/scheduling-reschedule-icon.png"
-                    alt="Reschedule Icon"
-                    class="action__icon"
-                  />
-                </td>
-                <td v-else class="content__actions">
-                  <span class="action__none">N/A</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  <td class="content__id">{{ schedule.scheduleId }}</td>
+                  <td class="content__date">{{ schedule.date }}</td>
+                  <td class="content__hour">{{ schedule.hour }}</td>
+                  <td class="content__site">{{ schedule.site }}</td>
+                  <td class="content__status">
+                    <span
+                      class="status__text"
+                      :class="schedule.status.toLowerCase()"
+                      >{{ getUserSchedule(schedule.status) }}</span
+                    >
+                  </td>
+                  <td
+                    v-if="schedule.status != 'CONCLUDED'"
+                    class="content__actions"
+                  >
+                    <img
+                      @click="
+                        openPopUp('cancel'), (scheduleId = schedule.scheduleId)
+                      "
+                      src="../../assets/img/scheduling-cancel-icon.png"
+                      alt="Cancel Icon"
+                      class="action__icon"
+                    />
+                    <img
+                      @click="
+                        openPopUp('conclude'),
+                          (scheduleId = schedule.scheduleId)
+                      "
+                      src="../../assets/img/scheduling-conclude-icon.png"
+                      alt=" Conclude Icon"
+                      class="action__icon"
+                    />
+                    <img
+                      @click="
+                        openPopUp('reschedule'),
+                          (scheduleId = schedule.scheduleId)
+                      "
+                      src="../../assets/img/scheduling-reschedule-icon.png"
+                      alt="Reschedule Icon"
+                      class="action__icon"
+                    />
+                  </td>
+                  <td v-else class="content__actions">
+                    <span class="action__none">N/A</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </transition>
   <PopUp
     v-if="selectedComponent === 'cancel'"
     :title="'Cancelar?'"
@@ -182,6 +185,9 @@ export default {
   components: { PopUp },
   data() {
     return {
+      //Transition
+      showTransition: false,
+
       selectedComponent: "",
       id: 0,
       name: "",
@@ -303,6 +309,7 @@ export default {
     },
   },
   mounted() {
+    this.showTransition = true;
     this.getUserData();
     this.getHospitalSites();
   },

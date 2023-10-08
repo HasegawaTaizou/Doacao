@@ -5,6 +5,7 @@ import router from "./router";
 import store from "./store/store";
 import VueTheMask from 'vue-the-mask';
 import { useVuelidate } from "@vuelidate/core";
+import 'vue2-transitions';
 
 const app = createApp(App);
 app.use(router);

@@ -144,7 +144,7 @@
       </div>
     </div>
   </section>
-  <PopUp
+  <!-- <PopUp
     v-if="selectedComponent === 'cancel'"
     :title="'Cancelar?'"
     :message="'Os agendamentos criados serão cancelados.'"
@@ -212,7 +212,7 @@
         </select>
       </div>
     </div>
-  </PopUp>
+  </PopUp> -->
 </template>
 
 <script>
@@ -228,6 +228,9 @@ export default {
   components: { PopUp },
   data() {
     return {
+      //Transition
+      showTransition: false,
+
       //Sites data
       sites: [],
 
@@ -332,6 +335,7 @@ export default {
     openPopUp,
   },
   mounted() {
+    this.showTransition = true;
     this.getHospitalSites();
     this.getBookSchedules();
   },
