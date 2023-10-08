@@ -202,7 +202,7 @@ export default {
   },
   methods: {
     getHospitalData() {
-      axios.get(`${BASE_URL}/hospital-data/1`).then((response) => {
+      axios.get(`${BASE_URL}/hospital-data/${this.$store.state.hospitalId}`).then((response) => {
         this.hospitalData = response.data.hospital;
         this.addressData = response.data.address;
         console.log(this.addressData);

@@ -191,7 +191,7 @@ export default {
   methods: {
     openPopUp,
     getHospitalData() {
-      axios.get(`${BASE_URL}/hospital-data/1`).then((response) => {
+      axios.get(`${BASE_URL}/hospital-data/${this.$store.state.hospitalId}`).then((response) => {
         this.hospitalData = response.data.hospital;
         this.addressData = response.data.address;
         console.log(this.addressData);
@@ -199,6 +199,7 @@ export default {
     },
     editHospital() {
       const updateHospitalData = {
+        id: this.$store.state.hospitalId,
         hospital: {
           name: this.hospitalData.name,
           cnpj: this.hospitalData.cnpj,
@@ -220,7 +221,7 @@ export default {
         },
       };
       console.log(updateHospitalData);
-      axios.put(`${BASE_URL}/hospital-update/1`, updateHospitalData);
+      axios.put(`${BASE_URL}/hospital-update`, updateHospitalData);
     },
   },
   mounted() {

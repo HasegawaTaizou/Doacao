@@ -108,7 +108,7 @@
       </div>
     </div>
   </section>
-  <!-- <PopUp
+  <PopUp
     v-if="selectedComponent === 'cancel'"
     :title="'Cancelar?'"
     :message="'Digite o motivo do cancelamento (Opcional)'"
@@ -152,7 +152,7 @@
         </select>
       </div>
     </div>
-  </PopUp> -->
+  </PopUp>
 </template>
 
 <script>

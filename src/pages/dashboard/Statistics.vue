@@ -241,7 +241,7 @@ export default {
   methods: {
     getSchedulesStatistics() {
       axios
-        .get(`${BASE_URL}/hospital/1/statistics/schedules`)
+        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/statistics/schedules`)
         .then((response) => {
           const schedulesStatisticsData = response.data.schedulesStatistics;
 
@@ -254,7 +254,7 @@ export default {
     },
     getRatingsStatistics() {
       axios
-        .get(`${BASE_URL}/hospital/1/statistics/ratings`)
+        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/statistics/ratings`)
         .then((response) => {
           const hospitalRatingsData = response.data.ratingsStatistics;
 
@@ -268,7 +268,7 @@ export default {
     },
     getReviews() {
       axios
-        .get(`${BASE_URL}/hospital/1/statistics/reviews`)
+        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/statistics/reviews`)
         .then((response) => {
           this.hospitalReviews = response.data.reviewsStatistics;
         });
@@ -280,7 +280,6 @@ export default {
     this.getReviews();
 
     const ctx = document.getElementById("doughnut-graph");
-    console.log(ctx);
 
     const data = {
       labels: ["Agendado", "Concluído", "Remarcado", "Pendente"],

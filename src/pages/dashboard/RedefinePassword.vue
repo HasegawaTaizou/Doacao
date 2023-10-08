@@ -158,10 +158,11 @@ export default {
         this.isPasswordSame(this.inputPassword, this.inputPasswordConfirmation)
       ) {
         const updatePasswordData = {
+          id: this.$store.state.hospitalId,
           password: this.inputPassword,
         };
         axios.put(
-          `${BASE_URL}/hospital/redefine-password/1`,
+          `${BASE_URL}/hospital/redefine-password`,
           updatePasswordData
         );
       } else {

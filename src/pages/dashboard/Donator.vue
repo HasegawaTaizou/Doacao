@@ -15,12 +15,7 @@
       <div class="donator-wrapper">
         <div class="donator__content">
           <div class="donator-container">
-            <!-- <img :src="photo" alt="Donator Image" class="donator__image" /> -->
-            <img
-              src="../../assets/img/donator-image.png"
-              alt="Donator Image"
-              class="donator__image"
-            />
+            <img :src="photo" alt="Donator Image" class="donator__image" />
             <h2 class="donator__name">{{ name }}</h2>
             <div class="donator__email">
               <span class="email__title">E-mail:</span>
@@ -247,7 +242,7 @@ export default {
       });
     },
     getHospitalSites() {
-      axios.get(`${BASE_URL}/hospital/1/sites`).then((response) => {
+      axios.get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/sites`).then((response) => {
         this.sites = response.data.sites;
       });
     },

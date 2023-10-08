@@ -257,7 +257,7 @@ export default {
   },
   methods: {
     getHospitalSites() {
-      axios.get(`${BASE_URL}/hospital/1/sites`).then((response) => {
+      axios.get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/sites`).then((response) => {
         this.sites = response.data.sites;
       });
     },
@@ -325,7 +325,7 @@ export default {
       axios.put(`${BASE_URL}/schedule-reschedule`, updateBookScheduleData);
     },
     getBookSchedules() {
-      axios.get(`${BASE_URL}/hospital/1/book-schedules`).then((response) => {
+      axios.get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/book-schedules`).then((response) => {
         this.bookSchedules = response.data.bookSchedules;
       });
     },

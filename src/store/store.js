@@ -35,10 +35,11 @@ export default new Vuex.Store({
     showPopUp: false,
 
     //HOSPITAL LOGIN
-    hospitalId: 0,
-    hospitalName: "",
-    hospitalPhoto: "",
-    token: ""
+    hospitalId: 1,
+    hospitalName: "Sofia Coghi Landi",
+    hospitalPhoto:
+      "https://firebasestorage.googleapis.com/v0/b/greenworld-f2763.appspot.com/o/images%2Favatar-man.png?alt=media&token=9d5745ab-3340-4e60-8a05-a55919c7dfa3",
+    token: "",
   },
   mutations: {
     updateFormData(state, payload) {
@@ -54,13 +55,13 @@ export default new Vuex.Store({
       state.formData.isPasswordSame = value;
     },
     SET_HOSPITAL_ID(state, value) {
-      state.hospitalId = value
+      state.hospitalId = value;
     },
     SET_HOSPITAL_NAME(state, value) {
-      state.hospitalName = value
+      state.hospitalName = value;
     },
     SET_HOSPITAL_PHOTO(state, value) {
-      state.hospitalPhoto = value
+      state.hospitalPhoto = value;
     },
   },
 });
