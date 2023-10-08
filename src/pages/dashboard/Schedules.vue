@@ -4,11 +4,11 @@
       <h1 class="scheduling__title">AGENDAMENTOS</h1>
       <div class="profile-container">
         <img
-          :src="$store.state.hospitalPhoto"
+          src="../../assets/img/hospital-profile-image.png"
           alt="Profile Image"
           class="profile__image"
         />
-        <span class="profile__name">{{ $store.state.hospitalName }}</span>
+        <span class="profile__name">Hospital Notredame Intermédica</span>
       </div>
     </div>
     <div class="scheduling__content">
@@ -40,66 +40,76 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="table__content">
-              <td class="content__id">1</td>
+            <tr
+              class="table__content"
+              v-for="(schedule, index) in schedules"
+              :key="index"
+            >
+              <td class="content__id">
+                {{ schedules[index].schedule.scheduleId }}
+              </td>
               <td class="content__donator">
-                <router-link :to="'/dashboard/donator'" class="donator__link">
+                <router-link
+                  @click="setUserId(schedules[index].user.userId)"
+                  :to="'/dashboard/donator'"
+                  class="donator__link"
+                >
                   <img
-                    src="../../assets/img/donator-image.png"
+                    :src="schedules[index].user.photo"
                     alt="Donator Image"
                     class="donator__image"
                   />
-                  <span class="donator__name">João Pedro Bueno</span>
+                  <span class="donator__name">{{
+                    schedules[index].user.name
+                  }}</span>
                 </router-link>
               </td>
-              <td class="content__date">29/07/2023</td>
-              <td class="content__hour">11:10</td>
-              <td class="content__site">Descrição do local 1</td>
-              <td class="content__status">
-                <span class="status__text scheduled">Agendado</span>
+              <td class="content__date">
+                {{ schedules[index].schedule.date }}
               </td>
-              <td class="content__actions">
+              <td class="content__hour">
+                {{ schedules[index].schedule.hour }}
+              </td>
+              <td class="content__site">
+                {{ schedules[index].schedule.site }}
+              </td>
+              <td class="content__status">
+                <span
+                  class="status__text"
+                  :class="schedules[index].schedule.status.toLowerCase()"
+                  >{{ getUserSchedule(schedules[index].schedule.status) }}</span
+                >
+              </td>
+              <td
+                v-if="schedules[index].schedule.status != 'CONCLUDED'"
+                class="content__actions"
+              >
                 <img
-                  @click="openPopUp('cancel')"
+                  @click="
+                    openPopUp('cancel'), (scheduleId = schedules[index].schedule.scheduleId)
+                  "
                   src="../../assets/img/scheduling-cancel-icon.png"
                   alt="Cancel Icon"
                   class="action__icon"
                 />
                 <img
-                  @click="openPopUp('conclude')"
+                  @click="
+                    openPopUp('conclude'), (scheduleId = schedules[index].schedule.scheduleId)
+                  "
                   src="../../assets/img/scheduling-conclude-icon.png"
                   alt=" Conclude Icon"
                   class="action__icon"
                 />
                 <img
-                  @click="openPopUp('reschedule')"
+                  @click="
+                    openPopUp('reschedule'), (scheduleId = schedules[index].schedule.scheduleId)
+                  "
                   src="../../assets/img/scheduling-reschedule-icon.png"
                   alt="Reschedule Icon"
                   class="action__icon"
                 />
               </td>
-            </tr>
-            <tr class="table__content">
-              <td class="content__id">2</td>
-              <td class="content__donator">
-                <router-link :to="'/dashboard/donator'" class="donator__link">
-                  <img
-                    src="../../assets/img/donator-image.png"
-                    alt="Donator Image"
-                    class="donator__image"
-                  />
-                  <span class="donator__name"
-                    >Beatriz Fideliz Landi Coelho</span
-                  >
-                </router-link>
-              </td>
-              <td class="content__date">29/07/2023</td>
-              <td class="content__hour">11:10</td>
-              <td class="content__site">Descrição do local 2</td>
-              <td class="content__status">
-                <span class="status__text concluded">Concluído</span>
-              </td>
-              <td class="content__actions">
+              <td v-else class="content__actions">
                 <span class="action__none">N/A</span>
               </td>
             </tr>
@@ -159,6 +169,9 @@
 import PopUp from "../../assets/components/PopUp.vue";
 import openPopUp from "../../assets/js/methods/open-pop-up.js";
 
+import axios from "axios";
+import { BASE_URL } from "../../assets/js/config";
+
 export default {
   name: "Schedules",
   components: { PopUp },
@@ -167,15 +180,46 @@ export default {
       //Transition
       showTransition: false,
       selectedComponent: "",
+
+      //Schedules
+      schedules: [],
+      scheduleId: 0,
+
+      //User ID
+      userId: 0,
     };
   },
   methods: {
     openPopUp,
+    setUserId(userId) {
+      this.$store.commit("SET_USER_ID", userId);
+    },
+    getSchedules() {
+      axios.get(`${BASE_URL}/hospital/schedules`).then((response) => {
+        this.schedules = response.data.schedules;
+        console.log(this.schedules[3]);
+      });
+    },
+    getUserSchedule(status) {
+      const mappedSchedules = [
+        { SCHEDULED: "Agendado" },
+        { RESCHEDULED: "Remarcado" },
+        { PENDING: "Pendente" },
+        { CONCLUDED: "Concluído" },
+      ];
+
+      mappedSchedules.forEach((schedule) => {
+        if (status == Object.keys(schedule)) {
+          status = Object.values(schedule)[0];
+        }
+      });
+
+      return status;
+    },
   },
   mounted() {
-    console.log("antes: ", this.showTransition);
     this.showTransition = true;
-    console.log("depois: ", this.showTransition);
+    this.getSchedules();
   },
 };
 </script>

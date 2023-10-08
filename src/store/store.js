@@ -40,6 +40,9 @@ export default new Vuex.Store({
     hospitalPhoto:
       "https://firebasestorage.googleapis.com/v0/b/greenworld-f2763.appspot.com/o/images%2Favatar-man.png?alt=media&token=9d5745ab-3340-4e60-8a05-a55919c7dfa3",
     token: "",
+
+    //USER DATA
+    userId: 0,
   },
   mutations: {
     updateFormData(state, payload) {
@@ -62,6 +65,9 @@ export default new Vuex.Store({
     },
     SET_HOSPITAL_PHOTO(state, value) {
       state.hospitalPhoto = value;
+    },
+    SET_USER_ID(state, value) {
+      state.userId = value;
     },
   },
 });

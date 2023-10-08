@@ -4,13 +4,13 @@
       <div class="donator__header">
         <h1 class="donator__title">DOADOR</h1>
         <div class="profile-container">
-        <img
-          :src="$store.state.hospitalPhoto"
-          alt="Profile Image"
-          class="profile__image"
-        />
-        <span class="profile__name">{{ $store.state.hospitalName }}</span>
-      </div>
+          <img
+            :src="$store.state.hospitalPhoto"
+            alt="Profile Image"
+            class="profile__image"
+          />
+          <span class="profile__name">{{ $store.state.hospitalName }}</span>
+        </div>
       </div>
       <div class="donator-wrapper">
         <div class="donator__content">
@@ -177,6 +177,7 @@ import { BASE_URL } from "../../assets/js/config";
 
 export default {
   name: "Donator",
+  props: ["name", "id"],
   components: { PopUp },
   data() {
     return {
@@ -212,7 +213,7 @@ export default {
     openPopUp,
     getUserData() {
       axios
-        .get(`${BASE_URL}/users/1`)
+        .get(`${BASE_URL}/users/${this.$store.state.userId}`)
         .then((response) => {
           const userData = response.data.user;
 
@@ -242,12 +243,14 @@ export default {
       });
     },
     getHospitalSites() {
-      axios.get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/sites`).then((response) => {
-        this.sites = response.data.sites;
-      });
+      axios
+        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/sites`)
+        .then((response) => {
+          this.sites = response.data.sites;
+        });
     },
     getUserSchedules() {
-      axios.get(`${BASE_URL}/users/${this.id}/schedules`).then((response) => {
+      axios.get(`${BASE_URL}/users/${this.$store.state.userId}/schedules`).then((response) => {
         this.schedules = response.data.schedules;
       });
     },
