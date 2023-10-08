@@ -201,3 +201,13 @@ label {
   top: 0px;
   right: 0px;
 }
+
+/* TRANSITION STYLE */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}

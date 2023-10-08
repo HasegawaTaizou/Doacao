@@ -231,3 +231,13 @@ label {
   font-size: 1.125rem;
   cursor: pointer;
 }
+
+/* TRANSITION STYLE */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
