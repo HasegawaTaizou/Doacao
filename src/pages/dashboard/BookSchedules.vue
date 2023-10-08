@@ -144,7 +144,7 @@
       </div>
     </div>
   </section>
-  <PopUp
+  <!-- <PopUp
     v-if="selectedComponent === 'cancel'"
     :title="'Cancelar?'"
     :message="'Os agendamentos criados serão cancelados.'"
@@ -212,7 +212,7 @@
         </select>
       </div>
     </div>
-  </PopUp>
+  </PopUp> -->
 </template>
 
 <script>

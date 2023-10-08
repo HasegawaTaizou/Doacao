@@ -77,17 +77,17 @@
   align-items: center;
   gap: 22px;
   height: 58px;
-  padding-left: 32px;
+  padding-left: 24px;
   width: 100%;
 }
 
 .navigation-field i {
-  font-size: 1.75rem;
+  font-size: 2rem;
 }
 
 .navigation-field__name {
   font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 .log-out-content {
@@ -97,7 +97,7 @@
   height: 50px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   border: 0;
   transition: all 400ms ease-in-out;
   display: flex;
@@ -108,7 +108,7 @@
 }
 
 .log-out__text {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 600;
 }
 
