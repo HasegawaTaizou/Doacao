@@ -26,12 +26,18 @@
         <form @submit.prevent="login" method="POST" class="form__form">
           <div class="form__email-container">
             <label for="email" class="email__label">E-mail:</label>
-            <input type="text" class="email__input" v-model="email" />
+            <input
+              type="text"
+              class="email__input"
+              v-model="email"
+              placeholder="Digite o E-mail"
+            />
             <i class="fa-solid fa-envelope email__icon"></i>
           </div>
           <div class="form__password-container">
             <label for="password" class="password__label">Senha:</label>
             <input
+              placeholder="Digite a Senha"
               :type="isShowPassword ? 'text' : 'password'"
               class="password__input"
               autocomplete="new-password"
@@ -49,9 +55,17 @@
             <i class="fas fa-lock password-padlock__icon"></i>
           </div>
           <button type="submit" class="login__button">Entrar</button>
-          <router-link class="login__forgot-password" to="/redefine-password">
-            Esqueceu a senha?
-          </router-link>
+          <div class="other-links">
+            <router-link
+              class="login__create-account"
+              to="/hospital-registration-part-one"
+            >
+              Não possui cadastro?
+            </router-link>
+            <router-link class="login__forgot-password" to="/redefine-password">
+              Esqueceu a senha?
+            </router-link>
+          </div>
         </form>
       </div>
       <img

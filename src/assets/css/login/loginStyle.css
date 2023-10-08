@@ -71,6 +71,7 @@ label {
   display: flex;
   flex-direction: column;
   gap: 32px;
+  align-items: center;
 }
 
 .form__email-container {
@@ -139,11 +140,22 @@ label {
   cursor: pointer;
 }
 
+.other-links {
+  display: flex;
+  gap: 42px;
+}
+
+.login__create-account {
+  text-align: center;
+  border-bottom: 1px solid #000;
+  padding-bottom: 2px;
+  font-size: 1.5rem;
+}
+
 .login__forgot-password {
   text-align: center;
   border-bottom: 1px solid #000;
   padding-bottom: 2px;
-  margin: 0px 125px;
   font-size: 1.5rem;
 }
 
