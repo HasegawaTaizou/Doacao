@@ -4,13 +4,13 @@
       <div class="donator__header">
         <h1 class="donator__title">DOADOR</h1>
         <div class="profile-container">
-          <img
-            src="../../assets/img/hospital-profile-image.png"
-            alt="Profile Image"
-            class="profile__image"
-          />
-          <span class="profile__name">Hospital Notredame Intermédica</span>
-        </div>
+        <img
+          :src="$store.state.hospitalPhoto"
+          alt="Profile Image"
+          class="profile__image"
+        />
+        <span class="profile__name">{{ $store.state.hospitalName }}</span>
+      </div>
       </div>
       <div class="donator-wrapper">
         <div class="donator__content">

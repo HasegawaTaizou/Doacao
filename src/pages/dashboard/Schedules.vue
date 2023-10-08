@@ -4,11 +4,11 @@
       <h1 class="scheduling__title">AGENDAMENTOS</h1>
       <div class="profile-container">
         <img
-          src="../../assets/img/hospital-profile-image.png"
+          :src="$store.state.hospitalPhoto"
           alt="Profile Image"
           class="profile__image"
         />
-        <span class="profile__name">Hospital Notredame Intermédica</span>
+        <span class="profile__name">{{ $store.state.hospitalName }}</span>
       </div>
     </div>
     <div class="scheduling__content">

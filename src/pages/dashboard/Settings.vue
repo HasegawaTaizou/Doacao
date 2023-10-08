@@ -4,13 +4,13 @@
     <div class="settings__header">
       <h1 class="settings__title">CONFIGURAÇÕES</h1>
       <div class="profile-container">
-        <img
-          src="../../assets/img/hospital-profile-image.png"
-          alt="Profile Image"
-          class="profile__image"
-        />
-        <span class="profile__name">Hospital Notredame Intermédica</span>
-      </div>
+          <img
+            :src="$store.state.hospitalPhoto"
+            alt="Profile Image"
+            class="profile__image"
+          />
+          <span class="profile__name">{{ $store.state.hospitalName }}</span>
+        </div>
     </div>
     <div class="settings__content">
       <div class="hospital-general-data">

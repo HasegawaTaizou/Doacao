@@ -1,184 +1,184 @@
 <template>
   <transition name="fade">
-  <section id="statistics-dashboard">
-    <div class="statistics__header">
-      <h1 class="statistics__title">Estatísticas</h1>
-      <div class="profile-container">
-        <img
-          src="../../assets/img/hospital-profile-image.png"
-          alt="Profile Image"
-          class="profile__image"
-        />
-        <span class="profile__name">Hospital Notredame Intermédica</span>
-      </div>
-    </div>
-    <div class="statistics-wrapper">
-      <div class="statistics__schedules">
-        <h2 class="schedules-introduction__title">AGENDAMENTOS</h2>
-        <img
-          src="../../assets/img/statistics-schedules-image.png"
-          alt="Schedules Image"
-          class="schedules-introduction__image"
-        />
-        <div class="schedules__schedules-graph">
-          <div class="schedules-graph__graph">
-            <div class="graph__total-container">
-              <span class="total__text">Total</span>
-              <span class="total__number">{{ this.scheduledTotal }}</span>
-            </div>
-            <canvas id="doughnut-graph"></canvas>
-          </div>
-          <div class="schedules-graph__labels">
-            <div class="graph-label-container">
-              <span class="graph-label__title">Agendado</span>
-              <span
-                :style="`background-color: ${this.scheduledColor}`"
-                class="graph-label__text__before"
-              ></span>
-              <span class="graph-label__text">{{ this.scheduled }}</span>
-            </div>
-            <div class="graph-label-container">
-              <span class="graph-label__title">Concluído</span>
-              <span
-                :style="`background-color: ${this.concludedColor}`"
-                class="graph-label__text__before"
-              ></span>
-
-              <span class="graph-label__text">{{ this.concluded }}</span>
-            </div>
-            <div class="graph-label-container">
-              <span class="graph-label__title">Remarcado</span>
-              <span
-                :style="`background-color: ${this.rescheduledColor}`"
-                class="graph-label__text__before"
-              ></span>
-
-              <span class="graph-label__text">{{ this.rescheduled }}</span>
-            </div>
-            <div class="graph-label-container">
-              <span class="graph-label__title">Pendente</span>
-              <span
-                :style="`background-color: ${this.pendingColor}`"
-                class="graph-label__text__before"
-              ></span>
-              <span class="graph-label__text">{{ this.pending }}</span>
-            </div>
-          </div>
+    <section id="statistics-dashboard">
+      <div class="statistics__header">
+        <h1 class="statistics__title">Estatísticas</h1>
+        <div class="profile-container">
+          <img
+            :src="$store.state.hospitalPhoto"
+            alt="Profile Image"
+            class="profile__image"
+          />
+          <span class="profile__name">{{ $store.state.hospitalName }}</span>
         </div>
       </div>
-      <div class="statistics__reviews">
-        <h2 class="reviews__title">AVALIAÇÕES</h2>
-        <div class="reviews__graph-review-container">
-          <div class="graph-review__summary-container">
-            <span class="summary__average">{{ averageReview }}</span>
-            <div class="summary__stars-container">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-              <i class="far fa-star"></i>
+      <div class="statistics-wrapper">
+        <div class="statistics__schedules">
+          <h2 class="schedules-introduction__title">AGENDAMENTOS</h2>
+          <img
+            src="../../assets/img/statistics-schedules-image.png"
+            alt="Schedules Image"
+            class="schedules-introduction__image"
+          />
+          <div class="schedules__schedules-graph">
+            <div class="schedules-graph__graph">
+              <div class="graph__total-container">
+                <span class="total__text">Total</span>
+                <span class="total__number">{{ this.scheduledTotal }}</span>
+              </div>
+              <canvas id="doughnut-graph"></canvas>
             </div>
-            <span class="summary__total">{{ totalReviews }} Avaliações</span>
-          </div>
-          <div class="graph-review__graph-container">
-            <div class="graph__bar-container">
-              <div class="bar__line-container">
-                <div
-                  class="line__progress"
-                  :style="`width: ${this.fiveStarPercentage}%`"
-                ></div>
+            <div class="schedules-graph__labels">
+              <div class="graph-label-container">
+                <span class="graph-label__title">Agendado</span>
+                <span
+                  :style="`background-color: ${this.scheduledColor}`"
+                  class="graph-label__text__before"
+                ></span>
+                <span class="graph-label__text">{{ this.scheduled }}</span>
               </div>
-              <div class="bar__label-container">
-                <span class="label__number">5</span>
-                <i class="far fa-star label__star"></i>
+              <div class="graph-label-container">
+                <span class="graph-label__title">Concluído</span>
+                <span
+                  :style="`background-color: ${this.concludedColor}`"
+                  class="graph-label__text__before"
+                ></span>
+
+                <span class="graph-label__text">{{ this.concluded }}</span>
               </div>
-            </div>
-            <div class="graph__bar-container">
-              <div class="bar__line-container">
-                <div
-                  class="line__progress"
-                  :style="{ width: `${fourStarPercentage}%` }"
-                ></div>
+              <div class="graph-label-container">
+                <span class="graph-label__title">Remarcado</span>
+                <span
+                  :style="`background-color: ${this.rescheduledColor}`"
+                  class="graph-label__text__before"
+                ></span>
+
+                <span class="graph-label__text">{{ this.rescheduled }}</span>
               </div>
-              <div class="bar__label-container">
-                <span class="label__number">4</span>
-                <i class="far fa-star label__star"></i>
-              </div>
-            </div>
-            <div class="graph__bar-container">
-              <div class="bar__line-container">
-                <div
-                  class="line__progress"
-                  :style="{ width: `${threeStarPercentage}%` }"
-                ></div>
-              </div>
-              <div class="bar__label-container">
-                <span class="label__number">3</span>
-                <i class="far fa-star label__star"></i>
-              </div>
-            </div>
-            <div class="graph__bar-container">
-              <div class="bar__line-container">
-                <div
-                  class="line__progress"
-                  :style="{ width: `${twoStarPercentage}%` }"
-                ></div>
-              </div>
-              <div class="bar__label-container">
-                <span class="label__number">2</span>
-                <i class="far fa-star label__star"></i>
-              </div>
-            </div>
-            <div class="graph__bar-container">
-              <div class="bar__line-container">
-                <div
-                  class="line__progress"
-                  :style="{ width: `${fiveStarPercentage}%` }"
-                ></div>
-              </div>
-              <div class="bar__label-container">
-                <span class="label__number">1</span>
-                <i class="far fa-star label__star"></i>
+              <div class="graph-label-container">
+                <span class="graph-label__title">Pendente</span>
+                <span
+                  :style="`background-color: ${this.pendingColor}`"
+                  class="graph-label__text__before"
+                ></span>
+                <span class="graph-label__text">{{ this.pending }}</span>
               </div>
             </div>
           </div>
         </div>
-        <div class="reviews__comments-container">
-          <div
-            v-for="(review, index) in hospitalReviews"
-            :key="index"
-            class="comment-container"
-          >
-            <!-- <img
+        <div class="statistics__reviews">
+          <h2 class="reviews__title">AVALIAÇÕES</h2>
+          <div class="reviews__graph-review-container">
+            <div class="graph-review__summary-container">
+              <span class="summary__average">{{ averageReview }}</span>
+              <div class="summary__stars-container">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <span class="summary__total">{{ totalReviews }} Avaliações</span>
+            </div>
+            <div class="graph-review__graph-container">
+              <div class="graph__bar-container">
+                <div class="bar__line-container">
+                  <div
+                    class="line__progress"
+                    :style="`width: ${this.fiveStarPercentage}%`"
+                  ></div>
+                </div>
+                <div class="bar__label-container">
+                  <span class="label__number">5</span>
+                  <i class="far fa-star label__star"></i>
+                </div>
+              </div>
+              <div class="graph__bar-container">
+                <div class="bar__line-container">
+                  <div
+                    class="line__progress"
+                    :style="{ width: `${fourStarPercentage}%` }"
+                  ></div>
+                </div>
+                <div class="bar__label-container">
+                  <span class="label__number">4</span>
+                  <i class="far fa-star label__star"></i>
+                </div>
+              </div>
+              <div class="graph__bar-container">
+                <div class="bar__line-container">
+                  <div
+                    class="line__progress"
+                    :style="{ width: `${threeStarPercentage}%` }"
+                  ></div>
+                </div>
+                <div class="bar__label-container">
+                  <span class="label__number">3</span>
+                  <i class="far fa-star label__star"></i>
+                </div>
+              </div>
+              <div class="graph__bar-container">
+                <div class="bar__line-container">
+                  <div
+                    class="line__progress"
+                    :style="{ width: `${twoStarPercentage}%` }"
+                  ></div>
+                </div>
+                <div class="bar__label-container">
+                  <span class="label__number">2</span>
+                  <i class="far fa-star label__star"></i>
+                </div>
+              </div>
+              <div class="graph__bar-container">
+                <div class="bar__line-container">
+                  <div
+                    class="line__progress"
+                    :style="{ width: `${fiveStarPercentage}%` }"
+                  ></div>
+                </div>
+                <div class="bar__label-container">
+                  <span class="label__number">1</span>
+                  <i class="far fa-star label__star"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reviews__comments-container">
+            <div
+              v-for="(review, index) in hospitalReviews"
+              :key="index"
+              class="comment-container"
+            >
+              <!-- <img
               :src="review.photo"
               alt="Comment Image"
               class="comment__image"
             /> -->
-            <img
-              src="../../assets/img/donator-image.png"
-              alt="Comment Image"
-              class="comment__image"
-            />
-            <router-link :to="'/dashboard/donator'" class="comment__donator">
-              {{ review.name }}
-            </router-link>
-            <div class="comment__stars-container">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-              <i class="far fa-star"></i>
+              <img
+                src="../../assets/img/donator-image.png"
+                alt="Comment Image"
+                class="comment__image"
+              />
+              <router-link :to="'/dashboard/donator'" class="comment__donator">
+                {{ review.name }}
+              </router-link>
+              <div class="comment__stars-container">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <span class="comment__date">{{ review.date }}</span>
+              <p class="comment__text">
+                {{ review.opinion }}
+              </p>
             </div>
-            <span class="comment__date">{{ review.date }}</span>
-            <p class="comment__text">
-              {{ review.opinion }}
-            </p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-</transition>
+    </section>
+  </transition>
 </template>
 
 <script>
@@ -241,7 +241,9 @@ export default {
   methods: {
     getSchedulesStatistics() {
       axios
-        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/statistics/schedules`)
+        .get(
+          `${BASE_URL}/hospital/${this.$store.state.hospitalId}/statistics/schedules`
+        )
         .then((response) => {
           const schedulesStatisticsData = response.data.schedulesStatistics;
 
@@ -254,7 +256,9 @@ export default {
     },
     getRatingsStatistics() {
       axios
-        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/statistics/ratings`)
+        .get(
+          `${BASE_URL}/hospital/${this.$store.state.hospitalId}/statistics/ratings`
+        )
         .then((response) => {
           const hospitalRatingsData = response.data.ratingsStatistics;
 
@@ -268,7 +272,9 @@ export default {
     },
     getReviews() {
       axios
-        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/statistics/reviews`)
+        .get(
+          `${BASE_URL}/hospital/${this.$store.state.hospitalId}/statistics/reviews`
+        )
         .then((response) => {
           this.hospitalReviews = response.data.reviewsStatistics;
         });

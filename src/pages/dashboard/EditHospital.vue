@@ -5,11 +5,11 @@
         <h1 class="settings__title">EDITAR PERFIL</h1>
         <div class="profile-container">
           <img
-            src="../../assets/img/hospital-profile-image.png"
+            :src="$store.state.hospitalPhoto"
             alt="Profile Image"
             class="profile__image"
           />
-          <span class="profile__name">Hospital Notredame Intermédica</span>
+          <span class="profile__name">{{ $store.state.hospitalName }}</span>
         </div>
       </div>
       <div class="settings__content">
@@ -182,7 +182,7 @@ export default {
     return {
       //Transition
       showTransition: false,
-      
+
       selectedComponent: "",
       hospitalData: [],
       addressData: [],
@@ -191,11 +191,13 @@ export default {
   methods: {
     openPopUp,
     getHospitalData() {
-      axios.get(`${BASE_URL}/hospital-data/${this.$store.state.hospitalId}`).then((response) => {
-        this.hospitalData = response.data.hospital;
-        this.addressData = response.data.address;
-        console.log(this.addressData);
-      });
+      axios
+        .get(`${BASE_URL}/hospital-data/${this.$store.state.hospitalId}`)
+        .then((response) => {
+          this.hospitalData = response.data.hospital;
+          this.addressData = response.data.address;
+          console.log(this.addressData);
+        });
     },
     editHospital() {
       const updateHospitalData = {

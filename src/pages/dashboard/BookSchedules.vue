@@ -4,11 +4,11 @@
       <h1 class="book-schedules__title">RESERVAR AGENDAMENTOS</h1>
       <div class="profile-container">
         <img
-          src="../../assets/img/hospital-profile-image.png"
+          :src="$store.state.hospitalPhoto"
           alt="Profile Image"
           class="profile__image"
         />
-        <span class="profile__name">Hospital Notredame Intermédica</span>
+        <span class="profile__name">{{ $store.state.hospitalName }}</span>
       </div>
     </div>
     <div class="book-schedules-wrapper">
@@ -144,7 +144,7 @@
       </div>
     </div>
   </section>
-  <!-- <PopUp
+  <PopUp
     v-if="selectedComponent === 'cancel'"
     :title="'Cancelar?'"
     :message="'Os agendamentos criados serão cancelados.'"
@@ -212,7 +212,7 @@
         </select>
       </div>
     </div>
-  </PopUp> -->
+  </PopUp>
 </template>
 
 <script>
