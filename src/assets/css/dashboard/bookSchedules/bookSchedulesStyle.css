@@ -41,7 +41,7 @@
 
 .book-schedules__content {
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
   background-color: #ffffff;
   border-radius: 12px;
   margin: 0px 32px;
@@ -51,9 +51,9 @@
 .book-scheduling-container {
   display: grid;
   grid-template-areas:
-    "input button"
+    "input input"
     "schedules schedules"
-    "actions actions";
+    "actions .";
   grid-template-columns: auto auto;
   grid-template-rows: auto auto auto;
   justify-content: space-between;
@@ -109,7 +109,6 @@
 }
 
 .book-scheduling__button {
-  grid-area: button;
   background-color: #2c62f1;
   width: 214px;
   height: 48px;
@@ -122,6 +121,9 @@
   font-family: "Abel";
   font-size: 1.25rem;
   cursor: pointer;
+  align-self: flex-end;
+  margin-bottom: 2px;
+  margin-left: 42px;
 }
 
 .schedules-available {
@@ -140,26 +142,33 @@
 
 .schedules__table {
   margin: 36px 0px;
+  width: 800px;
 }
 
 .schedules-available {
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.schedules-available__image {
+  width: 526px;
+  height: 526px;
+  padding: 42px 0px;
+  margin: 36px 36px;
 }
 
 .schedules-available > .schedules__table {
   padding: 42px 0px;
   margin: 36px 36px;
-  display: flex;
   border-spacing: 0px;
   border-collapse: separate;
-  width: 100%;
 }
 
 tr,
 td,
 th {
-  margin: auto;
   padding: 10px;
 }
 
@@ -170,10 +179,21 @@ th {
 }
 
 tr {
-  text-align: center;
   font-size: 1.5rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: 150px 100px 1fr auto;
   gap: 38px;
+}
+
+tbody {
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
+  max-height: 85vh;
+  overflow-y: scroll;
+}
+
+.table__content:hover {
+  transition: all 0.5s;
   background: rgba(209, 209, 209, 0.23);
 }
 
@@ -181,6 +201,12 @@ tr {
   background-color: #638bff;
   color: #fff;
   font-size: 1.75rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.title__action {
+  margin-right: 12px;
 }
 
 tr:not(:first-child) {
@@ -243,10 +269,11 @@ tr:not(:last-child)::after {
 .book-scheduling__actions-buttons {
   grid-area: actions;
   display: flex;
-  gap: 32px;
+  gap: 42px;
   justify-content: center;
   align-items: center;
   margin-top: 32px;
+
 }
 
 .action-button__cancel {
@@ -286,3 +313,4 @@ tr:not(:last-child)::after {
 .fade-leave-to {
   opacity: 0;
 }
+

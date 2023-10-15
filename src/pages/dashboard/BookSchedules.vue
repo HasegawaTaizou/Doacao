@@ -38,15 +38,16 @@
                 </option>
               </select>
             </div>
+            <button @click="addSchedule" class="book-scheduling__button">
+              <span class="book-scheduling__text">Reservar agendamento</span>
+              <img
+                src="../../assets/img/plus-icon.png"
+                alt="Book Scheduling Icon"
+                class="book-scheduling__icon"
+              />
+            </button>
           </div>
-          <button @click="addSchedule" class="book-scheduling__button">
-            <span class="book-scheduling__text">Reservar agendamento</span>
-            <img
-              src="../../assets/img/plus-icon.png"
-              alt="Book Scheduling Icon"
-              class="book-scheduling__icon"
-            />
-          </button>
+
           <div
             v-if="this.tableBookSchedules.length > 0"
             class="book-scheduling__schedules"
@@ -99,6 +100,11 @@
             </button>
           </div>
         </div>
+        <img
+          src="../../assets/img/book-schedule-image.png"
+          alt="Schedules Avaible Image"
+          class="schedules-available__image"
+        />
       </div>
       <h2 class="schedules-available__title">Agendamentos disponíveis:</h2>
       <div class="schedules-available">
@@ -141,6 +147,11 @@
             </tr>
           </tbody>
         </table>
+        <img
+          src="../../assets/img/book-schedule-image.png"
+          alt="Schedules Avaible Image"
+          class="schedules-available__image"
+        />
       </div>
     </div>
   </section>
@@ -257,9 +268,11 @@ export default {
   },
   methods: {
     getHospitalSites() {
-      axios.get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/sites`).then((response) => {
-        this.sites = response.data.sites;
-      });
+      axios
+        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/sites`)
+        .then((response) => {
+          this.sites = response.data.sites;
+        });
     },
     addSchedule() {
       if (this.scheduleDatetime != "" && this.scheduleSite != "") {
@@ -325,9 +338,13 @@ export default {
       axios.put(`${BASE_URL}/schedule-reschedule`, updateBookScheduleData);
     },
     getBookSchedules() {
-      axios.get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/book-schedules`).then((response) => {
-        this.bookSchedules = response.data.bookSchedules;
-      });
+      axios
+        .get(
+          `${BASE_URL}/hospital/${this.$store.state.hospitalId}/book-schedules`
+        )
+        .then((response) => {
+          this.bookSchedules = response.data.bookSchedules;
+        });
     },
     deleteBookSchedule() {
       axios.delete(`${BASE_URL}/delete-book-schedule/${this.bookScheduleId}`);

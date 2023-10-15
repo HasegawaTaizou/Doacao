@@ -4,11 +4,11 @@
       <h1 class="scheduling__title">AGENDAMENTOS</h1>
       <div class="profile-container">
         <img
-          src="../../assets/img/hospital-profile-image.png"
+          :src="$store.state.hospitalPhoto"
           alt="Profile Image"
           class="profile__image"
         />
-        <span class="profile__name">Hospital Notredame Intermédica</span>
+        <span class="profile__name">{{ $store.state.hospitalName }}</span>
       </div>
     </div>
     <div class="scheduling__content">
@@ -73,12 +73,18 @@
               <td class="content__site">
                 {{ schedules[index].schedule.site }}
               </td>
-              <td class="content__status">
+              <!-- <td class="content__status">
                 <span
                   class="status__text"
                   :class="schedules[index].schedule.status.toLowerCase()"
                   >{{ getUserSchedule(schedules[index].schedule.status) }}</span
                 >
+              </td> -->
+              <td
+                class="content__status"
+                :class="schedules[index].schedule.status.toLowerCase()"
+              >
+                {{ getUserSchedule(schedules[index].schedule.status) }}
               </td>
               <td
                 v-if="schedules[index].schedule.status != 'CONCLUDED'"
@@ -86,7 +92,8 @@
               >
                 <img
                   @click="
-                    openPopUp('cancel'), (scheduleId = schedules[index].schedule.scheduleId)
+                    openPopUp('cancel'),
+                      (scheduleId = schedules[index].schedule.scheduleId)
                   "
                   src="../../assets/img/scheduling-cancel-icon.png"
                   alt="Cancel Icon"
@@ -94,7 +101,8 @@
                 />
                 <img
                   @click="
-                    openPopUp('conclude'), (scheduleId = schedules[index].schedule.scheduleId)
+                    openPopUp('conclude'),
+                      (scheduleId = schedules[index].schedule.scheduleId)
                   "
                   src="../../assets/img/scheduling-conclude-icon.png"
                   alt=" Conclude Icon"
@@ -102,7 +110,8 @@
                 />
                 <img
                   @click="
-                    openPopUp('reschedule'), (scheduleId = schedules[index].schedule.scheduleId)
+                    openPopUp('reschedule'),
+                      (scheduleId = schedules[index].schedule.scheduleId)
                   "
                   src="../../assets/img/scheduling-reschedule-icon.png"
                   alt="Reschedule Icon"
@@ -195,10 +204,12 @@ export default {
       this.$store.commit("SET_USER_ID", userId);
     },
     getSchedules() {
-      axios.get(`${BASE_URL}/hospital/schedules`).then((response) => {
-        this.schedules = response.data.schedules;
-        console.log(this.schedules[3]);
-      });
+      axios
+        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/schedules`)
+        .then((response) => {
+          this.schedules = response.data.schedules;
+          console.log(this.schedules[3]);
+        });
     },
     getUserSchedule(status) {
       const mappedSchedules = [
