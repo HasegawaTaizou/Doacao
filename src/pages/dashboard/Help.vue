@@ -55,9 +55,7 @@ export default {
     };
   },
   mounted() {
-    console.log('antes: ', this.showTransition);
     this.showTransition = true;
-    console.log('depois: ', this.showTransition);
   },
 };
 </script>

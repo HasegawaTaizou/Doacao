@@ -72,11 +72,20 @@
             <div class="graph-review__summary-container">
               <span class="summary__average">{{ averageReview }}</span>
               <div class="summary__stars-container">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
+                <i
+                  v-for="(star, index) in Math.floor(averageReview)"
+                  class="fas fa-star"
+                  :key="index"
+                ></i>
+                <i
+                  class="fas fa-star-half-alt"
+                  v-if="averageReview % 1 !== 0"
+                ></i>
+                <i
+                  v-for="(star, index) in 5 - Math.ceil(averageReview)"
+                  class="far fa-star"
+                  :key="index"
+                ></i>
               </div>
               <span class="summary__total">{{ totalReviews }} Avaliações</span>
             </div>
@@ -149,25 +158,26 @@
               :key="index"
               class="comment-container"
             >
-              <!-- <img
-              :src="review.photo"
-              alt="Comment Image"
-              class="comment__image"
-            /> -->
               <img
-                src="../../assets/img/donator-image.png"
+                :src="review.photo"
                 alt="Comment Image"
                 class="comment__image"
               />
+
               <router-link :to="'/dashboard/donator'" class="comment__donator">
                 {{ review.name }}
               </router-link>
               <div class="comment__stars-container">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
+                <i
+                  class="fas fa-star"
+                  v-for="(star, index) in review.starRating"
+                  :key="index"
+                ></i>
+                <i
+                  v-for="(star, index) in 5 - review.starRating"
+                  class="far fa-star"
+                  :key="index"
+                ></i>
               </div>
               <span class="comment__date">{{ review.date }}</span>
               <p class="comment__text">
@@ -195,20 +205,20 @@ export default {
       showTransition: false,
 
       //Label Data
-      scheduled: 2,
-      concluded: 2,
-      rescheduled: 2,
-      pending: 2,
-      scheduledTotal: 2,
+      scheduled: 0,
+      concluded: 0,
+      rescheduled: 0,
+      pending: 0,
+      scheduledTotal: 0,
 
       //Stars Review Data
-      totalReviews: 10,
-      fiveStarsReview: 2,
-      fourStarsReview: 1,
-      threeStarsReview: 1,
-      twoStarsReview: 1,
-      oneStarsReview: 2,
-      averageReview: 2,
+      totalReviews: 0,
+      fiveStarsReview: 0,
+      fourStarsReview: 0,
+      threeStarsReview: 0,
+      twoStarsReview: 0,
+      oneStarsReview: 0,
+      averageReview: 0,
 
       //Hospital Reviews
       hospitalReviews: [],
@@ -252,6 +262,8 @@ export default {
           this.rescheduled = schedulesStatisticsData.rescheduledAmount;
           this.pending = schedulesStatisticsData.pendingAmount;
           this.scheduledTotal = schedulesStatisticsData.totalSchedules;
+
+          this.createChart();
         });
     },
     getRatingsStatistics() {
@@ -262,12 +274,14 @@ export default {
         .then((response) => {
           const hospitalRatingsData = response.data.ratingsStatistics;
 
+          console.log(hospitalRatingsData);
           this.oneStarsReview = hospitalRatingsData.oneStarsRating;
           this.twoStarsReview = hospitalRatingsData.twoStarsRating;
           this.threeStarsReview = hospitalRatingsData.threeStarsRating;
           this.fourStarsReview = hospitalRatingsData.fourStarsRating;
           this.fiveStarsReview = hospitalRatingsData.fiveStarsRating;
           this.averageReview = hospitalRatingsData.average;
+          this.totalReviews = hospitalRatingsData.totalReviews;
         });
     },
     getReviews() {
@@ -279,49 +293,50 @@ export default {
           this.hospitalReviews = response.data.reviewsStatistics;
         });
     },
+    createChart() {
+      const ctx = document.getElementById("doughnut-graph");
+
+      const data = {
+        labels: ["Agendado", "Concluído", "Remarcado", "Pendente"],
+        datasets: [
+          {
+            label: "Quantidade",
+            data: [
+              this.scheduled,
+              this.concluded,
+              this.rescheduled,
+              this.pending,
+            ],
+            backgroundColor: [
+              this.scheduledColor,
+              this.concludedColor,
+              this.rescheduledColor,
+              this.pendingColor,
+            ],
+            hoverOffset: 4,
+          },
+        ],
+      };
+
+      new Chart(ctx, {
+        type: "doughnut",
+        data: data,
+        options: {
+          maintainAspectRatio: false,
+          responsive: true,
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+        },
+      });
+    },
   },
   mounted() {
     this.getSchedulesStatistics();
     this.getRatingsStatistics();
     this.getReviews();
-
-    const ctx = document.getElementById("doughnut-graph");
-
-    const data = {
-      labels: ["Agendado", "Concluído", "Remarcado", "Pendente"],
-      datasets: [
-        {
-          label: "Quantidade",
-          data: [
-            this.scheduled,
-            this.concluded,
-            this.rescheduled,
-            this.pending,
-          ],
-          backgroundColor: [
-            this.scheduledColor,
-            this.concludedColor,
-            this.rescheduledColor,
-            this.pendingColor,
-          ],
-          hoverOffset: 4,
-        },
-      ],
-    };
-
-    new Chart(ctx, {
-      type: "doughnut",
-      data: data,
-      options: {
-        maintainAspectRatio: false,
-        responsive: true,
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-      },
-    });
 
     this.showTransition = true;
   },
