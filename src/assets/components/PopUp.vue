@@ -54,15 +54,15 @@ export default {
   },
 };
 </script>
-  
-  <style>
+
+<style>
 .popup-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
   min-width: 416px;
-  max-width: 416px;
+  max-width: fit-content;
   width: 100%;
   position: fixed;
   top: 30%;
@@ -73,6 +73,7 @@ export default {
   height: fit-content;
   background-color: #fff;
   gap: 32px;
+  padding: 24px;
 }
 
 .popup__title {
@@ -129,4 +130,3 @@ export default {
   transition: opacity 0.5s ease-out;
 }
 </style>
-  

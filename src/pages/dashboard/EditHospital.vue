@@ -74,6 +74,11 @@
                 class="cep__input"
                 v-model="addressData.cep"
                 v-mask="'#####-###'"
+                @blur="
+                  () => {
+                    fillAdrress();
+                  }
+                "
               />
             </div>
             <div class="hospital-address-data__state-container">
@@ -175,6 +180,8 @@ import openPopUp from "../../assets/js/methods/open-pop-up.js";
 import { BASE_URL } from "../../assets/js/config";
 import axios from "axios";
 
+import fillAdrress from "../../assets/js/methods/input/fill-address";
+
 export default {
   name: "EditHospital",
   components: { PopUp },
@@ -190,13 +197,34 @@ export default {
   },
   methods: {
     openPopUp,
+    fillAdrress() {
+    
+    this.addressData.cep = this.addressData.cep.replace('-', "")
+  
+    axios
+      .get(`https://viacep.com.br/ws/${this.addressData.cep}/json/`)
+      .then((response) => {
+        this.addressData.road = response.data.logradouro
+        this.addressData.neighborhood = response.data.bairro
+        this.addressData.complement = response.data.complemento
+        this.addressData.uf = response.data.uf
+        this.addressData.city = response.data.localidade
+        // this.formData.road = response.data.logradouro;
+        // this.formData.neighborhood = response.data.bairro;
+        // this.formData.complement = response.data.complemento;
+        // this.formData.uf = response.data.uf;
+        // this.formData.city = response.data.localidade;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  },
     getHospitalData() {
       axios
         .get(`${BASE_URL}/hospital-data/${this.$store.state.hospitalId}`)
         .then((response) => {
           this.hospitalData = response.data.hospital;
           this.addressData = response.data.address;
-          console.log(this.addressData);
         });
     },
     editHospital() {

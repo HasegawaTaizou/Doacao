@@ -154,76 +154,80 @@
         />
       </div>
     </div>
+    <PopUp
+      v-if="selectedComponent === 'cancel'"
+      :title="'Cancelar?'"
+      :message="'Os agendamentos criados serão cancelados.'"
+      :acceptFunction="clearSchedules"
+    ></PopUp>
+    <PopUp
+      v-if="selectedComponent === 'cancel-book-schedule'"
+      :title="'Excluir agendamento?'"
+      :message="`O agendamento será excluído.`"
+      :acceptFunction="deleteBookSchedule"
+    ></PopUp>
+    <PopUp
+      v-if="selectedComponent === 'save'"
+      :title="'Salvar?'"
+      :message="'Os agendamentos criados serão colocados como agendamentos disponíveis.'"
+      :acceptFunction="addSchedules"
+    ></PopUp>
+    <PopUp
+      v-if="selectedComponent === 'reschedule'"
+      :title="'Remarcar'"
+      :message="'Escolha a data e o horário para remarcar'"
+      :acceptFunction="updateSchedule"
+    >
+      <div class="book-scheduling">
+        <div class="scheduling-date">
+          <input
+            v-model="scheduleDatetime"
+            type="datetime-local"
+            name=""
+            id=""
+            class="date__datetime-local"
+          />
+        </div>
+        <div class="scheduling-site">
+          <select v-model="scheduleSite" name="" id="" class="site__select">
+            <option disabled value="">Escolha o local</option>
+            <option value="Descrição Local 1">Descrição Local 1</option>
+            <option value="Descrição Local 2">Descrição Local 2</option>
+          </select>
+        </div>
+      </div>
+    </PopUp>
+    <PopUp
+      v-if="selectedComponent === 'reschedule-book-schedule'"
+      :title="'Remarcar'"
+      :message="'Escolha a data e o horário para remarcar'"
+      :acceptFunction="updateBookSchedule"
+    >
+      <div class="book-scheduling">
+        <div class="scheduling-date">
+          <input
+            v-model="bookScheduleDatetime"
+            type="datetime-local"
+            name=""
+            id=""
+            class="date__datetime-local"
+          />
+        </div>
+        <div class="scheduling-site">
+          <select v-model="bookScheduleSite" name="" id="" class="site__select">
+            <option disabled value="">Escolha o local</option>
+            <option
+              v-for="site in sites"
+              :key="site.idSite"
+              :value="site.idSite"
+            >
+              {{ site.site }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </PopUp>
   </section>
-  <!-- <PopUp
-    v-if="selectedComponent === 'cancel'"
-    :title="'Cancelar?'"
-    :message="'Os agendamentos criados serão cancelados.'"
-    :acceptFunction="clearSchedules"
-  ></PopUp>
-  <PopUp
-    v-if="selectedComponent === 'cancel-book-schedule'"
-    :title="'Excluir agendamento?'"
-    :message="`O agendamento será excluído.`"
-    :acceptFunction="deleteBookSchedule"
-  ></PopUp>
-  <PopUp
-    v-if="selectedComponent === 'save'"
-    :title="'Salvar?'"
-    :message="'Os agendamentos criados serão colocados como agendamentos disponíveis.'"
-    :acceptFunction="addSchedules"
-  ></PopUp>
-  <PopUp
-    v-if="selectedComponent === 'reschedule'"
-    :title="'Remarcar'"
-    :message="'Escolha a data e o horário para remarcar'"
-    :acceptFunction="updateSchedule"
-  >
-    <div class="book-scheduling">
-      <div class="scheduling-date">
-        <input
-          v-model="scheduleDatetime"
-          type="datetime-local"
-          name=""
-          id=""
-          class="date__datetime-local"
-        />
-      </div>
-      <div class="scheduling-site">
-        <select v-model="scheduleSite" name="" id="" class="site__select">
-          <option disabled value="">Escolha o local</option>
-          <option value="Descrição Local 1">Descrição Local 1</option>
-          <option value="Descrição Local 2">Descrição Local 2</option>
-        </select>
-      </div>
-    </div>
-  </PopUp>
-  <PopUp
-    v-if="selectedComponent === 'reschedule-book-schedule'"
-    :title="'Remarcar'"
-    :message="'Escolha a data e o horário para remarcar'"
-    :acceptFunction="updateBookSchedule"
-  >
-    <div class="book-scheduling">
-      <div class="scheduling-date">
-        <input
-          v-model="bookScheduleDatetime"
-          type="datetime-local"
-          name=""
-          id=""
-          class="date__datetime-local"
-        />
-      </div>
-      <div class="scheduling-site">
-        <select v-model="bookScheduleSite" name="" id="" class="site__select">
-          <option disabled value="">Escolha o local</option>
-          <option v-for="site in sites" :key="site.idSite" :value="site.idSite">
-            {{ site.site }}
-          </option>
-        </select>
-      </div>
-    </div>
-  </PopUp> -->
 </template>
 
 <script>
@@ -291,6 +295,7 @@ export default {
         .post(`${BASE_URL}/book-schedules`, this.tableBookSchedules)
         .then(() => {
           this.clearSchedules();
+          location.reload();
         });
     },
     removeSchedule(index) {
@@ -335,7 +340,11 @@ export default {
         siteId: this.bookScheduleSite,
       };
 
-      axios.put(`${BASE_URL}/schedule-reschedule`, updateBookScheduleData);
+      axios
+        .put(`${BASE_URL}/schedule-reschedule`, updateBookScheduleData)
+        .then(() => {
+          location.reload();
+        });
     },
     getBookSchedules() {
       axios
@@ -347,7 +356,11 @@ export default {
         });
     },
     deleteBookSchedule() {
-      axios.delete(`${BASE_URL}/delete-book-schedule/${this.bookScheduleId}`);
+      axios
+        .delete(`${BASE_URL}/delete-book-schedule/${this.bookScheduleId}`)
+        .then(() => {
+          location.reload();
+        });
     },
     openPopUp,
   },

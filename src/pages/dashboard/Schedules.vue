@@ -126,52 +126,60 @@
         </table>
       </div>
     </div>
+    <PopUp
+      v-if="selectedComponent === 'cancel'"
+      :title="'Cancelar?'"
+      :message="'Digite o motivo do cancelamento (Opcional)'"
+      :acceptFunction="cancelSchedule"
+    >
+      <textarea
+        name=""
+        id=""
+        cols="30"
+        rows="10"
+        class="cancel-reason"
+        placeholder="Motivo:"
+        v-model="reason"
+      ></textarea>
+    </PopUp>
+    <PopUp
+      v-if="selectedComponent === 'conclude'"
+      :title="'Concluir?'"
+      :message="'Os dados serão alterados e não terá como desfazer esta ação.'"
+      :acceptFunction="concludeSchedule"
+    >
+    </PopUp>
+    <PopUp
+      v-if="selectedComponent === 'reschedule'"
+      :title="'Remarcar'"
+      :message="'Escolha a data e o horário para remarcar'"
+      :acceptFunction="rescheduleSchedule"
+    >
+      <div class="book-scheduling">
+        <div class="scheduling-date">
+          <input
+            type="datetime-local"
+            name=""
+            id=""
+            class="date__datetime-local"
+            v-model="scheduleDateTime"
+          />
+        </div>
+        <div class="scheduling-site">
+          <select v-model="scheduleSite" name="" id="" class="site__select">
+            <option disabled value="">Escolha o local</option>
+            <option
+              v-for="site in sites"
+              :key="site.idSite"
+              :value="site.idSite"
+            >
+              {{ site.site }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </PopUp>
   </section>
-  <!-- <PopUp
-    v-if="selectedComponent === 'cancel'"
-    :title="'Cancelar?'"
-    :message="'Digite o motivo do cancelamento (Opcional)'"
-    :acceptFunction="deleteVolunteer"
-  >
-    <textarea
-      name=""
-      id=""
-      cols="30"
-      rows="10"
-      class="cancel-reason"
-      placeholder="Motivo:"
-    ></textarea>
-  </PopUp>
-  <PopUp
-    v-if="selectedComponent === 'conclude'"
-    :title="'Concluir?'"
-    :message="'Os dados serão alterados e não terá como desfazer esta ação.'"
-    :acceptFunction="deleteVolunteer"
-  >
-  </PopUp>
-  <PopUp
-    v-if="selectedComponent === 'reschedule'"
-    :title="'Remarcar'"
-    :message="'Escolha a data e o horário para remarcar'"
-    :acceptFunction="deleteVolunteer"
-  >
-    <div class="book-scheduling">
-      <div class="scheduling-date">
-        <input
-          type="datetime-local"
-          name=""
-          id=""
-          class="date__datetime-local"
-        />
-      </div>
-      <div class="scheduling-site">
-        <select name="" id="" class="site__select">
-          <option value="" disabled>Escolha o local</option>
-          <option value="1">Descrição Local 1</option>
-        </select>
-      </div>
-    </div>
-  </PopUp> -->
 </template>
 
 <script>
@@ -180,6 +188,8 @@ import openPopUp from "../../assets/js/methods/open-pop-up.js";
 
 import axios from "axios";
 import { BASE_URL } from "../../assets/js/config";
+
+import { format } from "date-fns";
 
 export default {
   name: "Schedules",
@@ -196,6 +206,15 @@ export default {
 
       //User ID
       userId: 0,
+
+      //Schedule
+      reason: "",
+      sites: [],
+      scheduleSite: "",
+      scheduleDateTime: "",
+      scheduleDatetimeFormatted: "",
+      scheduleDate: "",
+      scheduleTime: "",
     };
   },
   methods: {
@@ -208,7 +227,6 @@ export default {
         .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/schedules`)
         .then((response) => {
           this.schedules = response.data.schedules;
-          console.log(this.schedules[3]);
         });
     },
     getUserSchedule(status) {
@@ -227,10 +245,61 @@ export default {
 
       return status;
     },
+    cancelSchedule() {
+      const scheduleData = {
+        id: this.scheduleId,
+        observation: this.reason,
+      };
+
+      axios.put(`${BASE_URL}/schedule-cancel`, scheduleData).then(() => {
+        location.reload();
+      });
+    },
+    formatDateTime() {
+      console.log(this.scheduleDateTime);
+      this.scheduleDatetimeFormatted = format(
+        new Date(this.scheduleDateTime),
+        "dd/MM/yyyy HH:mm"
+      );
+    },
+    rescheduleSchedule() {
+      this.formatDateTime();
+      const dateParts = this.scheduleDatetimeFormatted.split(" ");
+      this.scheduleDate = dateParts[0];
+      this.scheduleTime = dateParts[1];
+
+      const scheduleData = {
+        id: this.scheduleId,
+        date: this.scheduleDate,
+        hour: this.scheduleTime,
+        siteId: this.scheduleSite,
+      };
+
+      console.log(scheduleData);
+
+      axios.put(`${BASE_URL}/schedule-reschedule`, scheduleData).then(() => {
+        location.reload();
+      });
+    },
+    concludeSchedule() {
+      const scheduleData = {
+        id: this.scheduleId,
+      };
+
+      axios.put(`${BASE_URL}/schedule-conclude`, scheduleData);
+    },
+    getHospitalSites() {
+      axios
+        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/sites`)
+        .then((response) => {
+          this.sites = response.data.sites;
+        });
+    },
   },
   mounted() {
     this.showTransition = true;
     this.getSchedules();
+    this.getHospitalSites();
   },
 };
 </script>
