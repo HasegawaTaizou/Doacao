@@ -130,11 +130,11 @@
         alt="Hospital Registration Image"
         class="hospital-registration__image"
       />
-      <NotificationBar
+      <!-- <NotificationBar
         v-if="$store.state.showNotification"
         :route="'/'"
         :message="'Cadastro realizado com sucesso! Verifique seu e-mail'"
-      />
+      /> -->
     </main>
     <footer>
       <p class="footer__text">

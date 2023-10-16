@@ -67,6 +67,7 @@
 .schedules-introduction__image {
   grid-area: image;
   transform: translateY(-50px);
+  margin-left: 160px;
 }
 
 .schedules__schedules-graph {

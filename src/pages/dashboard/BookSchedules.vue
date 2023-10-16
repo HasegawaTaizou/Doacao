@@ -101,7 +101,7 @@
           </div>
         </div>
         <img
-          src="../../assets/img/book-schedule-image.png"
+          src="../../assets/img/book-schedule-image2.png"
           alt="Schedules Avaible Image"
           class="schedules-available__image"
         />
