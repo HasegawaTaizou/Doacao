@@ -30,7 +30,7 @@ export default function postData(formData) {
   axios
     .post(`${BASE_URL}/hospital-registration`, insertHospitalData)
     .then((response) => {
-      this.$router.push('/login')
+      router.push('/login')
       console.log(response.data);
       // sendEmail(formData)
     })

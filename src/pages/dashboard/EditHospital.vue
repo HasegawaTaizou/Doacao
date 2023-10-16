@@ -209,11 +209,6 @@ export default {
         this.addressData.complement = response.data.complemento
         this.addressData.uf = response.data.uf
         this.addressData.city = response.data.localidade
-        // this.formData.road = response.data.logradouro;
-        // this.formData.neighborhood = response.data.bairro;
-        // this.formData.complement = response.data.complemento;
-        // this.formData.uf = response.data.uf;
-        // this.formData.city = response.data.localidade;
       })
       .catch((error) => {
         console.error(error);
@@ -223,8 +218,10 @@ export default {
       axios
         .get(`${BASE_URL}/hospital-data/${this.$store.state.hospitalId}`)
         .then((response) => {
+          console.log(response.data.hospital);
           this.hospitalData = response.data.hospital;
           this.addressData = response.data.address;
+          
         });
     },
     editHospital() {
