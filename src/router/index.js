@@ -21,6 +21,10 @@ import RedefinePassword from "@/pages/dashboard/RedefinePassword.vue";
 import EditHospital from "@/pages/dashboard/EditHospital.vue";
 import Help from "@/pages/dashboard/Help.vue";
 import Statistics from "@/pages/dashboard/Statistics.vue";
+import Campaigns from "@/pages/dashboard/Campaigns.vue";
+import AddCampaign from "@/pages/dashboard/AddCampaign.vue";
+import SeeCampaign from "@/pages/dashboard/SeeCampaign.vue";
+import Donation from "@/pages/dashboard/Donation.vue";
 
 // TELAS DE TESTE
 import Requisicoes from "@/pages/Requisicoes.vue";
@@ -138,6 +142,26 @@ const routes = [
         path: "/dashboard/statistics",
         name: "Statistics",
         component: Statistics,
+      },
+      {
+        path: "/dashboard/campaign",
+        name: "Campaigns",
+        component: Campaigns,
+      },
+      {
+        path: "/dashboard/add-campaign",
+        name: "AddCampaign",
+        component: AddCampaign,
+      },
+      {
+        path: "/dashboard/see-campaign",
+        name: "SeeCampaign",
+        component: SeeCampaign,
+      },
+      {
+        path: "/dashboard/donation",
+        name: "Donation",
+        component: Donation,
       },
     ],
   },

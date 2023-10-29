@@ -100,6 +100,18 @@ export default {
           image: "fas fa-question-circle",
           route: "help",
         },
+        {
+          id: 6,
+          title: "Campanhas",
+          image: "fas fa-question-circle",
+          route: "campaign",
+        },
+        {
+          id: 7,
+          title: "Doação",
+          image: "fas fa-question-circle",
+          route: "donation",
+        },
       ],
       showSidenav: true,
     };
