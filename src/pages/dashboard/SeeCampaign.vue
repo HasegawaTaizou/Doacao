@@ -55,8 +55,14 @@
             <div class="show__action-container">
               <span class="action__date">{{ selectedDatetime }}</span>
               <div class="actions">
-                <i class="fas fa-edit action__edit"></i>
-                <i class="fas fa-trash-alt action__delete"></i>
+                <i
+                  @click="editCampaign(selectedId)"
+                  class="fas fa-edit action__edit"
+                ></i>
+                <i
+                  @click="deleteCampaign(selectedId)"
+                  class="fas fa-trash-alt action__delete"
+                ></i>
               </div>
             </div>
             <div class="show__description">
@@ -64,14 +70,18 @@
             </div>
           </div>
         </div>
+        <PopUp :title="'Concluir Agendamento?'" :image="'/src/assets/img/popup-image.png'" :message="'Os dados serão alterados e não terá como desfazer esta ação.'" ></PopUp>
       </div>
     </section>
   </transition>
 </template>
 
 <script>
+import PopUp from "../../assets/components/PopUp.vue";
+
 export default {
   name: "AddCampaign",
+  components: { PopUp },
   data() {
     return {
       showTransition: false,
@@ -79,6 +89,7 @@ export default {
       caimpaigns: [],
 
       //detail campaing
+      selectedId: 1,
       showCampaign: false,
       selectedDescription: "AAAAAAAAAAA",
       selectedDatetime: "AAAAAA",
@@ -86,8 +97,9 @@ export default {
     };
   },
   methods: {
-    selectCampaign(description, datetime, image) {
+    selectCampaign(id, description, datetime, image) {
       this.showCampaign = true;
+      this.selectedId = id;
       this.selectedDescription = description;
       this.selectedDatetime = datetime;
       this.selectedImage = image;
