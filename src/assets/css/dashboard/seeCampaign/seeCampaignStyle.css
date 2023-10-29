@@ -53,6 +53,8 @@ p {
   display: flex;
   gap: 26px;
   justify-content: center;
+  overflow-x: scroll;
+  max-width: 70vw;
 }
 
 .campaign {

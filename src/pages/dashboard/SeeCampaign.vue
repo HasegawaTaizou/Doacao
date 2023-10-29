@@ -14,29 +14,27 @@
       </div>
       <div class="campaigns__content">
         <div class="campaigns__campaigns-container">
-          <div class="campaign" @click="showCampaign = true">
+          <div
+            v-for="(campain, index) in campaigns"
+            :key="index"
+            class="campaign"
+            @click="
+              selectCampaign(
+                campain.id,
+                campain.description,
+                campain.date,
+                campain.hour,
+                campain.image
+              )
+            "
+          >
             <p class="campaign__description">
-              Contrary to popular belief, Lorem Ipsum is not simply random
-              text....
+              {{ campain.description }}
             </p>
-            <img
-              src="../../assets/img/see-campaign-image.png"
-              alt="See Iamge"
-              class="campaign__image"
-            />
-            <span class="campaign__date">20/10/2023 às 16:40</span>
-          </div>
-          <div class="campaign">
-            <p class="campaign__description">
-              Contrary to popular belief, Lorem Ipsum is not simply random
-              text....
-            </p>
-            <img
-              src="../../assets/img/see-campaign-image.png"
-              alt="See Iamge"
-              class="campaign__image"
-            />
-            <span class="campaign__date">20/10/2023 às 16:40</span>
+            <img :src="campain.image" alt="See Iamge" class="campaign__image" />
+            <span class="campaign__date"
+              >{{ campain.date }} às {{ campain.hour }}</span
+            >
           </div>
         </div>
         <div v-if="!showCampaign" class="campaigns__detail">
@@ -51,7 +49,9 @@
           <div class="campaigns__show">
             <img :src="selectedImage" alt="show image" class="show__image" />
             <div class="show__action-container">
-              <span class="action__date">{{ selectedDatetime }}</span>
+              <span class="action__date"
+                >{{ selectedDate }} às {{ selectedHour }}</span
+              >
               <div class="actions">
                 <i
                   @click="openPopUp('edit')"
@@ -134,6 +134,11 @@
 import PopUp from "../../assets/components/PopUp.vue";
 import openPopUp from "../../assets/js/methods/open-pop-up";
 
+import { BASE_URL } from "../../assets/js/config";
+import axios from "axios";
+import uploadImage from "../../assets/js/methods/input/upload-image";
+import { format } from "date-fns";
+
 export default {
   name: "AddCampaign",
   components: { PopUp },
@@ -143,28 +148,39 @@ export default {
 
       selectedComponent: "",
 
-      caimpaigns: [],
+      campaigns: [],
 
       //detail campaing
       showCampaign: false,
       selectedId: 1,
       selectedDescription: "AAAAAAAAAAA",
-      selectedDatetime: "AAAAAA",
+      selectedDate: "AAAAAA",
+      selectedHour: "AAAAAA",
       selectedImage: "/src/assets/img/see-campaign-image.png",
     };
   },
   methods: {
     openPopUp,
-    selectCampaign(id, description, datetime, image) {
+    selectCampaign(id, description, date, hour, image) {
       this.showCampaign = true;
       this.selectedId = id;
       this.selectedDescription = description;
-      this.selectedDatetime = datetime;
+      this.selectedDate = date;
+      this.selectedHour = hour;
       this.selectedImage = image;
+    },
+    getCampaigns() {
+      axios
+        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/campaigns`)
+        .then((response) => {
+          this.campaigns = response.data.campaigns;
+          console.log(this.campaigns);
+        });
     },
   },
   mounted() {
     this.showTransition = true;
+    this.getCampaigns();
   },
 };
 </script>
