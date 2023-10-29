@@ -61,7 +61,7 @@ export default {
             backgroundColor: "rgba(255, 0, 0, 0.5)",
             pointRadius: 8,
             pointHoverRadius: 10,
-            borderWidth: 2
+            borderWidth: 2,
           },
           {
             label: "2023",
@@ -70,7 +70,7 @@ export default {
             backgroundColor: "rgba(0, 0, 255, 0.5)",
             pointRadius: 8,
             pointHoverRadius: 10,
-            borderWidth: 2
+            borderWidth: 2,
           },
         ],
       };
@@ -87,6 +87,12 @@ export default {
           plugins: {
             legend: {
               position: "top",
+              onHover: (event, chartElement) => {
+                event.native.target.style.cursor = "pointer";
+              },
+              onLeave: (event, chartElement) => {
+                event.native.target.style.cursor = "default";
+              },
             },
             tooltip: {
               titleFont: {
