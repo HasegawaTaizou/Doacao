@@ -142,7 +142,7 @@ p {
   display: flex;
   gap: 24px;
   font-size: 1.75rem;
-  color: #638BFF;
+  color: #638bff;
 }
 
 .action__edit {
@@ -168,6 +168,104 @@ p {
 .campaigns__show:hover .show__description {
   transition: all 0.5s;
   opacity: 1;
+}
+
+.campaign__add {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.add__date-container {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+}
+
+.date__label {
+  font-size: 1.5rem;
+}
+
+.date__datetime-local {
+  width: 252px;
+  border: 1px solid #7395f7;
+  padding: 6px;
+  border-radius: 5px;
+  font-family: "Abel";
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.add__description-container {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+}
+
+.description__label {
+  font-size: 1.5rem;
+}
+
+.description__textarea {
+  border-radius: 5px;
+  border: var(--input-border);
+  resize: none;
+  width: 378px;
+  height: 194px;
+  padding: 12px 12px;
+  font-family: "Abel";
+  font-size: 1.25rem;
+}
+
+.form__photo-container {
+  grid-area: photo;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+.form__photo-container input[type="file"] {
+  display: none;
+}
+
+.form__photo-container label {
+  padding: 12px;
+  color: #527df9;
+  border-radius: 100%;
+  background-color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 508px;
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
+}
+
+.form__photo-container label::after {
+  content: "";
+}
+
+.form__photo-selected-container {
+  grid-area: photo;
+  max-width: 378px;
+  height: 378px;
+  width: 378px;
+  max-height: 378px;
+  position: relative;
+}
+
+.photo__photo {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 3%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.edit-photo {
+  font-size: 2rem;
+  
 }
 
 /* TRANSITION STYLE */

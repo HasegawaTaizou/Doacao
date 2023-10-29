@@ -32,7 +32,7 @@ export default new Vuex.Store({
     showNotification: false,
 
     //POPUP STATUS
-    showPopUp: true,
+    showPopUp: false,
 
     //HOSPITAL LOGIN
     hospitalId: 1,

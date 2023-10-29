@@ -21,11 +21,11 @@
       <slot></slot>
       <div class="popup__buttons">
         <button class="button__deny" @click="closePopup">
-          <span class="deny__text">Não</span>
+          <span class="deny__text">Cancelar</span>
           <i class="fa-regular fa-circle-xmark"></i>
         </button>
         <button class="button__accept" @click="executeAcceptAction">
-          <span class="accept__text">Sim</span>
+          <span class="accept__text">Confirmar</span>
           <i class="fa-regular fa-circle-check"></i>
         </button>
       </div>
@@ -53,7 +53,7 @@ export default {
     },
     message: {
       type: String,
-      required: true,
+      required: false,
     },
     acceptFunction: {
       type: Function,
@@ -78,7 +78,7 @@ export default {
 .popup-container {
   display: flex;
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
-  min-width: 758px;
+  min-width: 856px;
   max-width: fit-content;
   min-height: 428px;
   height: fit-content;
@@ -106,17 +106,18 @@ export default {
 }
 
 .popup__title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-family: "Abel";
   font-weight: normal;
   margin-top: 12px;
   color: #fff;
+  padding: 0px 8px;
 }
 
 .popup__image {
-  max-width: 232px;
+  max-width: 292px;
   width: 100%;
-  max-height: 232px;
+  max-height: 292px;
   height: 100%;
 }
 

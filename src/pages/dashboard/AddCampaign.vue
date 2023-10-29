@@ -64,8 +64,19 @@
           </div>
           <div v-else class="form__photo-selected-container">
             <img :src="downloadURL" alt="Hospital Photo" class="photo__photo" />
+            <div class="form__photo-edit-container">
+              <input
+                type="file"
+                class="photo__label"
+                id="photo"
+                @change="uploadImage"
+              />
+              <label for="photo">
+                <i class="fa-solid fa-pen-to-square edit-photo"></i>
+              </label>
+            </div>
           </div>
-          <button class="add__button">Publicar</button>
+          <button @click="insertCampaign" class="add__button">Publicar</button>
         </div>
       </div>
     </section>
@@ -73,14 +84,53 @@
 </template>
 
 <script>
+import { BASE_URL } from "../../assets/js/config";
+import axios from "axios";
+import uploadImage from "../../assets/js/methods/input/upload-image";
+import { format } from "date-fns";
+
 export default {
   name: "AddCampaign",
   data() {
     return {
       showTransition: false,
 
+      isSelectedImage: false,
+      downloadURL: "",
       campaignDatetime: "",
+      campaignDatetimeFormatted: "",
+      inputDescription: "",
     };
+  },
+  methods: {
+    uploadImage,
+    insertCampaign() {
+      this.formatDateTime();
+
+      const dateParts = this.campaignDatetimeFormatted.split(" ");
+      const date = dateParts[0];
+      const time = dateParts[1];
+
+      console.log();
+      const campaignData = {
+        date: date,
+        hour: time,
+        description: this.inputDescription,
+        image: this.downloadURL,
+        hospitalId: this.$store.state.hospitalId,
+      };
+      console.log(campaignData);
+
+      axios.post(`${BASE_URL}/campaign`, campaignData).then(() => {
+        this.$router.push('/dashboard/see-campaign')
+      });
+    },
+    formatDateTime() {
+      this.campaignDatetimeFormatted = format(
+        new Date(this.campaignDatetime),
+        "dd/MM/yyyy HH:mm"
+      );
+    },
   },
   mounted() {
     this.showTransition = true;

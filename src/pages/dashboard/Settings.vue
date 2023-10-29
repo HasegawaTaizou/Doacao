@@ -16,7 +16,7 @@
       <div class="hospital-general-data">
         <div class="hospital-general-data__image-container">
           <img
-            src="../../assets/img/hospital-profile-image.png"
+            :src="hospitalData.photo"
             alt="Hospital Image"
             class="hospital-general-data__image"
           />

@@ -45,9 +45,7 @@
             alt="detail image"
             class="detail__image"
           />
-          <p class="detail__text">
-            Selecione a campanha que deseja visualizar.
-          </p>
+          <p class="detail__text">Selecione a campanha que deseja visualizar</p>
         </div>
         <div v-else class="campaigns__wrapper">
           <div class="campaigns__show">
@@ -56,11 +54,11 @@
               <span class="action__date">{{ selectedDatetime }}</span>
               <div class="actions">
                 <i
-                  @click="editCampaign(selectedId)"
+                  @click="openPopUp('edit')"
                   class="fas fa-edit action__edit"
                 ></i>
                 <i
-                  @click="deleteCampaign(selectedId)"
+                  @click="openPopUp('delete'), (selectedId = 1)"
                   class="fas fa-trash-alt action__delete"
                 ></i>
               </div>
@@ -70,7 +68,63 @@
             </div>
           </div>
         </div>
-        <PopUp :title="'Concluir Agendamento?'" :image="'/src/assets/img/popup-image.png'" :message="'Os dados serão alterados e não terá como desfazer esta ação.'" ></PopUp>
+        <PopUp
+          v-if="selectedComponent === 'delete'"
+          :title="'Tem certeza que deseja excluir essa campanha?'"
+          :image="'/src/assets/img/campaigns-delete-image.png'"
+          :message="'A campanha será cancelada e não terá como desfazer esta ação..'"
+        ></PopUp>
+        <PopUp
+          v-if="selectedComponent === 'edit'"
+          :title="'Tem algo de errado? Arrume sua campanha e entregue o melhor para seus doadores.'"
+          :image="'/src/assets/img/campaigns-edit-image.png'"
+        >
+          <div class="campaign__add">
+            <div class="add__date-container">
+              <label for="datetime-local" class="date__label"
+                >Data da campanha:</label
+              >
+              <input
+                type="datetime-local"
+                name=""
+                id=""
+                class="date__datetime-local"
+                v-model="campaignDatetime"
+              />
+            </div>
+            <div class="add__description-container">
+              <label for="description" class="description__label"
+                >Descrição:</label
+              >
+              <textarea
+                name="description"
+                id=""
+                cols="30"
+                rows="10"
+                class="description__textarea"
+                v-model="inputDescription"
+              ></textarea>
+            </div>
+            <div class="form__photo-selected-container">
+              <img
+                :src="selectedImage"
+                alt="Campaign Photo"
+                class="photo__photo"
+              />
+              <div class="form__photo-container">
+                <input
+                  type="file"
+                  class="photo__label"
+                  id="photo"
+                  @change="uploadImage"
+                />
+                <label for="photo">
+                  <i class="fa-solid fa-pen-to-square edit-photo"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+        </PopUp>
       </div>
     </section>
   </transition>
@@ -78,6 +132,7 @@
 
 <script>
 import PopUp from "../../assets/components/PopUp.vue";
+import openPopUp from "../../assets/js/methods/open-pop-up";
 
 export default {
   name: "AddCampaign",
@@ -86,17 +141,20 @@ export default {
     return {
       showTransition: false,
 
+      selectedComponent: "",
+
       caimpaigns: [],
 
       //detail campaing
-      selectedId: 1,
       showCampaign: false,
+      selectedId: 1,
       selectedDescription: "AAAAAAAAAAA",
       selectedDatetime: "AAAAAA",
       selectedImage: "/src/assets/img/see-campaign-image.png",
     };
   },
   methods: {
+    openPopUp,
     selectCampaign(id, description, datetime, image) {
       this.showCampaign = true;
       this.selectedId = id;
