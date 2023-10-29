@@ -58,7 +58,7 @@
                   class="fas fa-edit action__edit"
                 ></i>
                 <i
-                  @click="openPopUp('delete'), (selectedId = 1)"
+                  @click="openPopUp('delete')"
                   class="fas fa-trash-alt action__delete"
                 ></i>
               </div>
@@ -73,12 +73,14 @@
           :title="'Tem certeza que deseja excluir essa campanha?'"
           :image="'/src/assets/img/campaigns-delete-image.png'"
           :message="'A campanha será cancelada e não terá como desfazer esta ação..'"
-        ></PopUp>
+          :acceptFunction="deleteCampaign"
+          ></PopUp>
         <PopUp
           v-if="selectedComponent === 'edit'"
           :title="'Tem algo de errado? Arrume sua campanha e entregue o melhor para seus doadores.'"
           :image="'/src/assets/img/campaigns-edit-image.png'"
-        >
+          :acceptFunction="updateCampaign"
+          >
           <div class="campaign__add">
             <div class="add__date-container">
               <label for="datetime-local" class="date__label"
@@ -152,7 +154,7 @@ export default {
 
       //detail campaing
       showCampaign: false,
-      selectedId: 1,
+      selectedId: 0,
       selectedDescription: "AAAAAAAAAAA",
       selectedDate: "AAAAAA",
       selectedHour: "AAAAAA",
@@ -168,13 +170,21 @@ export default {
       this.selectedDate = date;
       this.selectedHour = hour;
       this.selectedImage = image;
+      console.log(this.selectedId);
     },
     getCampaigns() {
       axios
         .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/campaigns`)
         .then((response) => {
           this.campaigns = response.data.campaigns;
-          console.log(this.campaigns);
+        });
+    },
+    deleteCampaign() {
+      console.log(this.selectedId);
+      axios
+        .delete(`${BASE_URL}/delete-campaign/${this.selectedId}`)
+        .then(() => {
+          location.reload();
         });
     },
   },
