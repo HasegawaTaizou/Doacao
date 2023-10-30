@@ -182,7 +182,6 @@ export default {
   },
   mounted() {
     this.getDonationBanks();
-    // this.createChart();
     this.showTransition = true;
   },
 };

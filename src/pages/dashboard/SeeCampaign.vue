@@ -18,6 +18,7 @@
             v-for="(campain, index) in campaigns"
             :key="index"
             class="campaign"
+            :class="{ 'active': showCampaign }"
             @click="
               selectCampaign(
                 campain.id,
