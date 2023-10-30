@@ -74,13 +74,13 @@
           :image="'/src/assets/img/campaigns-delete-image.png'"
           :message="'A campanha será cancelada e não terá como desfazer esta ação..'"
           :acceptFunction="deleteCampaign"
-          ></PopUp>
+        ></PopUp>
         <PopUp
           v-if="selectedComponent === 'edit'"
           :title="'Tem algo de errado? Arrume sua campanha e entregue o melhor para seus doadores.'"
           :image="'/src/assets/img/campaigns-edit-image.png'"
           :acceptFunction="updateCampaign"
-          >
+        >
           <div class="campaign__add">
             <div class="add__date-container">
               <label for="datetime-local" class="date__label"
@@ -104,12 +104,12 @@
                 cols="30"
                 rows="10"
                 class="description__textarea"
-                v-model="inputDescription"
+                v-model="selectedDescription"
               ></textarea>
             </div>
             <div class="form__photo-selected-container">
               <img
-                :src="selectedImage"
+                :src="downloadURL"
                 alt="Campaign Photo"
                 class="photo__photo"
               />
@@ -155,14 +155,20 @@ export default {
       //detail campaing
       showCampaign: false,
       selectedId: 0,
-      selectedDescription: "AAAAAAAAAAA",
-      selectedDate: "AAAAAA",
-      selectedHour: "AAAAAA",
-      selectedImage: "/src/assets/img/see-campaign-image.png",
+      selectedDescription: "",
+      selectedDate: "",
+      selectedHour: "",
+      selectedImage: "",
+
+      downloadURL: "",
+      // campaignDatetime: "2023-10-29T12:00",
+      campaignDatetime: "",
+      campaignDatetimeFormatted: "",
     };
   },
   methods: {
     openPopUp,
+    uploadImage,
     selectCampaign(id, description, date, hour, image) {
       this.showCampaign = true;
       this.selectedId = id;
@@ -170,7 +176,10 @@ export default {
       this.selectedDate = date;
       this.selectedHour = hour;
       this.selectedImage = image;
-      console.log(this.selectedId);
+
+      this.downloadURL = this.selectedImage;
+
+      this.formattedDateTime();
     },
     getCampaigns() {
       axios
@@ -179,8 +188,45 @@ export default {
           this.campaigns = response.data.campaigns;
         });
     },
+    updateCampaign() {
+      this.formatDateTime()
+
+      const dateParts = this.campaignDatetimeFormatted.split(" ");
+      const date = dateParts[0];
+      const time = dateParts[1];
+
+      const campaignData = {
+        id: this.selectedId,
+        date: date,
+        hour: time,
+        description: this.selectedDescription,
+        image: this.downloadURL,
+      };
+
+      axios.put(`${BASE_URL}/update-campaign`, campaignData).then(() => {
+        location.reload();
+      });
+    },
+    formatDateTime() {
+      this.campaignDatetimeFormatted = format(
+        new Date(this.campaignDatetime),
+        "dd/MM/yyyy HH:mm"
+      );
+    },
+    formattedDateTime() {
+      const date = this.selectedDate.split("/");
+
+      const year = date[2];
+      const month = date[1];
+      const day = date[0];
+
+      const time = this.selectedHour.split(":");
+      const hours = time[0];
+      const minutes = time[1];
+
+      this.campaignDatetime = `${year}-${month}-${day}T${hours}:${minutes}`;
+    },
     deleteCampaign() {
-      console.log(this.selectedId);
       axios
         .delete(`${BASE_URL}/delete-campaign/${this.selectedId}`)
         .then(() => {
