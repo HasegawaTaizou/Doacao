@@ -44,6 +44,7 @@
   justify-content: center;
   flex-direction: column;
   overflow-y: scroll;
+  margin: 0px 32px;
 }
 
 .introduction__text {
