@@ -131,6 +131,7 @@
       :title="'Cancelar?'"
       :message="'Digite o motivo do cancelamento (Opcional)'"
       :acceptFunction="cancelSchedule"
+      :image="'/src/assets/img/book-schedule-cancel-image.png'"
     >
       <textarea
         name=""
@@ -147,6 +148,7 @@
       :title="'Concluir?'"
       :message="'Os dados serão alterados e não terá como desfazer esta ação.'"
       :acceptFunction="concludeSchedule"
+      :image="'/src/assets/img/book-schedule-conclude-image.png'"
     >
     </PopUp>
     <PopUp
@@ -154,6 +156,7 @@
       :title="'Remarcar'"
       :message="'Escolha a data e o horário para remarcar'"
       :acceptFunction="rescheduleSchedule"
+      :image="'/src/assets/img/book-schedule-reschedule-image.png'"
     >
       <div class="book-scheduling">
         <div class="scheduling-date">

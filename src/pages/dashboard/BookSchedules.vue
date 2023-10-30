@@ -159,18 +159,21 @@
       :title="'Cancelar?'"
       :message="'Os agendamentos criados serão cancelados.'"
       :acceptFunction="clearSchedules"
+      :image="'../../assets/img/book-schedule-reschedule-image.png'"
     ></PopUp>
     <PopUp
       v-if="selectedComponent === 'cancel-book-schedule'"
       :title="'Excluir agendamento?'"
       :message="`O agendamento será excluído.`"
       :acceptFunction="deleteBookSchedule"
+      :image="'/src/assets/img/book-schedule-cancel-image.png'"
     ></PopUp>
     <PopUp
       v-if="selectedComponent === 'save'"
       :title="'Salvar?'"
       :message="'Os agendamentos criados serão colocados como agendamentos disponíveis.'"
       :acceptFunction="addSchedules"
+      :image="'/src/assets/img/book-schedule-save-image.png'"
     ></PopUp>
     <PopUp
       v-if="selectedComponent === 'reschedule'"
@@ -202,6 +205,7 @@
       :title="'Remarcar'"
       :message="'Escolha a data e o horário para remarcar'"
       :acceptFunction="updateBookSchedule"
+      :image="'/src/assets/img/book-schedule-reschedule-image.png'"
     >
       <div class="book-scheduling">
         <div class="scheduling-date">
