@@ -43,11 +43,39 @@ export default {
   data() {
     return {
       showTransition: false,
+
+      donationBanks: [],
+      donationBanksYears: {},
+
+      selectedFirstYear: 2022,
+      selectedSecondYear: 2023,
+
+      donationBankGraphFirstYearData: {
+        "O-": 0,
+        "O+": 0,
+        "A-": 0,
+        "A+": 0,
+        "B-": 0,
+        "B+": 0,
+        "AB-": 0,
+        "AB+": 0,
+      },
+
+      donationBankGraphSecondYearData: {
+        "O-": 0,
+        "O+": 0,
+        "A-": 0,
+        "A+": 0,
+        "B-": 0,
+        "B+": 0,
+        "AB-": 0,
+        "AB+": 0,
+      },
     };
   },
   methods: {
     createChart() {
-      const labels = ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"];
+      const labels = Object.keys(this.donationBankGraphFirstYearData);
 
       const ctx = document.getElementById("line-graph");
 
@@ -55,8 +83,8 @@ export default {
         labels: labels,
         datasets: [
           {
-            label: "2022",
-            data: [1000, 2000, 3000, 4000, 5000, 6000, 7000, 20000],
+            label: this.selectedFirstYear,
+            data: Object.values(this.donationBankGraphFirstYearData),
             borderColor: "red",
             backgroundColor: "rgba(255, 0, 0, 0.5)",
             pointRadius: 8,
@@ -64,8 +92,8 @@ export default {
             borderWidth: 2,
           },
           {
-            label: "2023",
-            data: [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000],
+            label: this.selectedSecondYear,
+            data: Object.values(this.donationBankGraphSecondYearData),
             borderColor: "blue",
             backgroundColor: "rgba(0, 0, 255, 0.5)",
             pointRadius: 8,
@@ -106,9 +134,55 @@ export default {
         },
       });
     },
+    getDonationBanks() {
+      axios
+        .get(
+          `${BASE_URL}/hospital/${this.$store.state.hospitalId}/donation-banks`
+        )
+        .then((response) => {
+          this.donationBanks = response.data.donationBanks;
+          this.donationBanks.forEach((donationBank) => {
+            if (this.donationBanksYears[donationBank.year]) {
+              this.donationBanksYears[donationBank.year].push(donationBank);
+            } else {
+              this.donationBanksYears[donationBank.year] = [donationBank];
+            }
+          });
+
+          this.donationBanksYears[this.selectedFirstYear].forEach(
+            (bloodsTypes) => {
+              if (
+                this.donationBankGraphFirstYearData.hasOwnProperty(
+                  bloodsTypes.type
+                )
+              ) {
+                this.donationBankGraphFirstYearData[bloodsTypes.type] +=
+                  parseInt(bloodsTypes.blood_ml);
+              }
+            }
+          );
+
+          this.donationBanksYears[this.selectedSecondYear].forEach(
+            (bloodsTypes) => {
+              if (
+                this.donationBankGraphSecondYearData.hasOwnProperty(
+                  bloodsTypes.type
+                )
+              ) {
+                this.donationBankGraphSecondYearData[bloodsTypes.type] +=
+                  parseInt(bloodsTypes.blood_ml);
+              }
+            }
+          );
+        })
+        .then(() => {
+          this.createChart();
+        });
+    },
   },
   mounted() {
-    this.createChart();
+    this.getDonationBanks();
+    // this.createChart();
     this.showTransition = true;
   },
 };
