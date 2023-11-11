@@ -4,11 +4,11 @@
       <h1 class="book-schedules__title">RESERVAR AGENDAMENTOS</h1>
       <div class="profile-container">
         <img
-          :src="$store.state.hospitalPhoto"
+          :src="hospitalPhoto"
           alt="Profile Image"
           class="profile__image"
         />
-        <span class="profile__name">{{ $store.state.hospitalName }}</span>
+        <span class="profile__name">{{ hospitalName }}</span>
       </div>
     </div>
     <div class="book-schedules-wrapper">
@@ -159,7 +159,7 @@
       :title="'Cancelar?'"
       :message="'Os agendamentos criados serão cancelados.'"
       :acceptFunction="clearSchedules"
-      :image="'../../assets/img/book-schedule-reschedule-image.png'"
+      :image="'/src/assets/img/book-schedule-cancel-image.png'"
     ></PopUp>
     <PopUp
       v-if="selectedComponent === 'cancel-book-schedule'"
@@ -180,6 +180,7 @@
       :title="'Remarcar'"
       :message="'Escolha a data e o horário para remarcar'"
       :acceptFunction="updateSchedule"
+      :image="'/src/assets/img/book-schedule-reschedule-image.png'"
     >
       <div class="book-scheduling">
         <div class="scheduling-date">
@@ -224,6 +225,7 @@
               v-for="site in sites"
               :key="site.idSite"
               :value="site.idSite"
+              v
             >
               {{ site.site }}
             </option>
@@ -247,6 +249,10 @@ export default {
   components: { PopUp },
   data() {
     return {
+      //ProfileData
+      hospitalName: "",
+      hospitalPhoto: "",
+      
       //Transition
       showTransition: false,
 
@@ -269,7 +275,7 @@ export default {
       bookScheduleDate: "",
       bookScheduleTime: "",
       bookScheduleSite: "",
-
+      bookScheduleTextSite: "",
       //Component
       selectedComponent: "",
     };
@@ -277,7 +283,7 @@ export default {
   methods: {
     getHospitalSites() {
       axios
-        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/sites`)
+        .get(`${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/sites`)
         .then((response) => {
           this.sites = response.data.sites;
         });
@@ -286,12 +292,19 @@ export default {
       if (this.scheduleDatetime != "" && this.scheduleSite != "") {
         this.formatDateTime();
 
+        const selectedSite = this.sites.find(
+          (site) => site.idSite === this.scheduleSite
+        );
+        const textSite = selectedSite ? selectedSite.site : "";
+
         this.tableBookSchedules.push({
           date: this.scheduleDatetimeFormatted.split(" ")[0],
           hour: this.scheduleDatetimeFormatted.split(" ")[1],
           hospitalSiteId: this.scheduleSite,
-          contentSite: this.scheduleSite,
+          contentSite: textSite,
         });
+
+        console.log(this.tableBookSchedules);
       }
     },
     addSchedules() {
@@ -353,7 +366,7 @@ export default {
     getBookSchedules() {
       axios
         .get(
-          `${BASE_URL}/hospital/${this.$store.state.hospitalId}/book-schedules`
+          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/book-schedules`
         )
         .then((response) => {
           this.bookSchedules = response.data.bookSchedules;
@@ -372,6 +385,9 @@ export default {
     this.showTransition = true;
     this.getHospitalSites();
     this.getBookSchedules();
+
+    this.hospitalName = localStorage.hospitalName;
+    this.hospitalPhoto = localStorage.hospitalPhoto;
   },
 };
 </script>

@@ -3,12 +3,8 @@
     <div class="scheduling__header">
       <h1 class="scheduling__title">AGENDAMENTOS</h1>
       <div class="profile-container">
-        <img
-          :src="$store.state.hospitalPhoto"
-          alt="Profile Image"
-          class="profile__image"
-        />
-        <span class="profile__name">{{ $store.state.hospitalName }}</span>
+        <img :src="hospitalPhoto" alt="Profile Image" class="profile__image" />
+        <span class="profile__name">{{ hospitalName }}</span>
       </div>
     </div>
     <div class="scheduling__content">
@@ -199,6 +195,10 @@ export default {
   components: { PopUp },
   data() {
     return {
+      //ProfileData
+      hospitalName: "",
+      hospitalPhoto: "",
+      
       //Transition
       showTransition: false,
       selectedComponent: "",
@@ -227,7 +227,9 @@ export default {
     },
     getSchedules() {
       axios
-        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/schedules`)
+        .get(
+          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/schedules`
+        )
         .then((response) => {
           this.schedules = response.data.schedules;
         });
@@ -293,7 +295,7 @@ export default {
     },
     getHospitalSites() {
       axios
-        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/sites`)
+        .get(`${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/sites`)
         .then((response) => {
           this.sites = response.data.sites;
         });
@@ -303,6 +305,9 @@ export default {
     this.showTransition = true;
     this.getSchedules();
     this.getHospitalSites();
+
+    this.hospitalName = localStorage.hospitalName;
+    this.hospitalPhoto = localStorage.hospitalPhoto;
   },
 };
 </script>

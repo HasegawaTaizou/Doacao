@@ -134,6 +134,9 @@ export default {
         this.$store.commit("SET_HOSPITAL_NAME", hospitalData.name);
         this.$store.commit("SET_HOSPITAL_PHOTO", hospitalData.photo);
 
+        localStorage.setItem("hospitalId", hospitalData.id);
+        localStorage.setItem("hospitalName", hospitalData.name);
+        localStorage.setItem("hospitalPhoto", hospitalData.photo);
         localStorage.setItem("token", hospitalData.token);
         this.$router.push("/dashboard");
       });

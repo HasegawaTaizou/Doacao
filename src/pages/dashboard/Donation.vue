@@ -5,11 +5,11 @@
         <h1 class="donation__title">Banco de doação</h1>
         <div class="profile-container">
           <img
-            :src="$store.state.hospitalPhoto"
+            :src="hospitalPhoto"
             alt="Profile Image"
             class="profile__image"
           />
-          <span class="profile__name">{{ $store.state.hospitalName }}</span>
+          <span class="profile__name">{{ hospitalName }}</span>
         </div>
       </div>
       <div class="donation__content">
@@ -42,6 +42,10 @@ export default {
   name: "Donation",
   data() {
     return {
+      //ProfileData
+      hospitalName: "",
+      hospitalPhoto: "",
+      
       showTransition: false,
 
       donationBanks: [],
@@ -137,7 +141,7 @@ export default {
     getDonationBanks() {
       axios
         .get(
-          `${BASE_URL}/hospital/${this.$store.state.hospitalId}/donation-banks`
+          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/donation-banks`
         )
         .then((response) => {
           this.donationBanks = response.data.donationBanks;
@@ -183,6 +187,9 @@ export default {
   mounted() {
     this.getDonationBanks();
     this.showTransition = true;
+
+    this.hospitalName = localStorage.hospitalName;
+    this.hospitalPhoto = localStorage.hospitalPhoto;
   },
 };
 </script>

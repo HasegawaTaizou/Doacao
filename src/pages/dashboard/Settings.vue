@@ -5,11 +5,11 @@
       <h1 class="settings__title">CONFIGURAÇÕES</h1>
       <div class="profile-container">
           <img
-            :src="$store.state.hospitalPhoto"
+            :src="hospitalPhoto"
             alt="Profile Image"
             class="profile__image"
           />
-          <span class="profile__name">{{ $store.state.hospitalName }}</span>
+          <span class="profile__name">{{ hospitalName }}</span>
         </div>
     </div>
     <div class="settings__content">
@@ -193,6 +193,10 @@ export default {
   name: "Settings",
   data() {
     return {
+      //ProfileData
+      hospitalName: "",
+      hospitalPhoto: "",
+      
       //Transition
       showTransition: false,
 
@@ -202,7 +206,7 @@ export default {
   },
   methods: {
     getHospitalData() {
-      axios.get(`${BASE_URL}/hospital-data/${this.$store.state.hospitalId}`).then((response) => {
+      axios.get(`${BASE_URL}/hospital-data/${localStorage.getItem("hospitalId")}`).then((response) => {
         this.hospitalData = response.data.hospital;
         this.addressData = response.data.address;
         console.log(this.addressData);
@@ -211,9 +215,10 @@ export default {
   },
   mounted() {
     this.getHospitalData();
-    console.log('antes: ', this.showTransition);
     this.showTransition = true;
-    console.log('depois: ', this.showTransition);
+
+    this.hospitalName = localStorage.hospitalName;
+    this.hospitalPhoto = localStorage.hospitalPhoto;
   },
 };
 </script>

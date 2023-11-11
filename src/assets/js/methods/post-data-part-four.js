@@ -1,6 +1,6 @@
 import axios from "axios";
-import sendEmail from "./send-email.js";
 import { BASE_URL } from "../config.js";
+import router from "../../../router/index.js";
 
 export default function postData(formData) {
   const insertHospitalData = {
@@ -26,13 +26,13 @@ export default function postData(formData) {
     },
   };
 
+  console.log(router);
   console.log(insertHospitalData);
   axios
     .post(`${BASE_URL}/hospital-registration`, insertHospitalData)
     .then((response) => {
-      router.push('/login')
+      router.push('/login');
       console.log(response.data);
-      // sendEmail(formData)
     })
     .catch((error) => {
       console.error(error);

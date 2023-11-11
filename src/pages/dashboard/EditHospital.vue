@@ -5,11 +5,11 @@
         <h1 class="settings__title">EDITAR PERFIL</h1>
         <div class="profile-container">
           <img
-            :src="$store.state.hospitalPhoto"
+            :src="hospitalPhoto"
             alt="Profile Image"
             class="profile__image"
           />
-          <span class="profile__name">{{ $store.state.hospitalName }}</span>
+          <span class="profile__name">{{ hospitalName }}</span>
         </div>
       </div>
       <div class="settings__content">
@@ -187,6 +187,10 @@ export default {
   components: { PopUp },
   data() {
     return {
+      //ProfileData
+      hospitalName: "",
+      hospitalPhoto: "",
+      
       //Transition
       showTransition: false,
 
@@ -216,7 +220,7 @@ export default {
   },
     getHospitalData() {
       axios
-        .get(`${BASE_URL}/hospital-data/${this.$store.state.hospitalId}`)
+        .get(`${BASE_URL}/hospital-data/${localStorage.getItem("hospitalId")}`)
         .then((response) => {
           console.log(response.data.hospital);
           this.hospitalData = response.data.hospital;
@@ -226,7 +230,7 @@ export default {
     },
     editHospital() {
       const updateHospitalData = {
-        id: this.$store.state.hospitalId,
+        id: localStorage.getItem("hospitalId"),
         hospital: {
           name: this.hospitalData.name,
           cnpj: this.hospitalData.cnpj,
@@ -254,6 +258,9 @@ export default {
   mounted() {
     this.showTransition = true;
     this.getHospitalData();
+
+    this.hospitalName = localStorage.hospitalName;
+    this.hospitalPhoto = localStorage.hospitalPhoto;
   },
 };
 </script>

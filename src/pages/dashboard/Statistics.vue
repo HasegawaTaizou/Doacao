@@ -5,11 +5,11 @@
         <h1 class="statistics__title">Estatísticas</h1>
         <div class="profile-container">
           <img
-            :src="$store.state.hospitalPhoto"
+            :src="hospitalPhoto"
             alt="Profile Image"
             class="profile__image"
           />
-          <span class="profile__name">{{ $store.state.hospitalName }}</span>
+          <span class="profile__name">{{ hospitalName }}</span>
         </div>
       </div>
       <div class="statistics-wrapper">
@@ -201,6 +201,10 @@ export default {
   name: "Statistics",
   data() {
     return {
+      //ProfileData
+      hospitalName: "",
+      hospitalPhoto: "",
+      
       //Transition
       showTransition: false,
 
@@ -252,7 +256,7 @@ export default {
     getSchedulesStatistics() {
       axios
         .get(
-          `${BASE_URL}/hospital/${this.$store.state.hospitalId}/statistics/schedules`
+          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/statistics/schedules`
         )
         .then((response) => {
           const schedulesStatisticsData = response.data.schedulesStatistics;
@@ -269,7 +273,7 @@ export default {
     getRatingsStatistics() {
       axios
         .get(
-          `${BASE_URL}/hospital/${this.$store.state.hospitalId}/statistics/ratings`
+          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/statistics/ratings`
         )
         .then((response) => {
           const hospitalRatingsData = response.data.ratingsStatistics;
@@ -287,7 +291,7 @@ export default {
     getReviews() {
       axios
         .get(
-          `${BASE_URL}/hospital/${this.$store.state.hospitalId}/statistics/reviews`
+          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/statistics/reviews`
         )
         .then((response) => {
           this.hospitalReviews = response.data.reviewsStatistics;
@@ -339,6 +343,9 @@ export default {
     this.getReviews();
 
     this.showTransition = true;
+
+    this.hospitalName = localStorage.hospitalName;
+    this.hospitalPhoto = localStorage.hospitalPhoto;
   },
 };
 </script>

@@ -5,11 +5,11 @@
       <h1 class="redefine-password__title">REDEFINIR SENHA</h1>
       <div class="profile-container">
           <img
-            :src="$store.state.hospitalPhoto"
+            :src="hospitalPhoto"
             alt="Profile Image"
             class="profile__image"
           />
-          <span class="profile__name">{{ $store.state.hospitalName }}</span>
+          <span class="profile__name">{{ hospitalName }}</span>
         </div>
     </div>
     <div class="redefine-password__content">
@@ -135,6 +135,10 @@ export default {
   components: { PopUp },
   data() {
     return {
+      //ProfileData
+      hospitalName: "",
+      hospitalPhoto: "",
+      
       showTransition: false,
 
       selectedComponent: "",
@@ -158,7 +162,7 @@ export default {
         this.isPasswordSame(this.inputPassword, this.inputPasswordConfirmation)
       ) {
         const updatePasswordData = {
-          id: this.$store.state.hospitalId,
+          id: localStorage.getItem("hospitalId"),
           password: this.inputPassword,
         };
         axios.put(
@@ -172,6 +176,9 @@ export default {
   },
   mounted() {
     this.showTransition = true;
+
+    this.hospitalName = localStorage.hospitalName;
+    this.hospitalPhoto = localStorage.hospitalPhoto;
   }
 };
 </script>

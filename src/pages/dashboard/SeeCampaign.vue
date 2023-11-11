@@ -5,11 +5,11 @@
         <h1 class="campaigns__title">Campanhas</h1>
         <div class="profile-container">
           <img
-            :src="$store.state.hospitalPhoto"
+            :src="hospitalPhoto"
             alt="Profile Image"
             class="profile__image"
           />
-          <span class="profile__name">{{ $store.state.hospitalName }}</span>
+          <span class="profile__name">{{ hospitalName }}</span>
         </div>
       </div>
       <div class="campaigns__content">
@@ -147,6 +147,10 @@ export default {
   components: { PopUp },
   data() {
     return {
+      //ProfileData
+      hospitalName: "",
+      hospitalPhoto: "",
+      
       showTransition: false,
 
       selectedComponent: "",
@@ -184,7 +188,7 @@ export default {
     },
     getCampaigns() {
       axios
-        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/campaigns`)
+        .get(`${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/campaigns`)
         .then((response) => {
           this.campaigns = response.data.campaigns;
         });
@@ -238,6 +242,9 @@ export default {
   mounted() {
     this.showTransition = true;
     this.getCampaigns();
+
+    this.hospitalName = localStorage.hospitalName;
+    this.hospitalPhoto = localStorage.hospitalPhoto;
   },
 };
 </script>

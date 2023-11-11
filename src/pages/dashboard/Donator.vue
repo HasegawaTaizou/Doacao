@@ -5,11 +5,11 @@
         <h1 class="donator__title">DOADOR</h1>
         <div class="profile-container">
           <img
-            :src="$store.state.hospitalPhoto"
+            :src="hospitalPhoto"
             alt="Profile Image"
             class="profile__image"
           />
-          <span class="profile__name">{{ $store.state.hospitalName }}</span>
+          <span class="profile__name">{{ hospitalName }}</span>
         </div>
       </div>
       <div class="donator-wrapper">
@@ -181,6 +181,10 @@ export default {
   components: { PopUp },
   data() {
     return {
+      //ProfileData
+      hospitalName: "",
+      hospitalPhoto: "",
+      
       //Transition
       showTransition: false,
 
@@ -244,7 +248,7 @@ export default {
     },
     getHospitalSites() {
       axios
-        .get(`${BASE_URL}/hospital/${this.$store.state.hospitalId}/sites`)
+        .get(`${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/sites`)
         .then((response) => {
           this.sites = response.data.sites;
         });
@@ -310,6 +314,9 @@ export default {
     this.showTransition = true;
     this.getUserData();
     this.getHospitalSites();
+
+    this.hospitalName = localStorage.hospitalName;
+    this.hospitalPhoto = localStorage.hospitalPhoto;
   },
 };
 </script>
