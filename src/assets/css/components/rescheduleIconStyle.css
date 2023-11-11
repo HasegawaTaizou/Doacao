@@ -5,6 +5,7 @@
 }
 
 .date__datetime-local {
+  width: 200px;
   border: 1px solid #7395f7;
   padding: 6px;
   border-radius: 5px;
@@ -14,6 +15,7 @@
 }
 
 .site__select {
+  width: 200px;
   border: 1px solid #7395f7;
   padding: 6px;
   border-radius: 5px;

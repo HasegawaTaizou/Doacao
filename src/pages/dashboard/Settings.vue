@@ -238,7 +238,11 @@ export default {
           this.addressData = response.data.address;
         });
     },
-    deleteHospital() {},
+    deleteHospital() {
+      axios.delete(`${BASE_URL}/delete-hospital/${localStorage.getItem("hospitalId")}`).then(() => {
+        this.$router.push('/thank-you')
+      })
+    },
   },
   mounted() {
     this.getHospitalData();

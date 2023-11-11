@@ -131,6 +131,7 @@ export default {
 }
 
 .popup__text {
+  padding-top: 12px;
   font-size: 2rem;
   max-width: 352px;
   width: 100%;

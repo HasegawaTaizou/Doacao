@@ -254,7 +254,7 @@ export default {
         });
     },
     getUserSchedules() {
-      axios.get(`${BASE_URL}/users/${this.$store.state.userId}/schedules`).then((response) => {
+      axios.get(`${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/users/${this.$store.state.userId}/schedules`).then((response) => {
         this.schedules = response.data.schedules;
       });
     },

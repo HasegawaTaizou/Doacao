@@ -144,7 +144,7 @@
       :title="'Concluir?'"
       :message="'Os dados serão alterados e não terá como desfazer esta ação.'"
       :acceptFunction="concludeSchedule"
-      :image="'/src/assets/img/book-schedule-conclude-image.png'"
+      :image="'/src/assets/img/book-schedule-save-image.png'"
     >
     </PopUp>
     <PopUp
