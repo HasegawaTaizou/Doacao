@@ -222,7 +222,7 @@ export default {
       selectedDate: "",
       selectedHour: "",
       selectedSite: "",
-      rescheduleDatetime: ""
+      rescheduleDatetime: "",
     };
   },
   methods: {
@@ -250,7 +250,8 @@ export default {
       this.formattedDateTime();
     },
     setUserId(userId) {
-      this.$store.commit("SET_USER_ID", userId);
+      console.log(userId);
+      localStorage.setItem("userId", userId);
     },
     getSchedules() {
       axios

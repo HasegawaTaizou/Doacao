@@ -281,7 +281,7 @@ export default {
     },
     getUserData() {
       axios
-        .get(`${BASE_URL}/users/${this.$store.state.userId}`)
+        .get(`${BASE_URL}/users/${localStorage.getItem('userId')}`)
         .then((response) => {
           const userData = response.data.user;
 
@@ -318,11 +318,10 @@ export default {
         });
     },
     getUserSchedules() {
+      console.log(localStorage.getItem("userId"));
       axios
         .get(
-          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/users/${
-            this.$store.state.userId
-          }/schedules`
+          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/users/${localStorage.getItem("userId")}/schedules`
         )
         .then((response) => {
           this.schedules = response.data.schedules;
@@ -376,6 +375,8 @@ export default {
     this.getUserData();
     this.getHospitalSites();
 
+    console.log(localStorage.getItem("userId"));
+    console.log(`${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/users/${localStorage.getItem("userId")}/schedules`);
     this.hospitalName = localStorage.hospitalName;
     this.hospitalPhoto = localStorage.hospitalPhoto;
   },
