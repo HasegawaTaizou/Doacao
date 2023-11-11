@@ -9,21 +9,41 @@
             alt="Profile Image"
             class="profile__image"
           />
+
           <span class="profile__name">{{ hospitalName }}</span>
         </div>
       </div>
       <div class="settings__content">
         <div class="hospital-general-data">
           <div class="hospital-general-data__image-container">
-            <img
-              :src="hospitalData.photo"
-              alt="Hospital Image"
-              class="hospital-general-data__image"
+            <div class="form__photo-selected-container">
+              <img
+                :src="downloadURL"
+                alt="Hospital Photo"
+                class="photo__photo"
+              />
+              <div class="form__photo-container">
+                <input
+                  type="file"
+                  class="photo__label"
+                  id="photo"
+                  @change="uploadImage"
+                />
+                <label for="photo">
+                  <i class="fa-solid fa-pen-to-square edit-photo"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="hospital-general-data__title-container">
+            <label for="" class="title__label">Nome:</label>
+            <input
+              type="text"
+              class="hospital-general-data__title"
+              v-model="hospitalData.name"
             />
           </div>
-          <h2 class="hospital-general-data__title">
-            {{ hospitalData.name }}
-          </h2>
+
           <div class="hospital-general-data__cnpj-container">
             <label for="" class="cnpj__label">CNPJ:</label>
             <input
@@ -169,6 +189,7 @@
     :title="'Alterar dados?'"
     :message="'Os dados serão alterados e não terá como desfazer esta ação.'"
     :acceptFunction="editHospital"
+    :image="'/src/assets/img/edit-profile-image.png'"
   >
   </PopUp>
 </template>
@@ -180,7 +201,7 @@ import openPopUp from "../../assets/js/methods/open-pop-up.js";
 import { BASE_URL } from "../../assets/js/config";
 import axios from "axios";
 
-import fillAdrress from "../../assets/js/methods/input/fill-address";
+import uploadImage from "../../assets/js/methods/input/upload-image";
 
 export default {
   name: "EditHospital",
@@ -190,34 +211,37 @@ export default {
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
-      
+
       //Transition
       showTransition: false,
 
       selectedComponent: "",
       hospitalData: [],
       addressData: [],
+
+      //photo
+      downloadURL: "",
     };
   },
   methods: {
     openPopUp,
+    uploadImage,
     fillAdrress() {
-    
-    this.addressData.cep = this.addressData.cep.replace('-', "")
-  
-    axios
-      .get(`https://viacep.com.br/ws/${this.addressData.cep}/json/`)
-      .then((response) => {
-        this.addressData.road = response.data.logradouro
-        this.addressData.neighborhood = response.data.bairro
-        this.addressData.complement = response.data.complemento
-        this.addressData.uf = response.data.uf
-        this.addressData.city = response.data.localidade
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  },
+      this.addressData.cep = this.addressData.cep.replace("-", "");
+
+      axios
+        .get(`https://viacep.com.br/ws/${this.addressData.cep}/json/`)
+        .then((response) => {
+          this.addressData.road = response.data.logradouro;
+          this.addressData.neighborhood = response.data.bairro;
+          this.addressData.complement = response.data.complemento;
+          this.addressData.uf = response.data.uf;
+          this.addressData.city = response.data.localidade;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
     getHospitalData() {
       axios
         .get(`${BASE_URL}/hospital-data/${localStorage.getItem("hospitalId")}`)
@@ -225,7 +249,8 @@ export default {
           console.log(response.data.hospital);
           this.hospitalData = response.data.hospital;
           this.addressData = response.data.address;
-          
+
+          this.downloadURL = response.data.hospital.photo;
         });
     },
     editHospital() {
@@ -239,7 +264,7 @@ export default {
           website: this.hospitalData.website,
           donationSite: this.hospitalData.donationSite,
           otherDonationSite: this.hospitalData.otherDonationSite,
-          photo: this.hospitalData.photo,
+          photo: this.downloadURL,
         },
         address: {
           cep: this.addressData.cep,
@@ -253,7 +278,9 @@ export default {
       };
       console.log(updateHospitalData);
       axios.put(`${BASE_URL}/hospital-update`, updateHospitalData).then(() => {
-        location.reload()
+        localStorage.setItem("hospitalPhoto", this.downloadURL);
+        localStorage.setItem("hospitalName", this.hospitalData.name);
+        location.reload();
       });
     },
   },

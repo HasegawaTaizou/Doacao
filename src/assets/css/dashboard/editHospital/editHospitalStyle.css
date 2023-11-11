@@ -68,13 +68,30 @@
   height: 408px;
 }
 
-.hospital-general-data__title {
+.hospital-general-data__title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 24px 0px;
+}
+
+.title__label {
   font-size: 2.75rem;
+}
+
+.hospital-general-data__title {
+  display: flex;
+  align-self: center;
   font-family: "Abel";
   color: #000;
   font-weight: normal;
   margin: 12px 0px;
   text-align: center;
+  border: var(--input-border);
+  border-radius: 5px;
+  font-size: 2.75rem;
+  padding-left: 12px;
 }
 
 input:disabled,
@@ -299,6 +316,57 @@ textarea:disabled {
   font-family: "Abel";
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+.form__photo-container {
+  grid-area: photo;
+  position: absolute;
+  top: 0px;
+  right: -5px;
+}
+
+.form__photo-container input[type="file"] {
+  display: none;
+}
+
+.form__photo-container label {
+  padding: 12px;
+  color: #527df9;
+  border-radius: 100%;
+  background-color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 508px;
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
+}
+
+.form__photo-container label::after {
+  content: "";
+}
+
+.form__photo-selected-container {
+  padding-top: 6px;
+  grid-area: photo;
+  max-width: 512px;
+  height: 512px;
+  width: 512px;
+  max-height: 512px;
+  position: relative;
+}
+
+.photo__photo {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 3%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.edit-photo {
+  font-size: 2rem;
 }
 
 /* TRANSITION STYLE */
