@@ -3,11 +3,7 @@
     <div class="book-schedules__header">
       <h1 class="book-schedules__title">RESERVAR AGENDAMENTOS</h1>
       <div class="profile-container">
-        <img
-          :src="hospitalPhoto"
-          alt="Profile Image"
-          class="profile__image"
-        />
+        <img :src="hospitalPhoto" alt="Profile Image" class="profile__image" />
         <span class="profile__name">{{ hospitalName }}</span>
       </div>
     </div>
@@ -76,7 +72,15 @@
                       class="action__icon"
                     />
                     <img
-                      @click="openPopUp('reschedule')"
+                      @click="
+                        openPopUp('reschedule');
+                        selectBookSchedule(
+                          schedule.id,
+                          schedule.date,
+                          schedule.hour,
+                          schedule.hospitalSiteId
+                        );
+                      "
                       src="../../assets/img/scheduling-reschedule-icon.png"
                       alt="Reschedule Icon"
                       class="action__icon"
@@ -139,6 +143,12 @@
                   alt="Reschedule Icon"
                   class="action__icon"
                   @click="
+                    selectBookSchedule(
+                      schedule.id,
+                      schedule.date,
+                      schedule.hour,
+                      schedule.site_id
+                    );
                     openPopUp('reschedule-book-schedule');
                     bookScheduleId = schedule.id;
                   "
@@ -185,7 +195,7 @@
       <div class="book-scheduling">
         <div class="scheduling-date">
           <input
-            v-model="scheduleDatetime"
+            v-model="rescheduleDatetime"
             type="datetime-local"
             name=""
             id=""
@@ -193,10 +203,16 @@
           />
         </div>
         <div class="scheduling-site">
-          <select v-model="scheduleSite" name="" id="" class="site__select">
+          <select v-model="selectedSite" name="" id="" class="site__select">
             <option disabled value="">Escolha o local</option>
-            <option value="Descrição Local 1">Descrição Local 1</option>
-            <option value="Descrição Local 2">Descrição Local 2</option>
+            <option
+              v-for="site in sites"
+              :key="site.idSite"
+              :value="site.idSite"
+              v
+            >
+              {{ site.site }}
+            </option>
           </select>
         </div>
       </div>
@@ -211,15 +227,22 @@
       <div class="book-scheduling">
         <div class="scheduling-date">
           <input
-            v-model="bookScheduleDatetime"
+            v-model="rescheduleDatetime"
             type="datetime-local"
             name=""
             id=""
             class="date__datetime-local"
           />
+          <!-- <input
+            v-model="bookScheduleDatetime"
+            type="datetime-local"
+            name=""
+            id=""
+            class="date__datetime-local"
+          /> -->
         </div>
         <div class="scheduling-site">
-          <select v-model="bookScheduleSite" name="" id="" class="site__select">
+          <select v-model="selectedSite" name="" id="" class="site__select">
             <option disabled value="">Escolha o local</option>
             <option
               v-for="site in sites"
@@ -252,7 +275,7 @@ export default {
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
-      
+
       //Transition
       showTransition: false,
 
@@ -278,6 +301,13 @@ export default {
       bookScheduleTextSite: "",
       //Component
       selectedComponent: "",
+
+      //Book Schedule Selected
+      selectedId: 0,
+      selectedDate: "",
+      selectedHour: "",
+      selectedSite: "",
+      rescheduleDatetime: "",
     };
   },
   methods: {
@@ -333,6 +363,30 @@ export default {
         "dd/MM/yyyy HH:mm"
       );
     },
+    formattedDateTime() {
+      const date = this.selectedDate.split("/");
+
+      const year = date[2];
+      const month = date[1];
+      const day = date[0];
+
+      const time = this.selectedHour.split(":");
+      const hours = time[0];
+      const minutes = time[1];
+
+      //RescheduleDateTime
+      this.rescheduleDatetime = `${year}-${month}-${day}T${hours}:${minutes}`;
+    },
+    selectBookSchedule(id, date, hour, siteId) {
+      this.selectedId = id;
+      this.selectedDate = date;
+      this.selectedHour = hour;
+      this.selectedSite = siteId;
+
+      console.log(this.selectedSite);
+
+      this.formattedDateTime();
+    },
     updateSchedule() {
       this.formatDateTime();
       const dateParts = this.scheduleDatetimeFormatted.split(" ");
@@ -366,10 +420,13 @@ export default {
     getBookSchedules() {
       axios
         .get(
-          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/book-schedules`
+          `${BASE_URL}/hospital/${localStorage.getItem(
+            "hospitalId"
+          )}/book-schedules`
         )
         .then((response) => {
           this.bookSchedules = response.data.bookSchedules;
+          console.log(this.bookSchedules);
         });
     },
     deleteBookSchedule() {

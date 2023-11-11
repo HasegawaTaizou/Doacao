@@ -9,7 +9,6 @@ import HospitalRegistrationPartFour from "@/pages/HospitalRegistrationPartFour.v
 import CheckYourEmail from "@/pages/CheckYourEmail.vue";
 // import RedefinePassword from "@/pages/RedefinePassword.vue";
 import RedefinePasswordConfirmation from "@/pages/RedefinePasswordConfirmation.vue";
-import Faq from "@/pages/Faq.vue";
 
 //DASHBOARD
 import Dashboard from "@/pages/dashboard/Dashboard.vue";
@@ -85,11 +84,6 @@ const routes = [
     path: "/redefine-password-confirmation",
     name: "RedefinePasswordConfirmation",
     component: RedefinePasswordConfirmation,
-  },
-  {
-    path: "/faq",
-    name: "Faq",
-    component: Faq,
   },
 
   //DASHBOARD
