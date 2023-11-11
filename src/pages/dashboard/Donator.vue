@@ -97,8 +97,14 @@
                     />
                     <img
                       @click="
+                        selectSchedule(
+                          schedule.scheduleId,
+                          schedule.date,
+                          schedule.hour,
+                          schedule.siteId
+                        );
                         openPopUp('reschedule'),
-                          (scheduleId = schedule.scheduleId)
+                          (scheduleId = schedule.scheduleId);
                       "
                       src="../../assets/img/scheduling-reschedule-icon.png"
                       alt="Reschedule Icon"
@@ -121,6 +127,7 @@
     :title="'Cancelar?'"
     :message="'Digite o motivo do cancelamento (Opcional)'"
     :acceptFunction="updateScheduleToCancel"
+    :image="'/src/assets/img/book-schedule-cancel-image.png'"
   >
     <textarea
       name=""
@@ -137,6 +144,7 @@
     :title="'Concluir?'"
     :message="'Os dados serão alterados e não terá como desfazer esta ação.'"
     :acceptFunction="updateScheduleToConclude"
+    :image="'/src/assets/img/book-schedule-save-image.png'"
   >
   </PopUp>
   <PopUp
@@ -144,6 +152,7 @@
     :title="'Remarcar'"
     :message="'Escolha a data e o horário para remarcar'"
     :acceptFunction="updateScheduleToReschedule"
+    :image="'/src/assets/img/book-schedule-reschedule-image.png'"
   >
     <div class="book-scheduling">
       <div class="scheduling-date">
@@ -152,11 +161,11 @@
           name=""
           id=""
           class="date__datetime-local"
-          v-model="scheduleDatetime"
+          v-model="rescheduleDatetime"
         />
       </div>
       <div class="scheduling-site">
-        <select v-model="scheduleSite" name="" id="" class="site__select">
+        <select v-model="selectedSite" name="" id="" class="site__select">
           <option disabled value="">Escolha o local</option>
           <option v-for="site in sites" :key="site.idSite" :value="site.idSite">
             {{ site.site }}
@@ -184,7 +193,7 @@ export default {
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
-      
+
       //Transition
       showTransition: false,
 
@@ -211,10 +220,65 @@ export default {
 
       //Sites data
       sites: [],
+
+      //ScheduleReschedule
+      selectedId: "",
+      selectedDate: "",
+      selectedHour: "",
+      selectedSite: "",
+      rescheduleDatetime: "",
     };
   },
   methods: {
     openPopUp,
+    formattedDateTime() {
+      const date = this.selectedDate.split("/");
+
+      const year = date[2];
+      const month = date[1];
+      const day = date[0];
+
+      const time = this.selectedHour.split(":");
+      const hours = time[0];
+      const minutes = time[1];
+
+      //RescheduleDateTime
+      this.rescheduleDatetime = `${year}-${month}-${day}T${hours}:${minutes}`;
+    },
+    selectSchedule(id, date, hour, siteId) {
+      this.selectedId = id;
+      this.selectedDate = date;
+      this.selectedHour = hour;
+      this.selectedSite = siteId;
+
+      console.log(this.selectedSite);
+      this.formattedDateTime();
+    },
+    formatDateTime() {
+      this.scheduleDatetimeFormatted = format(
+        new Date(this.rescheduleDatetime),
+        "dd/MM/yyyy HH:mm"
+      );
+    },
+    updateScheduleToReschedule() {
+      this.formatDateTime();
+      const dateParts = this.scheduleDatetimeFormatted.split(" ");
+      this.scheduleDate = dateParts[0];
+      this.scheduleTime = dateParts[1];
+
+      const scheduleData = {
+        id: this.selectedId,
+        date: this.scheduleDate,
+        hour: this.scheduleTime,
+        siteId: this.selectedSite,
+      };
+
+      console.log(scheduleData);
+
+      axios.put(`${BASE_URL}/schedule-reschedule`, scheduleData).then(() => {
+        location.reload();
+      });
+    },
     getUserData() {
       axios
         .get(`${BASE_URL}/users/${this.$store.state.userId}`)
@@ -254,9 +318,16 @@ export default {
         });
     },
     getUserSchedules() {
-      axios.get(`${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/users/${this.$store.state.userId}/schedules`).then((response) => {
-        this.schedules = response.data.schedules;
-      });
+      axios
+        .get(
+          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/users/${
+            this.$store.state.userId
+          }/schedules`
+        )
+        .then((response) => {
+          this.schedules = response.data.schedules;
+          console.log(this.schedules);
+        });
     },
     getUserSchedule(status) {
       const mappedSchedules = [
@@ -279,29 +350,19 @@ export default {
         id: this.scheduleId,
         observation: this.observation,
       };
-      axios.put(`${BASE_URL}/schedule-cancel`, updateScheduleData);
+      axios.put(`${BASE_URL}/schedule-cancel`, updateScheduleData).then(() => {
+        location.reload();
+      });
     },
     updateScheduleToConclude() {
       const updateScheduleData = {
         id: this.scheduleId,
       };
-      axios.put(`${BASE_URL}/schedule-conclude`, updateScheduleData);
-    },
-    updateScheduleToReschedule() {
-      this.updateScheduleDateTime();
-      const updateScheduleData = {
-        id: this.scheduleId,
-        date: this.scheduleDate,
-        hour: this.scheduleTime,
-        siteId: this.scheduleSite,
-      };
-      axios.put(`${BASE_URL}/schedule-reschedule`, updateScheduleData);
-    },
-    formatDateTime() {
-      this.scheduleDatetimeFormatted = format(
-        new Date(this.scheduleDatetime),
-        "dd/MM/yyyy HH:mm"
-      );
+      axios
+        .put(`${BASE_URL}/schedule-conclude`, updateScheduleData)
+        .then(() => {
+          location.reload();
+        });
     },
     updateScheduleDateTime() {
       this.formatDateTime();

@@ -69,13 +69,6 @@
               <td class="content__site">
                 {{ schedules[index].schedule.site }}
               </td>
-              <!-- <td class="content__status">
-                <span
-                  class="status__text"
-                  :class="schedules[index].schedule.status.toLowerCase()"
-                  >{{ getUserSchedule(schedules[index].schedule.status) }}</span
-                >
-              </td> -->
               <td
                 class="content__status"
                 :class="schedules[index].schedule.status.toLowerCase()"
@@ -106,8 +99,14 @@
                 />
                 <img
                   @click="
+                    selectSchedule(
+                      schedules[index].schedule.scheduleId,
+                      schedules[index].schedule.date,
+                      schedules[index].schedule.hour,
+                      schedules[index].schedule.siteId
+                    );
                     openPopUp('reschedule'),
-                      (scheduleId = schedules[index].schedule.scheduleId)
+                      (scheduleId = schedules[index].schedule.scheduleId);
                   "
                   src="../../assets/img/scheduling-reschedule-icon.png"
                   alt="Reschedule Icon"
@@ -161,11 +160,11 @@
             name=""
             id=""
             class="date__datetime-local"
-            v-model="scheduleDateTime"
+            v-model="this.rescheduleDatetime"
           />
         </div>
         <div class="scheduling-site">
-          <select v-model="scheduleSite" name="" id="" class="site__select">
+          <select v-model="selectedSite" name="" id="" class="site__select">
             <option disabled value="">Escolha o local</option>
             <option
               v-for="site in sites"
@@ -198,7 +197,7 @@ export default {
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
-      
+
       //Transition
       showTransition: false,
       selectedComponent: "",
@@ -218,10 +217,38 @@ export default {
       scheduleDatetimeFormatted: "",
       scheduleDate: "",
       scheduleTime: "",
+
+      selectedId: "",
+      selectedDate: "",
+      selectedHour: "",
+      selectedSite: "",
+      rescheduleDatetime: ""
     };
   },
   methods: {
     openPopUp,
+    formattedDateTime() {
+      const date = this.selectedDate.split("/");
+
+      const year = date[2];
+      const month = date[1];
+      const day = date[0];
+
+      const time = this.selectedHour.split(":");
+      const hours = time[0];
+      const minutes = time[1];
+
+      //RescheduleDateTime
+      this.rescheduleDatetime = `${year}-${month}-${day}T${hours}:${minutes}`;
+    },
+    selectSchedule(id, date, hour, siteId) {
+      this.selectedId = id;
+      this.selectedDate = date;
+      this.selectedHour = hour;
+      this.selectedSite = siteId;
+
+      this.formattedDateTime();
+    },
     setUserId(userId) {
       this.$store.commit("SET_USER_ID", userId);
     },
@@ -232,6 +259,7 @@ export default {
         )
         .then((response) => {
           this.schedules = response.data.schedules;
+          console.log(this.schedules);
         });
     },
     getUserSchedule(status) {
@@ -261,23 +289,25 @@ export default {
       });
     },
     formatDateTime() {
-      console.log(this.scheduleDateTime);
       this.scheduleDatetimeFormatted = format(
-        new Date(this.scheduleDateTime),
+        new Date(this.rescheduleDatetime),
         "dd/MM/yyyy HH:mm"
       );
     },
     rescheduleSchedule() {
       this.formatDateTime();
+      console.log(this.scheduleDatetimeFormatted);
       const dateParts = this.scheduleDatetimeFormatted.split(" ");
       this.scheduleDate = dateParts[0];
       this.scheduleTime = dateParts[1];
 
+      console.log(this.selectedId);
+      console.log(this.selectedSite);
       const scheduleData = {
-        id: this.scheduleId,
+        id: this.selectedId,
         date: this.scheduleDate,
         hour: this.scheduleTime,
-        siteId: this.scheduleSite,
+        siteId: this.selectedSite,
       };
 
       console.log(scheduleData);
