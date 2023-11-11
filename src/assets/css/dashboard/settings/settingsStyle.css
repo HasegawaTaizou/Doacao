@@ -293,6 +293,21 @@ input:disabled, textarea:disabled {
   cursor: pointer;
 }
 
+.delete-profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  background-color: #EE5353;
+  border-radius: 5px;
+  width: 208px;
+  height: 56px;
+  color: #fff;
+  font-family: "Abel";
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
 .hospital-actions img {
   width: 22px;
 }

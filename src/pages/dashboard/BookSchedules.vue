@@ -233,13 +233,6 @@
             id=""
             class="date__datetime-local"
           />
-          <!-- <input
-            v-model="bookScheduleDatetime"
-            type="datetime-local"
-            name=""
-            id=""
-            class="date__datetime-local"
-          /> -->
         </div>
         <div class="scheduling-site">
           <select v-model="selectedSite" name="" id="" class="site__select">
