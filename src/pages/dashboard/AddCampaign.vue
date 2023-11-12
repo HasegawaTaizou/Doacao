@@ -20,6 +20,21 @@
             alt="Campaign Image"
             class="campaign__image"
           />
+          <img
+            src="../../assets/img/see-campaign-ornament1.png"
+            alt="Ornament 1"
+            class="ornament1"
+          />
+          <img
+            src="../../assets/img/see-campaign-ornament2.png"
+            alt="Ornament 2"
+            class="ornament2"
+          />
+          <img
+            src="../../assets/img/see-campaign-ornament3.png"
+            alt="Ornament 3"
+            class="ornament3"
+          />
         </div>
         <div class="campaign__add">
           <div class="add__date-container">
@@ -96,7 +111,7 @@ export default {
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
-      
+
       showTransition: false,
 
       isSelectedImage: false,
@@ -126,7 +141,7 @@ export default {
       console.log(campaignData);
 
       axios.post(`${BASE_URL}/campaign`, campaignData).then(() => {
-        this.$router.push('/dashboard/see-campaign')
+        this.$router.push("/dashboard/see-campaign");
       });
     },
     formatDateTime() {

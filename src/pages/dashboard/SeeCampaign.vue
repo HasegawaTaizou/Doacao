@@ -166,7 +166,6 @@ export default {
       selectedImage: "",
 
       downloadURL: "",
-      // campaignDatetime: "2023-10-29T12:00",
       campaignDatetime: "",
       campaignDatetimeFormatted: "",
     };
