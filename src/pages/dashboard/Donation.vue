@@ -27,6 +27,46 @@
         <div class="donation__graph">
           <canvas id="line-graph"></canvas>
         </div>
+        <div class="donation__add-container">
+          <div class="add__introduction">
+            <img
+              src="../../assets/img/add-introduction-image.png"
+              alt="Add introduction Image"
+              class="add-introduction__image"
+            />
+            <p class="add-introduction__text">
+              Teve novas doações? Registre aqui e atualize seu banco de doação.
+            </p>
+          </div>
+          <div class="add-actions">
+            <div class="action__blood-type">
+              <label for="blood-type" class="blood-type__label"
+                >Tipo sanguíneo:</label
+              >
+              <select name="blood-type" class="blood_type__select">
+                <option value="" selected disabled class="blood-type__option">
+                  Selecione o tipo sanguíneo
+                </option>
+                <option value="O+" class="blood-type__option">
+                  O+
+                </option>
+              </select>
+            </div>
+            <div class="action__quantity">
+              <label for="quantity" class="quantity__label">Quantidade:</label>
+              <input type="number" class="quantity__input" />
+            </div>
+            <div class="action__year">
+              <label for="year" class="year__label">Ano:</label>
+              <select name="year" class="year__select">
+                <option value="" selected disabled class="year__option">
+                  Selecione o ano
+                </option>
+              </select>
+            </div>
+            <button class="action__button">Salvar</button>
+          </div>
+        </div>
       </div>
     </section>
   </transition>
@@ -45,7 +85,7 @@ export default {
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
-      
+
       showTransition: false,
 
       donationBanks: [],
@@ -141,7 +181,9 @@ export default {
     getDonationBanks() {
       axios
         .get(
-          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/donation-banks`
+          `${BASE_URL}/hospital/${localStorage.getItem(
+            "hospitalId"
+          )}/donation-banks`
         )
         .then((response) => {
           this.donationBanks = response.data.donationBanks;
