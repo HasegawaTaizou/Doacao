@@ -1,0 +1,85 @@
+.content {
+  height: 100vh;
+  width: 100vw;
+  background-color: #7395f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.thank-you__texts {
+  max-width: 724px;
+}
+
+.thank-you__text {
+  color: white;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.thank-you__text:last-child {
+  padding: 32px 0px;
+}
+
+.thank-you__button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  padding: 12px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.button__text {
+  color: #527df9;
+  font-family: "Abel";
+}
+
+.button__icon {
+  color: #527df9;
+}
+
+.thank-you__button:hover {
+  cursor: pointer;
+  background-color: #527df9;
+  transition: all 0.5s;
+}
+
+.thank-you__button:hover .button__icon,
+.thank-you__button:hover .button__text {
+  color: white;
+  transition: all 0.5s;
+}
+
+/* ORNAMENTS */
+.ornament1 {
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+}
+
+.ornament2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ornament3 {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.ornament4 {
+  position: absolute;
+  bottom: 80px;
+  right: 124px;
+}
+
+.ornament5 {
+  position: absolute;
+  top: 138px;
+  left: 280px;
+}
