@@ -98,26 +98,46 @@
               <label for="blood-type" class="blood-type__label"
                 >Tipo sanguíneo:</label
               >
-              <select name="blood-type" class="blood_type__select">
+              <select
+                name="blood-type"
+                class="blood_type__select"
+                v-model="bloodType"
+              >
                 <option value="" selected disabled class="blood-type__option">
                   Selecione o tipo sanguíneo
                 </option>
+                <option value="O-" class="blood-type__option">O-</option>
                 <option value="O+" class="blood-type__option">O+</option>
+                <option value="A-" class="blood-type__option">A-</option>
+                <option value="A+" class="blood-type__option">A+</option>
+                <option value="B-" class="blood-type__option">B-</option>
+                <option value="B+" class="blood-type__option">B+</option>
+                <option value="AB-" class="blood-type__option">AB-</option>
+                <option value="AB+" class="blood-type__option">AB+</option>
               </select>
             </div>
             <div class="action__quantity">
               <label for="quantity" class="quantity__label">Quantidade:</label>
-              <input type="number" class="quantity__input" />
+              <input v-model="quantity" type="number" class="quantity__input" />
             </div>
             <div class="action__year">
               <label for="year" class="year__label">Ano:</label>
-              <select name="year" class="year__select">
+              <select name="year" v-model="year" class="year__select">
                 <option value="" selected disabled class="year__option">
                   Selecione o ano
                 </option>
+                <option
+                  v-for="(year, index) in this.years"
+                  :key="index"
+                  :value="year.year"
+                >
+                  {{ year.year }}
+                </option>
               </select>
             </div>
-            <button class="action__button">Salvar</button>
+            <button @click="updateDonationBank" class="action__button">
+              Salvar
+            </button>
           </div>
         </div>
       </div>
@@ -168,9 +188,29 @@ export default {
         "AB-": 0,
         "AB+": 0,
       },
+
+      years: [],
+
+      //Update Donation Bank Data
+      bloodType: "",
+      quantity: 0,
+      year: 0,
     };
   },
   methods: {
+    updateDonationBank() {
+      const data = {
+        year: this.year,
+        bloodMl: this.quantity,
+        bloodType: this.bloodType,
+        hospitalId: Number(localStorage.getItem("hospitalId")),
+      };
+
+      console.log(data);
+      axios
+        .put(`${BASE_URL}/update-donation-bank`, data)
+        .then(location.reload());
+    },
     createBarChart() {
       const labels = Object.keys(this.donationBankGraphFirstYearData);
 
@@ -385,9 +425,21 @@ export default {
           this.createLineChart();
         });
     },
+    getYearsDonationBank() {
+      axios
+        .get(
+          `${BASE_URL}/hospital/${localStorage.getItem(
+            "hospitalId"
+          )}/donation-banks-years`
+        )
+        .then((response) => {
+          this.years = response.data.years;
+        });
+    },
   },
   mounted() {
     this.getDonationBanks();
+    this.getYearsDonationBank();
     this.showTransition = true;
 
     this.hospitalName = localStorage.hospitalName;
