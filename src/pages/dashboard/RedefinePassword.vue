@@ -116,6 +116,7 @@
     :title="'Alterar senha?'"
     :message="'A senha será alterada e não terá como desfazer esta ação.'"
     :acceptFunction="changePassword"
+    :image="'/src/assets/img/book-schedule-save-image.png'"
   >
   </PopUp>
 </template>
@@ -168,6 +169,8 @@ export default {
         axios.put(
           `${BASE_URL}/hospital/redefine-password`,
           updatePasswordData
+        ).then(
+          location.reload()
         );
       } else {
         this.isPasswordTheSame = false;

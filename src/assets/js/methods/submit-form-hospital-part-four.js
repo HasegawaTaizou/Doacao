@@ -17,7 +17,8 @@ export default async function submitFormHospitalPartFour() {
     this.inputPassword,
     this.inputPasswordConfirmation
   );
-  if (isPasswordTheSame) {
+
+  if (!isPasswordTheSame) {
     this.$store.commit("SET_IS_PASSWORD_SAME", false);
   }
 
