@@ -94,7 +94,7 @@
                 <div class="bar__line-container">
                   <div
                     class="line__progress"
-                    :style="`width: ${this.fiveStarPercentage}%`"
+                    :style="`width: ${fiveStarPercentage}%`"
                   ></div>
                 </div>
                 <div class="bar__label-container">
@@ -106,7 +106,7 @@
                 <div class="bar__line-container">
                   <div
                     class="line__progress"
-                    :style="{ width: `${fourStarPercentage}%` }"
+                    :style="`width: ${fourStarPercentage}%`"
                   ></div>
                 </div>
                 <div class="bar__label-container">
@@ -118,7 +118,7 @@
                 <div class="bar__line-container">
                   <div
                     class="line__progress"
-                    :style="{ width: `${threeStarPercentage}%` }"
+                    :style="`width: ${threeStarPercentage}%`"
                   ></div>
                 </div>
                 <div class="bar__label-container">
@@ -130,7 +130,7 @@
                 <div class="bar__line-container">
                   <div
                     class="line__progress"
-                    :style="{ width: `${twoStarPercentage}%` }"
+                    :style="`width: ${twoStarPercentage}%`"
                   ></div>
                 </div>
                 <div class="bar__label-container">
@@ -142,7 +142,7 @@
                 <div class="bar__line-container">
                   <div
                     class="line__progress"
-                    :style="{ width: `${fiveStarPercentage}%` }"
+                    :style="`width: ${oneStarPercentage}%`"
                   ></div>
                 </div>
                 <div class="bar__label-container">

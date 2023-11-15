@@ -13,19 +13,74 @@
         </div>
       </div>
       <div class="donation__content">
-        <div class="donation__introduction">
-          <p class="introduction__text">
-            No Brasil, os grupos sanguíneos mais comuns são o O e o A. Juntos
-            eles abrangem 87% de nossa população.
-          </p>
-          <img
-            src="../../assets/img/donation-image.png"
-            alt="Introduction Image"
-            class="introduction__image"
-          />
-        </div>
-        <div class="donation__graph">
-          <canvas id="line-graph"></canvas>
+        <div class="donation__graphs">
+          <div class="bar-graph-container">
+            <canvas id="bar-graph"></canvas>
+          </div>
+          <div class="doughnut-graph-container">
+            <canvas id="doughnut-graph"></canvas>
+            <div class="doughnut__blood-types">
+              <div class="doughnut__label-container">
+                <span
+                  :style="`background-color: rgb(75,192,192)`"
+                  class="graph-label__text__before"
+                ></span>
+                <span class="graph-label__title">O-</span>
+              </div>
+              <div class="doughnut__label-container">
+                <span
+                  :style="`background-color: rgb(255,159,64)`"
+                  class="graph-label__text__before"
+                ></span>
+                <span class="graph-label__title">O+</span>
+              </div>
+              <div class="doughnut__label-container">
+                <span
+                  :style="`background-color: rgb(54,162,235)`"
+                  class="graph-label__text__before"
+                ></span>
+                <span class="graph-label__title">A-</span>
+              </div>
+              <div class="doughnut__label-container">
+                <span
+                  :style="`background-color: rgb(153,102,255)`"
+                  class="graph-label__text__before"
+                ></span>
+                <span class="graph-label__title">A+</span>
+              </div>
+              <div class="doughnut__label-container">
+                <span
+                  :style="`background-color: rgb(255,205,86)`"
+                  class="graph-label__text__before"
+                ></span>
+                <span class="graph-label__title">B-</span>
+              </div>
+              <div class="doughnut__label-container">
+                <span
+                  :style="`background-color: rgb(201,203,207)`"
+                  class="graph-label__text__before"
+                ></span>
+                <span class="graph-label__title">B+</span>
+              </div>
+              <div class="doughnut__label-container">
+                <span
+                  :style="`background-color: rgb(254,17,17)`"
+                  class="graph-label__text__before"
+                ></span>
+                <span class="graph-label__title">AB-</span>
+              </div>
+              <div class="doughnut__label-container">
+                <span
+                  :style="`background-color: rgb(225,75,211)`"
+                  class="graph-label__text__before"
+                ></span>
+                <span class="graph-label__title">AB+</span>
+              </div>
+            </div>
+          </div>
+          <div class="line-graph-container">
+            <canvas id="line-graph"></canvas>
+          </div>
         </div>
         <div class="donation__add-container">
           <div class="add__introduction">
@@ -47,9 +102,7 @@
                 <option value="" selected disabled class="blood-type__option">
                   Selecione o tipo sanguíneo
                 </option>
-                <option value="O+" class="blood-type__option">
-                  O+
-                </option>
+                <option value="O+" class="blood-type__option">O+</option>
               </select>
             </div>
             <div class="action__quantity">
@@ -118,7 +171,95 @@ export default {
     };
   },
   methods: {
-    createChart() {
+    createBarChart() {
+      const labels = Object.keys(this.donationBankGraphFirstYearData);
+
+      const ctx = document.getElementById("bar-graph");
+
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: this.selectedFirstYear,
+            data: Object.values(this.donationBankGraphFirstYearData),
+            backgroundColor: "rgb(255,205,86)",
+          },
+          {
+            label: this.selectedSecondYear,
+            data: Object.values(this.donationBankGraphSecondYearData),
+            backgroundColor: "rgb(255,99,132)",
+          },
+        ],
+      };
+
+      Chart.defaults.font.size = 24;
+      Chart.defaults.font.family = "Abel";
+      Chart.defaults.color = `black`;
+
+      const config = {
+        type: "bar",
+        data: data,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+              onHover: (event, chartElement) => {
+                event.native.target.style.cursor = "pointer";
+              },
+              onLeave: (event, chartElement) => {
+                event.native.target.style.cursor = "default";
+              },
+            },
+          },
+        },
+      };
+
+      new Chart(ctx, config);
+    },
+    createDoughnutChart() {
+      const ctx = document.getElementById("doughnut-graph");
+
+      const labels = Object.keys(this.donationBankGraphFirstYearData);
+
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: this.selectedSecondYear,
+            data: Object.values(this.donationBankGraphSecondYearData),
+            backgroundColor: [
+              "rgb(75,192,192)",
+              "rgb(255,159,64)",
+              "rgb(54,162,235)",
+              "rgb(153,102,255)",
+              "rgb(255,205,86)",
+              "rgb(201,203,207)",
+              "rgb(254,17,17)",
+              "rgb(225,75,211)",
+            ],
+            hoverOffset: 4,
+          },
+        ],
+      };
+
+      const config = {
+        type: "doughnut",
+        data: data,
+        options: {
+          maintainAspectRatio: false,
+          responsive: true,
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+        },
+      };
+
+      new Chart(ctx, config);
+    },
+    createLineChart() {
       const labels = Object.keys(this.donationBankGraphFirstYearData);
 
       const ctx = document.getElementById("line-graph");
@@ -151,7 +292,7 @@ export default {
       Chart.defaults.font.family = "Abel";
       Chart.defaults.color = `black`;
 
-      new Chart(ctx, {
+      const config = {
         type: "line",
         data: data,
         options: {
@@ -175,8 +316,23 @@ export default {
               },
             },
           },
+          layout: {
+            padding: {
+              bottom: 0,
+            },
+          },
+          scales: {
+            x: {
+              barThickness: 4, // Ajuste o valor conforme necessário
+            },
+            y: {
+              beginAtZero: true,
+            },
+          },
         },
-      });
+      };
+
+      new Chart(ctx, config);
     },
     getDonationBanks() {
       axios
@@ -195,18 +351,20 @@ export default {
             }
           });
 
-          this.donationBanksYears[this.selectedFirstYear].forEach(
-            (bloodsTypes) => {
-              if (
-                this.donationBankGraphFirstYearData.hasOwnProperty(
-                  bloodsTypes.type
-                )
-              ) {
-                this.donationBankGraphFirstYearData[bloodsTypes.type] +=
-                  parseInt(bloodsTypes.blood_ml);
+          if (this.donationBanksYears[this.selectedFirstYear] != undefined) {
+            this.donationBanksYears[this.selectedFirstYear].forEach(
+              (bloodsTypes) => {
+                if (
+                  this.donationBankGraphFirstYearData.hasOwnProperty(
+                    bloodsTypes.type
+                  )
+                ) {
+                  this.donationBankGraphFirstYearData[bloodsTypes.type] +=
+                    parseInt(bloodsTypes.blood_ml);
+                }
               }
-            }
-          );
+            );
+          }
 
           this.donationBanksYears[this.selectedSecondYear].forEach(
             (bloodsTypes) => {
@@ -222,7 +380,9 @@ export default {
           );
         })
         .then(() => {
-          this.createChart();
+          this.createBarChart();
+          this.createDoughnutChart();
+          this.createLineChart();
         });
     },
   },
