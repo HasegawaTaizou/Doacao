@@ -58,7 +58,7 @@
             />
             <div v-if="v$.inputEmail.$error">
               <p
-                v-if="v$.inputEmail.required && v$.inputEmail.email"
+                v-if="v$.inputEmail.required"
                 class="error-text"
               >
                 Preencha o e-mail!
