@@ -13,12 +13,12 @@
         </div>
       </div>
       <div class="campaigns__content">
-        <div class="campaigns__campaigns-container">
+        <!-- <div class="campaigns__campaigns-container">
           <div
             v-for="(campain, index) in campaigns"
             :key="index"
             class="campaign"
-            :class="{ 'active': showCampaign }"
+            :class="{ active: showCampaign }"
             @click="
               selectCampaign(
                 campain.id,
@@ -37,7 +37,30 @@
               >{{ campain.date }} às {{ campain.hour }}</span
             >
           </div>
-        </div>
+        </div> -->
+        <Swiper
+          :modules="modules"
+          :space-between="30"
+          :slides-per-view="3"
+          :pagination="{ clickable: true }"
+          class="swiper campaigns__campaigns-container"
+        >
+          <SwiperSlide
+            v-for="(campain, index) in campaigns"
+            :key="index"
+            class="campaign slide"
+            :class="{ active: activeIndex === index }"
+            @click="selectCampaign(index)"
+          >
+            <p class="campaign__description">
+              {{ campain.description }}
+            </p>
+            <img :src="campain.image" alt="See Iamge" class="campaign__image" />
+            <span class="campaign__date"
+              >{{ campain.date }} às {{ campain.hour }}</span
+            >
+          </SwiperSlide>
+        </Swiper>
         <div v-if="!showCampaign" class="campaigns__detail">
           <img
             src="../../assets/img/see-campaign-detail-image.png"
@@ -142,15 +165,32 @@ import axios from "axios";
 import uploadImage from "../../assets/js/methods/input/upload-image";
 import { format } from "date-fns";
 
+import { Swiper, SwiperSlide } from "swiper/vue";
+import SwiperCore, { Pagination } from "swiper";
+
+// Import Swiper styles
+import "swiper/css";
+
+// Import the Pagination module styles
+import "swiper/css/pagination";
+
+// Install Swiper modules
+SwiperCore.use([Pagination]);
+
 export default {
-  name: "AddCampaign",
-  components: { PopUp },
+  setup() {
+    return {
+      modules: [Pagination],
+    };
+  },
+  name: "SeeCampaign",
+  components: { PopUp, Swiper, SwiperSlide },
   data() {
     return {
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
-      
+
       showTransition: false,
 
       selectedComponent: "",
@@ -158,6 +198,7 @@ export default {
       campaigns: [],
 
       //detail campaing
+      activeIndex: null,
       showCampaign: false,
       selectedId: 0,
       selectedDescription: "",
@@ -173,27 +214,38 @@ export default {
   methods: {
     openPopUp,
     uploadImage,
-    selectCampaign(id, description, date, hour, image) {
-      this.showCampaign = true;
-      this.selectedId = id;
-      this.selectedDescription = description;
-      this.selectedDate = date;
-      this.selectedHour = hour;
-      this.selectedImage = image;
+    selectCampaign(index) {
+      if (this.activeIndex === index) {
+        // If the same campaign is clicked again, toggle it off
+        this.activeIndex = null;
+        this.showCampaign = false;
+      } else {
+        // Otherwise, toggle the active campaign
+        this.activeIndex = index;
+        this.showCampaign = true;
 
-      this.downloadURL = this.selectedImage;
+        const campaign = this.campaigns[index];
+        this.selectedId = campaign.id;
+        this.selectedDescription = campaign.description;
+        this.selectedDate = campaign.date;
+        this.selectedHour = campaign.hour;
+        this.selectedImage = campaign.image;
+        this.downloadURL = this.selectedImage;
 
-      this.formattedDateTime();
+        this.formattedDateTime();
+      }
     },
     getCampaigns() {
       axios
-        .get(`${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/campaigns`)
+        .get(
+          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/campaigns`
+        )
         .then((response) => {
           this.campaigns = response.data.campaigns;
         });
     },
     updateCampaign() {
-      this.formatDateTime()
+      this.formatDateTime();
 
       const dateParts = this.campaignDatetimeFormatted.split(" ");
       const date = dateParts[0];
@@ -250,4 +302,18 @@ export default {
 
 <style scoped>
 @import url("../../assets/css/dashboard/seeCampaign/seeCampaignStyle.css");
+</style>
+
+<style lang="scss" scoped>
+@import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
+@import "@/styles/style.scss";
+
+.swiper {
+  @include swiper-wrapper();
+}
+
+.slide {
+  @include swiper-slide();
+}
 </style>

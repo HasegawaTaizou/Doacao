@@ -53,15 +53,15 @@ p {
   display: flex;
   gap: 26px;
   justify-content: center;
-  overflow-x: scroll;
   max-width: 70vw;
+  padding: 20px 0px 40px 0px !important;
 }
 
 .campaign {
   max-width: 476px;
   width: 100%;
   border-radius: 10px;
-  display: grid;
+  display: grid !important;
   grid-template-areas:
     "description image"
     "date image";
@@ -73,6 +73,7 @@ p {
   margin-top: 20px;
   cursor: pointer;
   column-gap: 24px;
+  font-weight: normal !important;
 }
 
 .campaign__description {
@@ -271,6 +272,25 @@ p {
 
 .active {
   border: 2px solid #2c62f1;
+}
+
+/* SWIPPER STYLES */
+
+.swiper-wrapper {
+  height: fit-content;
+  padding-bottom: 12px;
+}
+
+.swiper {
+  cursor: grab;
+  height: fit-content !important;
+
+}
+
+.slide {
+  padding: 12px;
+  margin: 12px;
+  width: 560px !important;
 }
 
 /* TRANSITION STYLE */
