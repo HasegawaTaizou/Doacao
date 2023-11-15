@@ -13,31 +13,6 @@
         </div>
       </div>
       <div class="campaigns__content">
-        <!-- <div class="campaigns__campaigns-container">
-          <div
-            v-for="(campain, index) in campaigns"
-            :key="index"
-            class="campaign"
-            :class="{ active: showCampaign }"
-            @click="
-              selectCampaign(
-                campain.id,
-                campain.description,
-                campain.date,
-                campain.hour,
-                campain.image
-              )
-            "
-          >
-            <p class="campaign__description">
-              {{ campain.description }}
-            </p>
-            <img :src="campain.image" alt="See Iamge" class="campaign__image" />
-            <span class="campaign__date"
-              >{{ campain.date }} às {{ campain.hour }}</span
-            >
-          </div>
-        </div> -->
         <Swiper
           :modules="modules"
           :space-between="30"

@@ -90,7 +90,10 @@
               <span class="summary__total">{{ totalReviews }} Avaliações</span>
             </div>
             <div class="graph-review__graph-container">
-              <div class="graph__bar-container">
+              <div
+                class="graph__bar-container"
+               
+              >
                 <div class="bar__line-container">
                   <div
                     class="line__progress"
@@ -151,6 +154,16 @@
                 </div>
               </div>
             </div>
+            <div
+              id="tooltip"
+              style="
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                padding: 5px;
+                border: 1px solid #ccc;
+              "
+            ></div>
           </div>
           <div class="reviews__comments-container">
             <div
@@ -197,6 +210,26 @@ import Chart from "chart.js/auto";
 import { BASE_URL } from "../../assets/js/config";
 import axios from "axios";
 
+function showValue(event) {
+  const tooltip = document.getElementById("tooltip");
+  const target = event.target;
+
+  if (target.classList.contains("label__number")) {
+    const value = target.getAttribute("data-value");
+    const rect = target.getBoundingClientRect();
+
+    tooltip.innerHTML = value;
+    tooltip.style.left = rect.left + window.pageXOffset + "px";
+    tooltip.style.top = rect.top + window.pageYOffset - 30 + "px";
+    tooltip.style.display = "block";
+  }
+}
+
+document.addEventListener("mouseout", function (event) {
+  const tooltip = document.getElementById("tooltip");
+  tooltip.style.display = "none";
+});
+
 export default {
   name: "Statistics",
   data() {
@@ -204,7 +237,7 @@ export default {
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
-      
+
       //Transition
       showTransition: false,
 
@@ -256,7 +289,9 @@ export default {
     getSchedulesStatistics() {
       axios
         .get(
-          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/statistics/schedules`
+          `${BASE_URL}/hospital/${localStorage.getItem(
+            "hospitalId"
+          )}/statistics/schedules`
         )
         .then((response) => {
           const schedulesStatisticsData = response.data.schedulesStatistics;
@@ -273,7 +308,9 @@ export default {
     getRatingsStatistics() {
       axios
         .get(
-          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/statistics/ratings`
+          `${BASE_URL}/hospital/${localStorage.getItem(
+            "hospitalId"
+          )}/statistics/ratings`
         )
         .then((response) => {
           const hospitalRatingsData = response.data.ratingsStatistics;
@@ -291,7 +328,9 @@ export default {
     getReviews() {
       axios
         .get(
-          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/statistics/reviews`
+          `${BASE_URL}/hospital/${localStorage.getItem(
+            "hospitalId"
+          )}/statistics/reviews`
         )
         .then((response) => {
           this.hospitalReviews = response.data.reviewsStatistics;
