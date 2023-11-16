@@ -42,8 +42,8 @@
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
   justify-content: center;
   flex-direction: column;
-  /* max-height: 88vh;
-  overflow-y: scroll; */
+  max-height: 88vh;
+  overflow-y: scroll;
   margin: 0px 32px;
 }
 
@@ -52,15 +52,16 @@ p {
 }
 
 .donation__graphs {
-  max-width: 1600px;
-  height: 100%;
+  max-width: 1800px;
+  max-height: 70vh;
+  overflow-y: scroll;
   display: grid;
   grid-template-areas:
     "bar doughnut"
     "line line";
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
-  padding: 32px 0px;
+  padding: 32px 32px;
   column-gap: 32px;
 }
 
@@ -167,7 +168,7 @@ p {
 }
 
 .blood_type__select {
-  width: 240px;
+  width: 180px;
   border: 1px solid #7395f7;
   padding: 6px;
   border-radius: 5px;
@@ -185,7 +186,7 @@ p {
 .quantity__input {
   border: var(--input-border);
   border-radius: 5px;
-  width: 278px;
+  width: 165px;
   height: 42px;
   font-size: 1.5rem;
   font-family: "Abel";
@@ -209,7 +210,7 @@ p {
 }
 
 .year__select {
-  width: 362px;
+  width: 300px;
   border: 1px solid #7395f7;
   padding: 6px;
   border-radius: 5px;
@@ -217,6 +218,10 @@ p {
   font-size: 1.5rem;
   cursor: pointer;
   height: 42px;
+}
+
+.year__option {
+  color: #000;
 }
 
 .action__button {

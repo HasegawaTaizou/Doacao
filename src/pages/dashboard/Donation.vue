@@ -94,6 +94,22 @@
             </p>
           </div>
           <div class="add-actions">
+            <div class="action__year">
+              <label for="year" class="year__label">Ano:</label>
+              <select name="year" v-model="year" class="year__select">
+                <option value="" selected disabled class="year__option">
+                  Selecione o ano
+                </option>
+                <option
+                  class="year__option"
+                  v-for="(donationYear, index) in this.years"
+                  :key="index"
+                  :value="donationYear.year"
+                >
+                  {{ donationYear.year }}
+                </option>
+              </select>
+            </div>
             <div class="action__blood-type">
               <label for="blood-type" class="blood-type__label"
                 >Tipo sanguíneo:</label
@@ -104,7 +120,7 @@
                 v-model="bloodType"
               >
                 <option value="" selected disabled class="blood-type__option">
-                  Selecione o tipo sanguíneo
+                  Tipo sanguíneo
                 </option>
                 <option value="O-" class="blood-type__option">O-</option>
                 <option value="O+" class="blood-type__option">O+</option>
@@ -117,24 +133,12 @@
               </select>
             </div>
             <div class="action__quantity">
-              <label for="quantity" class="quantity__label">Quantidade:</label>
+              <label for="quantity" class="quantity__label"
+                >Quantidade (ML):</label
+              >
               <input v-model="quantity" type="number" class="quantity__input" />
             </div>
-            <div class="action__year">
-              <label for="year" class="year__label">Ano:</label>
-              <select name="year" v-model="year" class="year__select">
-                <option value="" selected disabled class="year__option">
-                  Selecione o ano
-                </option>
-                <option
-                  v-for="(year, index) in this.years"
-                  :key="index"
-                  :value="year.year"
-                >
-                  {{ year.year }}
-                </option>
-              </select>
-            </div>
+
             <button @click="updateDonationBank" class="action__button">
               Salvar
             </button>
@@ -194,7 +198,7 @@ export default {
       //Update Donation Bank Data
       bloodType: "",
       quantity: 0,
-      year: 0,
+      year: "",
     };
   },
   methods: {
@@ -206,7 +210,6 @@ export default {
         hospitalId: Number(localStorage.getItem("hospitalId")),
       };
 
-      console.log(data);
       axios
         .put(`${BASE_URL}/update-donation-bank`, data)
         .then(location.reload());
@@ -433,6 +436,8 @@ export default {
           )}/donation-banks-years`
         )
         .then((response) => {
+          console.log(localStorage.hospitalId);
+          console.log(response.data.years);
           this.years = response.data.years;
         });
     },

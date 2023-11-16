@@ -255,7 +255,7 @@ export default {
     },
     editHospital() {
       const updateHospitalData = {
-        id: localStorage.getItem("hospitalId"),
+        id: Number(localStorage.getItem("hospitalId")),
         hospital: {
           name: this.hospitalData.name,
           cnpj: this.hospitalData.cnpj,
@@ -276,7 +276,6 @@ export default {
           complement: this.addressData.complement,
         },
       };
-      console.log(updateHospitalData);
       axios.put(`${BASE_URL}/hospital-update`, updateHospitalData).then(() => {
         localStorage.setItem("hospitalPhoto", this.downloadURL);
         localStorage.setItem("hospitalName", this.hospitalData.name);

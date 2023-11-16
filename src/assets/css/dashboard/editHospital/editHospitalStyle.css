@@ -91,7 +91,6 @@
   border: var(--input-border);
   border-radius: 5px;
   font-size: 2.75rem;
-  padding-left: 12px;
 }
 
 input:disabled,
