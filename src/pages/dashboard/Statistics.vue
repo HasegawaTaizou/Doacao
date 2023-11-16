@@ -210,26 +210,6 @@ import Chart from "chart.js/auto";
 import { BASE_URL } from "../../assets/js/config";
 import axios from "axios";
 
-function showValue(event) {
-  const tooltip = document.getElementById("tooltip");
-  const target = event.target;
-
-  if (target.classList.contains("label__number")) {
-    const value = target.getAttribute("data-value");
-    const rect = target.getBoundingClientRect();
-
-    tooltip.innerHTML = value;
-    tooltip.style.left = rect.left + window.pageXOffset + "px";
-    tooltip.style.top = rect.top + window.pageYOffset - 30 + "px";
-    tooltip.style.display = "block";
-  }
-}
-
-document.addEventListener("mouseout", function (event) {
-  const tooltip = document.getElementById("tooltip");
-  tooltip.style.display = "none";
-});
-
 export default {
   name: "Statistics",
   data() {
@@ -315,7 +295,6 @@ export default {
         .then((response) => {
           const hospitalRatingsData = response.data.ratingsStatistics;
 
-          console.log(hospitalRatingsData);
           this.oneStarsReview = hospitalRatingsData.oneStarsRating;
           this.twoStarsReview = hospitalRatingsData.twoStarsRating;
           this.threeStarsReview = hospitalRatingsData.threeStarsRating;

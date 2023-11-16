@@ -347,11 +347,6 @@ textarea:disabled {
 
 .form__photo-selected-container {
   padding-top: 6px;
-  grid-area: photo;
-  max-width: 512px;
-  height: 512px;
-  width: 512px;
-  max-height: 512px;
   position: relative;
 }
 
