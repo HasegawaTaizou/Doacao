@@ -3,10 +3,12 @@ import App from "./App.vue";
 import Dashboard from "./pages/dashboard/Dashboard.vue";
 import router from "./router";
 import store from "./store/store";
-import VueTheMask from 'vue-the-mask';
+import VueTheMask from "vue-the-mask";
 import { useVuelidate } from "@vuelidate/core";
-import 'vue2-transitions';
+import "vue2-transitions";
+import VueNativeSock from "vue-native-websocket";
 
+console.log(VueNativeSock);
 const app = createApp(App);
 app.use(router);
 app.use(store);
@@ -17,4 +19,4 @@ app.config.globalProperties.v$ = v$;
 
 app.component("Dashboard", Dashboard); // Registrar o componente do dashboard globalmente
 
-app.mount('#app');
+app.mount("#app");
