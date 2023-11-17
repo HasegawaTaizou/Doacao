@@ -62,7 +62,10 @@
               v-model="inputDescription"
             ></textarea>
           </div>
-          <div v-if="loading == false && isSelectedImage == false" class="form__photo-container">
+          <div
+            v-if="loading == false && isSelectedImage == false"
+            class="form__photo-container"
+          >
             <input
               type="file"
               class="photo__label"
@@ -77,7 +80,10 @@
               />
             </label>
           </div>
-          <div v-else-if="loading == false && isSelectedImage == true" class="form__photo-selected-container">
+          <div
+            v-else-if="loading == false && isSelectedImage == true"
+            class="form__photo-selected-container"
+          >
             <img :src="downloadURL" alt="Hospital Photo" class="photo__photo" />
             <div class="form__photo-edit-container">
               <input
@@ -91,7 +97,11 @@
               </label>
             </div>
           </div>
-          <div v-else-if="loading == true && isSelectedImage == false" class="loading-spinner"></div>
+          <div
+            v-else-if="loading == true && isSelectedImage == false"
+            class="loading-spinner"
+            style="margin: 0 0px 0px 176px;"
+          ></div>
           <button @click="insertCampaign" class="add__button">Publicar</button>
         </div>
       </div>
@@ -116,14 +126,13 @@ export default {
       showTransition: false,
 
       //Image
-      isSelectedImage: false,
       downloadURL: "",
+      isSelectedImage: false,
       loading: false, // Add loading state
-      
+
       campaignDatetime: "",
       campaignDatetimeFormatted: "",
       inputDescription: "",
-
     };
   },
   methods: {
