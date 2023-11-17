@@ -225,6 +225,7 @@ export default {
       downloadURL: "",
       isSelectedImage: true,
       loading: false, // Add loading state
+      //fse
     };
   },
   methods: {
