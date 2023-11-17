@@ -18,10 +18,12 @@
           <div class="hospital-general-data__image-container">
             <div class="form__photo-selected-container">
               <img
+                v-if="isSelectedImage"
                 :src="downloadURL"
                 alt="Hospital Photo"
                 class="photo__photo"
               />
+              <div v-else class="loading-spinner"></div>
               <div class="form__photo-container">
                 <input
                   type="file"
@@ -221,6 +223,8 @@ export default {
 
       //photo
       downloadURL: "",
+      isSelectedImage: true,
+      loading: false, // Add loading state
     };
   },
   methods: {
@@ -295,4 +299,5 @@ export default {
 
 <style scoped>
 @import url("../../assets/css/dashboard/editHospital/editHospitalStyle.css");
+@import url("../../assets/css/spinner/spinnerStyle.css");
 </style>

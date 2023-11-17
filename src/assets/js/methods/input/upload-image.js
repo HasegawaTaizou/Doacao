@@ -14,13 +14,21 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
 export default async function uploadImage(event) {
+  this.loading = true; // Set loading to true before upload
   const file = event.target.files[0];
   const storageRef = ref(storage, "images/" + file.name);
 
-  await uploadBytes(storageRef, file);
-
-  this.downloadURL = await getDownloadURL(storageRef);
-
-  this.isSelectedImage = true;
-  this.$store.state.formData.isSelectedImage = true;
+  this.isSelectedImage = false
+  
+  try {
+    await uploadBytes(storageRef, file);
+    this.downloadURL = await getDownloadURL(storageRef);
+    this.isSelectedImage = true;
+    this.$store.state.formData.isSelectedImage = true;
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    // Handle error if needed
+  } finally {
+    this.loading = false; // Set loading to false after upload (success or error)
+  }
 }
