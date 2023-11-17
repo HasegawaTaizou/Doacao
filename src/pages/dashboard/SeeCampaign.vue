@@ -108,10 +108,12 @@
             </div>
             <div class="form__photo-selected-container">
               <img
+                v-if="isSelectedImage"
                 :src="downloadURL"
                 alt="Campaign Photo"
                 class="photo__photo"
               />
+              <div v-else class="loading-spinner"></div>
               <div class="form__photo-container">
                 <input
                   type="file"
@@ -181,7 +183,11 @@ export default {
       selectedHour: "",
       selectedImage: "",
 
+      //Photo
       downloadURL: "",
+      isSelectedImage: true,
+      loading: false, // Add loading state
+
       campaignDatetime: "",
       campaignDatetimeFormatted: "",
     };
@@ -277,6 +283,7 @@ export default {
 
 <style scoped>
 @import url("../../assets/css/dashboard/seeCampaign/seeCampaignStyle.css");
+@import url("../../assets/css/spinner/spinnerStyle.css");
 </style>
 
 <style lang="scss" scoped>
