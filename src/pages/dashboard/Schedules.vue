@@ -72,6 +72,11 @@
               <td
                 class="content__status"
                 :class="schedules[index].schedule.status.toLowerCase()"
+                :title="
+                  schedules[index].schedule.status === 'PENDING'
+                    ? schedules[index].schedule.observation
+                    : ''
+                "
               >
                 {{ getUserSchedule(schedules[index].schedule.status) }}
               </td>
