@@ -3,7 +3,7 @@
     <ul class="menu_lateral_A">
       <input type="checkbox" id="chec" />
       <label for="chec">
-        <img class="menu_lateral1" src="../assets/img/menu_lateal1.png" alt="" />
+        <img class="menu_lateral1" src="../assets/img/menu-lateral2.png" alt="" />
       </label>
       <nav class="menu_novo">
         <ul class="ul_menu">

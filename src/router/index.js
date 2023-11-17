@@ -7,7 +7,6 @@ import HospitalRegistrationPartTwo from "@/pages/HospitalRegistrationPartTwo.vue
 import HospitalRegistrationPartThree from "@/pages/HospitalRegistrationPartThree.vue";
 import HospitalRegistrationPartFour from "@/pages/HospitalRegistrationPartFour.vue";
 import ThankYou from "@/pages/ThankYou.vue";
-import CheckYourEmail from "@/pages/CheckYourEmail.vue";
 // import RedefinePassword from "@/pages/RedefinePassword.vue";
 import RedefinePasswordConfirmation from "@/pages/RedefinePasswordConfirmation.vue";
 
@@ -34,7 +33,6 @@ import Menu from "@/pages/Menu.vue";
 import Notificacao from "@/pages/Notificacao.vue";
 import PopUp from "@/pages/PopUp.vue";
 import Pizza from "@/pages/Pizza.vue";
-import Adicionar from "@/pages/Adicionar.vue";
 import Slider from "@/pages/Slider.vue";
 
 const routes = [
@@ -76,11 +74,6 @@ const routes = [
     path: "/thank-you",
     name: "ThankYou",
     component: ThankYou,
-  },
-  {
-    path: "/check-your-email",
-    name: "CheckYourEmail",
-    component: CheckYourEmail,
   },
   // {
   //   path: "/redefine-password",
@@ -202,11 +195,6 @@ const routes = [
     path: "/pizza",
     name: "Pizza",
     component: Pizza,
-  },
-  {
-    path: "/adicionar",
-    name: "Adicionar",
-    component: Adicionar,
   },
   {
     path: "/slider",
