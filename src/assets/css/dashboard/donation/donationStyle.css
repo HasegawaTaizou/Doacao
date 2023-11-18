@@ -72,6 +72,20 @@ p {
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
   padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.bar-year__select {
+  width: 190px;
+  border: 1px solid #7395f7;
+  padding: 6px;
+  border-radius: 5px;
+  font-family: "Abel";
+  font-size: 1.5rem;
+  cursor: pointer;
+  height: 42px;
 }
 
 .doughnut-graph-container {

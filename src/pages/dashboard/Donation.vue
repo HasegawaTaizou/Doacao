@@ -15,6 +15,19 @@
       <div class="donation__content">
         <div class="donation__graphs">
           <div class="bar-graph-container">
+            <select name="year" class="bar-year__select">
+              <option value="" selected disabled class="bar-year__option">
+                Selecione o ano
+              </option>
+              <option
+                class="bar-year__option"
+                v-for="(donationYear, index) in this.years"
+                :key="index"
+                :value="donationYear.year"
+              >
+                {{ donationYear.year }}
+              </option>
+            </select>
             <canvas id="bar-graph"></canvas>
           </div>
           <div class="doughnut-graph-container">
@@ -239,6 +252,18 @@ export default {
       Chart.defaults.font.family = "Abel";
       Chart.defaults.color = `black`;
 
+      const legendMargin = {
+        id: "legendMargin",
+        beforeInit(chart, legend, options) {
+          const fitValue = chart.legend.fit;
+
+          chart.legend.fit = function fit() {
+            fitValue.call(chart.legend);
+            return (this.height += 30);
+          };
+        },
+      };
+
       const config = {
         type: "bar",
         data: data,
@@ -253,9 +278,13 @@ export default {
               onLeave: (event, chartElement) => {
                 event.native.target.style.cursor = "default";
               },
+              labels: {
+                padding: 30,
+              },
             },
           },
         },
+        plugins: [legendMargin],
       };
 
       new Chart(ctx, config);

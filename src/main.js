@@ -8,7 +8,6 @@ import { useVuelidate } from "@vuelidate/core";
 import "vue2-transitions";
 import VueNativeSock from "vue-native-websocket";
 
-console.log(VueNativeSock);
 const app = createApp(App);
 app.use(router);
 app.use(store);

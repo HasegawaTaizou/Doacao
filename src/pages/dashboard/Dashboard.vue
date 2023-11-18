@@ -1,34 +1,6 @@
 <template>
-  <!-- <header :class="{ none: this.showSidenav }">
-    <nav>
-      <img
-        @click="this.showSidenav = true"
-        src="../../assets/img/menu_image.png"
-        alt="Menu"
-      />
-    </nav>
-    <div class="container-image-log-out">
-      <img
-        src="../../assets/img/profile_administrator.png"
-        alt="Image profile"
-      />
-      <a href="#" class="log-out-content">
-        <button class="log-out__button">
-          <img src="../../assets/img/logout_image.png" alt="Image log out" />
-          <span class="log-out__text">Sair</span>
-        </button>
-      </a>
-    </div>
-  </header> -->
   <main>
     <div class="side-nav" :class="{ grid: this.showSidenav }">
-      <a href="#" class="close__button">
-        <img
-          src="../../assets/img/close-menu-icon.png"
-          alt="Close"
-          @click="this.showSidenav = false"
-        />
-      </a>
       <div class="company">
         <img
           src="../../assets/img/logo.png"
