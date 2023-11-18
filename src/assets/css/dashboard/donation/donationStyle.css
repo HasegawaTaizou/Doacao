@@ -108,6 +108,7 @@ p {
   flex-direction: column;
   gap: 8px;
   transform: translateX(-140px);
+  justify-content: flex-end;
 }
 
 .doughnut__label-container {
@@ -133,7 +134,9 @@ p {
   height: 720px;
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
-  padding: 32px;
+  padding: 32px 32px 64px 72px;
+  display: flex;
+  flex-direction: column;
 }
 
 .donation__add-container {

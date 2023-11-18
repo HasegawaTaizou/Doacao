@@ -33,6 +33,23 @@
           <div class="doughnut-graph-container">
             <canvas id="doughnut-graph"></canvas>
             <div class="doughnut__blood-types">
+              <select
+                name="year"
+                class="bar-year__select"
+                style="margin-bottom: 38px; transform: translateX(-60px)"
+              >
+                <option value="" selected disabled class="bar-year__option">
+                  Selecione o ano
+                </option>
+                <option
+                  class="bar-year__option"
+                  v-for="(donationYear, index) in this.years"
+                  :key="index"
+                  :value="donationYear.year"
+                >
+                  {{ donationYear.year }}
+                </option>
+              </select>
               <div class="doughnut__label-container">
                 <span
                   :style="`background-color: rgb(75,192,192)`"
@@ -92,6 +109,23 @@
             </div>
           </div>
           <div class="line-graph-container">
+            <select
+              name="year"
+              class="bar-year__select"
+              style="display: flex; align-self: flex-end"
+            >
+              <option value="" selected disabled class="bar-year__option">
+                Selecione o ano
+              </option>
+              <option
+                class="bar-year__option"
+                v-for="(donationYear, index) in this.years"
+                :key="index"
+                :value="donationYear.year"
+              >
+                {{ donationYear.year }}
+              </option>
+            </select>
             <canvas id="line-graph"></canvas>
           </div>
         </div>
@@ -364,6 +398,18 @@ export default {
       Chart.defaults.font.family = "Abel";
       Chart.defaults.color = `black`;
 
+      const legendMargin = {
+        id: "legendMargin",
+        beforeInit(chart, legend, options) {
+          const fitValue = chart.legend.fit;
+
+          chart.legend.fit = function fit() {
+            fitValue.call(chart.legend);
+            return (this.height += 30);
+          };
+        },
+      };
+
       const config = {
         type: "line",
         data: data,
@@ -378,6 +424,9 @@ export default {
               onLeave: (event, chartElement) => {
                 event.native.target.style.cursor = "default";
               },
+              labels: {
+                padding: 30,
+              },
             },
             tooltip: {
               titleFont: {
@@ -388,20 +437,8 @@ export default {
               },
             },
           },
-          layout: {
-            padding: {
-              bottom: 0,
-            },
-          },
-          scales: {
-            x: {
-              barThickness: 4, // Ajuste o valor conforme necessário
-            },
-            y: {
-              beginAtZero: true,
-            },
-          },
         },
+        plugins: [legendMargin],
       };
 
       new Chart(ctx, config);
@@ -415,6 +452,7 @@ export default {
         )
         .then((response) => {
           this.donationBanks = response.data.donationBanks;
+          console.log(this.donationBanks);
           this.donationBanks.forEach((donationBank) => {
             if (this.donationBanksYears[donationBank.year]) {
               this.donationBanksYears[donationBank.year].push(donationBank);
@@ -465,7 +503,6 @@ export default {
           )}/donation-banks-years`
         )
         .then((response) => {
-          console.log(localStorage.hospitalId);
           console.log(response.data.years);
           this.years = response.data.years;
         });
