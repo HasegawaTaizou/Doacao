@@ -36,6 +36,15 @@
               <select
                 name="year"
                 class="bar-year__select"
+                v-model="selectedYearDoughnut"
+                @change="
+                  getDonationBanks(
+                    undefined,
+                    selectedYearDoughnut,
+                    undefined,
+                    yearDoughnutGraph
+                  )
+                "
                 style="margin-bottom: 38px; transform: translateX(-60px)"
               >
                 <option value="" selected disabled class="bar-year__option">
@@ -205,7 +214,21 @@ import axios from "axios";
 export default {
   name: "Donation",
   data() {
+    const initializeGraphData = () => ({
+      "O-": 0,
+      "O+": 0,
+      "A-": 0,
+      "A+": 0,
+      "B-": 0,
+      "B+": 0,
+      "AB-": 0,
+      "AB+": 0,
+    });
+
     return {
+      //Charts
+      doughnutChart: null,
+
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
@@ -217,28 +240,21 @@ export default {
 
       selectedFirstYear: 2022,
       selectedSecondYear: 2023,
+      donationBankGraphFirstYearData: initializeGraphData(),
+      donationBankGraphSecondYearData: initializeGraphData(),
 
-      donationBankGraphFirstYearData: {
-        "O-": 0,
-        "O+": 0,
-        "A-": 0,
-        "A+": 0,
-        "B-": 0,
-        "B+": 0,
-        "AB-": 0,
-        "AB+": 0,
-      },
+      selectedFirstYearBar: 0,
+      selectedSecondYearBar: 0,
+      firstYearBarGraphData: initializeGraphData(),
+      secondYearBarGraphData: initializeGraphData(),
 
-      donationBankGraphSecondYearData: {
-        "O-": 0,
-        "O+": 0,
-        "A-": 0,
-        "A+": 0,
-        "B-": 0,
-        "B+": 0,
-        "AB-": 0,
-        "AB+": 0,
-      },
+      selectedYearDoughnut: "0",
+      yearDoughnutGraph: initializeGraphData(),
+
+      selectedFirstYearLine: 0,
+      selectedSecondYearLine: 0,
+      firstYearLineGraph: initializeGraphData(),
+      secondYearLineGraph: initializeGraphData(),
 
       years: [],
 
@@ -321,19 +337,22 @@ export default {
         plugins: [legendMargin],
       };
 
-      new Chart(ctx, config);
+     const a = new Chart(ctx, config);
     },
-    createDoughnutChart() {
+    createDoughnutChart(year, donationBankData) {
+      console.log(year);
+      console.log(donationBankData);
+
       const ctx = document.getElementById("doughnut-graph");
 
-      const labels = Object.keys(this.donationBankGraphFirstYearData);
+      const labels = Object.keys(donationBankData);
 
       const data = {
         labels: labels,
         datasets: [
           {
-            label: this.selectedSecondYear,
-            data: Object.values(this.donationBankGraphSecondYearData),
+            label: year,
+            data: Object.values(donationBankData),
             backgroundColor: [
               "rgb(75,192,192)",
               "rgb(255,159,64)",
@@ -363,7 +382,13 @@ export default {
         },
       };
 
-      new Chart(ctx, config);
+      this.doughnutChart = new Chart(ctx, config);
+    },
+    updateDoughnutChart() {
+      this.createDoughnutChart(this.selectedYearDoughnut, this.yearDoughnutGraph)
+      this.doughnutChart.data.datasets[0].data = this.yearDoughnutGraph;
+      console.log(this.doughnutChart.data.datasets[0].data);
+      // this.doughnutChart.update();
     },
     createLineChart() {
       const labels = Object.keys(this.donationBankGraphFirstYearData);
@@ -443,7 +468,12 @@ export default {
 
       new Chart(ctx, config);
     },
-    getDonationBanks() {
+    getDonationBanks(
+      firstYear,
+      secondYear,
+      firstYearGraphData,
+      secondYearGraphData
+    ) {
       axios
         .get(
           `${BASE_URL}/hospital/${localStorage.getItem(
@@ -452,7 +482,6 @@ export default {
         )
         .then((response) => {
           this.donationBanks = response.data.donationBanks;
-          console.log(this.donationBanks);
           this.donationBanks.forEach((donationBank) => {
             if (this.donationBanksYears[donationBank.year]) {
               this.donationBanksYears[donationBank.year].push(donationBank);
@@ -461,37 +490,28 @@ export default {
             }
           });
 
-          if (this.donationBanksYears[this.selectedFirstYear] != undefined) {
-            this.donationBanksYears[this.selectedFirstYear].forEach(
-              (bloodsTypes) => {
-                if (
-                  this.donationBankGraphFirstYearData.hasOwnProperty(
-                    bloodsTypes.type
-                  )
-                ) {
-                  this.donationBankGraphFirstYearData[bloodsTypes.type] +=
-                    parseInt(bloodsTypes.blood_ml);
-                }
+          if (this.donationBanksYears[firstYear] != undefined) {
+            this.donationBanksYears[firstYear].forEach((bloodsTypes) => {
+              if (firstYearGraphData.hasOwnProperty(bloodsTypes.type)) {
+                firstYearGraphData[bloodsTypes.type] += parseInt(
+                  bloodsTypes.blood_ml
+                );
               }
-            );
+            });
           }
 
-          this.donationBanksYears[this.selectedSecondYear].forEach(
-            (bloodsTypes) => {
-              if (
-                this.donationBankGraphSecondYearData.hasOwnProperty(
-                  bloodsTypes.type
-                )
-              ) {
-                this.donationBankGraphSecondYearData[bloodsTypes.type] +=
-                  parseInt(bloodsTypes.blood_ml);
-              }
+          this.donationBanksYears[secondYear].forEach((bloodsTypes) => {
+            if (secondYearGraphData.hasOwnProperty(bloodsTypes.type)) {
+              secondYearGraphData[bloodsTypes.type] += parseInt(
+                bloodsTypes.blood_ml
+              );
             }
-          );
+          });
         })
         .then(() => {
           this.createBarChart();
-          this.createDoughnutChart();
+          // this.updateDoughnutChart()
+          this.createDoughnutChart(secondYear, secondYearGraphData);
           this.createLineChart();
         });
     },
@@ -503,13 +523,17 @@ export default {
           )}/donation-banks-years`
         )
         .then((response) => {
-          console.log(response.data.years);
           this.years = response.data.years;
         });
     },
   },
   mounted() {
-    this.getDonationBanks();
+    this.getDonationBanks(
+      this.selectedFirstYear,
+      this.selectedSecondYear,
+      this.donationBankGraphFirstYearData,
+      this.donationBankGraphSecondYearData
+    );
     this.getYearsDonationBank();
     this.showTransition = true;
 

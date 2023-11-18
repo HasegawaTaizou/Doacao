@@ -17,9 +17,33 @@
           />
           <span class="action-introduction__title">Agendamentos</span>
         </div>
-        <div>
-          <input type="text" />
-          <input type="text" />
+        <div class="scheduling__inputs">
+          <div class="input__search-container">
+            <input
+              type="text"
+              class="input__search"
+              placeholder="Pesquise o usuário"
+              v-model="userFilter"
+              @input="filterNameSchedules"
+            />
+            <i class="fa-solid fa-magnifying-glass input__search-icon"></i>
+          </div>
+          <select
+            v-model="statusFilter"
+            name="status"
+            class="select__status"
+            @change="filterStatusSchedules"
+          >
+            <option class="status__option" selected value="">
+              Todos status
+            </option>
+            <option class="status__option" value="SCHEDULED">Agendado</option>
+            <option class="status__option" value="CONCLUDED">Concluído</option>
+            <option class="status__option" value="PENDING">Pendente</option>
+            <option class="status__option" value="RESCHEDULED">
+              Remarcado
+            </option>
+          </select>
         </div>
       </div>
       <div class="scheduling__schedules">
@@ -38,7 +62,7 @@
           <tbody>
             <tr
               class="table__content"
-              v-for="(schedule, index) in schedules"
+              v-for="(schedule, index) in this.schedules"
               :key="index"
             >
               <td class="content__id">
@@ -228,10 +252,54 @@ export default {
       selectedHour: "",
       selectedSite: "",
       rescheduleDatetime: "",
+
+      //Filter Select
+      filtteredSchedules: [],
+      statusFilter: "",
+      userFilter: "",
+      debounceTimeout: null,
     };
   },
   methods: {
     openPopUp,
+    filterStatusSchedules() {
+      if (this.statusFilter !== "") {
+        axios
+          .get(
+            `${BASE_URL}/hospital/${localStorage.getItem(
+              "hospitalId"
+            )}/schedules-status/${this.statusFilter}`
+          )
+          .then((response) => {
+            this.schedules = response.data.schedules;
+          });
+      } else {
+        this.getSchedules();
+      }
+    },
+    filterNameSchedules() {
+      // Limpar o timeout existente
+      clearTimeout(this.debounceTimeout);
+
+      this.debounceTimeout = setTimeout(() => {
+        if (this.userFilter !== "") {
+          axios
+            .get(
+              `${BASE_URL}/hospital/${localStorage.getItem(
+                "hospitalId"
+              )}/schedules/${this.userFilter}`
+            )
+            .then((response) => {
+              this.schedules = response.data.schedules;
+            })
+            .catch((err) => {
+              this.schedules = [];
+            });
+        } else {
+          this.getSchedules();
+        }
+      }, 500);
+    },
     formattedDateTime() {
       const date = this.selectedDate.split("/");
 
@@ -265,7 +333,6 @@ export default {
         )
         .then((response) => {
           this.schedules = response.data.schedules;
-          console.log(this.schedules);
         });
     },
     getUserSchedule(status) {
@@ -302,7 +369,6 @@ export default {
     },
     rescheduleSchedule() {
       this.formatDateTime();
-      console.log(this.scheduleDatetimeFormatted);
       const dateParts = this.scheduleDatetimeFormatted.split(" ");
       this.scheduleDate = dateParts[0];
       this.scheduleTime = dateParts[1];
@@ -316,8 +382,6 @@ export default {
         siteId: this.selectedSite,
       };
 
-      console.log(scheduleData);
-
       axios.put(`${BASE_URL}/schedule-reschedule`, scheduleData).then(() => {
         location.reload();
       });
@@ -327,7 +391,9 @@ export default {
         id: this.scheduleId,
       };
 
-      axios.put(`${BASE_URL}/schedule-conclude`, scheduleData);
+      axios.put(`${BASE_URL}/schedule-conclude`, scheduleData).then(() => {
+        location.reload();
+      });
     },
     getHospitalSites() {
       axios

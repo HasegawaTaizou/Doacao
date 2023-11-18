@@ -47,7 +47,8 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 32px 36px;
+  padding: 32px 48px;
+  gap: 48px;
 }
 
 .action-introduction {
@@ -63,6 +64,47 @@
 
 .action-introduction__title {
   font-size: 1.5rem;
+}
+
+.scheduling__inputs {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  align-items: center;
+}
+
+.input__search-container {
+  position: relative;
+  width: 100%;
+}
+
+.input__search {
+  border: var(--input-border);
+  border-radius: 5px;
+  width: 100%;
+  height: 48px;
+  font-size: 1.5rem;
+  font-family: "Abel";
+  padding-left: 52px;
+}
+
+.input__search-icon {
+  position: absolute;
+  color: #638bff;
+  font-size: 1.5rem;
+  top: 13px;
+  left: 16px;
+}
+
+.select__status {
+  width: 200px;
+  border: 1px solid #7395f7;
+  padding: 6px;
+  border-radius: 5px;
+  font-family: "Abel";
+  font-size: 1.5rem;
+  cursor: pointer;
+  height: 48px;
 }
 
 /* TABLE STYLE */
