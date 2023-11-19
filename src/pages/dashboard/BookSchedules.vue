@@ -326,8 +326,6 @@ export default {
           hospitalSiteId: this.scheduleSite,
           contentSite: textSite,
         });
-
-        console.log(this.tableBookSchedules);
       }
     },
     addSchedules() {

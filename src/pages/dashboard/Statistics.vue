@@ -90,10 +90,7 @@
               <span class="summary__total">{{ totalReviews }} Avaliações</span>
             </div>
             <div class="graph-review__graph-container">
-              <div
-                class="graph__bar-container"
-               
-              >
+              <div class="graph__bar-container">
                 <div class="bar__line-container">
                   <div
                     class="line__progress"
@@ -210,10 +207,22 @@ import Chart from "chart.js/auto";
 import { BASE_URL } from "../../assets/js/config";
 import axios from "axios";
 
+import {
+  getParsedData,
+  connectWebsocket,
+  handleWebsocketData,
+  setupWebsocketEventListener,
+} from "../../assets/js/websocket/websocket";
+
+import { updateDataFromWebsocket } from "../../assets/js/websocket/update-data-from-websocket";
+
 export default {
   name: "Statistics",
   data() {
     return {
+      //Websocket
+      connection: null,
+
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
@@ -266,6 +275,13 @@ export default {
     },
   },
   methods: {
+    sendMessage(message) {
+      console.log(this.connection);
+      this.connection.send(message);
+    },
+    updateReviewData() {
+      updateDataFromWebsocket(this.hospitalReviews, 'review');
+    },
     getSchedulesStatistics() {
       axios
         .get(
@@ -364,6 +380,10 @@ export default {
 
     this.hospitalName = localStorage.hospitalName;
     this.hospitalPhoto = localStorage.hospitalPhoto;
+  },
+  created() {
+    this.connection = connectWebsocket();
+    setupWebsocketEventListener(this.updateReviewData);
   },
 };
 </script>
