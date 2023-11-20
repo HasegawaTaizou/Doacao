@@ -251,7 +251,6 @@ export default {
       axios
         .get(`${BASE_URL}/hospital-data/${localStorage.getItem("hospitalId")}`)
         .then((response) => {
-          console.log(response.data.hospital);
           this.hospitalData = response.data.hospital;
           this.addressData = response.data.address;
 

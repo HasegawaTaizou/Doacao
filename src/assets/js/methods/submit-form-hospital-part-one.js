@@ -9,13 +9,10 @@ export default async function submitFormHospitalPartOne() {
   this.formData.password = this.inputPassword;
   this.formData.url = this.inputURL;
  
-  console.log(this.formData);
-
   this.v$.$touch();
 
   const isFormCorrect = await this.v$.$validate();
 
-  console.log(isFormCorrect);
   if (isFormCorrect) {
     this.$store.commit("updateFormData", this.formData);
     this.$router.push("/hospital-registration-part-two");

@@ -26,13 +26,10 @@ export default function postData(formData) {
     },
   };
 
-  console.log(router);
-  console.log(insertHospitalData);
   axios
     .post(`${BASE_URL}/hospital-registration`, insertHospitalData)
-    .then((response) => {
+    .then(() => {
       router.push('/login');
-      console.log(response.data);
     })
     .catch((error) => {
       console.error(error);

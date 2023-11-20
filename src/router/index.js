@@ -24,9 +24,6 @@ import SeeCampaign from "@/pages/dashboard/SeeCampaign.vue";
 import Donation from "@/pages/dashboard/Donation.vue";
 
 // TELAS DE TESTE
-import Requisicoes from "@/pages/Requisicoes.vue";
-import Firebase from "@/pages/Firebase.vue";
-import Criptografia from "@/pages/Criptografia.vue";
 import Menu from "@/pages/Menu.vue";
 import Notificacao from "@/pages/Notificacao.vue";
 import PopUp from "@/pages/PopUp.vue";
@@ -148,21 +145,6 @@ const routes = [
   },
 
   // TESTES DE FUNCIONALIDADES
-  {
-    path: "/requisicoes",
-    name: "Requisicoes",
-    component: Requisicoes,
-  },
-  {
-    path: "/firebase",
-    name: "Firebase",
-    component: Firebase,
-  },
-  {
-    path: "/criptografia",
-    name: "Criptografia",
-    component: Criptografia,
-  },
   {
     path: "/menu",
     name: "Menu",

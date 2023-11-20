@@ -144,7 +144,6 @@ export default {
       const date = dateParts[0];
       const time = dateParts[1];
 
-      console.log();
       const campaignData = {
         date: date,
         hour: time,
@@ -152,7 +151,6 @@ export default {
         image: this.downloadURL,
         hospitalId: localStorage.getItem("hospitalId"),
       };
-      console.log(campaignData);
 
       axios.post(`${BASE_URL}/campaign`, campaignData).then(() => {
         this.$router.push("/dashboard/see-campaign");

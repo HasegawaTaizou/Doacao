@@ -218,11 +218,24 @@ import { BASE_URL } from "../../assets/js/config";
 
 import { format } from "date-fns";
 
+//Websocket
+import {
+  connectWebsocket,
+  setupWebsocketEventListener,
+} from "../../assets/js/websocket/websocket";
+
+import { updateDataFromWebsocket } from "../../assets/js/websocket/update-data-from-websocket";
+
+import websocketConnectionData from "../../assets/js/data/websocket-connection";
+
 export default {
   name: "Schedules",
   components: { PopUp },
   data() {
     return {
+      //Websocket
+      ...websocketConnectionData,
+
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
@@ -262,6 +275,9 @@ export default {
   },
   methods: {
     openPopUp,
+    updateSchedulesData() {
+      updateDataFromWebsocket(this.schedules, "schedules", "replace");
+    },
     filterStatusSchedules() {
       if (this.statusFilter !== "") {
         axios
@@ -323,7 +339,6 @@ export default {
       this.formattedDateTime();
     },
     setUserId(userId) {
-      console.log(userId);
       localStorage.setItem("userId", userId);
     },
     getSchedules() {
@@ -357,9 +372,7 @@ export default {
         observation: this.reason,
       };
 
-      axios.put(`${BASE_URL}/schedule-cancel`, scheduleData).then(() => {
-        location.reload();
-      });
+      axios.put(`${BASE_URL}/schedule-cancel`, scheduleData);
     },
     formatDateTime() {
       this.scheduleDatetimeFormatted = format(
@@ -373,8 +386,6 @@ export default {
       this.scheduleDate = dateParts[0];
       this.scheduleTime = dateParts[1];
 
-      console.log(this.selectedId);
-      console.log(this.selectedSite);
       const scheduleData = {
         id: this.selectedId,
         date: this.scheduleDate,
@@ -382,18 +393,14 @@ export default {
         siteId: this.selectedSite,
       };
 
-      axios.put(`${BASE_URL}/schedule-reschedule`, scheduleData).then(() => {
-        location.reload();
-      });
+      axios.put(`${BASE_URL}/schedule-reschedule`, scheduleData);
     },
     concludeSchedule() {
       const scheduleData = {
         id: this.scheduleId,
       };
 
-      axios.put(`${BASE_URL}/schedule-conclude`, scheduleData).then(() => {
-        location.reload();
-      });
+      axios.put(`${BASE_URL}/schedule-conclude`, scheduleData);
     },
     getHospitalSites() {
       axios
@@ -410,6 +417,10 @@ export default {
 
     this.hospitalName = localStorage.hospitalName;
     this.hospitalPhoto = localStorage.hospitalPhoto;
+  },
+  created() {
+    this.connection = connectWebsocket();
+    setupWebsocketEventListener(this.updateSchedulesData);
   },
 };
 </script>

@@ -129,7 +129,6 @@ export default {
       };
       axios.post(`${BASE_URL}/hospital-login`, loginData).then((response) => {
         const hospitalData = response.data.hospitalData;
-        console.log(response.data.hospitalData);
         this.$store.commit("SET_HOSPITAL_ID", hospitalData.id);
         this.$store.commit("SET_HOSPITAL_NAME", hospitalData.name);
         this.$store.commit("SET_HOSPITAL_PHOTO", hospitalData.photo);
@@ -144,7 +143,6 @@ export default {
   },
   mounted() {
     this.showTranstion = true;
-    console.log('mount');
   },
 };
 </script>

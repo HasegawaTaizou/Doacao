@@ -51,30 +51,6 @@
 <script>
 export default {
   name: "ThankYou",
-  data() {
-    return {
-      connection: null,
-    };
-  },
-  methods: {
-    sendMessage(message) {
-      console.log(this.connection);
-      this.connection.send(message);
-    },
-  },
-  created() {
-    console.log("Starting connection WS");
-    this.connection = new WebSocket("ws://localhost:8080");
-
-    this.connection.onopen = function (event) {
-      console.log(event);
-    };
-
-    this.connection.onmessage = function (event) {
-      console.log(event);
-      console.log(event);
-    };
-  },
 };
 </script>
 

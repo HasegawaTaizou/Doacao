@@ -7,7 +7,6 @@ export default async function submitFormHospitalPartFour() {
   this.formData.photo = this.downloadURL
 
   this.$store.commit("updateFormData", this.formData);
-  console.log("form 4: ", this.formData);
 
   this.v$.$touch();
 

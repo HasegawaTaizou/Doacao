@@ -183,7 +183,6 @@ export default {
   },
   mounted() {
     this.showTransiton = true;
-    console.log('mount');
   },
 };
 </script>

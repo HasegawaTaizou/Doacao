@@ -5,7 +5,6 @@ export default async function submitFormHospitalPartThree() {
   this.formData.otherDonationLocal = this.inputOtherDonationLocal;
 
   this.$store.commit("updateFormData", this.formData);
-  console.log("form 3: ", this.formData);
 
   this.v$.$touch();
 
@@ -18,7 +17,6 @@ export default async function submitFormHospitalPartThree() {
     for (const field of fieldsHospitalPartThree) {
       if (this.v$[field.key].$error) {
         this.$nextTick(() => {
-          console.log(field);
           this.$refs[field.ref].focus();
         });
         break;

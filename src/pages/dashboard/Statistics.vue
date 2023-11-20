@@ -395,7 +395,6 @@ export default {
     setupWebsocketEventListener(this.updateReviewData);
     setupWebsocketEventListener(this.updateRatingsData);
   },
-  //a
 };
 </script>
 

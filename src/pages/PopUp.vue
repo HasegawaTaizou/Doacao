@@ -23,10 +23,9 @@ export default {
   methods: {
     teste() {
       this.$store.commit('setShowPopUp', true)
-      console.log(this.$store.state.showPopUp);
     },
     customFunction() {
-      console.log("Função personalizada chamada!");
+      // console.log("Função personalizada chamada!");
     },
   },
 };

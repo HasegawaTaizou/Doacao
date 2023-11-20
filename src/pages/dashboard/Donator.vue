@@ -67,7 +67,12 @@
                   <td class="content__date">{{ schedule.date }}</td>
                   <td class="content__hour">{{ schedule.hour }}</td>
                   <td class="content__site">{{ schedule.site }}</td>
-                  <td class="content__status">
+                  <td
+                    :title="
+                      schedule.status === 'PENDING' ? schedule.observation : ''
+                    "
+                    class="content__status"
+                  >
                     <span
                       class="status__text"
                       :class="schedule.status.toLowerCase()"
@@ -184,12 +189,25 @@ import { format } from "date-fns";
 import axios from "axios";
 import { BASE_URL } from "../../assets/js/config";
 
+//Websocket
+import {
+  connectWebsocket,
+  setupWebsocketEventListener,
+} from "../../assets/js/websocket/websocket";
+
+import { updateDataFromWebsocket } from "../../assets/js/websocket/update-data-from-websocket";
+
+import websocketConnectionData from "../../assets/js/data/websocket-connection";
+
 export default {
   name: "Donator",
   props: ["name", "id"],
   components: { PopUp },
   data() {
     return {
+      //Websocket
+      ...websocketConnectionData,
+
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
@@ -251,7 +269,6 @@ export default {
       this.selectedHour = hour;
       this.selectedSite = siteId;
 
-      console.log(this.selectedSite);
       this.formattedDateTime();
     },
     formatDateTime() {
@@ -273,15 +290,11 @@ export default {
         siteId: this.selectedSite,
       };
 
-      console.log(scheduleData);
-
-      axios.put(`${BASE_URL}/schedule-reschedule`, scheduleData).then(() => {
-        location.reload();
-      });
+      axios.put(`${BASE_URL}/schedule-reschedule`, scheduleData);
     },
     getUserData() {
       axios
-        .get(`${BASE_URL}/users/${localStorage.getItem('userId')}`)
+        .get(`${BASE_URL}/users/${localStorage.getItem("userId")}`)
         .then((response) => {
           const userData = response.data.user;
 
@@ -318,14 +331,14 @@ export default {
         });
     },
     getUserSchedules() {
-      console.log(localStorage.getItem("userId"));
       axios
         .get(
-          `${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/users/${localStorage.getItem("userId")}/schedules`
+          `${BASE_URL}/hospital/${localStorage.getItem(
+            "hospitalId"
+          )}/users/${localStorage.getItem("userId")}/schedules`
         )
         .then((response) => {
           this.schedules = response.data.schedules;
-          console.log(this.schedules);
         });
     },
     getUserSchedule(status) {
@@ -349,19 +362,13 @@ export default {
         id: this.scheduleId,
         observation: this.observation,
       };
-      axios.put(`${BASE_URL}/schedule-cancel`, updateScheduleData).then(() => {
-        location.reload();
-      });
+      axios.put(`${BASE_URL}/schedule-cancel`, updateScheduleData);
     },
     updateScheduleToConclude() {
       const updateScheduleData = {
         id: this.scheduleId,
       };
-      axios
-        .put(`${BASE_URL}/schedule-conclude`, updateScheduleData)
-        .then(() => {
-          location.reload();
-        });
+      axios.put(`${BASE_URL}/schedule-conclude`, updateScheduleData);
     },
     updateScheduleDateTime() {
       this.formatDateTime();
@@ -375,8 +382,6 @@ export default {
     this.getUserData();
     this.getHospitalSites();
 
-    console.log(localStorage.getItem("userId"));
-    console.log(`${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/users/${localStorage.getItem("userId")}/schedules`);
     this.hospitalName = localStorage.hospitalName;
     this.hospitalPhoto = localStorage.hospitalPhoto;
   },
