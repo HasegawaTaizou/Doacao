@@ -15,6 +15,10 @@ const connectWebsocket = function () {
   return connection;
 };
 
+const sendMessage = function (message) {
+  connection.send(message);
+};
+
 const handleWebsocketData = function (data) {
   parsedData = JSON.parse(data);
 };
@@ -37,4 +41,5 @@ export {
   handleWebsocketData,
   getParsedData,
   setupWebsocketEventListener,
+  sendMessage,
 };

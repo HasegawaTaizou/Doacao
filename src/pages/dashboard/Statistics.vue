@@ -208,20 +208,20 @@ import { BASE_URL } from "../../assets/js/config";
 import axios from "axios";
 
 import {
-  getParsedData,
   connectWebsocket,
-  handleWebsocketData,
   setupWebsocketEventListener,
 } from "../../assets/js/websocket/websocket";
 
 import { updateDataFromWebsocket } from "../../assets/js/websocket/update-data-from-websocket";
+
+import websocketConnectionData from "../../assets/js/data/websocket-connection";
 
 export default {
   name: "Statistics",
   data() {
     return {
       //Websocket
-      connection: null,
+      ...websocketConnectionData,
 
       //ProfileData
       hospitalName: "",
@@ -275,12 +275,8 @@ export default {
     },
   },
   methods: {
-    sendMessage(message) {
-      console.log(this.connection);
-      this.connection.send(message);
-    },
     updateReviewData() {
-      updateDataFromWebsocket(this.hospitalReviews, 'review');
+      updateDataFromWebsocket(this.hospitalReviews, 'review', 'concat');
     },
     getSchedulesStatistics() {
       axios
@@ -385,6 +381,7 @@ export default {
     this.connection = connectWebsocket();
     setupWebsocketEventListener(this.updateReviewData);
   },
+  //a
 };
 </script>
 

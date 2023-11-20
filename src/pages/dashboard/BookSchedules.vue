@@ -260,11 +260,24 @@ import { format } from "date-fns";
 import { BASE_URL } from "../../assets/js/config";
 import axios from "axios";
 
+//WebSocket
+import {
+  connectWebsocket,
+  setupWebsocketEventListener,
+} from "../../assets/js/websocket/websocket";
+
+import { updateDataFromWebsocket } from "../../assets/js/websocket/update-data-from-websocket";
+
+import websocketConnectionData from "../../assets/js/data/websocket-connection";
+
 export default {
   name: "BookSchedules",
   components: { PopUp },
   data() {
     return {
+      //Websocket
+      ...websocketConnectionData,
+
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
@@ -304,6 +317,9 @@ export default {
     };
   },
   methods: {
+    updateBookSchedulesData() {
+      updateDataFromWebsocket(this.bookSchedules, "bookSchedules", "replace");
+    },
     getHospitalSites() {
       axios
         .get(`${BASE_URL}/hospital/${localStorage.getItem("hospitalId")}/sites`)
@@ -333,7 +349,6 @@ export default {
         .post(`${BASE_URL}/book-schedules`, this.tableBookSchedules)
         .then(() => {
           this.clearSchedules();
-          location.reload();
         });
     },
     removeSchedule(index) {
@@ -374,8 +389,6 @@ export default {
       this.selectedHour = hour;
       this.selectedSite = siteId;
 
-      console.log(this.selectedSite);
-
       this.formattedDateTime();
     },
     updateSchedule() {
@@ -402,11 +415,7 @@ export default {
         siteId: this.bookScheduleSite,
       };
 
-      axios
-        .put(`${BASE_URL}/schedule-reschedule`, updateBookScheduleData)
-        .then(() => {
-          location.reload();
-        });
+      axios.put(`${BASE_URL}/schedule-reschedule`, updateBookScheduleData);
     },
     getBookSchedules() {
       axios
@@ -417,15 +426,10 @@ export default {
         )
         .then((response) => {
           this.bookSchedules = response.data.bookSchedules;
-          console.log(this.bookSchedules);
         });
     },
     deleteBookSchedule() {
-      axios
-        .delete(`${BASE_URL}/delete-book-schedule/${this.bookScheduleId}`)
-        .then(() => {
-          location.reload();
-        });
+      axios.delete(`${BASE_URL}/delete-book-schedule/${this.bookScheduleId}`);
     },
     openPopUp,
   },
@@ -436,6 +440,10 @@ export default {
 
     this.hospitalName = localStorage.hospitalName;
     this.hospitalPhoto = localStorage.hospitalPhoto;
+  },
+  created() {
+    this.connection = connectWebsocket();
+    setupWebsocketEventListener(this.updateBookSchedulesData);
   },
 };
 </script>
