@@ -285,22 +285,22 @@ th {
   padding: 8px;
 }
 
-.scheduled {
+.SCHEDULED {
   color: #2c62f1;
   background-color: #dae3ff;
 }
 
-.concluded {
+.CONCLUDED {
   color: #6ab39d;
   background-color: #f0f9f3;
 }
 
-.pending {
+.PENDING {
   color: #f43434;
   background-color: #fdc4c4;
 }
 
-.rescheduled {
+.RESCHEDULED {
   color: #e5c05e;
   background-color: #fbf4e4;
 }

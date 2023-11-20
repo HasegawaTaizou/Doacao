@@ -75,7 +75,7 @@
                   >
                     <span
                       class="status__text"
-                      :class="schedule.status.toLowerCase()"
+                      :class="schedule.status"
                       >{{ getUserSchedule(schedule.status) }}</span
                     >
                   </td>
@@ -249,6 +249,9 @@ export default {
   },
   methods: {
     openPopUp,
+    updateSchedulesData() {
+      updateDataFromWebsocket(this.schedules, "userSchedules", "replace");
+    },
     formattedDateTime() {
       const date = this.selectedDate.split("/");
 
@@ -384,6 +387,10 @@ export default {
 
     this.hospitalName = localStorage.hospitalName;
     this.hospitalPhoto = localStorage.hospitalPhoto;
+  },
+  created() {
+    this.connection = connectWebsocket();
+    setupWebsocketEventListener(this.updateSchedulesData);
   },
 };
 </script>

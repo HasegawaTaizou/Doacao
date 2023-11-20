@@ -365,6 +365,10 @@ export default {
         ],
       };
 
+      Chart.defaults.font.size = 24;
+      Chart.defaults.font.family = "Abel";
+      Chart.defaults.color = `black`;
+      
       new Chart(ctx, {
         type: "doughnut",
         data: data,

@@ -438,6 +438,10 @@ export default {
         },
       };
 
+      Chart.defaults.font.size = 24;
+      Chart.defaults.font.family = "Abel";
+      Chart.defaults.color = `black`;
+
       this.doughnutChart = new Chart(ctx, config);
     },
     updateDoughnutChart() {
