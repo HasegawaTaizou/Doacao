@@ -42,6 +42,7 @@
                 name="year"
                 class="bar-year__select"
                 v-model="selectedYearDoughnut"
+                @change="updateChart(doughnutChart)"
                 style="margin-bottom: 38px; transform: translateX(-60px)"
               >
                 <option value="" selected disabled class="bar-year__option">
@@ -246,8 +247,8 @@ export default {
       firstYearBarGraphData: initializeGraphData(),
       secondYearBarGraphData: initializeGraphData(),
 
-      selectedYearDoughnut: "0",
-      yearDoughnutGraph: initializeGraphData(),
+      selectedYearDoughnut: 2023,
+      yearDoughnutGraphData: initializeGraphData(),
 
       selectedFirstYearLine: 0,
       selectedSecondYearLine: 0,
@@ -276,18 +277,12 @@ export default {
         .then(location.reload());
     },
     async createBarChart(
-      firstYearChart,
-      secondYearChart,
-      firstYearGraphDataBar,
-      secondYearGraphDataBar
+      firstYear,
+      secondYear,
+      firstYearGraphData,
+      secondYearGraphData
     ) {
-      let firstYear = firstYearChart;
-      let secondYear = secondYearChart;
-      let firstYearGraphData = firstYearGraphDataBar;
-      let secondYearGraphData = secondYearGraphDataBar;
-
       const donationBanks = await this.getDonationBanksData();
-
 
       donationBanks.forEach((donationBank) => {
         if (this.donationBanksYears[donationBank.year]) {
@@ -385,26 +380,46 @@ export default {
     },
     updateChart(chart) {
       chart.destroy();
-
-      this.createBarChart(
-        this.selectedFirstYear,
-        this.selectedSecondYear,
-        this.donationBankGraphFirstYearData,
-        this.donationBankGraphSecondYearData
+      this.createDoughnutChart(
+        this.selectedYearDoughnut,
+        this.yearDoughnutGraphData
       );
+
+      this.yearDoughnutGraphData = {
+        "O-": 0,
+        "O+": 0,
+        "A-": 0,
+        "A+": 0,
+        "B-": 0,
+        "B+": 0,
+        "AB-": 0,
+        "AB+": 0,
+      };
     },
 
     //Doughnut
-    createDoughnutChart(year, donationBankData) {
-      console.log(year);
-      console.log(donationBankData);
+    async createDoughnutChart(year, donationBankData) {
+      const donationBanks = await this.getDonationBanksData();
+
+      const donationBanksYears = {};
+
+      donationBanks.forEach((donationBank) => {
+        if (donationBanksYears[donationBank.year]) {
+          donationBanksYears[donationBank.year].push(donationBank);
+        } else {
+          donationBanksYears[donationBank.year] = [donationBank];
+        }
+      });
+
+      donationBanksYears[year].forEach((bloodsTypes) => {
+        if (donationBankData.hasOwnProperty(bloodsTypes.type)) {
+          donationBankData[bloodsTypes.type] += parseInt(bloodsTypes.blood_ml);
+        }
+      });
 
       const ctx = document.getElementById("doughnut-graph");
 
-      const labels = Object.keys(donationBankData);
-
       const data = {
-        labels: labels,
         datasets: [
           {
             label: year,
@@ -443,15 +458,6 @@ export default {
       Chart.defaults.color = `black`;
 
       this.doughnutChart = new Chart(ctx, config);
-    },
-    updateDoughnutChart() {
-      this.createDoughnutChart(
-        this.selectedYearDoughnut,
-        this.yearDoughnutGraph
-      );
-      this.doughnutChart.data.datasets[0].data = this.yearDoughnutGraph;
-      console.log(this.doughnutChart.data.datasets[0].data);
-      // this.doughnutChart.update();
     },
     createLineChart() {
       const labels = Object.keys(this.donationBankGraphFirstYearData);
@@ -558,12 +564,17 @@ export default {
   },
   async mounted() {
     await this.getYearsDonationBank();
-    await this.createBarChart(
-      this.selectedFirstYear,
-      this.selectedSecondYear,
-      this.donationBankGraphFirstYearData,
-      this.donationBankGraphSecondYearData
+    // await this.createBarChart(
+    //   this.selectedFirstYear,
+    //   this.selectedSecondYear,
+    //   this.donationBankGraphFirstYearData,
+    //   this.donationBankGraphSecondYearData
+    // );
+    this.createDoughnutChart(
+      this.selectedYearDoughnut,
+      this.yearDoughnutGraphData
     );
+
     this.showTransition = true;
 
     this.hospitalName = localStorage.hospitalName;
