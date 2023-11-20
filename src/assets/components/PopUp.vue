@@ -66,7 +66,6 @@ export default {
       this.$store.commit("setShowPopUp", false);
     },
     executeAcceptAction() {
-      console.log("Ação executada");
       this.acceptFunction();
       this.closePopup();
     },

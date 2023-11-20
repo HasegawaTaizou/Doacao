@@ -154,6 +154,16 @@ import "swiper/css/pagination";
 // Install Swiper modules
 SwiperCore.use([Pagination]);
 
+//WebSocket
+import {
+  connectWebsocket,
+  setupWebsocketEventListener,
+} from "../../assets/js/websocket/websocket";
+
+import { updateDataFromWebsocket } from "../../assets/js/websocket/update-data-from-websocket";
+
+import websocketConnectionData from "../../assets/js/data/websocket-connection";
+
 export default {
   setup() {
     return {
@@ -164,6 +174,9 @@ export default {
   components: { PopUp, Swiper, SwiperSlide },
   data() {
     return {
+      //Websocket
+      ...websocketConnectionData,
+
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
@@ -195,8 +208,14 @@ export default {
   methods: {
     openPopUp,
     uploadImage,
+    updateCampaignsData() {
+      updateDataFromWebsocket(this.campaigns, "campaigns", "replace");
+    },
     selectCampaign(index) {
-      if (this.activeIndex === index) {
+      if (index == -1) {
+        this.activeIndex = null;
+        this.showCampaign = false;
+      } else if (this.activeIndex === index) {
         // If the same campaign is clicked again, toggle it off
         this.activeIndex = null;
         this.showCampaign = false;
@@ -241,7 +260,7 @@ export default {
       };
 
       axios.put(`${BASE_URL}/update-campaign`, campaignData).then(() => {
-        location.reload();
+        this.selectCampaign(-1);
       });
     },
     formatDateTime() {
@@ -267,7 +286,7 @@ export default {
       axios
         .delete(`${BASE_URL}/delete-campaign/${this.selectedId}`)
         .then(() => {
-          location.reload();
+          this.selectCampaign(-1);
         });
     },
   },
@@ -277,6 +296,10 @@ export default {
 
     this.hospitalName = localStorage.hospitalName;
     this.hospitalPhoto = localStorage.hospitalPhoto;
+  },
+  created() {
+    this.connection = connectWebsocket();
+    setupWebsocketEventListener(this.updateCampaignsData);
   },
 };
 </script>

@@ -7,8 +7,6 @@ import HospitalRegistrationPartTwo from "@/pages/HospitalRegistrationPartTwo.vue
 import HospitalRegistrationPartThree from "@/pages/HospitalRegistrationPartThree.vue";
 import HospitalRegistrationPartFour from "@/pages/HospitalRegistrationPartFour.vue";
 import ThankYou from "@/pages/ThankYou.vue";
-// import RedefinePassword from "@/pages/RedefinePassword.vue";
-import RedefinePasswordConfirmation from "@/pages/RedefinePasswordConfirmation.vue";
 
 //DASHBOARD
 import Dashboard from "@/pages/dashboard/Dashboard.vue";
@@ -75,17 +73,6 @@ const routes = [
     name: "ThankYou",
     component: ThankYou,
   },
-  // {
-  //   path: "/redefine-password",
-  //   name: "RedefinePassword",
-  //   component: RedefinePassword,
-  // },
-  {
-    path: "/redefine-password-confirmation",
-    name: "RedefinePasswordConfirmation",
-    component: RedefinePasswordConfirmation,
-  },
-
   //DASHBOARD
   {
     path: "/dashboard",
@@ -208,6 +195,7 @@ const router = createRouter({
   routes,
 });
 
+//Token
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     const token = localStorage.getItem("token");
