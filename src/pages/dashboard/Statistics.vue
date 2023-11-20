@@ -230,6 +230,9 @@ export default {
       //Transition
       showTransition: false,
 
+      //Ratings Data
+      hospitalRatingsData: [],
+
       //Label Data
       scheduled: 0,
       concluded: 0,
@@ -247,7 +250,7 @@ export default {
       averageReview: 0,
 
       //Hospital Reviews
-      hospitalReviews: [],
+      hospitalReviews: {},
 
       //BackgroundColor data
       scheduledColor: "rgb(44, 98, 241)",
@@ -276,7 +279,17 @@ export default {
   },
   methods: {
     updateReviewData() {
-      updateDataFromWebsocket(this.hospitalReviews, 'review', 'concat');
+      updateDataFromWebsocket(this.hospitalReviews, "review", "concat");
+    },
+    updateRatingsData() {
+      updateDataFromWebsocket(this.hospitalRatingsData, "ratings", "replace");
+      this.oneStarsReview = this.hospitalRatingsData.oneStarsRating;
+      this.twoStarsReview = this.hospitalRatingsData.twoStarsRating;
+      this.threeStarsReview = this.hospitalRatingsData.threeStarsRating;
+      this.fourStarsReview = this.hospitalRatingsData.fourStarsRating;
+      this.fiveStarsReview = this.hospitalRatingsData.fiveStarsRating;
+      this.averageReview = this.hospitalRatingsData.average;
+      this.totalReviews = this.hospitalRatingsData.totalReviews;
     },
     getSchedulesStatistics() {
       axios
@@ -305,15 +318,15 @@ export default {
           )}/statistics/ratings`
         )
         .then((response) => {
-          const hospitalRatingsData = response.data.ratingsStatistics;
+          this.hospitalRatingsData = response.data.ratingsStatistics;
 
-          this.oneStarsReview = hospitalRatingsData.oneStarsRating;
-          this.twoStarsReview = hospitalRatingsData.twoStarsRating;
-          this.threeStarsReview = hospitalRatingsData.threeStarsRating;
-          this.fourStarsReview = hospitalRatingsData.fourStarsRating;
-          this.fiveStarsReview = hospitalRatingsData.fiveStarsRating;
-          this.averageReview = hospitalRatingsData.average;
-          this.totalReviews = hospitalRatingsData.totalReviews;
+          this.oneStarsReview = this.hospitalRatingsData.oneStarsRating;
+          this.twoStarsReview = this.hospitalRatingsData.twoStarsRating;
+          this.threeStarsReview = this.hospitalRatingsData.threeStarsRating;
+          this.fourStarsReview = this.hospitalRatingsData.fourStarsRating;
+          this.fiveStarsReview = this.hospitalRatingsData.fiveStarsRating;
+          this.averageReview = this.hospitalRatingsData.average;
+          this.totalReviews = this.hospitalRatingsData.totalReviews;
         });
     },
     getReviews() {
@@ -380,6 +393,7 @@ export default {
   created() {
     this.connection = connectWebsocket();
     setupWebsocketEventListener(this.updateReviewData);
+    setupWebsocketEventListener(this.updateRatingsData);
   },
   //a
 };

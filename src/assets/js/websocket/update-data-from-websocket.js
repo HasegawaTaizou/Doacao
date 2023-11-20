@@ -1,11 +1,16 @@
 import { getParsedData } from "./websocket";
 
-const updateDataFromWebsocket = function (array, type, operation) {
+const updateDataFromWebsocket = function (target, type, operation) {
   const parsedData = getParsedData();
+
   if (parsedData.type == type && operation === "concat") {
-    array.push(parsedData.data);
+    target.push(parsedData.data);
   } else if (parsedData.type == type && operation === "replace") {
-    array.splice(0, array.length, ...parsedData.data);
+    if (!Array.isArray(target)) {
+      Object.assign(target, parsedData.data);
+    } else {
+      target.splice(0, target.length, ...parsedData.data);
+    }
   }
 };
 
