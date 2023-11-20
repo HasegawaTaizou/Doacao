@@ -75,7 +75,7 @@
                       @click="
                         openPopUp('reschedule');
                         selectBookSchedule(
-                          schedule.id,
+                          index,
                           schedule.date,
                           schedule.hour,
                           schedule.hospitalSiteId
@@ -319,6 +319,7 @@ export default {
   methods: {
     updateBookSchedulesData() {
       updateDataFromWebsocket(this.bookSchedules, "bookSchedules", "replace");
+      console.log(this.bookSchedules);
     },
     getHospitalSites() {
       axios
@@ -365,7 +366,7 @@ export default {
     },
     formatDateTimeBookSchedule() {
       this.bookScheduleDatetimeFormatted = format(
-        new Date(this.bookScheduleDatetime),
+        new Date(this.rescheduleDatetime),
         "dd/MM/yyyy HH:mm"
       );
     },
@@ -392,15 +393,21 @@ export default {
       this.formattedDateTime();
     },
     updateSchedule() {
-      this.formatDateTime();
-      const dateParts = this.scheduleDatetimeFormatted.split(" ");
-      const updatedDate = dateParts[0];
-      const updatedTime = dateParts[1];
+      this.formatDateTimeBookSchedule();
+      const dateParts = this.bookScheduleDatetimeFormatted.split(" ");
+      this.bookScheduleDate = dateParts[0];
+      this.bookScheduleTime = dateParts[1];
 
-      this.tableBookSchedules[this.currentIndex].contentDate = updatedDate;
-      this.tableBookSchedules[this.currentIndex].contentHour = updatedTime;
-      this.tableBookSchedules[this.currentIndex].contentSite =
-        this.scheduleSite;
+      const selectedSiteId = this.sites.find(
+        (site) => site.idSite === this.selectedSite
+      );
+
+      const textSite = selectedSiteId ? selectedSiteId.site : "";
+
+      this.tableBookSchedules[this.selectedId].date = this.bookScheduleDate;
+      this.tableBookSchedules[this.selectedId].hour = this.bookScheduleTime;
+      this.tableBookSchedules[this.selectedId].hospitalSiteId = this.selectedSite;
+      this.tableBookSchedules[this.selectedId].contentSite = textSite;
     },
     updateBookSchedule() {
       this.formatDateTimeBookSchedule();
@@ -412,10 +419,10 @@ export default {
         id: this.bookScheduleId,
         date: this.bookScheduleDate,
         hour: this.bookScheduleTime,
-        siteId: this.bookScheduleSite,
+        siteId: this.selectedSite,
       };
 
-      axios.put(`${BASE_URL}/schedule-reschedule`, updateBookScheduleData);
+      axios.put(`${BASE_URL}/update-book-schedule`, updateBookScheduleData);
     },
     getBookSchedules() {
       axios
