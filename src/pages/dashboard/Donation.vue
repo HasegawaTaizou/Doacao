@@ -18,7 +18,7 @@
             <select
               name="year"
               class="bar-year__select"
-              v-model="selectedFirstYear"
+              v-model="selectedSecondYearBar"
               @change="updateChart(this.barChart)"
             >
               <option value="" selected disabled class="bar-year__option">
@@ -30,7 +30,8 @@
                 :key="index"
                 :value="donationYear.year"
               >
-                {{ donationYear.year }}
+                <!-- {{ donationYear.year }} -->
+                {{ this.years }}
               </option>
             </select>
             <canvas id="bar-graph"></canvas>
@@ -242,8 +243,8 @@ export default {
       donationBankGraphFirstYearData: initializeGraphData(),
       donationBankGraphSecondYearData: initializeGraphData(),
 
-      selectedFirstYearBar: 0,
-      selectedSecondYearBar: 0,
+      selectedFirstYearBar: 2022,
+      selectedSecondYearBar: 2023,
       firstYearBarGraphData: initializeGraphData(),
       secondYearBarGraphData: initializeGraphData(),
 
@@ -256,6 +257,7 @@ export default {
       secondYearLineGraph: initializeGraphData(),
 
       years: [],
+      multipleYears: [],
 
       //Update Donation Bank Data
       bloodType: "",
@@ -282,18 +284,22 @@ export default {
       firstYearGraphData,
       secondYearGraphData
     ) {
+      const ctx = document.getElementById("bar-graph");
+
       const donationBanks = await this.getDonationBanksData();
 
+      const donationBanksYears = {};
+
       donationBanks.forEach((donationBank) => {
-        if (this.donationBanksYears[donationBank.year]) {
-          this.donationBanksYears[donationBank.year].push(donationBank);
+        if (donationBanksYears[donationBank.year]) {
+          donationBanksYears[donationBank.year].push(donationBank);
         } else {
-          this.donationBanksYears[donationBank.year] = [donationBank];
+          donationBanksYears[donationBank.year] = [donationBank];
         }
       });
 
-      if (this.donationBanksYears[firstYear] != undefined) {
-        this.donationBanksYears[firstYear].forEach((bloodsTypes) => {
+      if (donationBanksYears[firstYear] != undefined) {
+        donationBanksYears[firstYear].forEach((bloodsTypes) => {
           if (firstYearGraphData.hasOwnProperty(bloodsTypes.type)) {
             firstYearGraphData[bloodsTypes.type] += parseInt(
               bloodsTypes.blood_ml
@@ -302,7 +308,7 @@ export default {
         });
       }
 
-      this.donationBanksYears[secondYear].forEach((bloodsTypes) => {
+      donationBanksYears[secondYear].forEach((bloodsTypes) => {
         if (secondYearGraphData.hasOwnProperty(bloodsTypes.type)) {
           secondYearGraphData[bloodsTypes.type] += parseInt(
             bloodsTypes.blood_ml
@@ -312,26 +318,17 @@ export default {
 
       const labels = Object.keys(firstYearGraphData);
 
-      this.createBarChartInternal(
-        labels,
-        firstYearGraphData,
-        secondYearGraphData
-      );
-    },
-    createBarChartInternal(labels, firstYearData, secondYearData) {
-      const ctx = document.getElementById("bar-graph");
-
       const data = {
         labels: labels,
         datasets: [
           {
-            label: this.selectedFirstYear,
-            data: Object.values(firstYearData),
+            label: firstYear,
+            data: Object.values(firstYearGraphData),
             backgroundColor: "rgb(255,205,86)",
           },
           {
-            label: this.selectedSecondYear,
-            data: Object.values(secondYearData),
+            label: secondYear,
+            data: Object.values(secondYearGraphData),
             backgroundColor: "rgb(255,99,132)",
           },
         ],
@@ -559,17 +556,25 @@ export default {
         )
         .then((response) => {
           this.years = response.data.years;
+          this.years.forEach((year, index) => {
+            console.log(year.year, index);
+          });
+          // this.multipleYears[0] = this.years.splice(0, 2);
+          // this.multipleYears[1] = this.years.splice(0, 2);
+          console.log(this.years);
+          console.log(this.multipleYears);
         });
     },
   },
   async mounted() {
     await this.getYearsDonationBank();
-    // await this.createBarChart(
-    //   this.selectedFirstYear,
-    //   this.selectedSecondYear,
-    //   this.donationBankGraphFirstYearData,
-    //   this.donationBankGraphSecondYearData
-    // );
+    this.createBarChart(
+      this.selectedFirstYearBar,
+      this.selectedSecondYearBar,
+      this.firstYearBarGraphData,
+      this.secondYearBarGraphData
+    );
+
     this.createDoughnutChart(
       this.selectedYearDoughnut,
       this.yearDoughnutGraphData
