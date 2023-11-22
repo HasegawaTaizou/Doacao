@@ -18,20 +18,19 @@
             <select
               name="year"
               class="bar-year__select"
-              v-model="selectedSecondYearBar"
-              @change="updateChart(this.barChart)"
+              v-model="selectedYearsBar"
+              @change="updateBarChart"
             >
               <option value="" selected disabled class="bar-year__option">
                 Selecione o ano
               </option>
               <option
                 class="bar-year__option"
-                v-for="(donationYear, index) in this.years"
+                v-for="(donationYears, index) in this.mappedYears"
                 :key="index"
-                :value="donationYear.year"
+                :value="donationYears"
               >
-                <!-- {{ donationYear.year }} -->
-                {{ this.years }}
+                {{ donationYears }}
               </option>
             </select>
             <canvas id="bar-graph"></canvas>
@@ -43,7 +42,7 @@
                 name="year"
                 class="bar-year__select"
                 v-model="selectedYearDoughnut"
-                @change="updateChart(doughnutChart)"
+                @change="updateDoughnutChart"
                 style="margin-bottom: 38px; transform: translateX(-60px)"
               >
                 <option value="" selected disabled class="bar-year__option">
@@ -243,8 +242,7 @@ export default {
       donationBankGraphFirstYearData: initializeGraphData(),
       donationBankGraphSecondYearData: initializeGraphData(),
 
-      selectedFirstYearBar: 2022,
-      selectedSecondYearBar: 2023,
+      selectedYearsBar: "2022 - 2023",
       firstYearBarGraphData: initializeGraphData(),
       secondYearBarGraphData: initializeGraphData(),
 
@@ -257,7 +255,7 @@ export default {
       secondYearLineGraph: initializeGraphData(),
 
       years: [],
-      multipleYears: [],
+      mappedYears: [],
 
       //Update Donation Bank Data
       bloodType: "",
@@ -375,8 +373,44 @@ export default {
 
       this.barChart = new Chart(ctx, config);
     },
-    updateChart(chart) {
-      chart.destroy();
+    updateBarChart() {
+      this.barChart.destroy();
+
+      const firstYear = this.selectedYearsBar.split("-")[0].trim();
+      const secondYear = this.selectedYearsBar.split("-")[1].trim();
+
+      this.createBarChart(
+        firstYear,
+        secondYear,
+        this.firstYearBarGraphData,
+        this.secondYearBarGraphData
+      );
+
+      this.firstYearBarGraphData = {
+        "O-": 0,
+        "O+": 0,
+        "A-": 0,
+        "A+": 0,
+        "B-": 0,
+        "B+": 0,
+        "AB-": 0,
+        "AB+": 0,
+      };
+
+      this.secondYearBarGraphData = {
+        "O-": 0,
+        "O+": 0,
+        "A-": 0,
+        "A+": 0,
+        "B-": 0,
+        "B+": 0,
+        "AB-": 0,
+        "AB+": 0,
+      };
+    },
+    updateDoughnutChart() {
+      this.doughnutChart.destroy();
+
       this.createDoughnutChart(
         this.selectedYearDoughnut,
         this.yearDoughnutGraphData
@@ -556,21 +590,41 @@ export default {
         )
         .then((response) => {
           this.years = response.data.years;
-          this.years.forEach((year, index) => {
-            console.log(year.year, index);
+
+          const multipleYears = [];
+
+          for (let i = 0; i < this.years.length; i += 2) {
+            const chunk = this.years.slice(i, i + 2).slice();
+
+            const years = chunk.map((obj) => obj.year);
+
+            const yearString = years.join(" - ");
+
+            multipleYears.push(yearString);
+          }
+
+          if (this.years.length % 2 !== 0) {
+            const lastYearIndex = this.years.length - 1;
+            const lastYear = this.years[lastYearIndex].year;
+            const previousYear = this.years[lastYearIndex - 1].year;
+
+            const combinedString = previousYear + " - " + lastYear;
+
+            multipleYears.push(combinedString);
+          }
+
+          this.mappedYears = multipleYears.filter((multipleYear) => {
+            return multipleYear.includes("-");
           });
-          // this.multipleYears[0] = this.years.splice(0, 2);
-          // this.multipleYears[1] = this.years.splice(0, 2);
-          console.log(this.years);
-          console.log(this.multipleYears);
         });
     },
   },
   async mounted() {
     await this.getYearsDonationBank();
+
     this.createBarChart(
-      this.selectedFirstYearBar,
-      this.selectedSecondYearBar,
+      this.selectedYearsBar.split("-")[0].trim(),
+      this.selectedYearsBar.split("-")[1].trim(),
       this.firstYearBarGraphData,
       this.secondYearBarGraphData
     );
