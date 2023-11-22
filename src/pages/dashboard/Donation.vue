@@ -427,12 +427,10 @@ export default {
     updateLineChart() {
       this.lineChart.destroy();
 
-      console.log(this.selectedYearsLine);
       const firstYear = this.selectedYearsLine.split("-")[0].trim();
       const secondYear = this.selectedYearsLine.split("-")[1].trim();
 
-
-      this.createBarChart(
+      this.createLineChart(
         firstYear,
         secondYear,
         this.firstYearLineGraphData,
@@ -696,17 +694,17 @@ export default {
 
     await this.getYearsDonationBank();
 
-    // this.createBarChart(
-    //   this.selectedYearsBar.split("-")[0].trim(),
-    //   this.selectedYearsBar.split("-")[1].trim(),
-    //   this.firstYearBarGraphData,
-    //   this.secondYearBarGraphData
-    // );
+    this.createBarChart(
+      this.selectedYearsBar.split("-")[0].trim(),
+      this.selectedYearsBar.split("-")[1].trim(),
+      this.firstYearBarGraphData,
+      this.secondYearBarGraphData
+    );
 
-    // this.createDoughnutChart(
-    //   this.selectedYearDoughnut,
-    //   this.yearDoughnutGraphData
-    // );
+    this.createDoughnutChart(
+      this.selectedYearDoughnut,
+      this.yearDoughnutGraphData
+    );
 
     this.createLineChart(
       this.selectedYearsLine.split("-")[0].trim(),
