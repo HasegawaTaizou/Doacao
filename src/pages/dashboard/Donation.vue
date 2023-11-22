@@ -211,6 +211,16 @@ import Chart from "chart.js/auto";
 import { BASE_URL } from "../../assets/js/config";
 import axios from "axios";
 
+//Websocket
+import {
+  connectWebsocket,
+  setupWebsocketEventListener,
+} from "../../assets/js/websocket/websocket";
+
+import { updateDataFromWebsocket } from "../../assets/js/websocket/update-data-from-websocket";
+
+import websocketConnectionData from "../../assets/js/data/websocket-connection";
+
 export default {
   name: "Donation",
   data() {
@@ -226,6 +236,9 @@ export default {
     });
 
     return {
+      //Websocket
+      ...websocketConnectionData,
+
       //Charts
       doughnutChart: null,
       barChart: null,
@@ -261,6 +274,42 @@ export default {
     };
   },
   methods: {
+    updateGraphsData() {
+      //Bar Chart
+      updateDataFromWebsocket(
+        this.firstYearBarGraphData,
+        "donationBanks",
+        "replace"
+      );
+      updateDataFromWebsocket(
+        this.secondYearBarGraphData,
+        "donationBanks",
+        "replace"
+      );
+
+      //Doughnut chart
+      updateDataFromWebsocket(
+        this.yearDoughnutGraphData,
+        "donationBanks",
+        "replace"
+      );
+
+      //Line Chart
+      updateDataFromWebsocket(
+        this.firstYearLineGraphData,
+        "donationBanks",
+        "replace"
+      );
+      updateDataFromWebsocket(
+        this.secondYearLineGraphData,
+        "donationBanks",
+        "replace"
+      );
+
+      this.updateBarChart();
+      this.updateDoughnutChart();
+      this.updateLineChart();
+    },
     updateDonationBank() {
       const data = {
         year: this.year,
@@ -269,9 +318,9 @@ export default {
         hospitalId: Number(localStorage.getItem("hospitalId")),
       };
 
-      axios
-        .put(`${BASE_URL}/update-donation-bank`, data)
-        .then(location.reload());
+      axios.put(`${BASE_URL}/update-donation-bank`, data).then(() => {
+        location.reload();
+      });
     },
     async createBarChart(
       firstYear,
@@ -712,6 +761,10 @@ export default {
       this.firstYearLineGraphData,
       this.secondYearLineGraphData
     );
+  },
+  created() {
+    this.connection = connectWebsocket();
+    // setupWebsocketEventListener(this.updateGraphsData);
   },
 };
 </script>
