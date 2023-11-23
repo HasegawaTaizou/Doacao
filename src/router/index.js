@@ -7,6 +7,7 @@ import HospitalRegistrationPartTwo from "@/pages/HospitalRegistrationPartTwo.vue
 import HospitalRegistrationPartThree from "@/pages/HospitalRegistrationPartThree.vue";
 import HospitalRegistrationPartFour from "@/pages/HospitalRegistrationPartFour.vue";
 import ThankYou from "@/pages/ThankYou.vue";
+import ForgotPassword from "@/pages/ForgotPassword.vue";
 
 //DASHBOARD
 import Dashboard from "@/pages/dashboard/Dashboard.vue";
@@ -69,6 +70,11 @@ const routes = [
     path: "/thank-you",
     name: "ThankYou",
     component: ThankYou,
+  },
+  {
+    path: "/forgot-password/:token",
+    name: "ForgotPassword",
+    component: ForgotPassword,
   },
   //DASHBOARD
   {
