@@ -123,7 +123,7 @@ import { BASE_URL } from "../assets/js/config";
 import axios from "axios";
 
 export default {
-  name: "ForgotPassword",
+  name: "ForgotPasswordNewPassword",
   data() {
     return {
       //Show Password
