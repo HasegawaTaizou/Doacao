@@ -125,7 +125,9 @@
               :key="schedule.id"
               class="table__content"
             >
-              <td class="content__date">{{ schedule.date }}</td>
+              <td class="content__date">
+                {{ `${schedule.id} - ${schedule.date}` }}
+              </td>
               <td class="content__hour">{{ schedule.hour }}</td>
               <td class="content__site">{{ schedule.site }}</td>
               <td class="content__actions">
@@ -134,6 +136,12 @@
                   alt="Cancel Icon"
                   class="action__icon"
                   @click="
+                    selectBookSchedule(
+                      schedule.id,
+                      schedule.date,
+                      schedule.hour,
+                      schedule.site_id
+                    );
                     openPopUp('cancel-book-schedule');
                     bookScheduleId = schedule.id;
                   "
@@ -319,7 +327,6 @@ export default {
   methods: {
     updateBookSchedulesData() {
       updateDataFromWebsocket(this.bookSchedules, "bookSchedules", "replace");
-      console.log(this.bookSchedules);
     },
     getHospitalSites() {
       axios
@@ -390,6 +397,8 @@ export default {
       this.selectedHour = hour;
       this.selectedSite = siteId;
 
+      console.log("id no selectBookSchedule: ", this.selectedId);
+
       this.formattedDateTime();
     },
     updateSchedule() {
@@ -406,7 +415,8 @@ export default {
 
       this.tableBookSchedules[this.selectedId].date = this.bookScheduleDate;
       this.tableBookSchedules[this.selectedId].hour = this.bookScheduleTime;
-      this.tableBookSchedules[this.selectedId].hospitalSiteId = this.selectedSite;
+      this.tableBookSchedules[this.selectedId].hospitalSiteId =
+        this.selectedSite;
       this.tableBookSchedules[this.selectedId].contentSite = textSite;
     },
     updateBookSchedule() {
@@ -433,10 +443,11 @@ export default {
         )
         .then((response) => {
           this.bookSchedules = response.data.bookSchedules;
+          console.log(this.bookSchedules);
         });
     },
     deleteBookSchedule() {
-      axios.delete(`${BASE_URL}/delete-book-schedule/${this.bookScheduleId}`);
+      axios.delete(`${BASE_URL}/delete-book-schedule/${this.selectedId}`);
     },
     openPopUp,
   },
