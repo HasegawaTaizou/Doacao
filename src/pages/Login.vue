@@ -65,7 +65,7 @@
               </router-link>
               <router-link
                 class="login__forgot-password"
-                to="/redefine-password"
+                to="/forgot-password-email"
               >
                 Esqueceu a senha?
               </router-link>

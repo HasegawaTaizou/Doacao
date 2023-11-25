@@ -26,7 +26,6 @@ import SeeCampaign from "@/pages/dashboard/SeeCampaign.vue";
 import Donation from "@/pages/dashboard/Donation.vue";
 
 // TELAS DE TESTE
-import Menu from "@/pages/Menu.vue";
 import Notificacao from "@/pages/Notificacao.vue";
 import PopUp from "@/pages/PopUp.vue";
 import Pizza from "@/pages/Pizza.vue";
@@ -157,11 +156,6 @@ const routes = [
   },
 
   // TESTES DE FUNCIONALIDADES
-  {
-    path: "/menu",
-    name: "Menu",
-    component: Menu,
-  },
   {
     path: "/notificacao",
     name: "Notificacao",

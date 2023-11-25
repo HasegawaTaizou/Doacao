@@ -12,7 +12,7 @@
         Se você não receber o e-mail em até 10 minutos, refaça a solicitação.
       </p>
     </div>
-    <router-link class="email__button" to="/">Entendi</router-link>
+    <router-link class="email__button" to="/login">Entendi</router-link>
   </div>
 </template>
 

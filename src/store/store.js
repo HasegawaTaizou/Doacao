@@ -43,6 +43,9 @@ export default new Vuex.Store({
 
     //USER DATA
     userId: 0,
+
+    //Log Out
+    showLogOut: false,
   },
   mutations: {
     updateFormData(state, payload) {
@@ -68,6 +71,9 @@ export default new Vuex.Store({
     },
     SET_USER_ID(state, value) {
       state.userId = value;
+    },
+    SET_SHOW_LOGOUT(state, value) {
+      state.showLogOut = value;
     },
   },
 });

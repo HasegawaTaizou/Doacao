@@ -21,10 +21,13 @@
           </template>
         </ul>
       </nav>
-      <router-link :to="'/'" class="log-out-content">
+      <div
+        @click="this.$store.commit('SET_SHOW_LOGOUT', true)"
+        class="log-out-content"
+      >
         <i class="fa-solid fa-right-from-bracket"></i>
         <span class="log-out__text">Sair</span>
-      </router-link>
+      </div>
     </div>
     <div id="dashboard" class="dashboard-content">
       <router-view v-slot="{ Component }">
@@ -33,14 +36,19 @@
         </transition>
       </router-view>
     </div>
+    <LogOut></LogOut>
   </main>
 </template>
 
 <script>
+import LogOut from "../../assets/components/LogOut.vue";
+
 export default {
   name: "Dashboard",
+  components: { LogOut },
   data() {
     return {
+      showLogout: true,
       menuItems: [
         {
           id: 1,
