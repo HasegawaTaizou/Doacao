@@ -31,6 +31,7 @@ import PopUp from "@/pages/PopUp.vue";
 import Pizza from "@/pages/Pizza.vue";
 import Slider from "@/pages/Slider.vue";
 import Modals from "@/pages/Modals.vue";
+import Transitions from "@/pages/Transitions.vue";
 
 const routes = [
   {
@@ -181,6 +182,11 @@ const routes = [
     path: "/modals",
     name: "Modals",
     component: Modals,
+  },
+  {
+    path: "/transitions",
+    name: "Transitions",
+    component: Transitions,
   },
 ];
 
