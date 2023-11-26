@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content" ref="thankYouContent">
     <div class="thank-you__texts">
       <p class="thank-you__text">
         Sua conta foi encerrada com sucesso. Gostaríamos de agradecer por ter
@@ -51,9 +51,21 @@
 <script>
 export default {
   name: "ThankYou",
+  mounted() {
+    this.$refs.thankYouContent.classList.add("fade-enter");
+  },
 };
 </script>
 
 <style scoped>
 @import url("../assets/css/thankYou/thankYou.css");
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.8s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 1;
+}
 </style>

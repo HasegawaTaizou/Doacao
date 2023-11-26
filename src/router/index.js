@@ -30,6 +30,7 @@ import Notificacao from "@/pages/Notificacao.vue";
 import PopUp from "@/pages/PopUp.vue";
 import Pizza from "@/pages/Pizza.vue";
 import Slider from "@/pages/Slider.vue";
+import Modals from "@/pages/Modals.vue";
 
 const routes = [
   {
@@ -175,6 +176,11 @@ const routes = [
     path: "/slider",
     name: "Slider",
     component: Slider,
+  },
+  {
+    path: "/modals",
+    name: "Modals",
+    component: Modals,
   },
 ];
 
