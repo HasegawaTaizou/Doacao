@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="fade" appear v-if="showTransition">
     <section id="settings-dashboard">
       <div class="settings__header">
         <h1 class="settings__title">EDITAR PERFIL</h1>
@@ -300,4 +300,5 @@ export default {
 <style scoped>
 @import url("../../assets/css/dashboard/editHospital/editHospitalStyle.css");
 @import url("../../assets/css/spinner/spinnerStyle.css");
+@import url("../../assets/css/transitionsStyle.css");
 </style>

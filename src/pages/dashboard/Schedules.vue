@@ -1,212 +1,220 @@
 <template>
-  <section id="scheduling-dashboard">
-    <div class="scheduling__header">
-      <h1 class="scheduling__title">AGENDAMENTOS</h1>
-      <div class="profile-container">
-        <img :src="hospitalPhoto" alt="Profile Image" class="profile__image" />
-        <span class="profile__name">{{ hospitalName }}</span>
-      </div>
-    </div>
-    <div class="scheduling__content">
-      <div class="scheduling__actions">
-        <div class="action-introduction">
+  <transition name="fade" appear v-if="showTransition">
+    <section id="scheduling-dashboard">
+      <div class="scheduling__header">
+        <h1 class="scheduling__title">AGENDAMENTOS</h1>
+        <div class="profile-container">
           <img
-            src="../../assets/img/scheduling-dashboard-icon.png"
-            alt="Scheduling Icon"
-            class="action-introduction__image"
+            :src="hospitalPhoto"
+            alt="Profile Image"
+            class="profile__image"
           />
-          <span class="action-introduction__title">Agendamentos</span>
-        </div>
-        <div class="scheduling__inputs">
-          <div class="input__search-container">
-            <input
-              type="text"
-              class="input__search"
-              placeholder="Pesquise o usuário"
-              v-model="userFilter"
-              @input="filterNameSchedules"
-            />
-            <i class="fa-solid fa-magnifying-glass input__search-icon"></i>
-          </div>
-          <select
-            v-model="statusFilter"
-            name="status"
-            class="select__status"
-            @change="filterStatusSchedules"
-          >
-            <option class="status__option" selected value="">
-              Todos status
-            </option>
-            <option class="status__option" value="SCHEDULED">Agendado</option>
-            <option class="status__option" value="CONCLUDED">Concluído</option>
-            <option class="status__option" value="PENDING">Pendente</option>
-            <option class="status__option" value="RESCHEDULED">
-              Remarcado
-            </option>
-          </select>
+          <span class="profile__name">{{ hospitalName }}</span>
         </div>
       </div>
-      <div class="scheduling__schedules">
-        <table class="schedules__table">
-          <thead>
-            <tr class="table__title">
-              <th class="title__id">ID</th>
-              <th class="title__donator">Nome do doador</th>
-              <th class="title__date">Data</th>
-              <th class="title__hour">Horário</th>
-              <th class="title__site">Local</th>
-              <th class="title__status">Status</th>
-              <th class="title__action">Ação</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              class="table__content"
-              v-for="(schedule, index) in this.schedules"
-              :key="index"
+      <div class="scheduling__content">
+        <div class="scheduling__actions">
+          <div class="action-introduction">
+            <img
+              src="../../assets/img/scheduling-dashboard-icon.png"
+              alt="Scheduling Icon"
+              class="action-introduction__image"
+            />
+            <span class="action-introduction__title">Agendamentos</span>
+          </div>
+          <div class="scheduling__inputs">
+            <div class="input__search-container">
+              <input
+                type="text"
+                class="input__search"
+                placeholder="Pesquise o usuário"
+                v-model="userFilter"
+                @input="filterNameSchedules"
+              />
+              <i class="fa-solid fa-magnifying-glass input__search-icon"></i>
+            </div>
+            <select
+              v-model="statusFilter"
+              name="status"
+              class="select__status"
+              @change="filterStatusSchedules"
             >
-              <td class="content__id">
-                {{ schedules[index].schedule.scheduleId }}
-              </td>
-              <td class="content__donator">
-                <router-link
-                  @click="setUserId(schedules[index].user.userId)"
-                  :to="'/dashboard/donator'"
-                  class="donator__link"
+              <option class="status__option" selected value="">
+                Todos status
+              </option>
+              <option class="status__option" value="SCHEDULED">Agendado</option>
+              <option class="status__option" value="CONCLUDED">
+                Concluído
+              </option>
+              <option class="status__option" value="PENDING">Pendente</option>
+              <option class="status__option" value="RESCHEDULED">
+                Remarcado
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="scheduling__schedules">
+          <table class="schedules__table">
+            <thead>
+              <tr class="table__title">
+                <th class="title__id">ID</th>
+                <th class="title__donator">Nome do doador</th>
+                <th class="title__date">Data</th>
+                <th class="title__hour">Horário</th>
+                <th class="title__site">Local</th>
+                <th class="title__status">Status</th>
+                <th class="title__action">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                class="table__content"
+                v-for="(schedule, index) in this.schedules"
+                :key="index"
+              >
+                <td class="content__id">
+                  {{ schedules[index].schedule.scheduleId }}
+                </td>
+                <td class="content__donator">
+                  <router-link
+                    @click="setUserId(schedules[index].user.userId)"
+                    :to="'/dashboard/donator'"
+                    class="donator__link"
+                  >
+                    <img
+                      :src="schedules[index].user.photo"
+                      alt="Donator Image"
+                      class="donator__image"
+                    />
+                    <span class="donator__name">{{
+                      schedules[index].user.name
+                    }}</span>
+                  </router-link>
+                </td>
+                <td class="content__date">
+                  {{ schedules[index].schedule.date }}
+                </td>
+                <td class="content__hour">
+                  {{ schedules[index].schedule.hour }}
+                </td>
+                <td class="content__site">
+                  {{ schedules[index].schedule.site }}
+                </td>
+                <td
+                  class="content__status"
+                  :class="schedules[index].schedule.status.toLowerCase()"
+                  :title="
+                    schedules[index].schedule.status === 'PENDING'
+                      ? schedules[index].schedule.observation
+                      : ''
+                  "
+                >
+                  {{ getUserSchedule(schedules[index].schedule.status) }}
+                </td>
+                <td
+                  v-if="schedules[index].schedule.status != 'CONCLUDED'"
+                  class="content__actions"
                 >
                   <img
-                    :src="schedules[index].user.photo"
-                    alt="Donator Image"
-                    class="donator__image"
+                    @click="
+                      openPopUp('cancel'),
+                        (scheduleId = schedules[index].schedule.scheduleId)
+                    "
+                    src="../../assets/img/scheduling-cancel-icon.png"
+                    alt="Cancel Icon"
+                    class="action__icon"
                   />
-                  <span class="donator__name">{{
-                    schedules[index].user.name
-                  }}</span>
-                </router-link>
-              </td>
-              <td class="content__date">
-                {{ schedules[index].schedule.date }}
-              </td>
-              <td class="content__hour">
-                {{ schedules[index].schedule.hour }}
-              </td>
-              <td class="content__site">
-                {{ schedules[index].schedule.site }}
-              </td>
-              <td
-                class="content__status"
-                :class="schedules[index].schedule.status.toLowerCase()"
-                :title="
-                  schedules[index].schedule.status === 'PENDING'
-                    ? schedules[index].schedule.observation
-                    : ''
-                "
-              >
-                {{ getUserSchedule(schedules[index].schedule.status) }}
-              </td>
-              <td
-                v-if="schedules[index].schedule.status != 'CONCLUDED'"
-                class="content__actions"
-              >
-                <img
-                  @click="
-                    openPopUp('cancel'),
-                      (scheduleId = schedules[index].schedule.scheduleId)
-                  "
-                  src="../../assets/img/scheduling-cancel-icon.png"
-                  alt="Cancel Icon"
-                  class="action__icon"
-                />
-                <img
-                  @click="
-                    openPopUp('conclude'),
-                      (scheduleId = schedules[index].schedule.scheduleId)
-                  "
-                  src="../../assets/img/scheduling-conclude-icon.png"
-                  alt=" Conclude Icon"
-                  class="action__icon"
-                />
-                <img
-                  @click="
-                    selectSchedule(
-                      schedules[index].schedule.scheduleId,
-                      schedules[index].schedule.date,
-                      schedules[index].schedule.hour,
-                      schedules[index].schedule.siteId
-                    );
-                    openPopUp('reschedule'),
-                      (scheduleId = schedules[index].schedule.scheduleId);
-                  "
-                  src="../../assets/img/scheduling-reschedule-icon.png"
-                  alt="Reschedule Icon"
-                  class="action__icon"
-                />
-              </td>
-              <td v-else class="content__actions">
-                <span class="action__none">N/A</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <PopUp
-      v-if="selectedComponent === 'cancel'"
-      :title="'Cancelar?'"
-      :message="'Digite o motivo do cancelamento (Opcional)'"
-      :acceptFunction="cancelSchedule"
-      :image="'/src/assets/img/book-schedule-cancel-image.png'"
-    >
-      <textarea
-        name=""
-        id=""
-        cols="30"
-        rows="10"
-        class="cancel-reason"
-        placeholder="Motivo:"
-        v-model="reason"
-      ></textarea>
-    </PopUp>
-    <PopUp
-      v-if="selectedComponent === 'conclude'"
-      :title="'Concluir?'"
-      :message="'Os dados serão alterados e não terá como desfazer esta ação.'"
-      :acceptFunction="concludeSchedule"
-      :image="'/src/assets/img/book-schedule-save-image.png'"
-    >
-    </PopUp>
-    <PopUp
-      v-if="selectedComponent === 'reschedule'"
-      :title="'Remarcar'"
-      :message="'Escolha a data e o horário para remarcar'"
-      :acceptFunction="rescheduleSchedule"
-      :image="'/src/assets/img/book-schedule-reschedule-image.png'"
-    >
-      <div class="book-scheduling">
-        <div class="scheduling-date">
-          <input
-            type="datetime-local"
-            name=""
-            id=""
-            class="date__datetime-local"
-            v-model="this.rescheduleDatetime"
-          />
-        </div>
-        <div class="scheduling-site">
-          <select v-model="selectedSite" name="" id="" class="site__select">
-            <option disabled value="">Escolha o local</option>
-            <option
-              v-for="site in sites"
-              :key="site.idSite"
-              :value="site.idSite"
-            >
-              {{ site.site }}
-            </option>
-          </select>
+                  <img
+                    @click="
+                      openPopUp('conclude'),
+                        (scheduleId = schedules[index].schedule.scheduleId)
+                    "
+                    src="../../assets/img/scheduling-conclude-icon.png"
+                    alt=" Conclude Icon"
+                    class="action__icon"
+                  />
+                  <img
+                    @click="
+                      selectSchedule(
+                        schedules[index].schedule.scheduleId,
+                        schedules[index].schedule.date,
+                        schedules[index].schedule.hour,
+                        schedules[index].schedule.siteId
+                      );
+                      openPopUp('reschedule'),
+                        (scheduleId = schedules[index].schedule.scheduleId);
+                    "
+                    src="../../assets/img/scheduling-reschedule-icon.png"
+                    alt="Reschedule Icon"
+                    class="action__icon"
+                  />
+                </td>
+                <td v-else class="content__actions">
+                  <span class="action__none">N/A</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </PopUp>
-  </section>
+      <PopUp
+        v-if="selectedComponent === 'cancel'"
+        :title="'Cancelar?'"
+        :message="'Digite o motivo do cancelamento (Opcional)'"
+        :acceptFunction="cancelSchedule"
+        :image="'/src/assets/img/book-schedule-cancel-image.png'"
+      >
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          class="cancel-reason"
+          placeholder="Motivo:"
+          v-model="reason"
+        ></textarea>
+      </PopUp>
+      <PopUp
+        v-if="selectedComponent === 'conclude'"
+        :title="'Concluir?'"
+        :message="'Os dados serão alterados e não terá como desfazer esta ação.'"
+        :acceptFunction="concludeSchedule"
+        :image="'/src/assets/img/book-schedule-save-image.png'"
+      >
+      </PopUp>
+      <PopUp
+        v-if="selectedComponent === 'reschedule'"
+        :title="'Remarcar'"
+        :message="'Escolha a data e o horário para remarcar'"
+        :acceptFunction="rescheduleSchedule"
+        :image="'/src/assets/img/book-schedule-reschedule-image.png'"
+      >
+        <div class="book-scheduling">
+          <div class="scheduling-date">
+            <input
+              type="datetime-local"
+              name=""
+              id=""
+              class="date__datetime-local"
+              v-model="this.rescheduleDatetime"
+            />
+          </div>
+          <div class="scheduling-site">
+            <select v-model="selectedSite" name="" id="" class="site__select">
+              <option disabled value="">Escolha o local</option>
+              <option
+                v-for="site in sites"
+                :key="site.idSite"
+                :value="site.idSite"
+              >
+                {{ site.site }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </PopUp>
+    </section>
+  </transition>
 </template>
 
 <script>
@@ -412,6 +420,7 @@ export default {
   },
   mounted() {
     this.showTransition = true;
+
     this.getSchedules();
     this.getHospitalSites();
 
@@ -429,4 +438,5 @@ export default {
 @import url("../../assets/css/dashboard/schedules/schedulesStyle.css");
 @import url("../../assets/css/components/cancelIconStyle.css");
 @import url("../../assets/css/components/rescheduleIconStyle.css");
+@import url("../../assets/css/transitionsStyle.css");
 </style>

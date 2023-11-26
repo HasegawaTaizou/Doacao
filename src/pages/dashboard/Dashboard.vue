@@ -30,11 +30,7 @@
       </div>
     </div>
     <div id="dashboard" class="dashboard-content">
-      <router-view v-slot="{ Component }">
-        <transition name="fade">
-          <component :is="Component" />
-        </transition>
-      </router-view>
+      <router-view></router-view>
     </div>
     <LogOut></LogOut>
   </main>

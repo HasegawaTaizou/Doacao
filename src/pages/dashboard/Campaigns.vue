@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="fade" appear v-if="showTransition">
     <section id="campaigns-dashboard">
       <div class="campaigns__header">
         <h1 class="campaigns__title">Campanhas</h1>
@@ -56,4 +56,5 @@ export default {
 
 <style scoped>
 @import url("../../assets/css/dashboard/campaigns/campaignsStyle.css");
+@import url("../../assets/css/transitionsStyle.css");
 </style>

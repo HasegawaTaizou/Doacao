@@ -273,7 +273,6 @@ tr:not(:last-child)::after {
   justify-content: center;
   align-items: center;
   margin-top: 32px;
-
 }
 
 .action-button__cancel {
@@ -303,14 +302,3 @@ tr:not(:last-child)::after {
   cursor: pointer;
   font-size: 1.25rem;
 }
-
-/* TRANSITION STYLE */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-

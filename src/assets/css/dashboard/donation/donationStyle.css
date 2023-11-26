@@ -261,13 +261,3 @@ p {
   color: #638bff;
   transition: all 0.5s;
 }
-
-/* TRANSITION STYLE */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}

@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="fade" appear v-if="showTransition">
     <section id="donation-dashboard">
       <div class="donation__header">
         <h1 class="donation__title">Banco de doação</h1>
@@ -771,4 +771,5 @@ export default {
 
 <style scoped>
 @import url("../../assets/css/dashboard/donation/donationStyle.css");
+@import url("../../assets/css/transitionsStyle.css");
 </style>

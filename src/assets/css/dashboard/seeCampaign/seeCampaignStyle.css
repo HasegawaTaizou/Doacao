@@ -292,13 +292,3 @@ p {
   margin: 12px;
   width: 560px !important;
 }
-
-/* TRANSITION STYLE */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}

@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="fade" appear v-if="showTransition">
     <section id="help-dashboard">
       <div class="help__header">
         <h1 class="help__title">AJUDA</h1>
@@ -69,4 +69,5 @@ export default {
 
 <style scoped>
 @import url("../../assets/css/dashboard/help/helpStyle.css");
+@import url("../../assets/css/transitionsStyle.css");
 </style>

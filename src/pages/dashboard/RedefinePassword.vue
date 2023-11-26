@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="fade" appear v-if="showTransition">
   <section id="redefine-password-dashboard">
     <div class="redefine-password__header">
       <h1 class="redefine-password__title">REDEFINIR SENHA</h1>
@@ -188,4 +188,5 @@ export default {
 
 <style scoped>
 @import url("../../assets/css/dashboard/redefinePassword/redefinePasswordStyle.css");
+@import url("../../assets/css/transitionsStyle.css");
 </style>

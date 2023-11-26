@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="fade" appear v-if="showTransition">
     <section id="settings-dashboard">
       <div class="settings__header">
         <h1 class="settings__title">CONFIGURAÇÕES</h1>
@@ -189,13 +189,13 @@
           </button>
         </div>
         <PopUp
-            v-if="selectedComponent === 'delete'"
-            :title="'Tem certeza que deseja excluir seu perfil?'"
-            :message="'Seu perfil será excluido e não terá como desfazer esta ação.'"
-            :acceptFunction="deleteHospital"
-            :image="'/src/assets/img/delete-profile-image.png'"
-          >
-          </PopUp>
+          v-if="selectedComponent === 'delete'"
+          :title="'Tem certeza que deseja excluir seu perfil?'"
+          :message="'Seu perfil será excluido e não terá como desfazer esta ação.'"
+          :acceptFunction="deleteHospital"
+          :image="'/src/assets/img/delete-profile-image.png'"
+        >
+        </PopUp>
       </div>
     </section>
   </transition>
@@ -226,7 +226,7 @@ export default {
     };
   },
   components: {
-    PopUp
+    PopUp,
   },
   methods: {
     openPopUp,
@@ -239,9 +239,13 @@ export default {
         });
     },
     deleteHospital() {
-      axios.delete(`${BASE_URL}/delete-hospital/${localStorage.getItem("hospitalId")}`).then(() => {
-        this.$router.push('/thank-you')
-      })
+      axios
+        .delete(
+          `${BASE_URL}/delete-hospital/${localStorage.getItem("hospitalId")}`
+        )
+        .then(() => {
+          this.$router.push("/thank-you");
+        });
     },
   },
   mounted() {
@@ -256,4 +260,5 @@ export default {
 
 <style scoped>
 @import url("../../assets/css/dashboard/settings/settingsStyle.css");
+@import url("../../assets/css/transitionsStyle.css");
 </style>

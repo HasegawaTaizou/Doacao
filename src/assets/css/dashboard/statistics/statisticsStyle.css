@@ -314,13 +314,3 @@
   max-width: 372px;
   margin-top: 12px;
 }
-
-/* TRANSITION STYLE */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}

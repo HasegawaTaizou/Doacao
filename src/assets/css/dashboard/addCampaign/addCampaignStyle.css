@@ -227,13 +227,3 @@ p {
   bottom: 16px;
   right: 16px;
 }
-
-/* TRANSITION STYLE */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}

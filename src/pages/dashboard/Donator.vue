@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="fade" appear v-if="showTransition">
     <section id="donator-dashboard">
       <div class="donator__header">
         <h1 class="donator__title">DOADOR</h1>
@@ -399,4 +399,5 @@ export default {
 @import url("../../assets/css/dashboard/donator/donatorStyle.css");
 @import url("../../assets/css/components/cancelIconStyle.css");
 @import url("../../assets/css/components/rescheduleIconStyle.css");
+@import url("../../assets/css/transitionsStyle.css");
 </style>

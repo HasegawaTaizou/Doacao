@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="fade" appear v-if="showTransition">
     <section id="statistics-dashboard">
       <div class="statistics__header">
         <h1 class="statistics__title">Estatísticas</h1>
@@ -368,7 +368,7 @@ export default {
       Chart.defaults.font.size = 24;
       Chart.defaults.font.family = "Abel";
       Chart.defaults.color = `black`;
-      
+
       new Chart(ctx, {
         type: "doughnut",
         data: data,
@@ -404,4 +404,5 @@ export default {
 
 <style scoped>
 @import url("../../assets/css/dashboard/statistics/statisticsStyle.css");
+@import url("../../assets/css/transitionsStyle.css");
 </style>
