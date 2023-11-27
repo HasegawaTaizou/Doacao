@@ -1,6 +1,6 @@
 <template>
-  <transition name="fade" appear>
-    <div v-if="showTransiton" class="content">
+  <transition name="normal" appear v-if="showTransition">
+    <div class="content">
       <div id="logo-container">
         <img src="../assets/img/logo.png" alt="Website logo" id="logo__logo" />
         <span id="logo__name">Doe Vida</span>
@@ -165,9 +165,9 @@ export default {
     const data = dataPartOne(formData);
 
     return {
+      showTransition: false,
       validDate: true,
       ...data,
-      showTransiton: false,
     };
   },
   validations() {
@@ -182,7 +182,7 @@ export default {
     onlyLetters,
   },
   mounted() {
-    this.showTransiton = true;
+    this.showTransition = true;
   },
 };
 </script>
@@ -194,4 +194,5 @@ export default {
 @import url("../assets/css/hospitalRegistrationPartOne/hospitalRegistrationPartOneResponsiveStyle.css");
 @import url("../assets/css/hospitalRegistrationPartOne/copyrightStyle.css");
 @import url("../assets/css/hospitalRegistrationPartOne/copyrightResponsiveStyle.css");
+@import url("../assets/css/transitionsStyle.css")
 </style>

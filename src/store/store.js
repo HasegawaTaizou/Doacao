@@ -37,8 +37,7 @@ export default new Vuex.Store({
     //HOSPITAL LOGIN
     hospitalId: "",
     hospitalName: "",
-    hospitalPhoto:
-      "",
+    hospitalPhoto: "",
     token: "",
 
     //USER DATA
@@ -46,6 +45,9 @@ export default new Vuex.Store({
 
     //Log Out
     showLogOut: false,
+
+    //Email PopUp
+    showEmail: false,
   },
   mutations: {
     updateFormData(state, payload) {
@@ -74,6 +76,9 @@ export default new Vuex.Store({
     },
     SET_SHOW_LOGOUT(state, value) {
       state.showLogOut = value;
+    },
+    SET_SHOW_EMAIL(state, value) {
+      state.showEmail = value;
     },
   },
 });

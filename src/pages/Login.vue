@@ -1,6 +1,6 @@
 <template>
-  <transition name="fade" appear>
-    <div v-if="showTranstion" id="login">
+  <transition name="normal" appear v-if="showTransition">
+    <div id="login">
       <img
         src="../assets/img/login-ornament-6.png"
         alt="Login Ornament Image 6"
@@ -117,7 +117,7 @@ export default {
       password: "",
       email: "",
 
-      showTranstion: false,
+      showTransition: false,
     };
   },
   methods: {
@@ -142,7 +142,7 @@ export default {
     },
   },
   mounted() {
-    this.showTranstion = true;
+    this.showTransition = true;
   },
 };
 </script>
@@ -150,4 +150,5 @@ export default {
 <style scoped>
 @import url("../assets/css/login/generalStyle.css");
 @import url("../assets/css/login/loginStyle.css");
+@import url("../assets/css/transitionsStyle.css")
 </style>

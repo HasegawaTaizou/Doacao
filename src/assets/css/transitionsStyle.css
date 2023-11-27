@@ -8,3 +8,15 @@
   opacity: 0;
   transform: translateX(-10%);
 }
+
+/* NORMAL TRANSITIONS */
+.normal-enter-active,
+.normal-leave-active {
+  transition: opacity 1.5s;
+}
+
+.normal-enter-from,
+.normal-leave-to {
+  opacity: 0;
+}
+

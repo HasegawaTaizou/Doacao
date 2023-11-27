@@ -1,19 +1,32 @@
 <template>
-  <div class="email-container">
-    <h2 class="email__title">CONFIRA SEU E-MAIL</h2>
-    <img src="../img/email-image.png" alt="E-mail image" class="email__image" />
-    <div class="email__texts">
-      <p class="text">
-        Se encontrarmos uma conta que corresponda às informações que você
-        enviou, enviaremos instruções de redefinição de senha para o endereço de
-        e-mail que você acabou de inserir.
-      </p>
-      <p class="text">
-        Se você não receber o e-mail em até 10 minutos, refaça a solicitação.
-      </p>
+  <transition name="fade" appear>
+    <div class="email-container" v-if="this.$store.state.showEmail">
+      <h2 class="email__title">CONFIRA SEU E-MAIL</h2>
+      <img
+        src="../img/email-image.png"
+        alt="E-mail image"
+        class="email__image"
+      />
+      <div class="email__texts">
+        <p class="text">
+          Se encontrarmos uma conta que corresponda às informações que você
+          enviou, enviaremos instruções de redefinição de senha para o endereço
+          de e-mail que você acabou de inserir.
+        </p>
+        <p class="text">
+          Se você não receber o e-mail em até 10 minutos, refaça a solicitação.
+        </p>
+      </div>
+      <router-link class="email__button" to="/login">Entendi</router-link>
     </div>
-    <router-link class="email__button" to="/login">Entendi</router-link>
-  </div>
+  </transition>
+  <transition name="fade" appear>
+    <div
+      v-if="this.$store.state.showEmail"
+      @click="this.$store.commit('SET_SHOW_EMAIL', false)"
+      class="popup-background"
+    ></div>
+  </transition>
 </template>
 
 <script>
@@ -63,5 +76,26 @@ export default {
   color: #fff;
   font-family: "Abel";
   font-size: 1.5rem;
+}
+
+.popup-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  z-index: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

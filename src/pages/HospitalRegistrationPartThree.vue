@@ -1,4 +1,5 @@
 <template>
+  <transition name="normal" appear v-if="showTransition">
   <div class="content">
     <div id="logo-container">
       <img src="../assets/img/logo.png" alt="Website logo" id="logo__logo" />
@@ -85,6 +86,7 @@
       </p>
     </footer>
   </div>
+</transition>
 </template>
 
 <script>
@@ -103,6 +105,7 @@ export default {
     const data = dataFormPartThree(formData);
 
     return {
+      showTransition: false,
       validDate: true,
       ...data,
     };
@@ -116,6 +119,9 @@ export default {
   methods: {
     submitFormHospitalPartThree,
   },
+  mounted() {
+    this.showTransition = true;
+  },
 };
 </script>
 
@@ -126,4 +132,5 @@ export default {
 @import url("../assets/css/hospitalRegistrationPartThree/hospitalRegistrationPartThreeResponsiveStyle.css");
 @import url("../assets/css/hospitalRegistrationPartThree/copyrightStyle.css");
 @import url("../assets/css/hospitalRegistrationPartThree/copyrightResponsiveStyle.css");
+@import url("../assets/css/transitionsStyle.css");
 </style>

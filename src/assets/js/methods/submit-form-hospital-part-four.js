@@ -23,7 +23,7 @@ export default async function submitFormHospitalPartFour() {
 
   if (isFormCorrect && isPasswordTheSame) {
     //To show notification
-    this.$store.state.showNotification = true;
+    this.$store.commit("SET_SHOW_NOTIFICATION", true);
 
     this.$store.commit("updateFormData", this.formData);
 

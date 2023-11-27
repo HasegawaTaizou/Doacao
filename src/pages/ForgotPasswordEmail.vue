@@ -62,7 +62,7 @@
           class="login-ornament-image-5"
         />
       </main>
-      <Email v-if="showNotificationEmail"></Email>
+      <Email v-if="this.$store.state.showEmail"></Email>
     </div>
   </transition>
 </template>
@@ -81,7 +81,6 @@ export default {
   data() {
     return {
       email: "",
-      showNotificationEmail: false,
 
       showTranstion: false,
     };
@@ -92,10 +91,9 @@ export default {
         type: "hospital",
         email: this.email,
       };
-      console.log(data);
       axios.post(`${BASE_URL}/forgot-password`, data).then(() => {
         //show popup email
-        this.showNotificationEmail = true;
+        this.$store.commit("SET_SHOW_EMAIL", true)
       });
     },
   },

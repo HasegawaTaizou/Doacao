@@ -1,55 +1,36 @@
 <template>
-  <div class="content">
-    <div id="logo-container">
-      <img src="../assets/img/logo.png" alt="Website logo" id="logo__logo" />
-      <span id="logo__name">Doe Vida</span>
-    </div>
-    <header>
-      <div class="hospital-registration-parts">
-        <div class="registration-part">
-          <div class="registration-part__radio"></div>
-          <span class="registration-part__text">Dados pessoais</span>
-        </div>
-        <div class="registration-part">
-          <div class="registration-part__radio"></div>
-          <span class="registration-part__text">Endereço</span>
-        </div>
-        <div class="registration-part">
-          <div class="registration-part__radio"></div>
-          <span class="registration-part__text">Local</span>
-        </div>
-        <div class="registration-part">
-          <div class="registration-part__radio radio-active"></div>
-          <span class="registration-part__text">Foto e Senha</span>
-        </div>
+  <transition name="normal" appear v-if="showTransition">
+    <div class="content">
+      <div id="logo-container">
+        <img src="../assets/img/logo.png" alt="Website logo" id="logo__logo" />
+        <span id="logo__name">Doe Vida</span>
       </div>
-    </header>
-    <main>
-      <form class="hospital-registration-part-four-form">
-        <div
-          v-if="loading == false && isSelectedImage == false"
-          class="form__photo-container"
-        >
-          <input
-            type="file"
-            class="photo__label"
-            id="photo"
-            @change="uploadImage"
-          />
-          <label for="photo">
-            <img
-              src="../assets/img/photo-icon.png"
-              alt="Photo Icon"
-              class="photo__icon"
-            />
-          </label>
+      <header>
+        <div class="hospital-registration-parts">
+          <div class="registration-part">
+            <div class="registration-part__radio"></div>
+            <span class="registration-part__text">Dados pessoais</span>
+          </div>
+          <div class="registration-part">
+            <div class="registration-part__radio"></div>
+            <span class="registration-part__text">Endereço</span>
+          </div>
+          <div class="registration-part">
+            <div class="registration-part__radio"></div>
+            <span class="registration-part__text">Local</span>
+          </div>
+          <div class="registration-part">
+            <div class="registration-part__radio radio-active"></div>
+            <span class="registration-part__text">Foto e Senha</span>
+          </div>
         </div>
-        <div
-          v-else-if="loading == false && isSelectedImage == true"
-          class="form__photo-selected-container"
-        >
-          <img :src="downloadURL" alt="Hospital Photo" class="photo__photo" />
-          <div class="form__photo-edit-container">
+      </header>
+      <main>
+        <form class="hospital-registration-part-four-form">
+          <div
+            v-if="loading == false && isSelectedImage == false"
+            class="form__photo-container"
+          >
             <input
               type="file"
               class="photo__label"
@@ -57,113 +38,134 @@
               @change="uploadImage"
             />
             <label for="photo">
-              <i class="fa-solid fa-pen-to-square edit-photo"></i>
+              <img
+                src="../assets/img/photo-icon.png"
+                alt="Photo Icon"
+                class="photo__icon"
+              />
             </label>
           </div>
-        </div>
-        <div
-          v-else-if="loading == true && isSelectedImage == false"
-          class="loading-spinner"
-          style="grid-area: photo;"
-        ></div>
-        <div class="form__password-container">
-          <label for="password" class="password__label">Senha:</label>
-          <input
-            :type="isShowPassword ? 'text' : 'password'"
-            class="password__input"
-            v-model="inputPassword"
-            :class="{ error: v$.inputPassword.$error }"
-            ref="inputPassword"
-            @blur="v$.inputPassword.$touch()"
-            autocomplete="new-password"
-          />
-          <i
-            @mousedown="showPassword"
-            @mouseup="showPassword"
-            :class="{
-              'far fa-eye-slash': isShowPassword,
-              'far fa-eye': !isShowPassword,
-              'error-icon': v$.inputPassword.$error,
-            }"
-          ></i>
-          <div v-if="v$.inputPassword.$error">
-            <p
-              v-if="v$.inputPassword.required && v$.inputPassword.minLength"
-              class="error-text"
-            >
-              Preencha a senha!
-            </p>
-          </div>
-        </div>
-        <div class="form__password-confirmation-container">
-          <label
-            for="password-confirmation"
-            class="password-confirmation__label"
-            >Confirmar senha:</label
+          <div
+            v-else-if="loading == false && isSelectedImage == true"
+            class="form__photo-selected-container"
           >
-          <input
-            :type="isShowPasswordConfirmation ? 'text' : 'password'"
-            class="password-confirmation__input"
-            autocomplete="new-password"
-            v-model="inputPasswordConfirmation"
-            :class="{ error: v$.inputPasswordConfirmation.$error }"
-            ref="inputPasswordConfirmation"
-            @blur="v$.inputPasswordConfirmation.$touch()"
-          />
-          <i
-            @mousedown="showPasswordConfirmation"
-            @mouseup="showPasswordConfirmation"
-            :class="{
-              'far fa-eye-slash': isShowPasswordConfirmation,
-              'far fa-eye': !isShowPasswordConfirmation,
-              'error-icon': v$.inputPasswordConfirmation.$error,
-            }"
-          ></i>
-          <div v-if="v$.inputPasswordConfirmation.$error">
-            <p
-              v-if="
-                v$.inputPasswordConfirmation.required &&
-                v$.inputPasswordConfirmation.minLength
-              "
-              class="error-text"
+            <img :src="downloadURL" alt="Hospital Photo" class="photo__photo" />
+            <div class="form__photo-edit-container">
+              <input
+                type="file"
+                class="photo__label"
+                id="photo"
+                @change="uploadImage"
+              />
+              <label for="photo">
+                <i class="fa-solid fa-pen-to-square edit-photo"></i>
+              </label>
+            </div>
+          </div>
+          <div
+            v-else-if="loading == true && isSelectedImage == false"
+            class="loading-spinner"
+            style="grid-area: photo"
+          ></div>
+          <div class="form__password-container">
+            <label for="password" class="password__label">Senha:</label>
+            <input
+              :type="isShowPassword ? 'text' : 'password'"
+              class="password__input"
+              v-model="inputPassword"
+              :class="{ error: v$.inputPassword.$error }"
+              ref="inputPassword"
+              @blur="v$.inputPassword.$touch()"
+              autocomplete="new-password"
+            />
+            <i
+              @mousedown="showPassword"
+              @mouseup="showPassword"
+              :class="{
+                'far fa-eye-slash': isShowPassword,
+                'far fa-eye': !isShowPassword,
+                'error-icon': v$.inputPassword.$error,
+              }"
+            ></i>
+            <div v-if="v$.inputPassword.$error">
+              <p
+                v-if="v$.inputPassword.required && v$.inputPassword.minLength"
+                class="error-text"
+              >
+                Preencha a senha!
+              </p>
+            </div>
+          </div>
+          <div class="form__password-confirmation-container">
+            <label
+              for="password-confirmation"
+              class="password-confirmation__label"
+              >Confirmar senha:</label
             >
-              Preencha a senha!
-            </p>
+            <input
+              :type="isShowPasswordConfirmation ? 'text' : 'password'"
+              class="password-confirmation__input"
+              autocomplete="new-password"
+              v-model="inputPasswordConfirmation"
+              :class="{ error: v$.inputPasswordConfirmation.$error }"
+              ref="inputPasswordConfirmation"
+              @blur="v$.inputPasswordConfirmation.$touch()"
+            />
+            <i
+              @mousedown="showPasswordConfirmation"
+              @mouseup="showPasswordConfirmation"
+              :class="{
+                'far fa-eye-slash': isShowPasswordConfirmation,
+                'far fa-eye': !isShowPasswordConfirmation,
+                'error-icon': v$.inputPasswordConfirmation.$error,
+              }"
+            ></i>
+            <div v-if="v$.inputPasswordConfirmation.$error">
+              <p
+                v-if="
+                  v$.inputPasswordConfirmation.required &&
+                  v$.inputPasswordConfirmation.minLength
+                "
+                class="error-text"
+              >
+                Preencha a senha!
+              </p>
+            </div>
+            <div v-else-if="!this.$store.state.formData.isPasswordSame">
+              <p class="error-text">A senha deve ser a mesma!</p>
+            </div>
           </div>
-          <div v-else-if="!this.$store.state.formData.isPasswordSame">
-            <p class="error-text">A senha deve ser a mesma!</p>
+          <div class="hospital-registration__buttons">
+            <router-link to="/hospital-registration-part-three">
+              <button type="button" class="button__return">Voltar</button>
+            </router-link>
+            <button
+              type="button"
+              @click="submitFormHospitalPartFour"
+              class="button__send"
+            >
+              Enviar
+            </button>
           </div>
-        </div>
-        <div class="hospital-registration__buttons">
-          <router-link to="/hospital-registration-part-three">
-            <button type="button" class="button__return">Voltar</button>
-          </router-link>
-          <button
-            type="button"
-            @click="submitFormHospitalPartFour"
-            class="button__send"
-          >
-            Enviar
-          </button>
-        </div>
-      </form>
-      <img
-        src="../assets/img/hospital-registration-part-four-image.png"
-        alt="Hospital Registration Image"
-        class="hospital-registration__image"
-      />
-      <!-- <NotificationBar
-        v-if="$store.state.showNotification"
-        :route="'/'"
-        :message="'Cadastro realizado com sucesso! Verifique seu e-mail'"
-      /> -->
-    </main>
-    <footer>
-      <p class="footer__text">
-        Copyright © 2023 | Todos os direitos reservados Doe Vida
-      </p>
-    </footer>
-  </div>
+        </form>
+        <img
+          src="../assets/img/hospital-registration-part-four-image.png"
+          alt="Hospital Registration Image"
+          class="hospital-registration__image"
+        />
+        <NotificationBar
+          v-if="$store.state.showNotification"
+          :route="'/login'"
+          :message="'Cadastro realizado com sucesso! Verifique seu e-mail'"
+        />
+      </main>
+      <footer>
+        <p class="footer__text">
+          Copyright © 2023 | Todos os direitos reservados Doe Vida
+        </p>
+      </footer>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -190,6 +192,7 @@ export default {
     const data = dataFormPartFour(formData);
 
     return {
+      showTransition: false,
       validDate: true,
       ...data,
     };
@@ -207,6 +210,9 @@ export default {
     showPasswordConfirmation,
     isPasswordSame,
   },
+  mounted() {
+    this.showTransition = true;
+  },
 };
 </script>
 
@@ -218,4 +224,5 @@ export default {
 @import url("../assets/css/hospitalRegistrationPartFour/copyrightStyle.css");
 @import url("../assets/css/hospitalRegistrationPartFour/copyrightResponsiveStyle.css");
 @import url("../assets/css/spinner/spinnerStyle.css");
+@import url("../assets/css/transitionsStyle.css");
 </style>
