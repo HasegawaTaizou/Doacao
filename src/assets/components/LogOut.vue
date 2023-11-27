@@ -1,40 +1,37 @@
 <template>
-  <div
-    class="popup-container"
-    :class="{
-      'popup-container': this.$store.state.showLogOut,
-      hidden: !this.$store.state.showLogOut,
-    }"
-  >
-    <div class="popup__introduction">
-      <h2 class="popup__title">Sair?</h2>
-      <img
-        src="../img/book-schedule-reschedule-image.png"
-        alt="PopUp Image"
-        class="popup__image"
-      />
-    </div>
-    <div class="popup__actions">
-      <p class="popup__text">Você sairá do perfil de hemocentro</p>
-      <slot></slot>
-      <div class="popup__buttons">
-        <button class="button__deny" @click="closePopup">
-          <span class="deny__text">Cancelar</span>
-          <i class="fa-regular fa-circle-xmark"></i>
-        </button>
-        <button class="button__accept" @click="logOut">
-          <span class="accept__text">Sair</span>
-          <i class="fa-regular fa-circle-check"></i>
-        </button>
+  <transition name="fade" appear>
+    <div class="popup-container" v-if="this.$store.state.showLogOut">
+      <div class="popup__introduction">
+        <h2 class="popup__title">Sair do perfil.</h2>
+        <img
+          src="../img/logout-image.png"
+          alt="PopUp Image"
+          class="popup__image"
+        />
+      </div>
+      <div class="popup__actions">
+        <p class="popup__text">Tem certeza que quer sair do seu perfil?</p>
+        <slot></slot>
+        <div class="popup__buttons">
+          <button class="button__deny" @click="closePopup">
+            <span class="deny__text">Cancelar</span>
+            <i class="fa-regular fa-circle-xmark"></i>
+          </button>
+          <button class="button__accept" @click="logOut">
+            <span class="accept__text">Sair</span>
+            <i class="fa-regular fa-circle-check"></i>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <div
-    :class="{
-      'popup-background': this.$store.state.showLogOut,
-      hidden: !this.$store.state.showLogOut,
-    }"
-  ></div>
+  </transition>
+  <transition name="fade" appear>
+    <div
+      v-if="this.$store.state.showLogOut"
+      @click="this.$store.commit('SET_SHOW_LOGOUT', false)"
+      class="popup-background"
+    ></div>
+  </transition>
 </template>
 
 <script>
@@ -156,11 +153,6 @@ export default {
   font-size: 1.5rem;
 }
 
-.hidden {
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
-}
-
 .popup-background {
   position: absolute;
   top: 0;
@@ -170,5 +162,15 @@ export default {
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
   z-index: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

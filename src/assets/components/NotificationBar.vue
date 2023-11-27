@@ -61,12 +61,12 @@ export default {
     };
 
     onMounted(() => {
-      store.commit("setShowNotification", true);
+      store.commit("SET_SHOW_NOTIFICATION", true);
       setTimeout(() => {
         progressTransition.value = "width 3s linear";
         progressWidth.value = "0%";
         setTimeout(() => {
-          store.commit("setShowNotification", false);
+          store.commit("SET_SHOW_NOTIFICATION", false);
           redirectToRoute();
         }, 3000);
       }, 100);

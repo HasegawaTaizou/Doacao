@@ -51,7 +51,7 @@ export default new Vuex.Store({
     updateFormData(state, payload) {
       state.formData = { ...state.formData, ...payload };
     },
-    setShowNotification(state, value) {
+    SET_SHOW_NOTIFICATION(state, value) {
       state.showNotification = value;
     },
     setShowPopUp(state, value) {
