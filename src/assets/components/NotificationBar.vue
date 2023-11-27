@@ -42,7 +42,7 @@ export default {
     const topPosition = ref(-100); // Initial position above the viewport
 
     const redirectToRoute = () => {
-      if (props.route && props.route !== 'null') {
+      if (props.route && props.route !== "null") {
         router.push(props.route);
       }
     };
@@ -87,15 +87,16 @@ export default {
 <style>
 .notification {
   background-color: #fff;
-  border-left: 5px solid #0057FF;
+  border-left: 5px solid #0057ff;
   border-radius: 4px;
   min-width: 356px;
   max-width: 356px;
   min-height: 64px;
   text-align: center;
-  position: fixed !important;
-  right: auto;
-  left: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   top: 60px;
@@ -112,7 +113,7 @@ export default {
 }
 
 .fa-circle-exclamation {
-  color: #0057FF;
+  color: #0057ff;
   padding-right: 12px;
   font-size: 1.5rem;
 }
@@ -129,8 +130,8 @@ export default {
 }
 
 .progress-bar {
-  height: 4px;
-  background-color: #0057FF;
+  height: 5px;
+  background-color: #0057ff;
   width: 100%;
   transform-origin: right;
   transition: width 3s linear;

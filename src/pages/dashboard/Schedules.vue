@@ -213,11 +213,17 @@
           </div>
         </div>
       </PopUp>
+      <NotificationBar
+        v-if="$store.state.showNotification"
+        :route="'null'"
+        :message="'Ação realizada com sucesso!'"
+      ></NotificationBar>
     </section>
   </transition>
 </template>
 
 <script>
+import NotificationBar from "../../assets/components/NotificationBar.vue";
 import PopUp from "../../assets/components/PopUp.vue";
 import openPopUp from "../../assets/js/methods/open-pop-up.js";
 
@@ -238,7 +244,7 @@ import websocketConnectionData from "../../assets/js/data/websocket-connection";
 
 export default {
   name: "Schedules",
-  components: { PopUp },
+  components: { PopUp, NotificationBar },
   data() {
     return {
       //Websocket
@@ -380,7 +386,9 @@ export default {
         observation: this.reason,
       };
 
-      axios.put(`${BASE_URL}/schedule-cancel`, scheduleData);
+      axios.put(`${BASE_URL}/schedule-cancel`, scheduleData).then(() => {
+        this.$store.commit("SET_SHOW_NOTIFICATION", true);
+      });
     },
     formatDateTime() {
       this.scheduleDatetimeFormatted = format(
@@ -401,14 +409,18 @@ export default {
         siteId: this.selectedSite,
       };
 
-      axios.put(`${BASE_URL}/schedule-reschedule`, scheduleData);
+      axios.put(`${BASE_URL}/schedule-reschedule`, scheduleData).then(() => {
+        this.$store.commit("SET_SHOW_NOTIFICATION", true);
+      });
     },
     concludeSchedule() {
       const scheduleData = {
         id: this.scheduleId,
       };
 
-      axios.put(`${BASE_URL}/schedule-conclude`, scheduleData);
+      axios.put(`${BASE_URL}/schedule-conclude`, scheduleData).then(() => {
+        this.$store.commit("SET_SHOW_NOTIFICATION", true);
+      });
     },
     getHospitalSites() {
       axios

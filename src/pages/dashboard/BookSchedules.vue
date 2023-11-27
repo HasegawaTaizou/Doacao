@@ -270,11 +270,17 @@
           </div>
         </div>
       </PopUp>
+      <NotificationBar
+        v-if="$store.state.showNotification"
+        :route="'null'"
+        :message="'Ação realizada com sucesso!'"
+      ></NotificationBar>
     </section>
   </transition>
 </template>
 
 <script>
+import NotificationBar from "../../assets/components/NotificationBar.vue";
 import PopUp from "../../assets/components/PopUp.vue";
 import openPopUp from "../../assets/js/methods/open-pop-up.js";
 import { format } from "date-fns";
@@ -294,7 +300,7 @@ import websocketConnectionData from "../../assets/js/data/websocket-connection";
 
 export default {
   name: "BookSchedules",
-  components: { PopUp },
+  components: { PopUp, NotificationBar },
   data() {
     return {
       //Websocket
@@ -371,6 +377,7 @@ export default {
         .post(`${BASE_URL}/book-schedules`, this.tableBookSchedules)
         .then(() => {
           this.clearSchedules();
+          this.$store.commit("SET_SHOW_NOTIFICATION", true);
         });
     },
     removeSchedule(index) {
@@ -446,7 +453,11 @@ export default {
         siteId: this.selectedSite,
       };
 
-      axios.put(`${BASE_URL}/update-book-schedule`, updateBookScheduleData);
+      axios
+        .put(`${BASE_URL}/update-book-schedule`, updateBookScheduleData)
+        .then(() => {
+          this.$store.commit("SET_SHOW_NOTIFICATION", true);
+        });
     },
     getBookSchedules() {
       axios
@@ -460,7 +471,11 @@ export default {
         });
     },
     deleteBookSchedule() {
-      axios.delete(`${BASE_URL}/delete-book-schedule/${this.selectedId}`);
+      axios
+        .delete(`${BASE_URL}/delete-book-schedule/${this.selectedId}`)
+        .then(() => {
+          this.$store.commit("SET_SHOW_NOTIFICATION", true);
+        });
     },
     openPopUp,
   },

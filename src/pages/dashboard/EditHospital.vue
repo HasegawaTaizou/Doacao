@@ -283,7 +283,7 @@ export default {
       axios.put(`${BASE_URL}/hospital-update`, updateHospitalData).then(() => {
         localStorage.setItem("hospitalPhoto", this.downloadURL);
         localStorage.setItem("hospitalName", this.hospitalData.name);
-        location.reload();
+        this.$router.push('/dashboard/settings')
       });
     },
   },

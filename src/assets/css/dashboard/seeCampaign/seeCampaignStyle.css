@@ -79,6 +79,7 @@ p {
 .campaign__description {
   grid-area: description;
   font-size: 1.5rem;
+  max-width: 162px;
 }
 
 .campaign__image {

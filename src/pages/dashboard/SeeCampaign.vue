@@ -129,11 +129,17 @@
           </div>
         </PopUp>
       </div>
+      <NotificationBar
+        v-if="$store.state.showNotification"
+        :route="'null'"
+        :message="'Ação realizada com sucesso!'"
+      ></NotificationBar>
     </section>
   </transition>
 </template>
 
 <script>
+import NotificationBar from "../../assets/components/NotificationBar.vue";
 import PopUp from "../../assets/components/PopUp.vue";
 import openPopUp from "../../assets/js/methods/open-pop-up";
 
@@ -171,7 +177,7 @@ export default {
     };
   },
   name: "SeeCampaign",
-  components: { PopUp, Swiper, SwiperSlide },
+  components: { PopUp, NotificationBar, Swiper, SwiperSlide },
   data() {
     return {
       //Websocket
@@ -210,6 +216,7 @@ export default {
     uploadImage,
     updateCampaignsData() {
       updateDataFromWebsocket(this.campaigns, "campaigns", "replace");
+      console.log(this.campaigns);
     },
     selectCampaign(index) {
       if (index == -1) {
@@ -261,6 +268,7 @@ export default {
 
       axios.put(`${BASE_URL}/update-campaign`, campaignData).then(() => {
         this.selectCampaign(-1);
+        this.$store.commit("SET_SHOW_NOTIFICATION", true);
       });
     },
     formatDateTime() {
@@ -287,6 +295,8 @@ export default {
         .delete(`${BASE_URL}/delete-campaign/${this.selectedId}`)
         .then(() => {
           this.selectCampaign(-1);
+          this.$store.commit("SET_SHOW_NOTIFICATION", true);
+          this.updateCampaignsData()
         });
     },
   },
