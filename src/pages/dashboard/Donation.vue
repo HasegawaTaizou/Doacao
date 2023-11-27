@@ -764,7 +764,6 @@ export default {
   },
   created() {
     this.connection = connectWebsocket();
-    // setupWebsocketEventListener(this.updateGraphsData);
   },
 };
 </script>

@@ -92,7 +92,8 @@ export default {
         type: "hospital",
         email: this.email,
       };
-      axios.post(`${BASE_URL}/api/v1/forgot-password`, data).then(() => {
+      console.log(data);
+      axios.post(`${BASE_URL}/forgot-password`, data).then(() => {
         //show popup email
         this.showNotificationEmail = true;
       });

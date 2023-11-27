@@ -1,9 +1,6 @@
 <template>
   <transition name="fade">
     <section id="redefine-password-dashboard">
-      <div class="redefine-password__header">
-        <h1 class="redefine-password__title">NOVA SENHA</h1>
-      </div>
       <div class="redefine-password__content">
         <div class="redefine-password-introduction">
           <h2 class="redefine-password__title">Nova senha</h2>
@@ -88,9 +85,6 @@
               </div>
             </div>
             <div class="redefine-password__buttons">
-              <router-link :to="'/dashboard/settings/'">
-                <button class="button__cancel">Cancelar</button>
-              </router-link>
               <button
                 @click="openPopUp('change')"
                 class="button__redefine-password"
@@ -106,7 +100,7 @@
   <PopUp
     v-if="selectedComponent === 'change'"
     :title="'Alterar senha?'"
-    :message="'A senha será alterada e não terá como desfazer esta ação.'"
+    :message="'Tenha certeza de que a senha que colocou é a desejada.'"
     :acceptFunction="changePassword"
     :image="'/src/assets/img/book-schedule-save-image.png'"
   >
@@ -121,6 +115,7 @@ import isPasswordSame from "../assets/js/methods/input/is-password-same";
 
 import { BASE_URL } from "../assets/js/config";
 import axios from "axios";
+import PopUp from "../assets/components/PopUp.vue";
 
 export default {
   name: "ForgotPasswordNewPassword",
@@ -134,7 +129,12 @@ export default {
 
       inputPassword: "",
       inputPasswordConfirmation: "",
+
+      selectedComponent: "",
     };
+  },
+  components: {
+    PopUp,
   },
   methods: {
     showPassword,
@@ -145,24 +145,27 @@ export default {
       if (
         this.isPasswordSame(this.inputPassword, this.inputPasswordConfirmation)
       ) {
+        let type = "";
+
+        if (this.$route.params.token.startsWith("h")) {
+          type = "hospital";
+        } else if (this.$route.params.token.startsWith("u")) {
+          type = "user";
+        }
+
+        const modifiedToken = this.$route.params.token.substring(1);
+
         const updatePasswordData = {
-          id: localStorage.getItem("hospitalId"),
+          type: type,
           password: this.inputPassword,
+          token: modifiedToken,
         };
-        axios.put(`${BASE_URL}/hospital/redefine-password`, updatePasswordData);
+
+        axios.post(`${BASE_URL}/reset-password`, updatePasswordData);
       } else {
         this.isPasswordTheSame = false;
       }
     },
-  },
-  mounted() {
-    if (this.$route.params.token.startsWith("h")) {
-      console.log(this.$route.params.token);
-      console.log("update hospital");
-    } else if (this.$route.params.token.startsWith("u")) {
-      console.log(this.$route.params.token);
-      console.log("update user");
-    }
   },
 };
 </script>
