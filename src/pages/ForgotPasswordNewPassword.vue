@@ -110,11 +110,12 @@
 <script>
 import showPassword from "../assets/js/methods/input/show-password.js";
 import showPasswordConfirmation from "../assets/js/methods/input/show-password-confirmation.js";
-import openPopUp from "../assets/js/methods/open-pop-up.js";
 import isPasswordSame from "../assets/js/methods/input/is-password-same";
 
 import { BASE_URL } from "../assets/js/config";
 import axios from "axios";
+
+import openPopUp from "../assets/js/methods/open-pop-up.js";
 import PopUp from "../assets/components/PopUp.vue";
 
 export default {
@@ -171,5 +172,5 @@ export default {
 </script>
 
 <style scoped>
-@import url("../assets/css/dashboard/redefinePassword/redefinePasswordStyle.css");
+@import url("../assets/css/dashboard/redefinePasswordOut/redefinePasswordOutStyle.css");
 </style>
