@@ -139,7 +139,7 @@
                 class="table__content"
               >
                 <td class="content__date">
-                  {{ `${schedule.id} - ${schedule.date}` }}
+                  {{ schedule.date }}
                 </td>
                 <td class="content__hour">{{ schedule.hour }}</td>
                 <td class="content__site">{{ schedule.site }}</td>
@@ -457,7 +457,6 @@ export default {
         )
         .then((response) => {
           this.bookSchedules = response.data.bookSchedules;
-          console.log(this.bookSchedules);
         });
     },
     deleteBookSchedule() {

@@ -1,42 +1,38 @@
 <template>
-  <div
-    class="popup-container"
-    :class="{
-      'popup-container': this.$store.state.showPopUp,
-      hidden: !this.$store.state.showPopUp,
-    }"
-  >
-    <div class="popup__introduction">
-      <h2 class="popup__title">{{ title }}</h2>
-      <img
-        :src="image"
-        alt="PopUp Image"
-        class="popup__image"
-      />
-    </div>
-    <div class="popup__actions">
-      <p class="popup__text">
-        {{ message }}
-      </p>
-      <slot></slot>
-      <div class="popup__buttons">
-        <button class="button__deny" @click="closePopup">
-          <span class="deny__text">Cancelar</span>
-          <i class="fa-regular fa-circle-xmark"></i>
-        </button>
-        <button class="button__accept" @click="executeAcceptAction">
-          <span class="accept__text">Confirmar</span>
-          <i class="fa-regular fa-circle-check"></i>
-        </button>
+  <transition name="fade" appear>
+    <div
+      v-if="this.$store.state.showPopUp"
+      class="popup-container"
+    >
+      <div class="popup__introduction">
+        <h2 class="popup__title">{{ title }}</h2>
+        <img :src="image" alt="PopUp Image" class="popup__image" />
+      </div>
+      <div class="popup__actions">
+        <p class="popup__text">
+          {{ message }}
+        </p>
+        <slot></slot>
+        <div class="popup__buttons">
+          <button class="button__deny" @click="closePopup">
+            <span class="deny__text">Cancelar</span>
+            <i class="fa-regular fa-circle-xmark"></i>
+          </button>
+          <button class="button__accept" @click="executeAcceptAction">
+            <span class="accept__text">Confirmar</span>
+            <i class="fa-regular fa-circle-check"></i>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <div
-    :class="{
-      'popup-background': this.$store.state.showPopUp,
-      hidden: !this.$store.state.showPopUp,
-    }"
-  ></div>
+  </transition>
+  <transition name="fade" appear>
+    <div
+      class="popup-background"
+      v-if="this.$store.state.showPopUp"
+      @click="this.$store.commit('setShowPopUp', false)"
+    ></div>
+  </transition>
 </template>
 
 <script>
@@ -173,11 +169,6 @@ export default {
   font-size: 1.5rem;
 }
 
-.hidden {
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
-}
-
 .popup-background {
   position: absolute;
   top: 0;
@@ -188,5 +179,14 @@ export default {
   backdrop-filter: blur(8px);
   z-index: 1;
 }
-</style>
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
