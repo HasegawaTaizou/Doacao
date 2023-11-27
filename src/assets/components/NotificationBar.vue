@@ -1,13 +1,18 @@
 <template>
-  <div :class="{ 'notification': notificationStatus, 'hidden': !notificationStatus }">
-    <div class="notification-informations">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <p class="notification__text">{{ message }}</p>
+  <transition name="fade" appear @before-enter="beforeEnter" @enter="enter">
+    <div class="notification" v-if="$store.state.showNotification">
+      <div class="notification-informations">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p class="notification__text">{{ message }}</p>
+      </div>
+      <div class="progress-bar-container">
+        <div
+          class="progress-bar"
+          :style="{ width: progressWidth, transition: progressTransition }"
+        ></div>
+      </div>
     </div>
-    <div class="progress-bar-container">
-      <div class="progress-bar" :style="{ width: progressWidth, transition: progressTransition }"></div>
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -34,11 +39,25 @@ export default {
 
     const progressWidth = ref("100%");
     const progressTransition = ref("");
+    const topPosition = ref(-100); // Initial position above the viewport
 
     const redirectToRoute = () => {
-      if (props.route) {
+      if (props.route && props.route !== 'null') {
         router.push(props.route);
       }
+    };
+
+    const beforeEnter = (el) => {
+      el.style.top = `${topPosition.value}px`;
+    };
+
+    const enter = (el, done) => {
+      // Use Vue transition hooks for progressive transition
+      topPosition.value = 60; // Final position at 60px from the top
+      el.offsetHeight; // Trigger reflow
+      el.style.transition = "top 0.3s ease-in-out";
+      el.style.top = `${topPosition.value}px`;
+      done();
     };
 
     onMounted(() => {
@@ -57,6 +76,9 @@ export default {
       notificationStatus,
       progressWidth,
       progressTransition,
+      topPosition,
+      beforeEnter,
+      enter,
     };
   },
 };
@@ -64,8 +86,8 @@ export default {
 
 <style>
 .notification {
-  background-color: #e7e7e7;
-  border-left: 5px solid #408d7b;
+  background-color: #fff;
+  border-left: 5px solid #0057FF;
   border-radius: 4px;
   min-width: 356px;
   max-width: 356px;
@@ -78,12 +100,7 @@ export default {
   flex-direction: column;
   top: 60px;
   gap: 12px;
-  transition: opacity 0.5s ease-out;
-}
-
-.hidden {
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
 }
 
 .notification-informations {
@@ -95,7 +112,7 @@ export default {
 }
 
 .fa-circle-exclamation {
-  color: #408d7b;
+  color: #0057FF;
   padding-right: 12px;
   font-size: 1.5rem;
 }
@@ -103,6 +120,7 @@ export default {
 .notification__text {
   font-size: 1.5rem !important;
   padding-right: 12px;
+  color: black;
 }
 
 .progress-bar-container {
@@ -112,9 +130,21 @@ export default {
 
 .progress-bar {
   height: 4px;
-  background-color: #6ccdb6;
+  background-color: #0057FF;
   width: 100%;
   transform-origin: right;
   transition: width 3s linear;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s, transform 0.3s, top 0.3s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(80%);
+  top: 60px; /* Set the final position when leaving */
 }
 </style>
