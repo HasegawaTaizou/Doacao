@@ -50,7 +50,7 @@ export default new Vuex.Store({
     showEmail: false,
 
     //Password Reset PopUp
-    showPasswordReset: true,
+    showPasswordReset: false,
   },
   mutations: {
     updateFormData(state, payload) {

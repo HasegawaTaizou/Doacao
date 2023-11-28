@@ -92,7 +92,7 @@
           </div>
         </div>
       </div>
-      <PasswordReset></PasswordReset>
+      <PasswordReset v-if="this.$store.state.showPasswordReset"></PasswordReset>
     </section>
   </transition>
 </template>
@@ -154,7 +154,7 @@ export default {
         axios
           .post(`${BASE_URL}/reset-password`, updatePasswordData)
           .then(() => {
-            this.showPopUp = true;
+            this.$store.commit("SET_SHOW_PASSWORD_RESET", true);
           });
       } else {
         this.isPasswordTheSame = false;
