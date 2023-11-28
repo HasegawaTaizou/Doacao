@@ -156,7 +156,7 @@
         <NotificationBar
           v-if="$store.state.showNotification"
           :route="'/login'"
-          :message="'Cadastro realizado com sucesso! Verifique seu e-mail'"
+          :message="'Cadastro realizado com sucesso!'"
         />
       </main>
       <footer>

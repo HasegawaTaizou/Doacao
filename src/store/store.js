@@ -48,6 +48,9 @@ export default new Vuex.Store({
 
     //Email PopUp
     showEmail: false,
+
+    //Password Reset PopUp
+    showPasswordReset: true,
   },
   mutations: {
     updateFormData(state, payload) {
@@ -79,6 +82,9 @@ export default new Vuex.Store({
     },
     SET_SHOW_EMAIL(state, value) {
       state.showEmail = value;
+    },
+    SET_SHOW_PASSWORD_RESET(state, value) {
+      state.showPasswordReset = value;
     },
   },
 });

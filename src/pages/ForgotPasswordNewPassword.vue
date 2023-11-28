@@ -5,7 +5,7 @@
         <div class="redefine-password-introduction">
           <h2 class="redefine-password__title">Nova senha</h2>
           <img
-            src="../assets/img/redefine-password-image.png"
+            src="../assets/img/new-password-image.png"
             alt="Redefine Password Image"
             class="redefine-password__image"
           />
@@ -85,26 +85,16 @@
               </div>
             </div>
             <div class="redefine-password__buttons">
-              <button
-                @click="openPopUp('change')"
-                class="button__redefine-password"
-              >
+              <button @click="changePassword" class="button__redefine-password">
                 Redefinir senha
               </button>
             </div>
           </div>
         </div>
       </div>
+      <PasswordReset></PasswordReset>
     </section>
   </transition>
-  <PopUp
-    v-if="selectedComponent === 'change'"
-    :title="'Alterar senha?'"
-    :message="'Tenha certeza de que a senha que colocou é a desejada.'"
-    :acceptFunction="changePassword"
-    :image="'/src/assets/img/book-schedule-save-image.png'"
-  >
-  </PopUp>
 </template>
 
 <script>
@@ -115,8 +105,7 @@ import isPasswordSame from "../assets/js/methods/input/is-password-same";
 import { BASE_URL } from "../assets/js/config";
 import axios from "axios";
 
-import openPopUp from "../assets/js/methods/open-pop-up.js";
-import PopUp from "../assets/components/PopUp.vue";
+import PasswordReset from "../assets/components/PasswordReset.vue";
 
 export default {
   name: "ForgotPasswordNewPassword",
@@ -131,16 +120,15 @@ export default {
       inputPassword: "",
       inputPasswordConfirmation: "",
 
-      selectedComponent: "",
+      showPopUp: false,
     };
   },
   components: {
-    PopUp,
+    PasswordReset,
   },
   methods: {
     showPassword,
     showPasswordConfirmation,
-    openPopUp,
     isPasswordSame,
     changePassword() {
       if (
@@ -162,7 +150,12 @@ export default {
           token: modifiedToken,
         };
 
-        axios.post(`${BASE_URL}/reset-password`, updatePasswordData);
+        console.log(updatePasswordData);
+        axios
+          .post(`${BASE_URL}/reset-password`, updatePasswordData)
+          .then(() => {
+            this.showPopUp = true;
+          });
       } else {
         this.isPasswordTheSame = false;
       }
