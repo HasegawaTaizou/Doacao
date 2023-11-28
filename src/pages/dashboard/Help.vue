@@ -27,8 +27,9 @@
         <div class="help__contact">
           <h2 class="contact__title">Entre em Contato</h2>
           <p class="contact__text">
-            Se você tiver alguma dúvida, preocupação ou precisar de assistência,
-            nossa equipe de atendimento ao doador está disponível para ajudá-lo.
+            <b>Instruções Gerais:</b> Se precisar de ajuda adicional ou tiver
+            perguntas, não hesite em entrar em contato. Estamos disponíveis para
+            ajudar da melhor forma possível.
           </p>
           <div class="help__contacts">
             <div class="contact">
@@ -40,6 +41,12 @@
               <span class="contact__text">doevida@gmail.com</span>
             </div>
           </div>
+          <p class="contact__text">
+            Horário de Atendimento: Estamos disponíveis para atendê-lo de
+            segunda a sexta-feira, das 9h às 18h. Fique à vontade para nos ligar
+            durante esse período ou nos enviar um e-mail a qualquer momento.
+            Faremos o nosso melhor para responder o mais rápido possível.
+          </p>
         </div>
       </div>
     </section>
@@ -54,7 +61,7 @@ export default {
       //ProfileData
       hospitalName: "",
       hospitalPhoto: "",
-      
+
       showTransition: false,
     };
   },
