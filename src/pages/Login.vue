@@ -98,6 +98,11 @@
           class="login-ornament-image-5"
         />
       </main>
+      <NotificationErrorBar
+        v-if="$store.state.showNotification"
+        :route="'null'"
+        :message="'Usuário ou senha incorreto(s)!'"
+      ></NotificationErrorBar>
     </div>
   </transition>
 </template>
@@ -107,6 +112,8 @@ import showPassword from "../assets/js/methods/input/show-password.js";
 
 import axios from "axios";
 import { BASE_URL } from "../assets/js/config";
+
+import NotificationErrorBar from "../assets/components/NotificationErrorBar.vue";
 
 export default {
   name: "Login",
@@ -120,6 +127,7 @@ export default {
       showTransition: false,
     };
   },
+  components: { NotificationErrorBar },
   methods: {
     showPassword,
     login() {
@@ -127,18 +135,28 @@ export default {
         email: this.email,
         password: this.password,
       };
-      axios.post(`${BASE_URL}/hospital-login`, loginData).then((response) => {
-        const hospitalData = response.data.hospitalData;
-        this.$store.commit("SET_HOSPITAL_ID", hospitalData.id);
-        this.$store.commit("SET_HOSPITAL_NAME", hospitalData.name);
-        this.$store.commit("SET_HOSPITAL_PHOTO", hospitalData.photo);
+      axios
+        .post(`${BASE_URL}/hospital-login`, loginData)
+        .then((response) => {
+          const hospitalData = response.data.hospitalData;
+          this.$store.commit("SET_HOSPITAL_ID", hospitalData.id);
+          this.$store.commit("SET_HOSPITAL_NAME", hospitalData.name);
+          this.$store.commit("SET_HOSPITAL_PHOTO", hospitalData.photo);
 
-        localStorage.setItem("hospitalId", hospitalData.id);
-        localStorage.setItem("hospitalName", hospitalData.name);
-        localStorage.setItem("hospitalPhoto", hospitalData.photo);
-        localStorage.setItem("token", hospitalData.token);
-        this.$router.push("/dashboard");
-      });
+          localStorage.setItem("hospitalId", hospitalData.id);
+          localStorage.setItem("hospitalName", hospitalData.name);
+          localStorage.setItem("hospitalPhoto", hospitalData.photo);
+          localStorage.setItem("token", hospitalData.token);
+          this.$router.push("/dashboard");
+        })
+        .catch((error) => {
+          if (
+            error.response.data.status == 404 ||
+            error.response.data.status == 400
+          ) {
+            this.$store.commit("SET_SHOW_NOTIFICATION", true);
+          }
+        });
     },
   },
   mounted() {
@@ -150,5 +168,5 @@ export default {
 <style scoped>
 @import url("../assets/css/login/generalStyle.css");
 @import url("../assets/css/login/loginStyle.css");
-@import url("../assets/css/transitionsStyle.css")
+@import url("../assets/css/transitionsStyle.css");
 </style>

@@ -35,7 +35,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .email-container {
   display: flex;
   flex-direction: column;

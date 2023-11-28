@@ -1,13 +1,13 @@
 <template>
   <transition name="fade" appear @before-enter="beforeEnter" @enter="enter">
-    <div class="notification" v-if="$store.state.showNotification">
-      <div class="notification-informations">
+    <div class="notification-error" v-if="$store.state.showNotification">
+      <div class="notification-error-informations">
         <i class="fa-solid fa-circle-exclamation"></i>
-        <p class="notification__text">{{ message }}</p>
+        <p class="notification-error__text">{{ message }}</p>
       </div>
       <div class="progress-bar-container">
         <div
-          class="progress-bar"
+          class="progress-error-bar"
           :style="{ width: progressWidth, transition: progressTransition }"
         ></div>
       </div>
@@ -85,9 +85,9 @@ export default {
 </script>
 
 <style scoped>
-.notification {
+.notification-error {
   background-color: #fff;
-  border-left: 5px solid #0057ff;
+  border-left: 5px solid #ed4e3b;
   border-radius: 4px;
   min-width: 356px;
   max-width: 356px;
@@ -104,7 +104,7 @@ export default {
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
 }
 
-.notification-informations {
+.notification-error-informations {
   display: flex;
   width: 100%;
   padding-left: 12px;
@@ -113,12 +113,12 @@ export default {
 }
 
 .fa-circle-exclamation {
-  color: #0057ff;
+  color: #ed4e3b !important;
   padding-right: 12px;
   font-size: 1.5rem;
 }
 
-.notification__text {
+.notification-error__text {
   font-size: 1.5rem !important;
   padding-right: 12px;
   color: black;
@@ -129,9 +129,9 @@ export default {
   overflow: hidden;
 }
 
-.progress-bar {
+.progress-error-bar {
   height: 5px;
-  background-color: #0057ff;
+  background-color: #ed4e3b !important;
   width: 100%;
   transform-origin: right;
   transition: width 3s linear;

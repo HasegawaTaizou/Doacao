@@ -216,7 +216,6 @@ export default {
     uploadImage,
     updateCampaignsData() {
       updateDataFromWebsocket(this.campaigns, "campaigns", "replace");
-      console.log(this.campaigns);
     },
     selectCampaign(index) {
       if (index == -1) {

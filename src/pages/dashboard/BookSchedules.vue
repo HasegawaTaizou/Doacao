@@ -418,8 +418,6 @@ export default {
       this.selectedHour = hour;
       this.selectedSite = siteId;
 
-      console.log("id no selectBookSchedule: ", this.selectedId);
-
       this.formattedDateTime();
     },
     updateSchedule() {

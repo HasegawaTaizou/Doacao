@@ -150,7 +150,6 @@ export default {
           token: modifiedToken,
         };
 
-        console.log(updatePasswordData);
         axios
           .post(`${BASE_URL}/reset-password`, updatePasswordData)
           .then(() => {
