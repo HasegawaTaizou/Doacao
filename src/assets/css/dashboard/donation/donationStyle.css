@@ -53,7 +53,6 @@ p {
 
 .donation__graphs {
   max-width: 1800px;
-  max-height: 70vh;
   overflow-y: scroll;
   display: grid;
   grid-template-areas:
@@ -260,4 +259,39 @@ p {
   background-color: white;
   color: #638bff;
   transition: all 0.5s;
+}
+
+.donation__add-closed {
+  cursor: pointer;
+  background-color: #638bff;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 1600px;
+  padding: 24px;
+  border-radius: 10px;
+  margin-bottom: 32px;
+  margin-right: 24px;
+}
+
+.donation__add-close__text {
+  color: white;
+  font-size: 2rem;
+}
+
+.elevate-enter-active,
+.elevate-leave-active {
+  transition: opacity 1.5s, transform 0.8s;
+}
+
+.elevate-leave-to {
+  opacity: 0;
+  transform: translateY(50%);
+}
+
+.elevate-enter-from {
+  opacity: 0;
+  transform: translateY(0%);
 }

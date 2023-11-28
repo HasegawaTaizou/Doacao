@@ -138,68 +138,91 @@
             <canvas id="line-graph"></canvas>
           </div>
         </div>
-        <div class="donation__add-container">
-          <div class="add__introduction">
-            <img
-              src="../../assets/img/add-introduction-image.png"
-              alt="Add introduction Image"
-              class="add-introduction__image"
-            />
-            <p class="add-introduction__text">
-              Teve novas doações? Registre aqui e atualize seu banco de doação.
+        <transition name="elevate">
+          <div
+            class="donation__add-container"
+            v-show="showAddActions"
+            @click="showAddActions = false"
+          >
+            <div class="add__introduction">
+              <img
+                src="../../assets/img/add-introduction-image.png"
+                alt="Add introduction Image"
+                class="add-introduction__image"
+              />
+              <p class="add-introduction__text">
+                Teve novas doações? Registre aqui e atualize seu banco de
+                doação.
+              </p>
+            </div>
+            <div class="add-actions">
+              <div class="action__year">
+                <label for="year" class="year__label">Ano:</label>
+                <select name="year" v-model="year" class="year__select">
+                  <option value="" selected disabled class="year__option">
+                    Selecione o ano
+                  </option>
+                  <option
+                    class="year__option"
+                    v-for="(donationYear, index) in this.years"
+                    :key="index"
+                    :value="donationYear.year"
+                  >
+                    {{ donationYear.year }}
+                  </option>
+                </select>
+              </div>
+              <div class="action__blood-type">
+                <label for="blood-type" class="blood-type__label"
+                  >Tipo sanguíneo:</label
+                >
+                <select
+                  name="blood-type"
+                  class="blood_type__select"
+                  v-model="bloodType"
+                >
+                  <option value="" selected disabled class="blood-type__option">
+                    Tipo sanguíneo
+                  </option>
+                  <option value="O-" class="blood-type__option">O-</option>
+                  <option value="O+" class="blood-type__option">O+</option>
+                  <option value="A-" class="blood-type__option">A-</option>
+                  <option value="A+" class="blood-type__option">A+</option>
+                  <option value="B-" class="blood-type__option">B-</option>
+                  <option value="B+" class="blood-type__option">B+</option>
+                  <option value="AB-" class="blood-type__option">AB-</option>
+                  <option value="AB+" class="blood-type__option">AB+</option>
+                </select>
+              </div>
+              <div class="action__quantity">
+                <label for="quantity" class="quantity__label"
+                  >Quantidade (ML):</label
+                >
+                <input
+                  v-model="quantity"
+                  type="number"
+                  class="quantity__input"
+                />
+              </div>
+
+              <button @click="updateDonationBank" class="action__button">
+                Salvar
+              </button>
+            </div>
+          </div>
+        </transition>
+        <transition name="elevate">
+          <div
+            class="donation__add-closed"
+            v-show="!showAddActions"
+            @click="showAddActions = true"
+          >
+            <p class="donation__add-close__text">Teve novas doações?</p>
+            <p class="donation__add-close__text">
+              Clique aqui e atualize seu banco de doação.
             </p>
           </div>
-          <div class="add-actions">
-            <div class="action__year">
-              <label for="year" class="year__label">Ano:</label>
-              <select name="year" v-model="year" class="year__select">
-                <option value="" selected disabled class="year__option">
-                  Selecione o ano
-                </option>
-                <option
-                  class="year__option"
-                  v-for="(donationYear, index) in this.years"
-                  :key="index"
-                  :value="donationYear.year"
-                >
-                  {{ donationYear.year }}
-                </option>
-              </select>
-            </div>
-            <div class="action__blood-type">
-              <label for="blood-type" class="blood-type__label"
-                >Tipo sanguíneo:</label
-              >
-              <select
-                name="blood-type"
-                class="blood_type__select"
-                v-model="bloodType"
-              >
-                <option value="" selected disabled class="blood-type__option">
-                  Tipo sanguíneo
-                </option>
-                <option value="O-" class="blood-type__option">O-</option>
-                <option value="O+" class="blood-type__option">O+</option>
-                <option value="A-" class="blood-type__option">A-</option>
-                <option value="A+" class="blood-type__option">A+</option>
-                <option value="B-" class="blood-type__option">B-</option>
-                <option value="B+" class="blood-type__option">B+</option>
-                <option value="AB-" class="blood-type__option">AB-</option>
-                <option value="AB+" class="blood-type__option">AB+</option>
-              </select>
-            </div>
-            <div class="action__quantity">
-              <label for="quantity" class="quantity__label"
-                >Quantidade (ML):</label
-              >
-              <input v-model="quantity" type="number" class="quantity__input" />
-            </div>
-
-            <button @click="updateDonationBank" class="action__button">
-              Salvar
-            </button>
-          </div>
-        </div>
+        </transition>
       </div>
     </section>
   </transition>
@@ -271,6 +294,7 @@ export default {
       bloodType: "",
       quantity: 0,
       year: "",
+      showAddActions: true,
     };
   },
   methods: {
