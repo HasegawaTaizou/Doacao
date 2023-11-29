@@ -139,10 +139,13 @@
           </div>
         </div>
         <transition name="elevate">
-          <div
+          <!-- <div
             class="donation__add-container"
             v-show="showAddActions"
             @click="showAddActions = false"
+          > -->
+          <div
+            class="donation__add-container"
           >
             <div class="add__introduction">
               <img

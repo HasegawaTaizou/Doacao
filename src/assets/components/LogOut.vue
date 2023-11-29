@@ -45,6 +45,7 @@ export default {
       localStorage.removeItem("token");
 
       this.$router.push("/");
+      this.$store.commit('SET_SHOW_LOGOUT', false)
     },
     closePopup() {
       this.$store.commit("SET_SHOW_LOGOUT", false);
