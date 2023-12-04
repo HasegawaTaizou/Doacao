@@ -194,6 +194,8 @@
     :image="'/src/assets/img/edit-profile-image.png'"
   >
   </PopUp>
+  <!-- http://localhost:5173/src/assets/img/edit-profile-image.png -->
+  <!-- http://localhost:5173/dist/assets/edit-profile-image.png -->
 </template>
 
 <script>
@@ -283,7 +285,7 @@ export default {
       axios.put(`${BASE_URL}/hospital-update`, updateHospitalData).then(() => {
         localStorage.setItem("hospitalPhoto", this.downloadURL);
         localStorage.setItem("hospitalName", this.hospitalData.name);
-        this.$router.push('/dashboard/settings')
+        this.$router.push("/dashboard/settings");
       });
     },
   },
