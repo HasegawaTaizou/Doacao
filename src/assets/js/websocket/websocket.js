@@ -3,6 +3,7 @@ let parsedData = {};
 
 const connectWebsocket = function () {
   connection = new WebSocket("ws://20.206.241.108:8080");
+  // connection = new WebSocket("ws://localhost:8080");
 
   connection.onopen = (event) => {
     // console.log(event);

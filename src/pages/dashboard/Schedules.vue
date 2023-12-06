@@ -302,6 +302,8 @@ export default {
           )
           .then((response) => {
             this.schedules = response.data.schedules;
+          }).catch(() => {
+            this.schedules = [];
           });
       } else {
         this.getSchedules();
