@@ -1,6 +1,6 @@
 <template>
-  <transition name="fade" appear>
-    <div v-if="showTranstion" id="forgot-password">
+  <transition name="fade" appear v-if="showTranstion">
+    <div id="forgot-password">
       <img
         src="../assets/img/login-ornament-6.png"
         alt="Login Ornament Image 6"
@@ -63,6 +63,11 @@
         />
       </main>
       <Email v-if="this.$store.state.showEmail"></Email>
+      <NotificationErrorBar
+        v-if="$store.state.showNotification"
+        :route="'null'"
+        :message="'Email não exite!'"
+      ></NotificationErrorBar>
     </div>
   </transition>
 </template>
@@ -73,10 +78,12 @@ import { BASE_URL } from "../assets/js/config";
 
 import Email from "../assets/components/Email.vue";
 
+import NotificationErrorBar from "../assets/components/NotificationErrorBar.vue";
 export default {
   name: "ForgotPasswordEmail",
   components: {
     Email,
+    NotificationErrorBar,
   },
   data() {
     return {
@@ -91,10 +98,15 @@ export default {
         type: "hospital",
         email: this.email,
       };
-      axios.post(`${BASE_URL}/forgot-password`, data).then(() => {
-        //show popup email
-        this.$store.commit("SET_SHOW_EMAIL", true)
-      });
+      axios
+        .post(`${BASE_URL}/forgot-password`, data)
+        .then(() => {
+          //show popup email
+          this.$store.commit("SET_SHOW_EMAIL", true);
+        })
+        .catch(() => {
+          this.$store.commit("SET_SHOW_NOTIFICATION", true);
+        });
     },
   },
   mounted() {

@@ -98,11 +98,11 @@
           class="login-ornament-image-5"
         />
       </main>
-      <NotificationErrorBar
-        v-if="$store.state.showNotification"
+      <NotificationLogin
+        v-if="$store.state.showLoginIncorrect"
         :route="'null'"
         :message="'Usuário ou senha incorreto(s)!'"
-      ></NotificationErrorBar>
+      ></NotificationLogin>
     </div>
   </transition>
 </template>
@@ -113,7 +113,7 @@ import showPassword from "../assets/js/methods/input/show-password.js";
 import axios from "axios";
 import { BASE_URL } from "../assets/js/config";
 
-import NotificationErrorBar from "../assets/components/NotificationErrorBar.vue";
+import NotificationLogin from "../assets/components/NotificationLogin.vue";
 
 export default {
   name: "Login",
@@ -127,7 +127,7 @@ export default {
       showTransition: false,
     };
   },
-  components: { NotificationErrorBar },
+  components: { NotificationLogin },
   methods: {
     showPassword,
     login() {
@@ -154,7 +154,7 @@ export default {
             error.response.data.status == 404 ||
             error.response.data.status == 400
           ) {
-            this.$store.commit("SET_SHOW_NOTIFICATION", true);
+            this.$store.commit("SET_SHOW_LOGIN_INCORRECT", true);
           }
         });
     },

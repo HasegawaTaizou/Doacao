@@ -51,6 +51,8 @@ export default new Vuex.Store({
 
     //Password Reset PopUp
     showPasswordReset: false,
+
+    showLoginIncorrect: false,
   },
   mutations: {
     updateFormData(state, payload) {
@@ -85,6 +87,9 @@ export default new Vuex.Store({
     },
     SET_SHOW_PASSWORD_RESET(state, value) {
       state.showPasswordReset = value;
+    },
+    SET_SHOW_LOGIN_INCORRECT(state, value) {
+      state.showLoginIncorrect = value;
     },
   },
 });
